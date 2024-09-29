@@ -4,7 +4,6 @@ import { ProductsData } from "../context/ProductsCont";
 import Card from "../Components/Shared/Card";
 function Shop() {
   const { products } = useContext(ProductsData);
-
   return (
     <div>
       <Hero />

@@ -16,6 +16,7 @@ function ProductsCont({children}) {
           await setProducts(resp.data)
           
           
+          
         }catch(err){
           console.log(err);
           
@@ -23,6 +24,7 @@ function ProductsCont({children}) {
       }
       fetchProductsData()
     },[])
+    
     return (
     <div>
         <ProductsData.Provider value={{products}}>

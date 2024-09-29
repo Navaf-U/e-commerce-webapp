@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 
 function Card({ keyId,price, actualPrice, src, title, productName }) {
+  
+  
   return (
     <div>
       <div className="h-[450px] w-[700px] relative m-10 flex max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
