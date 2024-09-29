@@ -7,6 +7,8 @@ import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import LoginSignup from "./pages/LoginSignup";
 import NotFound from "./pages/NotFound";
+import Men from "./pages/Men";
+import Women from "./pages/Women";
 function App() {
   return (
     <>
@@ -14,14 +16,17 @@ function App() {
       <Routes>
         <Route path="/" element={<><Navbar /> <Outlet/></>}>
           <Route path="/" element={<Shop />} />
+          <Route path="/men" element={<Men/>} />
+          <Route path="/women" element={<Women/>}/>
           <Route path="/cats" element={<ShopCategory catergory="cats" />} />
           <Route path="/dogs" element={<ShopCategory catergory="dogs" />} />
           <Route path="/products/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<LoginSignup />} />
         </Route>
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
+      
     </>
   );
 }

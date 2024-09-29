@@ -24,6 +24,7 @@ function ProductsCont({children}) {
       }
       fetchProductsData()
     },[])
+    console.log(products);
     
     return (
     <div>

@@ -1,30 +1,26 @@
 import { NavLink } from "react-router-dom";
 
-function Card({ keyId,price, actualPrice, src, title, productName }) {
-  
+function Card({id,price,image,type,name}) {
   
   return (
     <div>
       <div className="h-[450px] w-[700px] relative m-10 flex max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
-        <NavLink to={`/products/${keyId}`} className="relative  justify-center w-full mx-3 mt-3 flex h-60 overflow-hidden rounded-xl">
-          <img className="object-cover" src={src} alt="product image" />
-          <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
-            {title}
+        <NavLink to={`/products/${id}`} className="justify-center w-full mx-3 mt-3 flex h-60 overflow-hidden rounded-xl">
+          <img className="object-cover" src={image} alt="product image" />
+          <span className="absolute top-0 left-0 m-2  rounded-full bg-black px-2 text-center text-sm font-medium text-white">
+            {type}
           </span>
         </NavLink>
-        <NavLink to="" className="relative  mx-3 mt-3 flex overflow-hidden rounded-xl">
-          <p className="text-1xl font-bold pt-4 text-center text-slate-900">
-            {productName}
+        <NavLink to="" className="relative mx-3 mt-3 flex justify-center overflow-hidden rounded-xl">
+          <p className="text-1xl font-bold pt-4  text-slate-900">
+            {name}
           </p>
         </NavLink>
         
         <div className="mt-4 px-5 pb-5">
           <div className="mt-2 mb-5 flex items-center justify-between">
             <p>
-              <span className="text-3xl font-bold text-slate-900">{price}</span>
-              <span className="text-sm text-slate-900 line-through">
-                {actualPrice}
-              </span>
+              <span className="text-3xl font-bold text-center text-slate-900">{price}</span>
             </p>
             <div className="flex items-center">
               <svg
@@ -90,7 +86,7 @@ function Card({ keyId,price, actualPrice, src, title, productName }) {
             >
               <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
-            Add to cart{" "}
+            Add to cart
           </a>
         </div>
       </div>
