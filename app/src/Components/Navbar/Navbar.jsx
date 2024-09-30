@@ -49,7 +49,7 @@ function Navbar() {
             placeholder="search...."
           />
           <NavLink to="/search">
-          <FaSearch  className="bg-white border-[#BF3131]  border-[1px] h-[34px] border-l-0 w-8 " />
+          <FaSearch  className="bg-white border-[#BF3131]  border-[1px] h-[34px] border-l-0 w-6 " />
           </NavLink>
           <NavLink to="/login">
             <FaUser size={20} className="ms-5 me-2" />

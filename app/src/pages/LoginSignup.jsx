@@ -22,7 +22,7 @@ const LoginSignup = () => {
             placeholder="Password"
           />
         </div>
-        <button className="w-full h-14 md:h-16 text-white bg-[#ff4141] mt-6 text-xl md:text-2xl font-medium">
+        <button className="w-full h-14 md:h-16 text-white bg-[#BF3131] hover:bg-[#7D0A0A] focus:ring-4 focus:ring-blue-300 mt-6 text-xl md:text-2xl font-medium">
           Continue
         </button>
         <p className="loginsignup-login mt-5 text-[#5c5c5c] text-base md:text-lg font-medium">
