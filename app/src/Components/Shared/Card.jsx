@@ -20,7 +20,7 @@ function Card({id,price,image,type,name}) {
         <div className="mt-4 px-5 pb-5">
           <div className="mt-2 mb-5 flex items-center justify-between">
             <p>
-              <span className="text-3xl font-bold text-center text-slate-900">{price}</span>
+              <span className="text-3xl font-bold text-center text-slate-900">{price}₹</span>
             </p>
             <div className="flex items-center">
               <svg
@@ -75,7 +75,7 @@ function Card({id,price,image,type,name}) {
           </div>
           <a
             href="#"
-            className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+            className="flex items-center justify-center rounded-md bg-[#BF3131] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#7D0A0A] focus:outline-none focus:ring-4 focus:ring-blue-300"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

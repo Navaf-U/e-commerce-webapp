@@ -7,7 +7,7 @@ export const ProductsData = createContext()
 
 function ProductsCont({children}) {
     const [products,setProducts]=useState([])
-    
+    const [search,setSearch] = useState("")
 
     useEffect(()=>{
       const fetchProductsData = async () =>{
@@ -24,11 +24,11 @@ function ProductsCont({children}) {
       }
       fetchProductsData()
     },[])
-    console.log(products);
-    
+  const currency = "₹"
+  const value = {currency,products,search,setSearch}
     return (
     <div>
-        <ProductsData.Provider value={{products}}>
+        <ProductsData.Provider value={value}>
           {children}
         </ProductsData.Provider>
     </div>

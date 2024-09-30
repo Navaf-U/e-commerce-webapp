@@ -6,8 +6,11 @@ import Card from "../Components/Shared/Card";
 import { FaPersonWalkingArrowRight } from 'react-icons/fa6';
 import menAd from '../Components/assets/menAd.jpg'
 import womenAd from '../Components/assets/womenAd.jpg'
+import NewsLetter from "../Components/NewsLetter";
+import Footer from "./Footer";
 function Shop() {
   const { products } = useContext(ProductsData);
+  
   return (
     <div>
       <Hero/>
@@ -44,7 +47,9 @@ function Shop() {
         </NavLink> 
       </div>
       </div>
+      <NewsLetter/>
 
+      <Footer/>
     </div>
   );
 }
