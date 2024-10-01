@@ -1,7 +1,9 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { ProductsData } from "../../context/ProductsCont";
 
 function Card({id,price,image,type,name}) {
-  
+  const {addToCart} = useContext(ProductsData)
   return (
     <div>
       <div className="h-[450px] w-[700px] relative m-10 flex max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
@@ -73,7 +75,7 @@ function Card({id,price,image,type,name}) {
               </span>
             </div>
           </div>
-          <NavLink
+          <NavLink onClick={()=>addToCart(id)}
             to="/cart"
             className="flex items-center justify-center rounded-md bg-[#BF3131] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#7D0A0A] focus:outline-none focus:ring-4 focus:ring-blue-300"
           >

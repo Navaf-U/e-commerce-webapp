@@ -8,7 +8,7 @@ export const ProductsData = createContext()
 function ProductsCont({children}) {
     const [products,setProducts]=useState([])
     const [search,setSearch] = useState("")
-    const [cart,setCart] = useState({});
+    const [cart,setCart] = useState([]);
     
     
     useEffect(()=>{
@@ -18,15 +18,11 @@ function ProductsCont({children}) {
           await setProducts(resp.data)
           
           let defaultCart ={}
-           resp.data.forEach((_,i)=>{
-            defaultCart[i]=0
+           resp.data.forEach((item)=>{
+            defaultCart[item.id]=0
+            setCart(defaultCart)
            })
-           const addToCart =(item)=>{
-            setCart((prev)=>({...prev,[item]:prev[item]+1}))
-           }
-           const removeFromCart =(item)=>{
-            setCart((prev)=>({...prev,[item]:prev[item]-1}))
-           }
+           
 
 
           
@@ -37,8 +33,24 @@ function ProductsCont({children}) {
       }
       fetchProductsData()
     },[])
+    const addToCart =(id)=>{
+      setCart((prev)=> ({
+        ...prev,[id]:prev[id]+1
+      }))
+     }
+     const removeFromCart =(id)=>{
+      setCart ( (prev) => {
+        const cartNew = {...prev};
+        if(cartNew[id]>0){
+          cartNew[id] -= 1;
+        }
+        return cartNew
+      }
+
+      )
+    }
   const currency = "₹"
-  const value = {currency,products,search,setSearch,addToCart,removeFromCart}
+  const value = {currency,products,search,setSearch,cart,setCart,addToCart,removeFromCart}
 
  
 

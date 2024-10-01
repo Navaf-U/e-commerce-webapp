@@ -9,7 +9,7 @@ function Women() {
     <div className="flex flex-wrap">
         {products.map((item)=>{
             if(item.type==="women"){
-                return <Card key={item.id} image={item.image} price={item.price}/>
+                return <Card key={item.id} image={item.image} name={item.name} price={item.price}/>
             }
         })}
     </div>
