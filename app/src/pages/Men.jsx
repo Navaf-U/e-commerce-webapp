@@ -13,6 +13,7 @@ function Men() {
           return (
             <NavLink key={item.id} to={`/products/${item.id}`}>
               <Card key={item.id} 
+              id={item.id}
               image={item.image}
               price={item.price} 
               name={item.name} 

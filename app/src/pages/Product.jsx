@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { ProductsData } from "../context/ProductsCont";
 import logo from '../Components/assets/MainLogo.png'
 function Product() {
   const { id } = useParams();
-  const { products, currency } = useContext(ProductsData);
+  const { products, currency,addToCart } = useContext(ProductsData);
   const findProduct = products.find((item) => item.id === id);
 
   return (
@@ -20,9 +20,11 @@ function Product() {
         <p className="text-[50px] font-[300] text-center text-sm md:text-base px-2 mt-[-50px]">
           Experience the perfect blend of style and comfort with our latest collection. <br /> Upgrade your wardrobe today and enjoy free shipping on all orders!
         </p>
-        <button className="mt-8 w-[50%] h-[70px] rounded-md bg-[#BF3131] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#7D0A0A] focus:outline-none focus:ring-4 focus:ring-blue-300">
+        <NavLink to="/cart" onClick={()=> addToCart(id)}>
+        <button className="mt-8 w-[350px] h-[70px] rounded-md bg-[#BF3131] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#7D0A0A] focus:outline-none focus:ring-4 focus:ring-blue-300">
           Add to Cart
         </button>
+        </NavLink>
       </div>
     </div>
   );
