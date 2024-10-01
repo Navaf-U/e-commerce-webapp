@@ -17,25 +17,26 @@ function Navbar() {
         <div className="nav-logo flex justify-around items-center w-full">
           <div className="flex items-center">
             <img src={logo} className="size-20" alt="" />
-            <h1 className="nav-logo hidden text-[30px] font-[900] lg:flex ">
-              Foot PIPI
-            </h1>
+            <h1 className="nav-logo hidden text-[30px] font-[900] lg:flex items-center text-gray-800">
+  <span className="text-red-600">Chic</span>
+  <span className="text-black">Kicks</span>
+</h1>
           </div>
-          <div className="gap-2 hidden sm:flex">
+          <div className="gap-4 hidden sm:flex">
             <NavLink to="/">
-              <h1>Shop</h1>
+              <h1 className="hover-line">Shop</h1>
             </NavLink>
             <NavLink to="/men">
-              <h1>Men</h1>
+              <h1 className="hover-line">Men</h1>
             </NavLink>
             <NavLink to="/women">
-              <h1>Women</h1>
+              <h1 className="hover-line">Women</h1>
             </NavLink>
             <NavLink>
-              <h1>Orders</h1>
+              <h1 className="hover-line">Orders</h1>
             </NavLink>
             <NavLink>
-              <h1>Contact</h1>
+              <h1 className="hover-line">Contact</h1>
             </NavLink>
           </div>
 

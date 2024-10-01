@@ -7,7 +7,7 @@ function Card({id,price,image,type,name}) {
   return (
     <div>
       <div className="h-[450px] w-[700px] relative m-10 flex max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
-        <NavLink to={`/products/${id}`} className="justify-center w-full mx-3 mt-3 flex h-60 overflow-hidden rounded-xl">
+        <NavLink to={`/products/${id}`} className="transition-transform duration-1000 ease-in-out hover:scale-110 justify-center w-full mx-3 mt-5 flex h-60 overflow-hidden rounded-xl">
           <img className="object-cover" src={image} alt="product image" />
           <span className="absolute top-0 left-0 m-2  rounded-full bg-black px-2 text-center text-sm font-medium text-white">
             {type}
