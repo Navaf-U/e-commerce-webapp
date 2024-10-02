@@ -11,13 +11,13 @@ const Cart = () => {
       {products.length === 0 ? (
         <p className="text-center text-lg">Your cart is empty.</p>
       ) : (
-        <div className="cart-format-main mb-6 hidden sm:flex justify-between">
-          <p className="flex-1 text-center">Product</p>
+        <div className="hidden sm:flex flex-col sm:flex-row items-center py-4 px-4 bg-[#c95555] text-white rounded-lg shadow-md mb-4">
+          <p className="flex-1 text-center w-24 object-cover rounded-md sm:mr-4 mb-2 sm:mb-0">Product</p>
           <p className="flex-1 text-center">Title</p>
-          <p className="flex-1 text-center ps-56">Price</p>
-          <p className="flex-1 text-center ms-10">Quantity</p>
-          <p className="flex-1 text-center ms-20 ">Total</p>
-          <p className="flex-1 text-center">Remove</p>
+          <p className="flex-1 text-right">Price</p>
+          <p className="flex-1 text-right">Quantity</p>
+          <p className="flex-1 text-right ">Total</p>
+          <p className="flex-1 text-right">Remove</p>
         </div>
       )}
       {products.map((item) => {
@@ -39,7 +39,7 @@ const Cart = () => {
               <button onClick={() => removeFromCart(item.id)} className="ml-4 mb-2 sm:mb-0">
                 <RxCross1
                   size={28}
-                  className="text-red-600 hover:text-red-800 transition-colors duration-200"
+                  className="text-red-600 hover:text-red-800 transition-colors duration-200 me-4"
                 />
               </button>
             </div>

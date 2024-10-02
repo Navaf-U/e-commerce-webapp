@@ -7,7 +7,6 @@ import { FaPersonWalkingArrowRight } from "react-icons/fa6";
 import menAd from "../Components/assets/menAd.jpg";
 import womenAd from "../Components/assets/womenAd.jpg";
 import NewsLetter from "../Components/NewsLetter/NewsLetter";
-import Footer from "./Footer";
 function Shop() {
   const { products } = useContext(ProductsData);
 
@@ -52,7 +51,7 @@ function Shop() {
           />
           <NavLink to="/women" className="flex  justify-center items-center">
             <button className="md:hover:bg-neutral-400 text-[3em] flex justify-center font-[100] text-black bg-white border-white-600 rounded-full w-[100%] mt-5">
-              Womens{" "}
+              Womens
               <FaPersonWalkingArrowRight className="ms-7 mt-6" size={35} />
             </button>
           </NavLink>
