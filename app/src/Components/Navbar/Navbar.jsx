@@ -3,12 +3,12 @@ import { FaUser } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { FaBars } from "react-icons/fa";
-import logo from "../assets/mainLogo.png";
+import logo from "../assets/ChicKickLogo.png";
 import { useState } from "react";
 import { useContext } from "react";
 import { ProductsData } from "../../context/ProductsCont";
-
 function Navbar() {
+  const {cartItemNotify} = useContext(ProductsData)
   const [menu, setMenu] = useState(false);
   const { search, setSearch } = useContext(ProductsData);
   return (
@@ -18,9 +18,9 @@ function Navbar() {
           <div className="flex items-center">
             <img src={logo} className="size-20" alt="" />
             <h1 className="nav-logo hidden text-[30px] font-[900] lg:flex items-center text-gray-800">
-  <span className="text-red-600">Chic</span>
-  <span className="text-black">Kicks</span>
-</h1>
+              <span className="text-red-600">Chic</span>
+              <span className="text-black">Kick</span>
+            </h1>
           </div>
           <div className="gap-4 hidden sm:flex">
             <NavLink to="/">
@@ -45,7 +45,7 @@ function Navbar() {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="bg-white border-[1px] border-[#BF3131] ps-3 py-1 sm:w-[100%] w-[60%] border-r-0 active:border-[#BF3131] focus:border-[#BF3131]"
+              className="bg-white border-[1px] border-[#BF3131] ps-3 py-1 sm:w-[100%] w-[60%] border-r-0  outline-none"
               placeholder="search...."
             />
             <NavLink to="/search">
@@ -56,7 +56,7 @@ function Navbar() {
             </NavLink>
             <NavLink to="/cart" className="relative">
               <div className="absolute top-[-20px] right-[-3px]  bg-red-700 rounded-full h-4 w-4 text-center  mt-2">
-                <p className="m-[-3px] text-white text-[13px]">0</p>
+                <p className="m-[-3px] text-white text-[13px]">{cartItemNotify()}</p>
               </div>
               <IoCartOutline size={25} />
             </NavLink>

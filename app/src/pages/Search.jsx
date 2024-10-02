@@ -24,10 +24,13 @@ function Search() {
               className="border-[1px] border-[#BF3131] text-center w-full md:w-[40%] text-[20px] p-5"
               key={item.id}
             >
-              <NavLink to={`/products/${item.id}`} className="flex justify-center">
+              <NavLink
+                to={`/products/${item.id}`}
+                className="flex justify-center"
+              >
                 <img src={item.image} className="w-52" alt={item.name} />
               </NavLink>
-              
+
               <p className="mt-2">{item.name}</p>
             </li>
           ))}

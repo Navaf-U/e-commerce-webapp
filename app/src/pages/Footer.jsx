@@ -1,12 +1,22 @@
-import { FaInstagramSquare, FaPinterest, FaWhatsappSquare } from "react-icons/fa";
-import footerImage from "../Components/assets/footer.jpg";
+import {
+  FaInstagramSquare,
+  FaPinterest,
+  FaWhatsappSquare,
+} from "react-icons/fa";
+import ChicKickLogo from "../Components/assets/ChicKickLogo.png";
 
 function Footer() {
   return (
     <div className="main-footer flex flex-col items-center gap-10 px-4 md:px-10">
       <div className="footer-logo flex items-center gap-4">
-        <img src={footerImage} alt="" className="h-16 w-16 md:h-20 md:w-20" />
-        <p className="text-3xl md:text-4xl text-[#383838] font-bold">PIPI</p>
+        <img src={ChicKickLogo} alt="" className="h-16 w-16 md:h-20 md:w-20" />
+        <h1
+          className="footer-title nav-logo 
+ text-[30px] font-[900]  items-center text-gray-800"
+        >
+          <span className="text-red-600">Chic</span>
+          <span className="text-black">Kick</span>
+        </h1>{" "}
       </div>
       <ul className="flex flex-col md:flex-row list-none gap-10 text-[#252525] text-lg">
         <li className="cursor-pointer">Company</li>

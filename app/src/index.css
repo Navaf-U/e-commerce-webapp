@@ -2,48 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-    margin: 0;
+* {
+  margin: 0;
 }
 
-a.active hr{
-    display: block;
+a.active hr {
+  display: block;
 }
-.nav-cart-count{
-    width: 22px;
-    height: 22px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: -30px;
-    margin-left: -21px;
-    border-radius: 11px;
-    font-size: 14px;
-    background-color: red;
-    color: white;
-
+.nav-cart-count {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -30px;
+  margin-left: -21px;
+  border-radius: 11px;
+  font-size: 14px;
+  background-color: red;
+  color: white;
 }
 
 .hover-line {
-    display: inline-block;
-      position: relative;
-      padding-bottom: 5px;
-  }
+  display: inline-block;
+  position: relative;
+  padding-bottom: 5px;
+}
 
-  .hover-line::after {
-    content: "";
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      background-color: blue;
-      bottom: 0;
-      left: 0;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.8s ease-out, background-color 0.3s;
-  }
+.hover-line::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: blue;
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s ease-out, background-color 0.3s;
+}
 
-  .hover-line:hover::after {
-    transform: scaleX(1);
-    background-color: #BF3131;
-  }
+.hover-line:hover::after {
+  transform: scaleX(1);
+  background-color: #bf3131;
+}
+.footer-title{
+  font-family: "Dancing Script";
+  margin-left: -30px;
+}

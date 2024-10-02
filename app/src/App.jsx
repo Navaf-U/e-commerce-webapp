@@ -9,9 +9,11 @@ import NotFound from "./pages/NotFound";
 import Men from "./pages/Men";
 import Women from "./pages/Women";
 import Search from "./pages/Search";
+import Layout from "./Layout/Layout";
 function App() {
   return (
     <>
+    <Layout>
       <Routes>
         <Route
           path="/"
@@ -31,6 +33,7 @@ function App() {
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
+      </Layout>
     </>
   );
 }
