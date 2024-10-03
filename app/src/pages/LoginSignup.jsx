@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { ProductsData } from "../context/ProductsCont";
 
 const LoginSignup = () => {
-  const [isLogged, setIsLogged] = useState(false);
+  const {isLoggedOrNot,isLogged} = useContext(ProductsData)
+  
+  
   return (
     <div>
-      {isLogged === true ? (
+      {isLogged ===false?(
         <div className="login-signup w-full min-h-screen pt-16 pb-20">
           <form action="">
             <div className="login-cont w-[90%] max-w-[580px] h-auto bg-white m-auto px-6 py-10 md:px-10 md:py-14">
@@ -45,7 +48,7 @@ const LoginSignup = () => {
               <p className="loginsignup-login mt-5 text-[#5c5c5c] text-base md:text-lg font-medium">
                 Already have an account?
                 <button
-                  onClick={() => setIsLogged(!isLogged)}
+                  onClick={isLoggedOrNot}
                   className="text-[#ff4141] font-semibold"
                 >
                   Login here
@@ -67,7 +70,7 @@ const LoginSignup = () => {
             </div>
           </form>
         </div>
-      ) : (
+      ) :(
         <div className="login-signup w-full min-h-screen pt-16 pb-20">
           <form action="">
             <div className="login-cont w-[90%] max-w-[580px] h-auto bg-white m-auto px-6 py-10 md:px-10 md:py-14">
@@ -96,7 +99,7 @@ const LoginSignup = () => {
               <p className="loginsignup-login mt-5 text-[#5c5c5c] text-base md:text-lg font-medium">
                 {`Don't have an account?`}
                 <button
-                  onClick={() => setIsLogged(!isLogged)}
+                  onClick={isLoggedOrNot }
                   className="text-[#ff4141] font-semibold"
                 >
                   Sign up here
@@ -119,7 +122,10 @@ const LoginSignup = () => {
           </form>
         </div>
       )}
-    </div>
+        
+      
+        
+     </div>
   );
 };
 

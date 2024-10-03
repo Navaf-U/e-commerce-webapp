@@ -8,6 +8,9 @@ function ProductsCont({ children }) {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [cart, setCart] = useState({});
+  const [isLogged, setIsLogged] = useState(false);
+
+ 
   
   const getTotalCartAmount = () => {
     let total = 0;
@@ -29,7 +32,10 @@ function ProductsCont({ children }) {
     }
     return totalNotify
   }
-  
+
+  const isLoggedOrNot = ()=>{
+    setIsLogged(!isLogged)
+  }
 
   useEffect(() => {
     const fetchProductsData = async () => {
@@ -37,9 +43,10 @@ function ProductsCont({ children }) {
         const resp = await axios.get("http://localhost:3000/newProducts");
          setProducts(resp.data);
 
+         const storedCart = JSON.parse(localStorage.getItem("cart")) || {}
         let defaultCart = {};
         resp.data.forEach((item) => {
-          defaultCart[item.id] = 0;
+          defaultCart[item.id] = storedCart[item.id] || 0;
         });
         setCart(defaultCart);
       } catch (err) {
@@ -48,11 +55,22 @@ function ProductsCont({ children }) {
     };
     fetchProductsData();
   }, []);
+
+  useEffect(()=>{
+    if(products.length > 0){
+      localStorage.setItem("cart",JSON.stringify(cart))
+    }
+    
+  },[cart,products])
+
   const addToCart = (id) => {
-    setCart((prev) => ({
+    setCart((prev) => {
+      const newCart = {
       ...prev,
       [id]: prev[id] + 1,
-    }));
+    };
+    return newCart
+  });
   };
   const removeFromCart = (id) => {
     setCart((prev) => {
@@ -74,7 +92,9 @@ function ProductsCont({ children }) {
     addToCart,
     removeFromCart,
     getTotalCartAmount,
-    cartItemNotify
+    cartItemNotify,
+    isLogged,
+    isLoggedOrNot
   };
 
   return (
