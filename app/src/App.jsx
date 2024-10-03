@@ -10,6 +10,7 @@ import Men from "./pages/Men";
 import Women from "./pages/Women";
 import Search from "./pages/Search";
 import Layout from "./Layout/Layout";
+import Payment from "./pages/Payment";
 function App() {
   return (
     <>
@@ -30,6 +31,7 @@ function App() {
           <Route path="/products/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<LoginSignup />} />
+          <Route path="/payment" element={<Payment/>} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
