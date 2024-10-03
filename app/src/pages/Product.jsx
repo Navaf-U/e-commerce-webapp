@@ -2,10 +2,12 @@ import { useContext } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { ProductsData } from "../context/ProductsCont";
 import logo from "../Components/assets/ChicKickLogo.png";
+import { userData } from "../context/UserContext";
 function Product() {
-  const { id } = useParams();
-  const { products, currency, addToCart } = useContext(ProductsData);
-  const findProduct = products.find((item) => item.id === id);
+  const {id} = useParams();
+  const {products,currency,addToCart} = useContext(ProductsData);
+  const {isLogged} = useContext(userData)
+  const findProduct=products.find((item) => item.id===id);
 
   return (
     <div className="flex flex-col md:flex-row justify-around px-4 py-6">
@@ -28,11 +30,19 @@ function Product() {
           collection. <br /> Upgrade your wardrobe today and enjoy free shipping
           on all orders!
         </p>
-        <NavLink to="/cart" onClick={() => addToCart(id)}>
-          <button className="mt-8 w-[350px] h-[70px] rounded-md bg-[#BF3131] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#7D0A0A] focus:outline-none focus:ring-4 focus:ring-blue-300">
-            Add to Cart
-          </button>
-        </NavLink>
+       {isLogged===true ? (
+         <NavLink to="/cart" onClick={() => addToCart(id)}>
+         <button className="mt-8 w-[350px] h-[70px] rounded-md bg-[#BF3131] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#7D0A0A] focus:outline-none focus:ring-4 focus:ring-blue-300">
+           Add to Cart
+         </button>
+       </NavLink>
+       ):
+       <NavLink to="/login">
+        <button className="mt-8 w-[200px] h-[50px] rounded-md bg-[#333] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#7D0A0A] focus:outline-none focus:ring-4 focus:ring-blue-300">
+       Login 
+     </button>
+       </NavLink>
+       }
       </div>
     </div>
   );

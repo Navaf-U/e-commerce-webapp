@@ -36,9 +36,9 @@ function Shop() {
 
       <div className="menAd flex flex-wrap justify-evenly  items-center ">
         <div className="border-[2px] bg-[#EAD196] p-3 border-[#fff]">
-          <img src={menAd} className="w-[400px] rounded-xl h-[500px]" alt="" />
+          <img src={menAd} className="w-[300px] rounded-xl h-[400px]" alt="" />
           <NavLink to="/men" className=" ">
-            <button className="md:hover:bg-neutral-400 text-[3em] font-[100] flex justify-center text-black bg-white rounded-full w-[100%] mt-5">
+            <button className="text-[3em] font-[100] flex justify-center text-black bg-white rounded-full w-[100%] mt-5">
               Mens <FaPersonWalkingArrowRight className="ms-7 mt-6" size={35} />
             </button>
           </NavLink>
@@ -46,11 +46,11 @@ function Shop() {
         <div className="border-[2px] p-3 bg-[pink] border-[#fff]">
           <img
             src={womenAd}
-            className="w-[400px] rounded-xl h-[500px]"
+            className="w-[300px] rounded-xl h-[400px]"
             alt=""
           />
           <NavLink to="/women" className="flex  justify-center items-center">
-            <button className="md:hover:bg-neutral-400 text-[3em] flex justify-center font-[100] text-black bg-white border-white-600 rounded-full w-[100%] mt-5">
+            <button className="text-[3em] flex justify-center font-[100] text-black bg-white border-white-600 rounded-full w-[100%] mt-5">
               Womens
               <FaPersonWalkingArrowRight className="ms-7 mt-6" size={35} />
             </button>

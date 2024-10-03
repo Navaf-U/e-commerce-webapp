@@ -12,8 +12,7 @@ function Search() {
     );
 
     setData(filteredDatas.length > 0 ? filteredDatas : "not found");
-    console.log(filteredDatas);
-  }, [search, products]);
+  },[search, products]);
 
   return (
     <div className="pt-20">

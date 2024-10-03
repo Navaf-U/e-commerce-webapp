@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { ProductsData } from "../context/ProductsCont";
+import { NavLink } from "react-router-dom";
 
 const Cart = () => {
   const { cart, products, currency, removeFromCart, getTotalCartAmount } =
@@ -82,9 +83,9 @@ const Cart = () => {
               {currency} {getTotalCartAmount().toFixed(2)}
             </h3>
           </div>
-          <button className="w-full sm:w-1/2 lg:w-[262px] h-14 bg-red-700 text-white font-semibold text-lg rounded-md transition-all hover:bg-red-800">
-            PROCEED TO CHECKOUT
-          </button>
+          <NavLink to="/payment">
+          <button className="w-full sm:w-1/2 lg:w-[262px] h-14 bg-red-700 text-white font-semibold text-lg rounded-md transition-all hover:bg-red-800">PROCEED TO PAY</button>          
+          </NavLink>
         </div>
 
         <div className="promo-code flex-1">

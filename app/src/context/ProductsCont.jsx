@@ -57,7 +57,7 @@ function ProductsCont({ children }) {
   }, []);
 
   useEffect(()=>{
-    if(products.length > 0){
+    if(products.length>0){
       localStorage.setItem("cart",JSON.stringify(cart))
     }
     

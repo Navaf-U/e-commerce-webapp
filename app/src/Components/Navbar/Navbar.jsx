@@ -7,10 +7,14 @@ import logo from "../assets/ChicKickLogo.png";
 import { useState } from "react";
 import { useContext } from "react";
 import { ProductsData } from "../../context/ProductsCont";
+import { userData } from "../../context/UserContext";
+import { CiLogout } from "react-icons/ci";
+
 function Navbar() {
   const {cartItemNotify} = useContext(ProductsData)
   const [menu, setMenu] = useState(false);
   const { search, setSearch } = useContext(ProductsData);
+  const {isLogged,logoutUser} =useContext(userData)
   return (
     <div className="pb-20">
       <div className="border-b-2 h-20 w-full fixed bg-white z-50 ">
@@ -54,12 +58,18 @@ function Navbar() {
             <NavLink to="/login">
               <FaUser size={20} className="ms-5 me-2" />
             </NavLink>
-            <NavLink to="/cart" className="relative">
+            {isLogged===true ?(
+              <div className="flex gap-5">
+                <NavLink to="/cart" className="relative">
               <div className="absolute top-[-20px] right-[-3px]  bg-red-700 rounded-full h-4 w-4 text-center  mt-2">
                 <p className="m-[-3px] text-white text-[13px]">{cartItemNotify()}</p>
               </div>
               <IoCartOutline size={25} />
             </NavLink>
+             <CiLogout className="cursor-pointer" onClick={logoutUser} size={20}/>
+              </div>
+            ) : null}
+            
           </div>
           <FaBars onClick={() => setMenu(true)} className="flex sm:hidden" />
           <div
