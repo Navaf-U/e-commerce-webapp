@@ -26,8 +26,9 @@ function UserContext({children}) {
         if(user){
             setIsLogged(true)
             setCurrUser(user)
-            localStorage.setItem("isLogged",true)
+            localStorage.setItem("isLogged","true")
             localStorage.setItem("currUser",JSON.stringify(user))
+            alert("user logged")
         }else{
             alert("invalid email or password")
         }
@@ -41,7 +42,7 @@ function UserContext({children}) {
     }
 
     useEffect(()=>{
-        const logged = localStorage.getItem("isLogged") === true;
+        const logged = localStorage.getItem("isLogged") === "true";
         const saveLog=JSON.parse(localStorage.getItem("currUser"))
 
         if(logged && saveLog){
@@ -50,13 +51,36 @@ function UserContext({children}) {
         }
     },[])
 
+
+
+ const PostUserDatas = (name,email,password,cart)=>{
+        const postData = async()=>{
+           try{
+            const response = await axios.post("http://localhost:3000/allUsers",{
+                name,
+                email,
+                password,
+                cart,
+            });
+            setUsers([...users,response.data])
+            
+           }catch(error){
+            console.log(error);
+           }
+        }
+        postData()
+    }
+ 
+
+
     const value ={
         users,
         currUser,
         isLogged,
         loginUser,
-        logoutUser
-    }
+        logoutUser,
+        PostUserDatas
+    };
 
 
   return (
@@ -65,7 +89,7 @@ function UserContext({children}) {
         {children}
         </userData.Provider>
     </div>
-  )
+ 
+);
 }
-
 export default UserContext

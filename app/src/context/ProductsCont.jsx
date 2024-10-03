@@ -8,7 +8,6 @@ function ProductsCont({ children }) {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [cart, setCart] = useState({});
-  const [isLogged, setIsLogged] = useState(false);
 
  
   
@@ -33,9 +32,7 @@ function ProductsCont({ children }) {
     return totalNotify
   }
 
-  const isLoggedOrNot = ()=>{
-    setIsLogged(!isLogged)
-  }
+
 
   useEffect(() => {
     const fetchProductsData = async () => {
@@ -93,8 +90,7 @@ function ProductsCont({ children }) {
     removeFromCart,
     getTotalCartAmount,
     cartItemNotify,
-    isLogged,
-    isLoggedOrNot
+  
   };
 
   return (

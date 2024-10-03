@@ -55,16 +55,18 @@ function Navbar() {
             <NavLink to="/search">
               <FaSearch className="bg-white border-[#BF3131]  border-[1px] h-[34px] border-l-0 w-6 " />
             </NavLink>
-            <NavLink to="/login">
-              <FaUser size={20} className="ms-5 me-2" />
-            </NavLink>
+           {isLogged=== false ?(
+             <NavLink to="/login">
+             <FaUser size={20} className="ms-5 me-2" />
+           </NavLink>
+           ):null}
             {isLogged===true ?(
               <div className="flex gap-5">
                 <NavLink to="/cart" className="relative">
               <div className="absolute top-[-20px] right-[-3px]  bg-red-700 rounded-full h-4 w-4 text-center  mt-2">
                 <p className="m-[-3px] text-white text-[13px]">{cartItemNotify()}</p>
               </div>
-              <IoCartOutline size={25} />
+              <IoCartOutline className="ms-3" size={25} />
             </NavLink>
              <CiLogout className="cursor-pointer" onClick={logoutUser} size={20}/>
               </div>
