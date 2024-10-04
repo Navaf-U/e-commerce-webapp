@@ -4,11 +4,6 @@ import { userData } from "./UserContext";
 
 export const ProductsData = createContext();
 
-// const cartUpdater=(userId,updatedCart)=>{
-//    axios.patch(`http://localhost:3000/allUsers/${userId}`,{cart:updatedCart})
-//    .catch((err)=>console.log(err))
-// }
-
 
 // eslint-disable-next-line react/prop-types
 function ProductsCont({ children }) {
@@ -29,18 +24,12 @@ function ProductsCont({ children }) {
     return total;
   };
 
-  // useEffect(()=>{
-  //   cart?localStorage.setItem("cart",JSON.stringify(cart)):null
-  // },[cart])
-  // useEffect(()=>{
-  //   currUser?cartUpdater(currUser.id,cart):null
-  // },[cart,currUser])
   
   useEffect(() => {
     const fetchProductsData = async () => {
       try {
-        const resp = await axios.get("http://localhost:3000/newProducts");
-        setProducts(resp.data);
+        const {data} = await axios.get("http://localhost:3000/newProducts");
+        setProducts(data);
 
       } catch (err) {
         console.log(err);

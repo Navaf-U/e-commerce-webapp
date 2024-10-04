@@ -47,6 +47,13 @@ a.active hr {
   background-color: #bf3131;
 }
 .footer-title{
-  font-family: "Dancing Script";
-  margin-left: -30px;
+  font-family: "Lobster", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nav-logo-title{
+    font-family: "Spicy Rice", serif;
+    font-weight: 400;
+    font-style: normal;
 }

@@ -47,7 +47,9 @@ function UserContext({ children }) {
     const saveLog = JSON.parse(localStorage.getItem("currUser"));
 
     async function getCart(userId) {
-      const { data } = await axios.get(`http://localhost:3000/allUsers/${userId}`);
+      const { data } = await axios.get(
+        `http://localhost:3000/allUsers/${userId}`
+      );
       setCart(data.cart || {});
     }
 
@@ -135,7 +137,7 @@ function UserContext({ children }) {
     cart,
     addToCart,
     removeFromCart,
-    cartItemNotify,
+    cartItemNotify
   };
 
   return (

@@ -10,7 +10,7 @@ import NewsLetter from "../Components/NewsLetter/NewsLetter";
 
 function Shop() {
   const { products } = useContext(ProductsData);
- 
+
   return (
     <div>
       <Hero />

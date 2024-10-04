@@ -1,50 +1,61 @@
-import { NavLink } from "react-router-dom";
+import logo from "../assets/StepPrimeLogo.png";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { FaBars } from "react-icons/fa";
-import logo from "../assets/ChicKickLogo.png";
 import { useState } from "react";
 import { useContext } from "react";
 import { ProductsData } from "../../context/ProductsCont";
 import { userData } from "../../context/UserContext";
 import { CiLogout } from "react-icons/ci";
 import { RiUserFollowFill } from "react-icons/ri";
+import { FaBackspace } from "react-icons/fa";
 
 function Navbar() {
-  const {cartItemNotify} = useContext(userData)
   const [menu, setMenu] = useState(false);
+  const [currUserDataShows, setCurrUserDataShows] = useState(false);
   const { search, setSearch } = useContext(ProductsData);
-  const {isLogged,logoutUser,currUser} =useContext(userData)
-  const [currUserDataShows,setCurrUserDataShows]=useState(false)
+  const { cartItemNotify } = useContext(userData);
+  const { isLogged, logoutUser, currUser } = useContext(userData);
+  const navigate = useNavigate()
   const toggleDropdown = () => {
     setCurrUserDataShows((prev) => !prev);
   };
+  const handleSubmitEvent =(e)=>{
+    e.preventDefault()
+    navigate("/search")
+  }
   return (
     <div className="pb-20">
       <div>
-      {currUserDataShows && currUser && (
-        <div className="fixed right-0 w-48 mt-20 bg-white rounded-md shadow-lg py-2 z-50">
-          <p className="px-4 py-2 font-bold hover:hover:bg-[#800000] hover:text-white">{currUser.name}</p>
-          <p className="px-4 py-2 text-gray-600 hover:text-white hover:hover:bg-[#800000]">{currUser.email}</p>
-          <NavLink to="/profile">
+        {currUserDataShows && currUser && (
+          <div className="fixed right-0 w-48 mt-20 bg-white rounded-md shadow-lg py-2 z-50">
+            <p className="px-4 py-2 font-bold hover:hover:bg-[#800000] hover:text-white">
+              {currUser.name}
+            </p>
+            <p className="px-4 py-2 text-gray-600 hover:text-white hover:hover:bg-[#800000]">
+              {currUser.email}
+            </p>
             <button className="w-full px-4 py-2 text-left hover:text-white hover:bg-[#800000]">
               View Profile
             </button>
-          </NavLink>
-          <button onClick={logoutUser} className="w-full px-4 py-2 text-left hover:text-white hover:bg-[#800000]">
-            Logout
-          </button>
-        </div>
-      )}
+            <button
+              onClick={logoutUser}
+              className="w-full px-4 py-2 text-left hover:text-white hover:bg-[#800000]"
+            >
+              Logout
+            </button>
+            <FaBackspace size={20} onClick={toggleDropdown} className="ms-5 mt-3 mb-2"/>
+          </div>
+        )}
       </div>
-
 
       <div className="border-b-2 h-20 w-full fixed bg-white z-50 ">
         <div className="nav-logo flex justify-around items-center w-full">
           <div className="flex items-center">
             <img src={logo} className="size-20" alt="" />
-            <h1 className="nav-logo hidden text-[30px] font-[900] lg:flex items-center text-gray-800">
+            <h1 className="nav-logo-title hidden text-[30px] font-[900] lg:flex items-center text-gray-800">
               <span className="text-black">Step</span>
               <span className="text-red-600">Prime</span>
             </h1>
@@ -68,39 +79,47 @@ function Navbar() {
           </div>
 
           <div className="flex items-center ps-3">
-            <input
+           <form action="" onSubmit={handleSubmitEvent}>
+           <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="bg-white border-[1px] border-[#BF3131] ps-3 py-1 sm:w-[100%] w-[60%] border-r-0  outline-none"
               placeholder="search...."
             />
+           </form>
             <NavLink to="/search">
               <FaSearch className="bg-white border-[#BF3131]  border-[1px] h-[34px] border-l-0 w-6 " />
             </NavLink>
-           {isLogged=== false ?(
-             <NavLink to="/login">
-             <FaUser size={20} className="ms-5 me-2" />
-           </NavLink>
-           ):(
-           <RiUserFollowFill size={30} onClick={toggleDropdown} className="ms-5 me-3 cursor-pointer" />
-           )}
-            {isLogged===true ?(
+            {isLogged === false ? (
+              <NavLink to="/login">
+                <FaUser size={20} className="ms-5 me-2" />
+              </NavLink>
+            ) : (
+              <RiUserFollowFill
+                size={30}
+                onClick={toggleDropdown}
+                className="ms-5 me-3 cursor-pointer"
+              />
+            )}
+            {isLogged === true ? (
               <div className="flex gap-5">
                 <NavLink to="/cart" className="relative">
-              <div className="absolute top-[-20px] right-[-3px]  bg-red-700 rounded-full h-4 w-4 text-center  mt-2">
-                <p className="m-[-3px] text-white text-[13px]">{cartItemNotify()}</p>
-              </div>
-              <IoCartOutline className="ms-3" size={25} />
-            </NavLink>
-             
-             
-             <CiLogout className="cursor-pointer" onClick={logoutUser} size={20}/>
+                  <div className="absolute top-[-20px] right-[-3px]  bg-red-700 rounded-full h-4 w-4 text-center  mt-2">
+                    <p className="m-[-3px] text-white text-[13px]">
+                      {cartItemNotify()}
+                    </p>
+                  </div>
+                  <IoCartOutline className="ms-3" size={25} />
+                </NavLink>
+
+                <CiLogout
+                  className="cursor-pointer"
+                  onClick={logoutUser}
+                  size={20}
+                />
               </div>
             ) : null}
-            
-
-
           </div>
           <FaBars onClick={() => setMenu(true)} className="flex sm:hidden" />
           <div

@@ -16,7 +16,7 @@ function Search() {
 
   return (
     <div className="pt-20">
-      {data.length > 0 && data !== "not found" ? (
+      {data.length > 0 ? (
         <ul className="flex flex-wrap justify-center items-center gap-8">
           {data.map((item) => (
             <li

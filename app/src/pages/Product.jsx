@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { ProductsData } from "../context/ProductsCont";
-import logo from "../Components/assets/ChicKickLogo.png";
+import logo from "../Components/assets/StepPrimeLogo.png";
 import { userData } from "../context/UserContext";
 function Product() {
   const { id } = useParams();
@@ -40,7 +40,7 @@ function Product() {
             <h1 className="text-[20px] font-[600]">Quantity:</h1>
             <div className="flex gap-5 border-[4px] w-[30%] justify-between border-[#BF3131] my-5 ">
               <button
-                className="text-[30px] bg-[#BF3131] hover:bg-[#381111] text-white w-[30%]"
+                className="text-[30px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%]"
                 onClick={() =>
                   setQuantity((prevQuantity) =>
                     prevQuantity > 1 ? prevQuantity - 1 : 1
@@ -51,7 +51,7 @@ function Product() {
               </button>
               <button className="text-[30px] font-[600]">{quantity}</button>
               <button
-                className="text-[22px] bg-[#BF3131] hover:bg-[#184218] text-white w-[30%]"
+                className="text-[22px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%]"
                 onClick={() => setQuantity((prevQuantity) => prevQuantity + 1)}
               >
                 +
