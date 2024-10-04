@@ -12,11 +12,11 @@ const Hero = () => {
       <div className="flex-1 flex flex-col justify-center items-start px-6 z-10">
         <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-wide uppercase mb-4">Exclusive Arrivals</h2>
         <div className="mb-6">
-          <p className="text-5xl md:text-6xl font-bold text-[#BF3131] drop-shadow-md">New</p>
-          <p className="text-5xl md:text-6xl font-bold text-white drop-shadow-md">Collections</p>
-          <p className="text-5xl md:text-6xl font-bold text-yellow-400 drop-shadow-md">For Everyone</p>
+          <p className="text-5xl md:text-6xl font-bold text-[#BF3131] drop-shadow-md transition-transform transform hover:scale-105">New</p>
+          <p className="text-5xl md:text-6xl font-bold text-white drop-shadow-md transition-transform transform hover:scale-105">Collections</p>
+          <p className="text-5xl md:text-6xl font-bold text-[#BF3131] drop-shadow-md transition-transform transform hover:scale-105">For Everyone</p>
         </div>
-        <button className="flex items-center justify-center w-56 h-14 rounded-full bg-yellow-500 text-white text-lg font-semibold transition-transform transform hover:scale-105 hover:bg-yellow-600 shadow-lg">
+        <button className="flex items-center justify-center w-56 h-14 rounded-full bg-[#BF3131] text-white text-lg font-semibold transition-transform transform hover:scale-105 hover:bg-[#7D0A0A] shadow-lg">
           Explore Latest <FaArrowRight className="ml-2" />
         </button>
       </div>

@@ -61,10 +61,10 @@ function ProductsCont({ children }) {
 
   const addToCart = (id, quantity) => {
     setCart((prev) => {
-      const exitingQuant = prev[id] || 0;
+      const exitingQuant = (prev[id] || 0  );
       const newCart = {
         ...prev,
-        [id]: exitingQuant + prev[id] + quantity,
+        [id]: exitingQuant + quantity,
       };
       return newCart;
     });

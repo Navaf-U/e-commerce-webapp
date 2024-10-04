@@ -17,7 +17,7 @@ function LoginCombo() {
         if(isLogged){
             navigates("/")
         }
-    })
+    },[navigates,isLogged])
   return (
     <div>
       <div className="login-signup w-full min-h-screen pt-16 pb-20">

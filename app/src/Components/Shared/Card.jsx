@@ -1,13 +1,12 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { ProductsData } from "../../context/ProductsCont";
-import { userData } from "../../context/UserContext";
-import Cart from "../../pages/Cart";
-
 function Card({ id, price, image, type, name }) {
   const { addToCart } = useContext(ProductsData);
-  const {PostUserDatas} = useContext(userData)
-
+  
+  const handleAddToCart = () => {
+    addToCart(id, 1);
+  }
   return (
     <div>
       <div className="h-[450px] w-[700px] relative m-10 flex max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
@@ -36,7 +35,7 @@ function Card({ id, price, image, type, name }) {
             </p>
           </div>
           <NavLink
-            onClick={() => addToCart(id)}
+            onClick={handleAddToCart}
             to=""
             className="flex items-center justify-center rounded-md bg-[#BF3131] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#7D0A0A] focus:outline-none focus:ring-4 focus:ring-blue-300"
           >
@@ -49,7 +48,7 @@ function Card({ id, price, image, type, name }) {
             >
               <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
-            <button onClick={()=>PostUserDatas(cart)}>Add to cart</button>
+            <button>Add to cart</button>
           </NavLink>
         </div>
       </div>
