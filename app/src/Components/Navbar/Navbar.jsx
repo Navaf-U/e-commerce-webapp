@@ -12,7 +12,7 @@ import { CiLogout } from "react-icons/ci";
 import { RiUserFollowFill } from "react-icons/ri";
 
 function Navbar() {
-  const {cartItemNotify} = useContext(ProductsData)
+  const {cartItemNotify} = useContext(userData)
   const [menu, setMenu] = useState(false);
   const { search, setSearch } = useContext(ProductsData);
   const {isLogged,logoutUser,currUser} =useContext(userData)
@@ -24,15 +24,15 @@ function Navbar() {
     <div className="pb-20">
       <div>
       {currUserDataShows && currUser && (
-        <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50">
-          <p className="px-4 py-2 font-bold">Hello, {currUser.name}</p>
-          <p className="px-4 py-2 text-gray-600">{currUser.email}</p>
+        <div className="fixed right-0 w-48 mt-20 bg-white rounded-md shadow-lg py-2 z-50">
+          <p className="px-4 py-2 font-bold hover:hover:bg-[#800000] hover:text-white">{currUser.name}</p>
+          <p className="px-4 py-2 text-gray-600 hover:text-white hover:hover:bg-[#800000]">{currUser.email}</p>
           <NavLink to="/profile">
-            <button className="w-full px-4 py-2 text-left hover:bg-gray-200">
+            <button className="w-full px-4 py-2 text-left hover:text-white hover:bg-[#800000]">
               View Profile
             </button>
           </NavLink>
-          <button onClick={logoutUser} className="w-full px-4 py-2 text-left hover:bg-gray-200">
+          <button onClick={logoutUser} className="w-full px-4 py-2 text-left hover:text-white hover:bg-[#800000]">
             Logout
           </button>
         </div>
@@ -93,10 +93,14 @@ function Navbar() {
               </div>
               <IoCartOutline className="ms-3" size={25} />
             </NavLink>
+             
+             
              <CiLogout className="cursor-pointer" onClick={logoutUser} size={20}/>
               </div>
             ) : null}
             
+
+
           </div>
           <FaBars onClick={() => setMenu(true)} className="flex sm:hidden" />
           <div

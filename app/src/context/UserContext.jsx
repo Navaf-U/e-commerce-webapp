@@ -1,108 +1,147 @@
-import axios from "axios"
-import { createContext, useEffect, useState } from "react"
+import axios from "axios";
+import { createContext, useEffect, useState } from "react";
 
 export const userData = createContext();
 
-function UserContext({children}) {
-    
-    const [users,setUsers]=useState([])
-    const [isLogged,setIsLogged]=useState(false)
-    const [currUser,setCurrUser]=useState(null)
-    const [loading,setLoading]=useState(false)
+// eslint-disable-next-line react/prop-types
+function UserContext({ children }) {
+  const [isLogged, setIsLogged] = useState(false);
+  const [currUser, setCurrUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [cart, setCart] = useState({});
 
-    useEffect(()=>{
-        const userFetch = async () =>{
-            try{
-                setLoading(true)
-                const data = await axios.get("http://localhost:3000/allUsers")
-            setUsers(data.data);
-            }catch(err){
-                console.log(err);
-            }finally{
-                setLoading(false)
- }
-        }
-        userFetch()
-    },[])
+  const loginUser = async (email, password) => {
+    try {
+      const { data } = await axios.get("http://localhost:3000/allUsers");
+      const user = data.find(
+        (item) => item.email === email && item.password === password
+      );
+      if (user) {
+        setIsLogged(true);
+        setCurrUser(user);
+        setCart(user.cart);
+        localStorage.setItem("isLogged", "true");
+        localStorage.setItem("currUser", JSON.stringify(user));
+        const storedCart =
+          JSON.parse(localStorage.getItem(`${user.email}_cart`)) || {};
+        localStorage.setItem("cart", JSON.stringify(storedCart));
+        alert("User logged in");
+      } else {
+        alert("invalid email or password");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    const loginUser = (email,password) =>{
-        const user = users.find((item)=>item.email === email && item.password === password )
-        if(user){
-            setIsLogged(true)
-            setCurrUser(user)
-            localStorage.setItem("isLogged","true")
-            localStorage.setItem("currUser",JSON.stringify(user))
-            const storedCart = JSON.parse(localStorage.getItem(`${user.email}_=cart`)) || {};
-            localStorage.setItem("cart", JSON.stringify(storedCart));
-            alert("user logged")
-        }else{
-            alert("invalid email or password")
-        }
+  const logoutUser = () => {
+    setCurrUser(null);
+    setIsLogged(false);
+    localStorage.removeItem("isLogged");
+    localStorage.removeItem("currUser");
+    localStorage.removeItem("cart");
+  };
+
+  useEffect(() => {
+    const logged = localStorage.getItem("isLogged") === "true";
+    const saveLog = JSON.parse(localStorage.getItem("currUser"));
+
+    async function getCart(userId) {
+      const { data } = await axios.get(`http://localhost:3000/allUsers/${userId}`);
+      setCart(data.cart || {});
     }
 
-    const logoutUser = ()=>{
-        setIsLogged(false)
-        setCurrUser(null)
-        localStorage.removeItem("isLogged")
-        localStorage.removeItem("currUser")
-        localStorage.removeItem("cart")
+    if (logged && saveLog) {
+      getCart(saveLog.id);
+      setIsLogged(true);
+      setCurrUser(saveLog);
     }
+  }, []);
 
-    useEffect(()=>{
-        const logged = localStorage.getItem("isLogged") === "true";
-        const saveLog=JSON.parse(localStorage.getItem("currUser"))
-
-        if(logged && saveLog){
-            setIsLogged(true)
-            setCurrUser(saveLog)
+  const addToCart = (id, quantity) => {
+    if (currUser) {
+      setCart((prev) => {
+        const existingQuant = prev[id] || 0;
+        const updatedCart = {
+          ...prev,
+          [id]: existingQuant + quantity,
+        };
+        if (currUser) {
+          localStorage.setItem(
+            `${currUser.email}_cart`,
+            JSON.stringify(updatedCart)
+          );
         }
-    },[])
+        axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
+          cart: updatedCart,
+        });
+        return updatedCart;
+      });
+    } else {
+      alert("please login");
+    }
+  };
 
+  const removeFromCart = (id) => {
+    setCart((prev) => {
+      const updatedCart = { ...prev };
+      if (updatedCart[id] > 0) {
+        updatedCart[id] -= 1;
+      }
+      axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
+        cart: updatedCart,
+      });
+      return updatedCart;
+    });
+  };
 
+  const cartItemNotify = () => {
+    let totalNotify = 0;
+    for (let i in cart) {
+      if (cart[i] > 0) {
+        totalNotify += cart[i];
+      }
+    }
+    return totalNotify;
+  };
 
- const PostUserDatas = (name,email,password,cart)=>{
+  const PostUserDatas = (name, email, password, cart) => {
     const data = {
-      name:name,
-      email:email,
-      password:password,
-      cart:cart,
-
-
-    }
-        const postData = async()=>{
-           try{
-            setLoading(true)
-             await axios.post("http://localhost:3000/allUsers",data);
-
-           }catch(error){
-            console.log(error);
-           }finally{
-            setLoading(false)
-           }
-        }
-        postData()
-    }
- 
-
-
-    const value ={
-        users,
-        currUser,
-        isLogged,
-        loginUser,
-        logoutUser,
-        PostUserDatas,
-        loading
+      name: name,
+      email: email,
+      password: password,
+      cart: cart,
     };
+    const postData = async () => {
+      try {
+        setLoading(true);
+        await axios.post("http://localhost:3000/allUsers", data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    postData();
+  };
 
+  const value = {
+    currUser,
+    isLogged,
+    loginUser,
+    logoutUser,
+    PostUserDatas,
+    loading,
+    cart,
+    addToCart,
+    removeFromCart,
+    cartItemNotify,
+  };
 
   return (
     <div>
-        <userData.Provider value={value}>
-        {children}
-        </userData.Provider>
+      <userData.Provider value={value}>{children}</userData.Provider>
     </div>
- 
-);
+  );
 }
-export default UserContext
+export default UserContext;

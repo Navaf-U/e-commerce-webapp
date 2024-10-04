@@ -2,10 +2,13 @@ import { useContext } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { ProductsData } from "../context/ProductsCont";
 import { NavLink } from "react-router-dom";
+import { userData } from "../context/UserContext";
 
 const Cart = () => {
-  const { cart, products, currency, removeFromCart, getTotalCartAmount } =
+  const {  products, currency,  getTotalCartAmount } =
     useContext(ProductsData);
+  const { cart, removeFromCart } =
+    useContext(userData);
 
   return (
     <div className="cart-items mx-auto my-8 max-w-screen-lg p-4">

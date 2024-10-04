@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { ProductsData } from "../../context/ProductsCont";
+import { userData } from "../../context/UserContext";
+// eslint-disable-next-line react/prop-types
 function Card({ id, price, image, type, name }) {
-  const { addToCart } = useContext(ProductsData);
+  const { addToCart } = useContext(userData);
   
   const handleAddToCart = () => {
     addToCart(id, 1);
