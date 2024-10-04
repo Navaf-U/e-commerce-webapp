@@ -22,6 +22,9 @@ function Navbar() {
   const toggleDropdown = () => {
     setCurrUserDataShows((prev) => !prev);
   };
+  const toggleDropdownMenu = () => {
+    setMenu((prev) => !prev);
+  };
   const handleSubmitEvent =(e)=>{
     e.preventDefault()
     navigate("/search")
@@ -79,15 +82,18 @@ function Navbar() {
           </div>
 
           <div className="flex items-center ps-3">
-           <form action="" onSubmit={handleSubmitEvent}>
            <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSubmitEvent();
+                }
+              }}
               className="bg-white border-[1px] border-[#BF3131] ps-3 py-1 sm:w-[100%] w-[60%] border-r-0  outline-none"
               placeholder="search...."
             />
-           </form>
             <NavLink to="/search">
               <FaSearch className="bg-white border-[#BF3131]  border-[1px] h-[34px] border-l-0 w-6 " />
             </NavLink>
@@ -114,14 +120,14 @@ function Navbar() {
                 </NavLink>
 
                 <CiLogout
-                  className="cursor-pointer"
+                  className="cursor-pointer me-5"
                   onClick={logoutUser}
                   size={20}
                 />
               </div>
             ) : null}
           </div>
-          <FaBars onClick={() => setMenu(true)} className="flex sm:hidden" />
+          <FaBars onClick={() => setMenu(true)} className="flex sm:hidden me-2" />
           <div
             className={`absolute bg-white top-0 z-10 right-0 bottom-0 ${
               menu ? "w-[250px]" : "hidden"
@@ -171,8 +177,9 @@ function Navbar() {
                 <h1 className="font-[500] text-[20px] p-5">Contact</h1>
               </NavLink>
             </button>
-
-            <br />
+            <button className=" w-full hover:bg-[#7D0A0A] bg-white">
+            <FaBackspace size={30} onClick={toggleDropdownMenu} className=" ms-5 mt-3 mb-3"/>
+            </button>
           </div>
         </div>
       </div>
