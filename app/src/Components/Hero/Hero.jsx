@@ -1,32 +1,24 @@
 import { FaArrowRight } from "react-icons/fa";
-import mainBgAd from "../assets/storeBg.png";
+import mainBgAd from "../assets/heroBg-3.jpg";
+ 
 
 const Hero = () => {
   return (
-    <div className="hero flex flex-col md:flex-row bg-cover bg-center bg-gradient-to-b from-[#fff] via-[#fff] to-[#1f1c1c] md:h-screen w-full relative">
-      <div className="hero-left flex flex-col gap-6 leading-tight  mt-24 px-4 sm:px-10 md:px-20 lg:px-24">
-        <h2 className="text-xl md:text-2xl font-semibold opacity-80 text-[#]">
-          NEW ARRIVALS ONLY
-        </h2>
-        <div>
-          <p className="text-5xl md:text-6xl font-bold text-[#BF3232] opacity-80">
-            New
-          </p>
-          <p className="text-5xl md:text-6xl font-bold text-[#333] opacity-100">
-            collections
-          </p>
-          <p className="text-5xl md:text-6xl font-bold text-[#BF3232] opacity-80">
-            for everyone
-          </p>
-        </div>
-        <div>
-          <button className="hero-latest-btn flex items-center justify-center gap-4 w-full md:w-[260px] h-[60px] rounded-full mt-6 bg-[white] text-lg font-medium  hover:opacity-100 text-[#7D0A0A] hover:bg-[#7D0A0A] hover:text-[white]">
-            Latest collections <FaArrowRight />
-          </button>
-        </div>
+    <div className="relative flex flex-col md:flex-row w-full h-screen bg-cover bg-center" style={{ backgroundImage: `url(${mainBgAd})` }}>
+      <div className="absolute inset-0 bg-black opacity-60 z-0" />
+      <div className="flex-1 flex items-center justify-center z-10">
+        <img src={mainBgAd} alt="Shoe" className="w-3/4 md:w-1/2 h-auto rounded-lg shadow-lg" />
       </div>
-      <div className="flex-1 flex justify-center items-center md:justify-end mt-[66px]">
-        <img src={mainBgAd} alt="" className="max-w-full h-auto" />
+      <div className="flex-1 flex flex-col justify-center items-start px-6 z-10">
+        <h2 className="text-2xl md:text-3xl font-semibold text-white tracking-wide uppercase mb-4">Exclusive Arrivals</h2>
+        <div className="mb-6">
+          <p className="text-5xl md:text-6xl font-bold text-[#BF3131] drop-shadow-md">New</p>
+          <p className="text-5xl md:text-6xl font-bold text-white drop-shadow-md">Collections</p>
+          <p className="text-5xl md:text-6xl font-bold text-yellow-400 drop-shadow-md">For Everyone</p>
+        </div>
+        <button className="flex items-center justify-center w-56 h-14 rounded-full bg-yellow-500 text-white text-lg font-semibold transition-transform transform hover:scale-105 hover:bg-yellow-600 shadow-lg">
+          Explore Latest <FaArrowRight className="ml-2" />
+        </button>
       </div>
     </div>
   );

@@ -8,15 +8,19 @@ function UserContext({children}) {
     const [users,setUsers]=useState([])
     const [isLogged,setIsLogged]=useState(false)
     const [currUser,setCurrUser]=useState(null)
+    const [loading,setLoading]=useState(false)
 
     useEffect(()=>{
         const userFetch = async () =>{
             try{
+                setLoading(true)
                 const data = await axios.get("http://localhost:3000/allUsers")
             setUsers(data.data);
             }catch(err){
                 console.log(err);
-            }
+            }finally{
+                setLoading(false)
+ }
         }
         userFetch()
     },[])
@@ -28,6 +32,8 @@ function UserContext({children}) {
             setCurrUser(user)
             localStorage.setItem("isLogged","true")
             localStorage.setItem("currUser",JSON.stringify(user))
+            const storedCart = JSON.parse(localStorage.getItem(`${user.email}_=cart`)) || {};
+            localStorage.setItem("cart", JSON.stringify(storedCart));
             alert("user logged")
         }else{
             alert("invalid email or password")
@@ -39,6 +45,7 @@ function UserContext({children}) {
         setCurrUser(null)
         localStorage.removeItem("isLogged")
         localStorage.removeItem("currUser")
+        localStorage.removeItem("cart")
     }
 
     useEffect(()=>{
@@ -54,18 +61,23 @@ function UserContext({children}) {
 
 
  const PostUserDatas = (name,email,password,cart)=>{
+    const data = {
+      name:name,
+      email:email,
+      password:password,
+      cart:cart,
+
+
+    }
         const postData = async()=>{
            try{
-            const response = await axios.post("http://localhost:3000/allUsers",{
-                name,
-                email,
-                password,
-                cart,
-            });
-            setUsers([...users,response.data])
-            
+            setLoading(true)
+             await axios.post("http://localhost:3000/allUsers",data);
+
            }catch(error){
             console.log(error);
+           }finally{
+            setLoading(false)
            }
         }
         postData()
@@ -79,7 +91,8 @@ function UserContext({children}) {
         isLogged,
         loginUser,
         logoutUser,
-        PostUserDatas
+        PostUserDatas,
+        loading
     };
 
 

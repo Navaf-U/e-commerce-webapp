@@ -9,21 +9,44 @@ import { useContext } from "react";
 import { ProductsData } from "../../context/ProductsCont";
 import { userData } from "../../context/UserContext";
 import { CiLogout } from "react-icons/ci";
+import { RiUserFollowFill } from "react-icons/ri";
 
 function Navbar() {
   const {cartItemNotify} = useContext(ProductsData)
   const [menu, setMenu] = useState(false);
   const { search, setSearch } = useContext(ProductsData);
-  const {isLogged,logoutUser} =useContext(userData)
+  const {isLogged,logoutUser,currUser} =useContext(userData)
+  const [currUserDataShows,setCurrUserDataShows]=useState(false)
+  const toggleDropdown = () => {
+    setCurrUserDataShows((prev) => !prev);
+  };
   return (
     <div className="pb-20">
+      <div>
+      {currUserDataShows && currUser && (
+        <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50">
+          <p className="px-4 py-2 font-bold">Hello, {currUser.name}</p>
+          <p className="px-4 py-2 text-gray-600">{currUser.email}</p>
+          <NavLink to="/profile">
+            <button className="w-full px-4 py-2 text-left hover:bg-gray-200">
+              View Profile
+            </button>
+          </NavLink>
+          <button onClick={logoutUser} className="w-full px-4 py-2 text-left hover:bg-gray-200">
+            Logout
+          </button>
+        </div>
+      )}
+      </div>
+
+
       <div className="border-b-2 h-20 w-full fixed bg-white z-50 ">
         <div className="nav-logo flex justify-around items-center w-full">
           <div className="flex items-center">
             <img src={logo} className="size-20" alt="" />
             <h1 className="nav-logo hidden text-[30px] font-[900] lg:flex items-center text-gray-800">
-              <span className="text-red-600">Chic</span>
-              <span className="text-black">Kick</span>
+              <span className="text-black">Step</span>
+              <span className="text-red-600">Prime</span>
             </h1>
           </div>
           <div className="gap-4 hidden sm:flex">
@@ -59,7 +82,9 @@ function Navbar() {
              <NavLink to="/login">
              <FaUser size={20} className="ms-5 me-2" />
            </NavLink>
-           ):null}
+           ):(
+           <RiUserFollowFill size={30} onClick={toggleDropdown} className="ms-5 me-3 cursor-pointer" />
+           )}
             {isLogged===true ?(
               <div className="flex gap-5">
                 <NavLink to="/cart" className="relative">

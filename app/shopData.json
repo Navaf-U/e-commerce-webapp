@@ -147,26 +147,49 @@
       "name": "navaf",
       "email": "navafsoft@gmail.com",
       "password": "navaf1212",
-      "cart": []
+      "cart": {}
     },
     {
       "id": "2",
       "name": "janson",
       "email": "janson@gmail.com",
       "password": "janson1212",
-      "cart": []
+      "cart": {}
     },
     {
       "id": "7b11",
       "name": "irfan",
       "email": "irfankuttappu@gmail.com",
-      "password": "1231"
+      "password": "1231",
+      "cart": {}
     },
     {
-      "id": "ee4a",
+      "id": "f74d",
       "name": "nishaj",
       "email": "nishaj123@gmail.com",
-      "password": "12345"
+      "password": "123",
+      "cart": {}
+    },
+    {
+      "id": "eb13",
+      "name": "harsha",
+      "email": "harsha@gmail.com",
+      "password": "12345",
+      "cart": {}
+    },
+    {
+      "id": "81c1",
+      "name": "sithara",
+      "email": "sithara@gmail.com",
+      "password": "1212",
+      "cart": {}
+    },
+    {
+      "id": "3f21",
+      "name": "sahad",
+      "email": "sahad@gmail.com",
+      "password": "123",
+      "cart": {}
     }
   ]
 }

@@ -12,8 +12,9 @@ function SignupCombo() {
 
   const handlerEvent =(e)=>{
     e.preventDefault()
+    const cart={}
     if(password===cpassword){
-      PostUserDatas(name,email,password)
+      PostUserDatas(name,email,password,cart)
       alert("new account created please login")
     }else{
       alert("password not matching")
