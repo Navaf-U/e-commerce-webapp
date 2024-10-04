@@ -14,7 +14,9 @@ function Product() {
     <>
       {!products.length ? (
         <p>Loading...</p>
-      ) : !findProduct ? <p>product not found</p>: (
+      ) : !findProduct ? (
+        <p>product not found</p>
+      ) : (
         <div className="flex flex-col md:flex-row justify-around px-4 py-6">
           <div className="left-section md:w-[40%] flex flex-col items-center">
             <img
