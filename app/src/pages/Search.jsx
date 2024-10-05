@@ -8,15 +8,15 @@ function Search() {
 
   useEffect(() => {
     const filteredDatas = products.filter((item) =>
-      item.name.toLowerCase().includes(search)
+      item.name.toLowerCase().includes(search.toLowerCase())
     );
 
-    setData(filteredDatas.length > 0 ? filteredDatas : "not found");
-  },[search, products]);
+    setData(filteredDatas.length > 0 ? filteredDatas : null);
+  }, [search, products]);
 
   return (
     <div className="pt-20">
-      {data.length > 0 ? (
+      {data != null ? (
         <ul className="flex flex-wrap justify-center items-center gap-8">
           {data.map((item) => (
             <li
@@ -29,13 +29,15 @@ function Search() {
               >
                 <img src={item.image} className="w-52" alt={item.name} />
               </NavLink>
-
               <p className="mt-2">{item.name}</p>
             </li>
           ))}
         </ul>
       ) : (
-        <h1>Not found</h1>
+        <div className="flex justify-center mb-20">
+        <h1 className="text-[30px] font-[600] ">Not&nbsp;</h1>
+        <h1 className="text-[30px] font-[600] text-[red]">Found!!</h1>
+        </div>
       )}
     </div>
   );

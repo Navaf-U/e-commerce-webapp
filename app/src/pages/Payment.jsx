@@ -74,13 +74,13 @@ function Payment() {
           <input
             type="number"
             placeholder="Card Number"
-            disabled={!paymentMethod || paymentMethod === "COD"}
+            disabled={paymentMethod==null || paymentMethod === "COD"}
             className={`my-2 rounded-2xl bg-[#000000] h-14 md:h-16 w-full ps-5 border-gray-500 outline-none text-[#fff] text-base`}
           />
           <div className="flex justify-between gap-2">
             <input
               placeholder="Expiration Date"
-              disabled={!paymentMethod || paymentMethod === "COD"}
+              disabled={paymentMethod==null || paymentMethod === "COD"}
               className={`my-2 rounded-2xl bg-[#000000] h-14 md:h-20 w-[32%] ps-5 border-gray-500 outline-none text-[#fff] text-base`}
             />
             <input
@@ -90,7 +90,7 @@ function Payment() {
             />
             <input
               placeholder="ZIP"
-              disabled={!paymentMethod || paymentMethod === "COD"}
+              disabled={paymentMethod==null || paymentMethod === "COD"}
               className={`my-2 rounded-2xl bg-[#000000] h-14 md:h-20 w-[32%] ps-5 border-gray-500 outline-none text-[#fff] text-base`}
             />
           </div>

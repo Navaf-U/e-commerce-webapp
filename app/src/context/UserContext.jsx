@@ -31,15 +31,20 @@ function UserContext({ children }) {
       }
     } catch (error) {
       console.error(error);
+    }finally{
+      setLoading(false)
     }
   };
 
   const logoutUser = () => {
+    const confirmLogout = confirm("You are going to log out. Do you want to continue?")
+    if(confirmLogout){
     setCurrUser(null);
     setIsLogged(false);
     localStorage.removeItem("isLogged");
     localStorage.removeItem("currUser");
     localStorage.removeItem("cart");
+  }
   };
 
   useEffect(() => {
@@ -134,6 +139,7 @@ function UserContext({ children }) {
     logoutUser,
     PostUserDatas,
     loading,
+    setLoading,
     cart,
     addToCart,
     removeFromCart,

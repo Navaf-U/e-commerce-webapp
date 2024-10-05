@@ -10,7 +10,7 @@ function ProductsCont({ children }) {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   
-  const { currUser,cart } = useContext(userData) || {};
+  const { currUser,cart,setLoading } = useContext(userData) || {};
 
 
   const getTotalCartAmount = () => {
@@ -27,12 +27,15 @@ function ProductsCont({ children }) {
   
   useEffect(() => {
     const fetchProductsData = async () => {
+      setLoading(true)
       try {
         const {data} = await axios.get("http://localhost:3000/newProducts");
         setProducts(data);
 
       } catch (err) {
         console.log(err);
+      }finally{
+        setLoading(false)
       }
     };
     fetchProductsData();

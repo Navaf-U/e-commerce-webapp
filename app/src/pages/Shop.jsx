@@ -15,7 +15,7 @@ function Shop() {
     <div>
       <Hero />
       <div>
-        <div className="shadow-lg">&nbsp;</div>
+        <div className="shadow-lg pb-5">&nbsp;</div>
         <h1 className="text-4xl font-extrabold text-center text-slate-900 tracking-wide leading-tight">
           Popular Shoes
         </h1>

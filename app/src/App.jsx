@@ -5,11 +5,11 @@ import UserContext from "./context/UserContext";
 function App() {
   return (
     <div>
-        <UserContext>
-      <ProductsCont>
+      <UserContext>
+        <ProductsCont>
           <AppRoutes />
-      </ProductsCont>
-        </UserContext>
+        </ProductsCont>
+      </UserContext>
     </div>
   );
 }

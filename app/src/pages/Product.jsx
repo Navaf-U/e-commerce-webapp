@@ -1,7 +1,7 @@
+import logo from "../Components/assets/StepPrimeLogo.png";
 import { useContext, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { ProductsData } from "../context/ProductsCont";
-import logo from "../Components/assets/StepPrimeLogo.png";
 import { userData } from "../context/UserContext";
 function Product() {
   const { id } = useParams();

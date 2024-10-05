@@ -1,5 +1,5 @@
 import logo from "../assets/StepPrimeLogo.png";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
@@ -18,17 +18,13 @@ function Navbar() {
   const { search, setSearch } = useContext(ProductsData);
   const { cartItemNotify } = useContext(userData);
   const { isLogged, logoutUser, currUser } = useContext(userData);
-  const navigate = useNavigate()
   const toggleDropdown = () => {
     setCurrUserDataShows((prev) => !prev);
   };
   const toggleDropdownMenu = () => {
     setMenu((prev) => !prev);
   };
-  const handleSubmitEvent =(e)=>{
-    e.preventDefault()
-    navigate("/search")
-  }
+
   return (
     <div className="pb-20">
       <div>
@@ -86,11 +82,6 @@ function Navbar() {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  handleSubmitEvent();
-                }
-              }}
               className="bg-white border-[1px] border-[#BF3131] ps-3 py-1 sm:w-[100%] w-[60%] border-r-0  outline-none"
               placeholder="search...."
             />
