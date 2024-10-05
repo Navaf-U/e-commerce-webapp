@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import MasterCard from "../Components/assets/MasterCard.png";
 import PayPal from "../Components/assets/PayPal.png";
 import RazorPay from "../Components/assets/RazorPay.png";
+import { userData } from "../context/UserContext";
 
 function Payment() {
   const [paymentMethod, setPaymentMethod] = useState(null);
-
+  const {setCart} = useContext(userData)
+ 
   const paymentMethodsSelection = (method) => {
     setPaymentMethod(method);
   };
+
+ 
 
   return (
     <div className="flex justify-center">
@@ -50,24 +54,28 @@ function Payment() {
             <img src={RazorPay} className="w-48 h-36" alt="" />
           </button>
         </div>
-        <form className="flex flex-col">
+        <form onSubmit={()=>setCart({})} className="flex flex-col">
           <input
             type="text"
+            required
             placeholder="First Name"
             className="my-2 rounded-2xl bg-gray-200 h-14 md:h-16 w-full ps-5 border-gray-500 outline-none text-[#5c5c5c] text-base"
           />
           <input
             type="text"
+            required
             placeholder="Last Name"
             className="my-2 rounded-2xl bg-gray-200 h-14 md:h-16 w-full ps-5 border-gray-500 outline-none text-[#5c5c5c] text-base"
           />
           <input
             type="email"
+            required
             placeholder="Email Address"
             className="my-2 rounded-2xl bg-gray-200 h-14 md:h-16 w-full ps-5 border-gray-500 outline-none text-[#5c5c5c] text-base"
           />
           <input
             type="text"
+            required
             placeholder="Address"
             className="my-2 rounded-2xl bg-gray-200 h-14 md:h-16 w-full ps-5 border-gray-500 outline-none text-[#5c5c5c] text-base"
           />

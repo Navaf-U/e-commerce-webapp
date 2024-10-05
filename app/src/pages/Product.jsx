@@ -31,11 +31,9 @@ function Product() {
             <h3 className="text-[24px] text-center font-[700]">{`Price: ${findProduct.price}${currency}`}</h3>
           </div>
           <div className="right-section md:w-[50%] mt-4 md:mt-0 flex flex-col items-center justify-center">
-            <img src={logo} className="h-[400px] mt-[-20px]" alt="" />
-            <p className="text-[50px] font-[300] text-center text-sm md:text-base px-2 mt-[-50px]">
-              Experience the perfect blend of style and comfort with our latest
-              collection. <br /> Upgrade your wardrobe today and enjoy free
-              shipping on all orders!
+            <img src={logo} className="h-[300px] mt-[-50px]" alt="" />
+            <p className="text-[50px] font-[300] text-center text-sm md:text-base px-2 mt-[-20px]">
+              {findProduct.description}
             </p>
             <h1 className="text-[20px] font-[600]">Quantity:</h1>
             <div className="flex gap-5 border-[4px] w-[30%] justify-between border-[#BF3131] my-5 ">

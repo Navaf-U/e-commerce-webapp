@@ -39,7 +39,7 @@ function ProductsCont({ children }) {
       }
     };
     fetchProductsData();
-  }, [currUser]);
+  }, [currUser, setLoading]);
 
 
 

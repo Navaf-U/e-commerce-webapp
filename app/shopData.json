@@ -5,140 +5,177 @@
       "name": "Men’s Black Running",
       "type": "men",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-005-400x400.jpg",
-      "price": 799
+      "price": 799,
+      "description": "Experience comfort and performance with the Men’s Black Running shoes. Designed for avid runners, they feature breathable mesh and a cushioned sole for optimal support."
+  
     },
     {
       "id": "2",
       "name": "Men’s Classic Blue",
       "type": "men",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-019-600x600.jpg",
-      "price": 1699
+      "price": 1699,
+      "description": "Step out in style with the Men’s Classic Blue sneakers. With a timeless design and durable materials, these shoes offer both comfort and versatility for everyday wear."
+ 
     },
     {
       "id": "3",
       "name": "Men’s Classic Mint",
       "type": "men",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-020-600x600.jpg",
-      "price": 1799
+      "price": 1799,
+      "description": "Freshen up your footwear collection with the Men’s Classic Mint shoes. These sneakers combine retro style with modern comfort, making them perfect for any casual occasion."
     },
     {
       "id": "4",
       "name": "Men’s Earth-Tone Sneaker",
       "type": "men",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-017-600x600.jpg",
-      "price": 749
+      "price": 749,
+      "description": "Embrace nature with the Men’s Earth-Tone Sneakers. These eco-friendly shoes provide a relaxed fit, perfect for outdoor activities or leisurely strolls in the park."
     },
     {
       "id": "5",
       "name": "Men’s Green Running",
       "type": "men",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-007-600x600.jpg",
-      "price": 769
+      "price": 769,
+      "description": "Elevate your running game with the Men’s Green Running shoes. Featuring shock-absorbing soles and a lightweight design, they ensure a smooth ride with every stride."
+ 
     },
     {
       "id": "6",
       "name": "Men’s Moonstone Sneaker",
       "type": "men",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-018-600x600.jpg",
-      "price": 749
+      "price": 749,
+      "description": "Shine bright with the Men’s Moonstone Sneakers. These stylish shoes combine elegance and comfort, making them suitable for both casual outings and active lifestyles."
+ 
     },
     {
       "id": "7",
       "name": "Men’s Navy Running",
       "type": "men",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-008-600x600.jpg",
-      "price": 1049
+      "price": 1049,
+      "description": "Hit the ground running in the Men’s Navy Running shoes. Designed with support and durability in mind, these shoes are ideal for both training sessions and races."
+ 
     },
     {
       "id": "8",
       "name": "Men’s Red Running",
       "type": "men",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-006-600x600.jpg",
-      "price": 1049
+      "price": 1049,
+      "description": "Make a statement with the Men’s Red Running shoes. Their vibrant color and ergonomic design provide the motivation you need for your next workout."
+ 
     },
     {
       "id": "9",
       "name": "Women’s Blue Training",
       "type": "women",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-003-600x600.jpg",
-      "price": 699
+      "price": 699,
+      "description": "Train in style with the Women’s Blue Training shoes. Lightweight and flexible, these shoes provide excellent traction for various indoor and outdoor workouts."
+ 
     },
     {
       "id": "10",
       "name": "Women’s Candy City Run",
       "type": "women",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-014-600x600.jpg",
-      "price": 549
+      "price": 549,
+      "description": "Brighten up your run with the Women’s Candy City Run shoes. Their sweet color palette and cushioned soles ensure you’ll enjoy every step of your journey."
+
     },
     {
       "id": "11",
       "name": "Women’s Choco City Run",
       "type": "women",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-013-600x600.jpg",
-      "price": 549
+      "price": 549,
+      "description": "Treat your feet with the Women’s Choco City Run shoes. Designed for comfort, these shoes offer a perfect fit for daily training and city exploration."
+ 
     },
     {
       "id": "12",
       "name": "Women’s Cream Suede",
       "type": "women",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-015-600x600.jpg",
-      "price": 949
+      "price": 949,
+      "description": "Step out in luxury with the Women’s Cream Suede shoes. Their plush material and classic design make them a stylish choice for any occasion."
+ 
     },
     {
       "id": "13",
       "name": "Women’s Green Training",
       "type": "women",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-001-600x600.jpg",
-      "price": 449
+      "price": 449,
+      "description": "Stay energized with the Women’s Green Training shoes. Lightweight and breathable, they provide the perfect balance of comfort and performance for your workouts."
+ 
     },
     {
       "id": "14",
       "name": "Women’s Mint Sneaker",
       "type": "women",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-010-600x600.jpg",
-      "price": 899
+      "price": 899,
+      "description": "Refresh your footwear with the Women’s Mint Sneakers. Their chic design and excellent support make them ideal for both casual outings and training sessions."
+ 
     },
     {
       "id": "15",
       "name": "Women’s Orange Sneaker",
       "type": "women",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-009-600x600.jpg",
-      "price": 899
+      "price": 899,
+      "description": "Add a pop of color to your wardrobe with the Women’s Orange Sneakers. Stylish and versatile, these shoes are perfect for every occasion."
+ 
     },
     {
       "id": "16",
       "name": "Women’s Peach Training",
       "type": "women",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-004-600x600.jpg",
-      "price": 549
+      "price": 549,
+      "description": "Train hard and look good with the Women’s Peach Training shoes. Their supportive design ensures maximum comfort, whether you’re at the gym or on the track."
+ 
     },
     {
       "id": "17",
       "name": "Women’s Pink Suede",
       "type": "women",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-016-600x600.jpg",
-      "price": 599
+      "price": 599,
+      "description": "Feel fabulous in the Women’s Pink Suede shoes. Combining elegance and comfort, they’re perfect for dressing up or down."
+ 
     },
     {
       "id": "18",
       "name": "Women’s Pink Training",
       "type": "women",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-002-600x600.jpg",
-      "price": 549
+      "price": 549,
+      "description": "Train in style with the Women’s Pink Training shoes. With a supportive fit and eye-catching color, these shoes are perfect for gym sessions or outdoor runs."
+ 
     },
     {
       "id": "19",
       "name": "Women’s Tan Sneaker",
       "type": "women",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-011-600x600.jpg",
-      "price": 899
+      "price": 899,
+      "description": "The Women’s Tan Sneakers offer a classic, neutral look perfect for any outfit. Their durable build ensures lasting comfort for casual wear and active days."
+ 
     },
     {
       "id": "20",
       "name": "Women’s Tosca City Run",
       "type": "women",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-012-600x600.jpg",
-      "price": 649
+      "price": 649,
+      "description": "Take on the streets with the Women’s Tosca City Run shoes. Lightweight, breathable, and stylish, these shoes are designed for comfort and style during urban runs."
     }
   ],
   "allUsers": [
@@ -214,6 +251,17 @@
         "3": 1,
         "8": 0,
         "10": 0
+      }
+    },
+    {
+      "id": "8fc0",
+      "name": "navafy",
+      "email": "navafy@gmail.com",
+      "password": "123",
+      "cart": {
+        "1": 4,
+        "2": 2,
+        "3": 4
       }
     }
   ]
