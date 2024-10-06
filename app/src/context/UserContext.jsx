@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 
+
 export const userData = createContext();
 
 // eslint-disable-next-line react/prop-types
@@ -9,6 +10,7 @@ function UserContext({ children }) {
   const [currUser, setCurrUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState({});
+
 
   const loginUser = async (email, password) => {
     try {
@@ -86,6 +88,7 @@ function UserContext({ children }) {
       });
     } else {
       alert("please login");
+
     }
   };
 

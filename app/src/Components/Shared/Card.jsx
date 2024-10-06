@@ -30,7 +30,7 @@ function Card({ id, price, image, type, name }) {
         <div className="mt-4 px-5 pb-5">
           <div className="mt-2 mb-5 flex items-center justify-center">
             <p>
-              <span className="text-3xl text-center font-bold text-slate-900">
+              <span className="text-1xl text-center font-bold text-slate-900">
                 {price}₹
               </span>
             </p>

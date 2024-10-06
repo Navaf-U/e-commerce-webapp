@@ -7,7 +7,7 @@ import StepPrimeLogo from "../Components/assets/StepPrimeLogo.png";
 
 function Footer() {
   return (
-    <div className="main-footer flex flex-col items-center gap-10 px-4 md:px-10">
+    <div className="main-footer flex flex-col mt-40 items-center gap-10 px-4 md:px-10">
       <div className="footer-logo flex items-center gap-4">
         <img src={StepPrimeLogo} alt="" className="h-16 w-16 md:h-20 md:w-20" />
         <h1
