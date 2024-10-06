@@ -9,7 +9,10 @@ function Product() {
   const { isLogged, addToCart } = useContext(userData);
   const [quantity, setQuantity] = useState(1);
   const findProduct = products.find((item) => item.id === id);
-
+  const menFiltered = products.filter((item) => item.type === "men")
+  const womenFiltered = products.filter((item)=> item.type === "women")
+  
+  
   return (
     <>
       {!products.length ? (
@@ -17,6 +20,7 @@ function Product() {
       ) : !findProduct ? (
         <p>product not found</p>
       ) : (
+        <div>
         <div className="flex flex-col md:flex-row justify-around px-4 py-6">
           <div className="left-section md:w-[40%] flex flex-col items-center">
             <img
@@ -68,6 +72,22 @@ function Product() {
                 </button>
               </NavLink>
             )}
+          </div>
+          </div>
+          <div className="mt-32">
+            <h1 className="text-[25px] font-[600] text-center">Trending Now - You&apos;ll Love These</h1>
+            <div>
+          {findProduct.type === "men" ? (
+            <div className="flex flex-wrap gap-7 mt-28 ms-14">{menFiltered.map((item)=>{
+              return <h1 className="font-[600]" key={item.id}><img src={item.image} className="w-36" alt="" /> {item.name} </h1> 
+            })}</div>
+            
+          ):(
+            <div className="flex flex-wrap gap-7 mt-28 ms-16">{womenFiltered.map((item)=>{
+              return <h1 className="font-[600]" key={item.id}><img src={item.image} className="w-36" alt="" /> {item.name} </h1> 
+            })}</div>
+          )}
+            </div>
           </div>
         </div>
       )}

@@ -168,6 +168,8 @@
       "email": "navafsoft@gmail.com",
       "password": "navaf1212",
       "cart": {
+        "3": 1,
+        "16": 1,
         "19": 1,
         "20": 1
       }

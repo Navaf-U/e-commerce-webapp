@@ -28,8 +28,8 @@ const Cart = () => {
       {products.map((item) => {
         const quantity = cart[item.id] || 0;
         const totalAmount = (item.price * quantity).toFixed(2)
+
         return (
-          
           quantity > 0 && (
             <div
               key={item.id}
