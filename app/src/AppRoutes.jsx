@@ -21,14 +21,13 @@ function AppRoutes() {
   return (
     <>
     <ToastContainer/>
-        <Layout>
           <Routes>
             <Route
               path="/"
               element={
-                <>
+                <Layout>
                   <Navbar /> <Outlet />
-                </>
+              </Layout>
               }
             >
               <Route path="/" element={<Shop />} />
@@ -41,12 +40,11 @@ function AppRoutes() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/contact" element={<Contact />} />
-            </Route>
             <Route path="*" element={<NotFound />} />
+            </Route>
             <Route path="/admin" element={<AdmineMainPage />} />
             <Route path="/adminProducts/:id" element={<AdmineActionPage />} />
           </Routes>
-        </Layout>
     </>
   );
 }

@@ -488,29 +488,7 @@
       "id": "1",
       "name": "navaf",
       "email": "navafsoft@gmail.com",
-      "password": "navaf1212",
-      "cart": {
-        "2": 0,
-        "3": 1,
-        "16": 1,
-        "19": 1,
-        "20": 1,
-        "1540": 0,
-        "0ba0": 2
-      }
-    },
-    {
-      "id": "2",
-      "name": "janson",
-      "email": "janson@gmail.com",
-      "password": "janson1212",
-      "cart": {}
-    },
-    {
-      "id": "7b11",
-      "name": "irfan",
-      "email": "irfankuttappu@gmail.com",
-      "password": "1231",
+      "password": "123",
       "cart": {}
     },
     {
@@ -565,18 +543,6 @@
       }
     },
     {
-      "id": "8fc0",
-      "name": "navafy",
-      "email": "navafy@gmail.com",
-      "password": "123",
-      "cart": {
-        "1": 2,
-        "2": 0,
-        "3": 3,
-        "9": 4
-      }
-    },
-    {
       "id": "97e9",
       "name": "test",
       "email": "test@gmail.com",
@@ -586,6 +552,27 @@
         "2": 0,
         "5": 0
       }
+    },
+    {
+      "id": "cb0d",
+      "name": "ann",
+      "email": "ann@gmail.com",
+      "password": "123",
+      "cart": {}
+    },
+    {
+      "id": "71c3",
+      "name": "GOD",
+      "email": "god@gmail.com",
+      "password": "123",
+      "cart": {}
+    },
+    {
+      "id": "11b0",
+      "name": "loli",
+      "email": "loli@gmail.com",
+      "password": "loli@gmail.com",
+      "cart": {}
     }
   ]
 }

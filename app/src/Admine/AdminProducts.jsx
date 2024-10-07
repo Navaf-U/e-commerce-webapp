@@ -6,50 +6,51 @@ function AdminProducts() {
   const { products } = useContext(ProductsData);
 
   return (
-    <div className="h-[100vh] w-[145%] overflow-y-auto">
-      <table className="w-full text-center table-auto">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>IMAGE</th>
-            <th>NAME</th>
-            <th>TYPE</th>
-            <th>PRICE</th>
-            <th>BRAND</th>
-            <th>RATING</th>
-            <th>REVIEWS</th>
-            <th>ACTION</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((item) => (
-            <tr key={item.id} className="border-b">
-              <td className="py-2 font-[700]">{item.id}</td>
-              <td className="py-2">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-10 py-2 ms-3"
-                />
-              </td>
-              <td className="py-2">{item.name}</td>
-              <td className="py-2">{item.type}</td>
-              <td className="py-2">{item.price}</td>
-              <td className="py-2">{item.brand}</td>
-              <td className="py-2">{item.rating}</td>
-              <td className="py-2">{item.reviews}</td>
-              <td className="py-2">
-                
-                <NavLink to={`/adminProducts/${item.id}`}>
-                <button className="bg-blue-500 text-white px-4 py-1 rounded">
-                  Action
-                </button>
-                </NavLink>
-              </td>
+    <div className="h-[100vh] w-full overflow-y-auto">
+      <div className="overflow-x-auto">
+        <table className="min-w-full text-center table-auto">
+          <thead>
+            <tr className="bg-gray-200">
+              <th className="p-2 text-xs md:text-sm">ID</th>
+              <th className="p-2 text-xs md:text-sm hidden sm:table-cell">IMAGE</th>
+              <th className="p-2 text-xs md:text-sm">NAME</th>
+              <th className="p-2 text-xs md:text-sm hidden sm:table-cell">TYPE</th>
+              <th className="p-2 text-xs md:text-sm">PRICE</th>
+              <th className="p-2 text-xs md:text-sm hidden sm:table-cell">BRAND</th>
+              <th className="p-2 text-xs md:text-sm hidden md:table-cell">RATING</th>
+              <th className="p-2 text-xs md:text-sm hidden md:table-cell">REVIEWS</th>
+              <th className="p-2 text-xs md:text-sm">ACTION</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {products.map((item) => (
+              <tr key={item.id} className="border-b">
+                <td className="py-2 font-semibold text-xs md:text-sm">{item.id}</td>
+                <td className="py-2 hidden sm:table-cell">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-16 h-16 object-cover mx-auto"
+                  />
+                </td>
+                <td className="py-2 text-xs md:text-sm">{item.name}</td>
+                <td className="py-2 hidden sm:table-cell text-xs md:text-sm">{item.type}</td>
+                <td className="py-2 text-xs md:text-sm">{item.price}</td>
+                <td className="py-2 hidden sm:table-cell text-xs md:text-sm">{item.brand}</td>
+                <td className="py-2 hidden md:table-cell text-xs md:text-sm">{item.rating}</td>
+                <td className="py-2 hidden md:table-cell text-xs md:text-sm">{item.reviews}</td>
+                <td className="py-2">
+                  <NavLink to={`/adminProducts/${item.id}`}>
+                    <button className="bg-blue-500 text-white px-3 py-1 rounded text-xs md:text-sm">
+                      Action
+                    </button>
+                  </NavLink>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
