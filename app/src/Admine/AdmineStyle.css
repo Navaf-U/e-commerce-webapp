@@ -1,0 +1,23 @@
+.Adminlayout {
+  position: relative;
+  z-index: 1;
+}
+
+.Adminlayout::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+      to bottom right,
+      rgba(0, 0, 0, 0.635),
+      rgb(0, 0, 0)
+    ),
+    url("D:\project\e-commerce-webapp\app\src\Components\assets\admineLayoutBg.jpg");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
+}

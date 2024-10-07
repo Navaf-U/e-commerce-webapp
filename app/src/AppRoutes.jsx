@@ -15,6 +15,8 @@ import SignupPage from "./pages/SignupPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Contact from "./pages/Contact";
+import AdmineMainPage from "./Admine/AdminMainPage";
+import AdmineActionPage from "./Admine/AdminActionPage";
 function AppRoutes() {
   return (
     <>
@@ -41,8 +43,9 @@ function AppRoutes() {
               <Route path="/contact" element={<Contact />} />
             </Route>
             <Route path="*" element={<NotFound />} />
+            <Route path="/admin" element={<AdmineMainPage />} />
+            <Route path="/adminProducts/:id" element={<AdmineActionPage />} />
           </Routes>
-      
         </Layout>
     </>
   );

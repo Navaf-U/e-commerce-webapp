@@ -27,7 +27,7 @@ const Cart = () => {
       )}
       {products.map((item) => {
         const quantity = cart[item.id] || 0;
-        const totalAmount = (item.price * quantity).toFixed(2)
+        const totalAmount = (item.price * quantity)
 
         return (
           quantity > 0 && (
@@ -45,7 +45,7 @@ const Cart = () => {
               <p className="flex-1 text-center mb-2 sm:mb-0">{item.name}</p>
               <p className="flex-1 text-center mb-2 sm:mb-0">
                 {currency}
-                {item.price.toFixed(2)}
+                {item.price}
               </p>
               <button className="bg-red-800 h-12 text-white flex items-center justify-center w-24 mb-2 sm:mb-0">
                 <p className="text-sm">{quantity}</p>
@@ -73,7 +73,7 @@ const Cart = () => {
           <div className="flex justify-between text-lg">
             <p>Subtotal</p>
             <p>
-              {currency} {getTotalCartAmount().toFixed(2)}
+              {currency} {getTotalCartAmount()}
             </p>
           </div>
           <hr className="border-gray-400" />
@@ -85,7 +85,7 @@ const Cart = () => {
           <div className="flex justify-between font-semibold text-xl">
             <h3>Total</h3>
             <h3>
-              {currency} {getTotalCartAmount().toFixed(2)}
+              {currency} {getTotalCartAmount()}
             </h3>
           </div>
           <NavLink to="/payment">
