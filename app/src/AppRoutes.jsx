@@ -12,27 +12,38 @@ import Layout from "./Layout/Layout";
 import Payment from "./pages/Payment";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Contact from "./pages/Contact";
 function AppRoutes() {
   return (
     <>
-    <Layout>
-      <Routes>
-        <Route
-          path="/"
-          element={<> <Navbar /> <Outlet /> </> } >
-          <Route path="/" element={<Shop />} />
-          <Route path="/men" element={<Men />} />
-          <Route path="/women" element={<Women />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/products/:id" element={<Product />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/payment" element={<Payment/>} />
-           <Route path="/login" element={<LoginPage/>}/>
-           <Route path="/signup" element={<SignupPage/>}/> 
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      </Layout>
+    <ToastContainer/>
+        <Layout>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Navbar /> <Outlet />
+                </>
+              }
+            >
+              <Route path="/" element={<Shop />} />
+              <Route path="/men" element={<Men />} />
+              <Route path="/women" element={<Women />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/products/:id" element={<Product />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/payment" element={<Payment />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignupPage />} />
+              <Route path="/contact" element={<Contact />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+      
+        </Layout>
     </>
   );
 }

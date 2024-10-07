@@ -2,6 +2,7 @@
 import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { userData } from "../../context/UserContext";
+import { toast } from "react-toastify";
 
 function SignupCombo() {
   const { PostUserDatas } = useContext(userData);
@@ -16,10 +17,10 @@ function SignupCombo() {
     const cart = {};
     if (password === cpassword) {
       PostUserDatas(name, email, password, cart);
-      alert("New account created.. Please login");
+      toast.success("New account created.. Please login");
       navigate("/login");
     } else {
-      alert("password not matching");
+      toast.error("password not matching");
     }
   };
 

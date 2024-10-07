@@ -72,7 +72,7 @@ function Navbar() {
             <NavLink>
               <h1 className="hover-line">Orders</h1>
             </NavLink>
-            <NavLink>
+            <NavLink to="/contact">
               <h1 className="hover-line">Contact</h1>
             </NavLink>
           </div>
@@ -150,7 +150,6 @@ function Navbar() {
                 <h1 className="font-[500] text-[20px] p-5">Women</h1>
               </NavLink>
             </button>
-
             <button
               onClick={() => setMenu(false)}
               className="w-full hover:bg-[#7D0A0A] bg-white hover:text-white"
@@ -164,7 +163,7 @@ function Navbar() {
               onClick={() => setMenu(false)}
               className="w-full hover:bg-[#7D0A0A] bg-white hover:text-white"
             >
-              <NavLink>
+              <NavLink to="/contact">
                 <h1 className="font-[500] text-[20px] p-5">Contact</h1>
               </NavLink>
             </button>

@@ -1,7 +1,9 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const userData = createContext();
 
 // eslint-disable-next-line react/prop-types
@@ -27,9 +29,9 @@ function UserContext({ children }) {
         const storedCart =
           JSON.parse(localStorage.getItem(`${user.email}_cart`)) || {};
         localStorage.setItem("cart", JSON.stringify(storedCart));
-        alert("User logged in");
+        toast.success("User logged in");
       } else {
-        alert("invalid email or password");
+        toast.error("invalid email or password");
       }
     } catch (error) {
       console.error(error);
@@ -87,7 +89,7 @@ function UserContext({ children }) {
         return updatedCart;
       });
     } else {
-      alert("please login");
+      toast.alert("please login");
 
     }
   };
