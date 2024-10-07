@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { userData } from "../../context/UserContext";
+import { FaStar } from "react-icons/fa";
 // eslint-disable-next-line react/prop-types
-function Card({ id, price, image, type, name }) {
+function Card({ id, price, image, type, name ,rating }) {
   const { addToCart } = useContext(userData);
   
   const handleAddToCart = () => {
@@ -28,11 +29,17 @@ function Card({ id, price, image, type, name }) {
         </NavLink>
 
         <div className="mt-4 px-5 pb-5">
-          <div className="mt-2 mb-5 flex items-center justify-center">
+          <div className="mt-2 mb-5 flex justify-around">
             <p>
-              <span className="text-1xl text-center font-bold text-slate-900">
+              <span className="text-[130%]  font-bold text-slate-900">
                 {price}₹
               </span>
+              </p>
+              <p className="flex">
+              <span className="text-1xl flex text-center font-bold text-slate-900">
+              {rating}<FaStar className="mt-1"/>
+              </span>
+              
             </p>
           </div>
           <NavLink

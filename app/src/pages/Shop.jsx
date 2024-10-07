@@ -30,6 +30,7 @@ function Shop() {
               price={item.price}
               type={item.type}
               name={item.name}
+              rating={item.rating}
             />
           );
         })}

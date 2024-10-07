@@ -35,8 +35,12 @@ function Product() {
             <h3 className="text-[24px] text-center font-[700]">{`Price: ${findProduct.price}${currency}`}</h3>
           </div>
           <div className="right-section md:w-[50%] mt-4 md:mt-0 flex flex-col items-center justify-center">
-            <img src={logo} className="h-[300px] mt-[-50px]" alt="" />
-            <p className="text-[50px] font-[300] text-center text-sm md:text-base px-2 mt-[-20px]">
+            <img src={logo} className="h-[200px] mt-[-50px]" alt="" />
+
+            <p className="text-[50px] font-[700] text-center text-sm md:text-base px-2 mt-[-20px]">
+             Brand: {findProduct.brand}
+            </p>
+            <p className="text-[50px] font-[300] text-center text-sm md:text-base px-2">
               {findProduct.description}
             </p>
             <h1 className="text-[20px] font-[600]">Quantity:</h1>
@@ -59,6 +63,7 @@ function Product() {
                 +
               </button>
             </div>
+            <button className="font-[600] p-5 bg-slate-500 rounded-md">it has {findProduct.reviews} reviews </button>
             {isLogged === true ? (
               <NavLink to="/cart" onClick={() => addToCart(id, quantity)}>
                 <button className="mt-8 w-[350px] h-[70px] rounded-md bg-[#BF3131] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#7D0A0A] focus:outline-none focus:ring-4 focus:ring-blue-300">

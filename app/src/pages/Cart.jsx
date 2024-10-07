@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { ProductsData } from "../context/ProductsCont";
 import { NavLink } from "react-router-dom";
@@ -7,6 +7,7 @@ import { userData } from "../context/UserContext";
 const Cart = () => {
   const { products, currency, getTotalCartAmount } = useContext(ProductsData);
   const { cart, removeFromCart } = useContext(userData);
+  const [quantities,setQuantity]=useState(1)
 
   return (
     <div className="cart-items mx-auto my-8 max-w-screen-lg p-4">
@@ -47,9 +48,27 @@ const Cart = () => {
                 {currency}
                 {item.price}
               </p>
-              <button className="bg-red-800 h-12 text-white flex items-center justify-center w-24 mb-2 sm:mb-0">
-                <p className="text-sm">{quantity}</p>
+              <div className="flex">
+              <button
+                className="text-[22px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%]"
+                onClick={() => setQuantity((prevQuantity) => prevQuantity + 1)}
+              >
+                +
               </button>
+              <button className="bg-red-800 h-12 text-white flex items-center justify-center w-24 mb-2 sm:mb-0">
+                {quantities}
+                </button>
+                <button
+                className="text-[30px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%]"
+                onClick={() =>
+                  setQuantity((prevQuantity) =>
+                    prevQuantity > 1 ? prevQuantity - 1 : 1
+                  )
+                }
+              >
+                -
+              </button>
+              </div>
               <p className="flex-1 text-center mb-2 sm:mb-0">
                 {currency}
                 {totalAmount}
