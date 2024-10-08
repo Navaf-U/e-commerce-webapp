@@ -125,7 +125,7 @@ function UserContext({ children }) {
       email: email,
       password: password,
       cart: cart,
-      isAdmine:false,
+      isAdmin:false,
       isBlocked:false,
     };
     const postData = async () => {

@@ -492,7 +492,7 @@
       "cart": {
         "3": 1
       },
-      "isAdmine": true,
+      "isAdmin": true,
       "isBlocked": false
     },
     {
@@ -504,7 +504,7 @@
         "2": 1,
         "8": 1
       },
-      "isAdmine": false,
+      "isAdmin": false,
       "isBlocked": false
     },
     {
@@ -513,7 +513,7 @@
       "email": "sahad@gmail.com",
       "password": "123",
       "cart": {},
-      "isAdmine": false,
+      "isAdmin": false,
       "isBlocked": false
     },
     {
@@ -527,8 +527,8 @@
         "3": 0,
         "12": 0
       },
-      "isAdmine": false,
-      "isBlocked": true
+      "isAdmin": false,
+      "isBlocked": false
     },
     {
       "id": "71c3",
@@ -545,7 +545,7 @@
       "email": "sithara@gmail.com",
       "password": "sithara@gmail.com",
       "cart": {},
-      "isAdmine": false,
+      "isAdmin": false,
       "isBlocked": false
     }
   ]
