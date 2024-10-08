@@ -1,18 +1,12 @@
 import { useContext, useEffect, useState } from "react"
 import { userData } from "../context/UserContext"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 function AdminUsersPage() {
   const [users,setUsers] = useState([])
-    const {currUser,setIsLogged} = useContext(userData)
-  
-
-    const DeleteUser = async(userID) =>{
-        await axios.delete(`http://localhost:3000/allUsers/${userID}`)
-        setUsers(users.filter((user)=>user.id === userID))
-        setIsLogged(false)
-    }
-
+    const {currUser} = useContext(userData)
+    const navigate = useNavigate()
 
     useEffect(()=>{
         const fetchUser = async ()=>{
@@ -20,18 +14,38 @@ function AdminUsersPage() {
             setUsers(data)
         }
         fetchUser()
-    },[users,currUser])
+    },[])
+    
         return (
     <div className="h-[100vh] overflow-scroll">
-        <h1 className="text-[30px] font-[700]">
-            Current User :
-            {currUser.id} 
-            {currUser.name} {currUser.email} {currUser.password}</h1>
-        {users.map((item)=>{
-            return (<div key={item.id}><li className="p-3">id : <span className="font-[600]">{item.id}</span> name: <span className="font-[600]">{item.name}</span> email: <span className="font-[600]">{item.email}</span> password: <span className="font-[600]">{item.password}</span></li><button className="bg-red-600" onClick={() => DeleteUser(item.id)}>Remove</button></div>
-        )})}
-
-
+        <h1 className="text-[12px] font-[500] text-end">
+        Current User :
+        {currUser.id} {currUser.name} {currUser.email}</h1>
+        
+        <table className="min-w-full text-center table-auto">
+          <thead>
+            <tr className="bg-[#BF3131] text-white">
+              <th className="p-2 text-xs md:text-sm">ID</th>
+              <th className="p-2 text-xs md:text-sm">NAME</th>
+              <th className="p-2 text-xs md:text-sm">EMAIL</th>
+              <th className="p-2 text-xs md:text-sm">VIEW</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((item) => (
+              <tr key={item.id} className="border-b">
+                <td className="py-2 font-semibold text-xs md:text-sm">{item.id}</td>
+                <td className="py-2 text-xs md:text-sm">{item.name}</td>
+                <td className="py-2 text-xs md:text-sm">{item.email}</td>
+                <td className="py-2">
+                    <button onClick={()=>navigate(`/adminUsers/${item.id}`,{state:{item}})} className="bg-blue-500 text-white px-3 py-1 rounded text-xs md:text-sm">
+                      Action
+                    </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
     </div>
   )
 }

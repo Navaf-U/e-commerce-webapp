@@ -18,6 +18,7 @@ function Men() {
               key={item.id}
               id={item.id}
               image={item.image}
+              rating={item.rating}
               price={item.price}
               name={item.name}
             />

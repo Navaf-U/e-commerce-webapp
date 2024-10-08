@@ -18,9 +18,11 @@ function UserContext({ children }) {
     try {
       const { data } = await axios.get("http://localhost:3000/allUsers");
       const user = data.find(
-        (item) => item.email === email && item.password === password
-      );
+        (item) => item.email === email && item.password === password);
       if (user) {
+        if(user.isBlocked){
+         return toast.error("blocked")
+       }else if(user)
         setIsLogged(true);
         setCurrUser(user);
         setCart(user.cart);
@@ -31,7 +33,7 @@ function UserContext({ children }) {
         localStorage.setItem("cart", JSON.stringify(storedCart));
         toast.success("User logged in");
       } else {
-        toast.error("invalid email or password");
+        toast.error("Invalid Email or Password");
       }
     } catch (error) {
       console.error(error);
@@ -123,6 +125,8 @@ function UserContext({ children }) {
       email: email,
       password: password,
       cart: cart,
+      isAdmine:false,
+      isBlocked:false,
     };
     const postData = async () => {
       try {

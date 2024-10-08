@@ -17,6 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Contact from "./pages/Contact";
 import AdmineMainPage from "./Admine/AdminMainPage";
 import AdmineActionPage from "./Admine/AdminActionPage";
+import AdminUserActionPage from "./Admine/AdminUserActionPage";
 function AppRoutes() {
   return (
     <>
@@ -44,6 +45,7 @@ function AppRoutes() {
             </Route>
             <Route path="/admin" element={<AdmineMainPage />} />
             <Route path="/adminProducts/:id" element={<AdmineActionPage />} />
+            <Route path="/adminUsers/:ID" element={<AdminUserActionPage />} />
           </Routes>
     </>
   );

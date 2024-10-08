@@ -1,4 +1,6 @@
 import logo from "../Components/assets/StepPrimeLogo.png";
+import { FaStar } from "react-icons/fa";
+import { FaStarHalfAlt } from "react-icons/fa";
 import { useContext, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { ProductsData } from "../context/ProductsCont";
@@ -11,10 +13,25 @@ function Product() {
   const findProduct = products.find((item) => item.id === id);
   const menFiltered = products.filter((item) => item.type === "men")
   const womenFiltered = products.filter((item)=> item.type === "women")
-  
+
+  const FinalRating = Number(findProduct?.rating || 0)
+
+  const Stars = (rating) => {
+    const fullStars = Math.floor(rating);
+    const halfStar = rating % 1 >= 0.5;
+
+    return (
+      <>
+        {[...Array(fullStars)].map((_, index) => (
+          <FaStar key={index} />
+        ))}
+        {halfStar && <FaStarHalfAlt />}
+      </>
+    );
+  };
   
   return (
-    <>
+   <div>
       {!products.length ? (
         <p>Loading...</p>
       ) : !findProduct ? (
@@ -33,6 +50,9 @@ function Product() {
             </h4>
             <h3 className="text-[20px] text-center font-[400]">{`Type: ${findProduct.type}`}</h3>
             <h3 className="text-[24px] text-center font-[700]">{`Price: ${findProduct.price}${currency}`}</h3>
+            <h3 className="text-[24px] text-center font-[700]">{`${findProduct.rating}` } 
+            <p className="mt-1 flex">{Stars(FinalRating)}</p>
+               </h3>
           </div>
           <div className="right-section md:w-[50%] mt-4 md:mt-0 flex flex-col items-center justify-center">
             <img src={logo} className="h-[200px] mt-[-50px]" alt="" />
@@ -96,7 +116,7 @@ function Product() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

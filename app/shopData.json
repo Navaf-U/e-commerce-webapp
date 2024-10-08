@@ -491,7 +491,9 @@
       "password": "123",
       "cart": {
         "3": 1
-      }
+      },
+      "isAdmine": true,
+      "isBlocked": false
     },
     {
       "id": "f74d",
@@ -501,14 +503,18 @@
       "cart": {
         "2": 1,
         "8": 1
-      }
+      },
+      "isAdmine": false,
+      "isBlocked": false
     },
     {
       "id": "3f21",
       "name": "sahad",
       "email": "sahad@gmail.com",
       "password": "123",
-      "cart": {}
+      "cart": {},
+      "isAdmine": false,
+      "isBlocked": false
     },
     {
       "id": "8164",
@@ -520,61 +526,27 @@
         "2": 3,
         "3": 0,
         "12": 0
-      }
-    },
-    {
-      "id": "5fe5",
-      "name": "irfan",
-      "email": "qeqw@gmail.com",
-      "password": "123",
-      "cart": {
-        "2": 1,
-        "3": 7
-      }
-    },
-    {
-      "id": "788e",
-      "name": "bilal",
-      "email": "bilal@gmail.com",
-      "password": "123",
-      "cart": {
-        "2": 0,
-        "3": 1,
-        "8": 0,
-        "10": 0
-      }
-    },
-    {
-      "id": "97e9",
-      "name": "test",
-      "email": "test@gmail.com",
-      "password": "123",
-      "cart": {
-        "1": 2,
-        "2": 0,
-        "5": 0
-      }
-    },
-    {
-      "id": "cb0d",
-      "name": "ann",
-      "email": "ann@gmail.com",
-      "password": "123",
-      "cart": {}
+      },
+      "isAdmine": false,
+      "isBlocked": true
     },
     {
       "id": "71c3",
       "name": "GOD",
       "email": "god@gmail.com",
       "password": "123",
-      "cart": {}
+      "cart": {},
+      "isAdmin": false,
+      "isBlocked": true
     },
     {
-      "id": "11b0",
-      "name": "loli",
-      "email": "loli@gmail.com",
-      "password": "loli@gmail.com",
-      "cart": {}
+      "id": "6648",
+      "name": "sithara",
+      "email": "sithara@gmail.com",
+      "password": "sithara@gmail.com",
+      "cart": {},
+      "isAdmine": false,
+      "isBlocked": false
     }
   ]
 }
