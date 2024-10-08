@@ -75,7 +75,13 @@ function Navbar() {
             <NavLink to="/contact">
               <h1 className="hover-line">Contact</h1>
             </NavLink>
-          </div>
+            { currUser && currUser.isAdmin?( 
+              <NavLink to="/admin">
+              <h1 className="hover-line">admin</h1>
+            </NavLink> ) : "hi" }
+          </div> 
+          
+
 
           <div className="flex items-center ps-3">
            <input
@@ -172,8 +178,8 @@ function Navbar() {
             </button>
           </div>
         </div>
+        </div>
       </div>
-    </div>
   );
 }
 
