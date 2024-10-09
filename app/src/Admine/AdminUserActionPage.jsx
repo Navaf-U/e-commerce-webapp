@@ -1,35 +1,31 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { RiUser5Line } from "react-icons/ri";
+import { TbUserSquare } from "react-icons/tb";
 import axios from "axios";
 
 function AdminUserActionPage() {
   const { state } = useLocation();
   const [users, setUsers] = useState(state?.item);
-  const navigates = useNavigate();
+  const navigate = useNavigate();
 
-  const DeleteUser = async (userID,email) => {
-    if (!userID) {
-      console.log("NOT FOUND");
-      return;
-    }
+  const DeleteUser = async (userID, email) => {
+    if (!userID) return;
+
     const cartKey = `${email}_cart`;
     if (localStorage.getItem(cartKey)) {
       localStorage.removeItem(cartKey);
     }
-      try {
+    try {
       await axios.delete(`http://localhost:3000/allUsers/${userID}`);
-      navigates("/admin");
+      navigate("/admin");
     } catch (err) {
       console.log(err);
     }
   };
 
   const toggleBlockUser = async (Id) => {
-    if (!Id) {
-      console.log("USER ID NOT FOUND");
-      return;
-    }
+    if (!Id) return;
+
     try {
       const { data } = await axios.get(`http://localhost:3000/allUsers/${Id}`);
       const updatedStatus = !data.isBlocked;
@@ -46,25 +42,56 @@ function AdminUserActionPage() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center h-[100vh]">
-      <RiUser5Line size={100} />
-      <h1>id: {users.id}</h1>
-      <p>{users.name}</p>
-      <p>{users.email}</p>
-      <button
-        onClick={() => DeleteUser(users.id,users.email)}
-        className="bg-red-600 w-32 h-10 rounded-2xl mt-10"
-      >
-        remove
-      </button>
-      <button
-        onClick={() => toggleBlockUser(users.id)}
-        className={`${
-          users.isBlocked ? "bg-green-700" : "bg-blue-700"
-        } w-32 h-10 rounded-2xl mt-10 hover:bg-slate-500 active:bg-orange-500`}
-      >
-        {users.isBlocked ? "Unblock" : "Block"}
-      </button>
+    <div className="sm:ps-20 pt-10 px-4 sm:px-0">
+      <div className="flex flex-col sm:flex-row sm:gap-28 items-center sm:items-start">
+        <TbUserSquare size={130} />
+        <div className="text-center sm:text-left">
+          <p className="text-[28px] sm:text-[36px] font-semibold">{(users.name).toUpperCase()}</p>
+          <p className="text-[18px] sm:text-[23px]">{users.email}</p>
+          <p className="text-cyan-700 font-medium">{users.isAdmin ? "Administrator" : "User"}</p>
+          <div className="flex gap-5 sm:gap-0">
+            <button
+              onClick={() => DeleteUser(users.id, users.email)}
+              className="bg-[#BF3131] w-32 h-10 hover:bg-[#800000] active:bg-[#BF3131] hover:text-white rounded-2xl sm:mt-10 mt-4"
+            >
+              Remove
+            </button>
+            <button
+              onClick={() => toggleBlockUser(users.id)}
+              className={`sm:ms-8 ${users.isBlocked ? "bg-green-700" : "bg-blue-700"} w-32 h-10 rounded-2xl sm:mt-10 mt-4 sm:ms-8 hover:bg-[#BF3131] active:bg-orange-500`}
+            >
+              {users.isBlocked ? "Unblock" : "Block"}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="flex gap-10 mt-10">
+        <div className="flex flex-col items-center sm:items-start">
+          <p className="mb-5 ps-2 font-medium">Username:</p>
+          <p className="mb-5 ps-2 font-medium">Email:</p>
+          <p className="mb-5 ps-2 font-medium">Role:</p>
+        </div>
+        <div className="w-full">
+          <input
+            type="text"
+            className="ps-2 mb-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#BF3131] h-8 w-[90%]"
+            value={users.name}
+            readOnly
+          />
+          <input
+            type="text"
+            className="ps-2 mb-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#BF3131] h-8 w-[90%]"
+            value={users.email}
+            readOnly
+          />
+          <input
+            type="text"
+            className="ps-2 mb-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#BF3131] h-8 w-[90%]"
+            value={users.isAdmin ? "admin" : "user"}
+            readOnly
+          />
+        </div>
+      </div>
     </div>
   );
 }
