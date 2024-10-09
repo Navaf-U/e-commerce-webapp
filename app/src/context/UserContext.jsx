@@ -136,6 +136,7 @@ function UserContext({ children }) {
 
   const cartItemNotify = () => {
     let totalNotify = 0;
+    
     for (let i in cart) {
       if (cart[i] > 0) {
         totalNotify += cart[i];

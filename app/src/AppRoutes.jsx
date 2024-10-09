@@ -39,7 +39,7 @@ function AppRoutes() {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer draggable />
       <Routes>
         <Route
           path="/"
