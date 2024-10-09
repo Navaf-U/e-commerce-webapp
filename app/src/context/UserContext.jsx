@@ -2,74 +2,81 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-
-// eslint-disable-next-line react-refresh/only-export-components
 export const userData = createContext();
 
-// eslint-disable-next-line react/prop-types
 function UserContext({ children }) {
   const [isLogged, setIsLogged] = useState(false);
   const [currUser, setCurrUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState({});
 
-
   const loginUser = async (email, password) => {
     try {
       const { data } = await axios.get("http://localhost:3000/allUsers");
-      const user = data.find(
-        (item) => item.email === email && item.password === password);
+      const user = data.find((item) => item.email === email && item.password === password);
       if (user) {
-        if(user.isBlocked){
-         return toast.error("blocked")
-       }else if(user)
+        if (user.isBlocked) {
+          return toast.error("Access Denied");
+        }
+        if (user.isAdmin) {
+          toast.success("ADMIN IS LOGGED");
+        }
         setIsLogged(true);
         setCurrUser(user);
-        setCart(user.cart);
+        setCart(user.cart || {});
         localStorage.setItem("isLogged", "true");
         localStorage.setItem("currUser", JSON.stringify(user));
-        const storedCart =
-          JSON.parse(localStorage.getItem(`${user.email}_cart`)) || {};
+        const storedCart = JSON.parse(localStorage.getItem(`${user.email}_cart`)) || {};
+        setCart(storedCart);
         localStorage.setItem("cart", JSON.stringify(storedCart));
-        toast.success("User logged in");
+        if (!user.isAdmin) {
+          toast.success(`User logged in`);
+        }
       } else {
         toast.error("Invalid Email or Password");
       }
     } catch (error) {
       console.error(error);
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
   const logoutUser = () => {
-    const confirmLogout = confirm("You are going to log out. Do you want to continue?")
-    if(confirmLogout){
-    setCurrUser(null);
-    setIsLogged(false);
-    localStorage.removeItem("isLogged");
-    localStorage.removeItem("currUser");
-    localStorage.removeItem("cart");
-  }
+    const confirmLogout = confirm("You are going to log out. Do you want to continue?");
+    if (confirmLogout) {
+      setCurrUser(null);
+      setIsLogged(false);
+      setCart({});
+      localStorage.removeItem("isLogged");
+      localStorage.removeItem("currUser");
+      localStorage.removeItem("cart");
+    }
   };
 
   useEffect(() => {
     const logged = localStorage.getItem("isLogged") === "true";
     const saveLog = JSON.parse(localStorage.getItem("currUser"));
 
-    async function getCart(userId) {
-      const { data } = await axios.get(
-        `http://localhost:3000/allUsers/${userId}`
-      );
+    const getCart = async (userId) => {
+      const { data } = await axios.get(`http://localhost:3000/allUsers/${userId}`);
       setCart(data.cart || {});
-    }
+    };
 
     if (logged && saveLog) {
-      getCart(saveLog.id);
       setIsLogged(true);
       setCurrUser(saveLog);
+      const storedCart = JSON.parse(localStorage.getItem(`${saveLog.email}_cart`)) || {};
+      setCart(storedCart);
+      getCart(saveLog.id);
     }
   }, []);
+
+  const updateCartInLocalStorage = (updatedCart) => {
+    if (currUser) {
+      localStorage.setItem(`${currUser.email}_cart`, JSON.stringify(updatedCart));
+    }
+  };
 
   const addToCart = (id, quantity) => {
     if (currUser) {
@@ -79,12 +86,7 @@ function UserContext({ children }) {
           ...prev,
           [id]: existingQuant + quantity,
         };
-        if (currUser) {
-          localStorage.setItem(
-            `${currUser.email}_cart`,
-            JSON.stringify(updatedCart)
-          );
-        }
+        updateCartInLocalStorage(updatedCart);
         axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
           cart: updatedCart,
         });
@@ -92,7 +94,6 @@ function UserContext({ children }) {
       });
     } else {
       toast.alert("please login");
-
     }
   };
 
@@ -102,9 +103,32 @@ function UserContext({ children }) {
       if (updatedCart[id] > 0) {
         updatedCart[id] -= 1;
       }
+      updateCartInLocalStorage(updatedCart);
       axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
         cart: updatedCart,
       });
+      return updatedCart;
+    });
+  };
+
+  const increaseQuantity = (id) => {
+    setCart((oldCart) => {
+      const updatedCart = {
+        ...oldCart,
+        [id]: (oldCart[id] || 0) + 1,
+      };
+      updateCartInLocalStorage(updatedCart);
+      return updatedCart;
+    });
+  };
+
+  const decreaseQuantity = (id) => {
+    setCart((oldCart) => {
+      const updatedCart = {
+        ...oldCart,
+        [id]: oldCart[id] > 1 ? oldCart[id] - 1 : 1,
+      };
+      updateCartInLocalStorage(updatedCart);
       return updatedCart;
     });
   };
@@ -125,8 +149,8 @@ function UserContext({ children }) {
       email: email,
       password: password,
       cart: cart,
-      isAdmin:false,
-      isBlocked:false,
+      isAdmin: false,
+      isBlocked: false,
     };
     const postData = async () => {
       try {
@@ -152,13 +176,14 @@ function UserContext({ children }) {
     cart,
     addToCart,
     removeFromCart,
-    cartItemNotify
+    increaseQuantity,
+    decreaseQuantity,
+    cartItemNotify,
   };
 
   return (
-    <div>
-      <userData.Provider value={value}>{children}</userData.Provider>
-    </div>
+    <userData.Provider value={value}>{children}</userData.Provider>
   );
 }
+
 export default UserContext;

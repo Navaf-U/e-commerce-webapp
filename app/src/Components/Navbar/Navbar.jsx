@@ -77,8 +77,8 @@ function Navbar() {
             </NavLink>
             { currUser && currUser.isAdmin?( 
               <NavLink to="/admin">
-              <h1 className="hover-line">admin</h1>
-            </NavLink> ) : "hi" }
+              <h1 className="hover-line font-[600] text-[#BF3131]">Admin</h1>
+            </NavLink> ) : null }
           </div> 
           
 

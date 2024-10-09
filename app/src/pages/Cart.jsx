@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext} from "react";
 import { RxCross1 } from "react-icons/rx";
 import { ProductsData } from "../context/ProductsCont";
 import { NavLink } from "react-router-dom";
@@ -6,8 +6,7 @@ import { userData } from "../context/UserContext";
 
 const Cart = () => {
   const { products, currency, getTotalCartAmount } = useContext(ProductsData);
-  const { cart, removeFromCart } = useContext(userData);
-  const [quantities,setQuantity]=useState(1)
+  const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useContext(userData);
 
   return (
     <div className="cart-items mx-auto my-8 max-w-screen-lg p-4">
@@ -51,20 +50,16 @@ const Cart = () => {
               <div className="flex">
               <button
                 className="text-[22px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%]"
-                onClick={() => setQuantity((prevQuantity) => prevQuantity + 1)}
+                onClick={() => increaseQuantity(item.id)}
               >
                 +
               </button>
               <button className="bg-red-800 h-12 text-white flex items-center justify-center w-24 mb-2 sm:mb-0">
-                {quantities}
+                {quantity}
                 </button>
                 <button
                 className="text-[30px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%]"
-                onClick={() =>
-                  setQuantity((prevQuantity) =>
-                    prevQuantity > 1 ? prevQuantity - 1 : 1
-                  )
-                }
+                onClick={() => decreaseQuantity(item.id)}
               >
                 -
               </button>
