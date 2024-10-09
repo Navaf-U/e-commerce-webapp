@@ -20,6 +20,7 @@ import AdmineActionPage from "./Admine/AdminActionPage";
 import AdminUserActionPage from "./Admine/AdminUserActionPage";
 import  { userData } from "./context/UserContext";
 import { useContext } from "react";
+import ProductAddPage from "./Admine/ProductAddPage";
 
 function AppRoutes() {
 
@@ -64,6 +65,7 @@ function AppRoutes() {
         <Route path='/admin' element={<AdminRoute><AdmineMainPage /></AdminRoute>} />
         <Route path="/adminProducts/:id" element={<AdminRoute><AdmineActionPage /></AdminRoute>} />
         <Route path="/adminUsers/:ID" element={<AdminRoute><AdminUserActionPage /></AdminRoute>} />
+        <Route path="/addproducts" element={<AdminRoute><ProductAddPage/></AdminRoute>} />
       </Routes>
     </>
   );

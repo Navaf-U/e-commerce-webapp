@@ -12,7 +12,6 @@ function ProductsCont({ children }) {
   
   const { currUser,cart,setLoading } = useContext(userData) || {};
 
-
   const getTotalCartAmount = () => {
     let total = 0;
     products.forEach((item) => {
@@ -42,6 +41,33 @@ function ProductsCont({ children }) {
   }, [currUser, setLoading]);
 
 
+  const PostProducts= (name,type,image,price,rating,reviews,brand,description)=> {
+    const datas ={
+      name:name,
+      type:type,
+      image:image,
+      price:price,
+      rating:rating,
+      reviews:reviews,
+      brand:brand,
+      description:description
+    }
+
+    const AddProducts = async ()=>{
+      setLoading(true)
+      try{
+      await axios.post("http://localhost:3000/newProducts" , datas) 
+      }catch(err){
+        console.log(err);
+        
+      }finally{
+        setLoading(false)
+        
+      }
+    }
+    AddProducts()
+
+  }
 
   const currency = "₹";
 
@@ -51,6 +77,7 @@ function ProductsCont({ children }) {
     search,
     setSearch,
     getTotalCartAmount,
+    PostProducts
   };
 
   return (

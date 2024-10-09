@@ -7,6 +7,16 @@ function AdminProducts() {
 
   return (
     <div className="h-[100vh] w-full overflow-y-auto">
+       <div className="flex justify-end items-center px-4 py-5">
+      <NavLink to="/addproducts">
+      <button 
+        type="button" 
+        className="px-6 py-2 bg-green-500 text-white text-lg rounded-md hover:bg-green-600 transition"
+      >
+        Add Product
+      </button>
+      </NavLink>
+    </div>
       <div className="overflow-x-auto">
         <table className="min-w-full text-center table-auto">
           <thead>

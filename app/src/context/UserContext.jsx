@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 export const userData = createContext();
 
+// eslint-disable-next-line react/prop-types
 function UserContext({ children }) {
   const [isLogged, setIsLogged] = useState(false);
   const [currUser, setCurrUser] = useState(null);
@@ -101,7 +102,7 @@ function UserContext({ children }) {
     setCart((prev) => {
       const updatedCart = { ...prev };
       if (updatedCart[id] > 0) {
-        updatedCart[id] -= 1;
+        updatedCart[id] -= updatedCart[id];
       }
       updateCartInLocalStorage(updatedCart);
       axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {

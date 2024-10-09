@@ -7,12 +7,10 @@ import { FaPersonWalkingArrowRight } from "react-icons/fa6";
 import menAd from "../Components/assets/menAd.jpg";
 import womenAd from "../Components/assets/womenAd.jpg";
 import NewsLetter from "../Components/NewsLetter/NewsLetter";
-import { userData } from "../context/UserContext";
 
 function Shop() {
   const { products } = useContext(ProductsData);
-  const {currUser} = useContext(userData)
-  console.log(currUser);
+
   
   return (
     <div>
