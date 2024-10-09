@@ -49,7 +49,6 @@ function UserContext({ children }) {
     if (confirmLogout) {
       setCurrUser(null);
       setIsLogged(false);
-      setCart({});
       localStorage.removeItem("isLogged");
       localStorage.removeItem("currUser");
       localStorage.removeItem("cart");
@@ -121,6 +120,9 @@ function UserContext({ children }) {
         [id]: (oldCart[id] || 0) + 1,
       };
       updateCartInLocalStorage(updatedCart);
+      axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
+        cart: updatedCart,
+      });
       return updatedCart;
     });
   };
@@ -132,6 +134,9 @@ function UserContext({ children }) {
         [id]: oldCart[id] > 1 ? oldCart[id] - 1 : 1,
       };
       updateCartInLocalStorage(updatedCart);
+      axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
+        cart: updatedCart,
+      });
       return updatedCart;
     });
   };
