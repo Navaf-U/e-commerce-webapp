@@ -1,23 +1,24 @@
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { userData } from "../context/UserContext";
 import { RiUser5Line } from "react-icons/ri";
 import axios from "axios";
 
 function AdminUserActionPage() {
-  const { currUser } = useContext(userData);
   const { state } = useLocation();
-  const [users,setUsers] = useState(state?.item);
+  const [users, setUsers] = useState(state?.item);
   const navigates = useNavigate();
 
-  const DeleteUser = async (userID) => {
+  const DeleteUser = async (userID,email) => {
     if (!userID) {
       console.log("NOT FOUND");
       return;
     }
-    try {
+    const cartKey = `${email}_cart`;
+    if (localStorage.getItem(cartKey)) {
+      localStorage.removeItem(cartKey);
+    }
+      try {
       await axios.delete(`http://localhost:3000/allUsers/${userID}`);
-      currUser(false);
       navigates("/admin");
     } catch (err) {
       console.log(err);
@@ -51,7 +52,7 @@ function AdminUserActionPage() {
       <p>{users.name}</p>
       <p>{users.email}</p>
       <button
-        onClick={() => DeleteUser(users.id)}
+        onClick={() => DeleteUser(users.id,users.email)}
         className="bg-red-600 w-32 h-10 rounded-2xl mt-10"
       >
         remove

@@ -2,6 +2,7 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const userData = createContext();
 
 // eslint-disable-next-line react/prop-types
@@ -99,10 +100,11 @@ function UserContext({ children }) {
   };
 
   const removeFromCart = (id) => {
+    
     setCart((prev) => {
       const updatedCart = { ...prev };
       if (updatedCart[id] > 0) {
-        updatedCart[id] -= updatedCart[id];
+        delete updatedCart[id];
       }
       updateCartInLocalStorage(updatedCart);
       axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
@@ -134,16 +136,7 @@ function UserContext({ children }) {
     });
   };
 
-  const cartItemNotify = () => {
-    let totalNotify = 0;
-    
-    for (let i in cart) {
-      if (cart[i] > 0) {
-        totalNotify += cart[i];
-      }
-    }
-    return totalNotify;
-  };
+ 
 
   const PostUserDatas = (name, email, password, cart) => {
     const data = {
@@ -180,7 +173,6 @@ function UserContext({ children }) {
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
-    cartItemNotify,
   };
 
   return (

@@ -23,6 +23,19 @@ function ProductsCont({ children }) {
     return total;
   };
 
+  const cartItemNotify = () => {
+    let totalNotify = 0;
+    for (let i in cart) {
+
+      const productExist = products.find((item)=>item.id==i)
+
+      if (cart[i] > 0 && productExist) {
+        
+        totalNotify += cart[i];
+      }
+    }
+    return totalNotify;
+  };
   
   useEffect(() => {
     const fetchProductsData = async () => {
@@ -77,7 +90,8 @@ function ProductsCont({ children }) {
     search,
     setSearch,
     getTotalCartAmount,
-    PostProducts
+    PostProducts,
+    cartItemNotify
   };
 
   return (

@@ -481,17 +481,6 @@
       "rating": "4.6",
       "reviews": "20",
       "image": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_350,h_350/global/379993/02/sv01/fnd/IND/fmt/png/Flyer-Runner-Engineered-Knit-Men's-Shoes"
-    },
-    {
-      "id": "66b0",
-      "name": "Men Yellow Shoe",
-      "type": "men",
-      "image": "https://i.etsystatic.com/18526884/r/il/f63c97/4204375720/il_570xN.4204375720_1ylm.jpg",
-      "price": "799",
-      "rating": "2.6",
-      "reviews": "12",
-      "brand": "Nois",
-      "description": "good yellow shoe uooooou"
     }
   ],
   "allUsers": [
@@ -501,12 +490,9 @@
       "email": "navafsoft@gmail.com",
       "password": "123",
       "cart": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "5": 0,
-        "0d1c": 1,
-        "66b0": 0
+        "2": 1,
+        "8d9d": 7,
+        "b131": 9
       },
       "isAdmin": true,
       "isBlocked": false
@@ -518,7 +504,8 @@
       "password": "123",
       "cart": {
         "2": 1,
-        "8": 1
+        "8": 1,
+        "af7f": 2
       },
       "isAdmin": false,
       "isBlocked": false

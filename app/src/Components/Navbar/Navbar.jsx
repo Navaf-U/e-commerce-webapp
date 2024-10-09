@@ -16,7 +16,7 @@ function Navbar() {
   const [menu, setMenu] = useState(false);
   const [currUserDataShows, setCurrUserDataShows] = useState(false);
   const { search, setSearch } = useContext(ProductsData);
-  const { cartItemNotify } = useContext(userData);
+  const { cartItemNotify } = useContext(ProductsData);
   const { isLogged, logoutUser, currUser } = useContext(userData);
   const toggleDropdown = () => {
     setCurrUserDataShows((prev) => !prev);
