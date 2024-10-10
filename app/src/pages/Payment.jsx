@@ -3,46 +3,74 @@ import MasterCard from "../Components/assets/MasterCard.png";
 import PayPal from "../Components/assets/PayPal.png";
 import RazorPay from "../Components/assets/RazorPay.png";
 import { userData } from "../context/UserContext";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Payment() {
   const [paymentMethod, setPaymentMethod] = useState(null);
-  const { setCart, cart,currUser } = useContext(userData);
+  const { cart, currUser } = useContext(userData);
+  const navigator = useNavigate();
+
+  const paymentMethodsSelection = (method) => {
+    setPaymentMethod(method);
+  };
+
+  const cartEntries = Object.entries(cart).map(([id, quantity]) => ({
+    id,
+    name: `Product ${id}`,
+    quantity,
+    price: 1000,
+  }));
+
+  const totalAmount = cartEntries.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
     email: "",
     address: "",
   });
-  const paymentMethodsSelection = (method) => {
-    setPaymentMethod(method);
-  };
-  
-  // const cartEntries = Object.entries(cart);
-  // cartEntries.forEach(([id, quantity]) => {
-  //   console.log(`Item ID: ${id}, Quantity: ${quantity}`);
-  // });
-  
 
-
-  const HandleEvent = (e) => {
+  const HandleEvent = async (e) => {
     e.preventDefault();
+  
     if (user.firstName && user.lastName && user.email && user.address) {
       const OrderedItems = {
         id: `order${Date.now()}`,
         name: `${user.firstName} ${user.lastName}`,
-        email: `${user.email}`,
-        address: `${user.address}`,
-      }
-      currUser.orders.push(OrderedItems)
-      console.log(currUser);
-      
-      
-    } else {
-      console.error("User information is incomplete, cannot create order.");
-    }
-    
-  };
+        address: user.address,
+        items: cartEntries.map((item) => ({
+          id: item.id,
+          name: item.name,
+          quantity: item.quantity,
+        })),
+        totalAmount,
+      };
   
+      if (!currUser.orders) {
+        currUser.orders = [];
+      }
+      currUser.orders.push(OrderedItems);
+  
+      try {
+        await axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
+          orders: currUser.orders,
+        });
+        toast.success("Order Successful");
+        navigator("/orders");
+      } catch (error) {
+        console.log("Failed to update orders:", error);
+        toast.error("Failed to save your order. Please try again.");
+      }
+    } else {
+      toast.error("User information is incomplete");
+    }
+  };
+
   return (
     <div className="flex justify-center">
       <div className="payment-page mt-16 pt-5 px-3 rounded-2xl border-[1px] border-[#bf313136] max-w-lg w-full">

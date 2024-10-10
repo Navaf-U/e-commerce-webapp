@@ -1,5 +1,5 @@
 import Navbar from "./Components/Navbar/Navbar";
-import { Navigate, Outlet, Route, Routes} from "react-router-dom";
+import { Outlet, Route, Routes} from "react-router-dom";
 import Shop from "./pages/Shop";
 import "./App.css";
 import Product from "./pages/Product";

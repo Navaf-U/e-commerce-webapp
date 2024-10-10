@@ -490,11 +490,29 @@
       "email": "navafsoft@gmail.com",
       "password": "123",
       "cart": {
-        "9": 1,
-        "75c9": 2
+        "1": 9,
+        "2": 1
       },
       "orders": [
-        1
+        1,
+        {
+          "id": "order1728575025341",
+          "name": "irfan kuttappu",
+          "address": "pandikkad,poolammanna",
+          "items": [
+            {
+              "id": "1",
+              "name": "Product 1",
+              "quantity": 9
+            },
+            {
+              "id": "2",
+              "name": "Product 2",
+              "quantity": 1
+            }
+          ],
+          "totalAmount": 10000
+        }
       ],
       "isAdmin": true,
       "isBlocked": false

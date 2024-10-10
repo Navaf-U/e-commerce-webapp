@@ -145,28 +145,33 @@ function UserContext({ children }) {
 
  
 
-  const PostUserDatas = (name, email, password, cart) => {
+  const PostUserDatas = async (name, email, password, cart) => {
     const data = {
       name: name,
       email: email,
       password: password,
       cart: cart,
-      orders:[],
+      orders: [],
       isAdmin: false,
       isBlocked: false,
     };
-    const postData = async () => {
-      try {
-        setLoading(true);
-        await axios.post("http://localhost:3000/allUsers", data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
+  
+    try {
+      setLoading(true);
+      const response = await axios.post("http://localhost:3000/allUsers", data);
+      if (response.status === 201) {
+        toast.success("User registered successfully");
+        setCurrUser(response.data);
+        localStorage.setItem("currUser", JSON.stringify(response.data));
       }
-    };
-    postData();
+    } catch (error) {
+      console.error(error);
+      toast.error("Registration failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
+  
 
   const value = {
     currUser,
