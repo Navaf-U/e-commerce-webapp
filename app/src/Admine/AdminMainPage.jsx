@@ -10,7 +10,7 @@ import AdminProducts from './AdminProducts';
 import AdminUsersPage from './AdminUsersPage';
 
 function AdminMainPage() {
-    const { logoutUser,currUser } = useContext(userData);
+    const { logoutUser,isAdmin } = useContext(userData);
     const [adminOption, setAdminOption] = useState("dashboard");
     const handleSwitch = () => {
         switch (adminOption) {
@@ -28,7 +28,7 @@ function AdminMainPage() {
 
     return (
         <div className="w-full overflow-x-auto">
-            { !currUser.isAdmin ? "Cant Access the Page" :(
+            { ! isAdmin ? "Cant Access the Page" :(
            <div className='flex flex-col md:flex-row gap-5 h-screen'>
            <div className="Adminlayout flex pt-5 md:w-[18%] w-full text-white flex-col gap-5">
                <h1 className='text-[24px] md:text-[30px] font-[500] ms-3'>Step Prime</h1>

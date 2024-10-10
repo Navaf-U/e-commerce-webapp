@@ -21,22 +21,10 @@ import AdminUserActionPage from "./Admine/AdminUserActionPage";
 import  { userData } from "./context/UserContext";
 import { useContext } from "react";
 import ProductAddPage from "./Admine/ProductAddPage";
+import Orders from "./pages/Orders";
 
 function AppRoutes() {
-
-  // eslint-disable-next-line react/prop-types
-  const AdminRoute = ({ children }) => {
-    const { isLogged, currUser } = useContext(userData);
-    
-    if (!isLogged || !currUser?.isAdmin) {
-      return <Navigate to="/admin" />; 
-    }else{
-      "CAN'T ACCESS NOOB"
-    }
-  
-    return children;
-  };
-
+  const { isAdmin } = useContext(userData);
   return (
     <>
       <ToastContainer draggable />
@@ -56,19 +44,33 @@ function AppRoutes() {
           <Route path="/products/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/orders" element={<Orders />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Route>
         
-        <Route path='/admin' element={<AdminRoute><AdmineMainPage /></AdminRoute>} />
-        <Route path="/adminProducts/:id" element={<AdminRoute><AdmineActionPage /></AdminRoute>} />
-        <Route path="/adminUsers/:ID" element={<AdminRoute><AdminUserActionPage /></AdminRoute>} />
-        <Route path="/addproducts" element={<AdminRoute><ProductAddPage/></AdminRoute>} />
+      <Route
+            path="/admin"
+            element={ isAdmin ? <AdmineMainPage /> : <NotFound />}
+          />
+      <Route
+            path="/adminProducts/:id"
+            element={ isAdmin ? <AdmineActionPage /> : <NotFound />}
+          />
+          <Route
+            path="/adminUsers/:ID"
+            element={ isAdmin ? <AdminUserActionPage /> : <NotFound />}
+          />
+          <Route
+            path="/addproducts"
+            element={ isAdmin ? <ProductAddPage /> : <NotFound />}
+          />
       </Routes>
     </>
   );
 }
+
 
 export default AppRoutes;

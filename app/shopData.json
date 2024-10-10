@@ -490,8 +490,12 @@
       "email": "navafsoft@gmail.com",
       "password": "123",
       "cart": {
+        "9": 1,
         "75c9": 2
       },
+      "orders": [
+        1
+      ],
       "isAdmin": true,
       "isBlocked": false
     },
@@ -501,6 +505,7 @@
       "email": "nishaj123@gmail.com",
       "password": "123",
       "cart": {},
+      "orders": [],
       "isAdmin": false,
       "isBlocked": false
     },
@@ -510,6 +515,9 @@
       "email": "sahad@gmail.com",
       "password": "123",
       "cart": {},
+      "orders": [
+        1
+      ],
       "isAdmin": false,
       "isBlocked": false
     },
@@ -518,7 +526,10 @@
       "name": "harsha",
       "email": "harsha@gmail.com",
       "password": "123",
-      "cart": {},
+      "cart": {
+        "5839": 1
+      },
+      "orders": [],
       "isAdmin": false,
       "isBlocked": false
     },
@@ -528,6 +539,7 @@
       "email": "god@gmail.com",
       "password": "123",
       "cart": {},
+      "orders": [],
       "isAdmin": false,
       "isBlocked": true
     },
@@ -537,6 +549,7 @@
       "email": "sithara@gmail.com",
       "password": "sithara@gmail.com",
       "cart": {},
+      "orders": [],
       "isAdmin": false,
       "isBlocked": false
     }

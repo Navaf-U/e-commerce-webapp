@@ -12,6 +12,8 @@ function UserContext({ children }) {
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState({});
 
+  const isAdmin = currUser !== null && currUser.isAdmin ? true : false;
+
   const loginUser = async (email, password) => {
     try {
       const { data } = await axios.get("http://localhost:3000/allUsers");
@@ -149,6 +151,7 @@ function UserContext({ children }) {
       email: email,
       password: password,
       cart: cart,
+      orders:[],
       isAdmin: false,
       isBlocked: false,
     };
@@ -178,6 +181,7 @@ function UserContext({ children }) {
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
+    isAdmin
   };
 
   return (

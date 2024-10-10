@@ -1,4 +1,4 @@
-import Footer from "../pages/Footer";
+import Footer from "../Components/Footer/Footer";
 // eslint-disable-next-line react/prop-types
 function Layout({ children }) {
   return (

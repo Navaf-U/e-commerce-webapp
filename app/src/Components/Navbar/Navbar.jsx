@@ -69,7 +69,7 @@ function Navbar() {
             <NavLink to="/women">
               <h1 className="hover-line">Women</h1>
             </NavLink>
-            <NavLink>
+            <NavLink to="/orders">
               <h1 className="hover-line">Orders</h1>
             </NavLink>
             <NavLink to="/contact">
