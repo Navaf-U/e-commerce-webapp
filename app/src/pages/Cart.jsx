@@ -5,13 +5,12 @@ import { NavLink } from "react-router-dom";
 import { userData } from "../context/UserContext";
 
 const Cart = () => {
-  const { products, currency, getTotalCartAmount } = useContext(ProductsData);
-  const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useContext(userData);
-
+  const { products, currency, getTotalCartAmount , cartItemNotify } = useContext(ProductsData);
+  const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useContext(userData);  
   return (
     <div className="cart-items mx-auto my-8 max-w-screen-lg p-4">
       <h2 className="text-2xl font-bold text-center mb-6">Your Cart</h2>
-      {products.length == 0 ? (
+      {cartItemNotify() === 0 ? (
         <p className="text-center text-lg">Your cart is empty.</p>
       ) : (
         <div className="hidden sm:flex flex-col sm:flex-row items-center py-4 px-4 bg-[#c95555] text-white rounded-lg shadow-md mb-4">

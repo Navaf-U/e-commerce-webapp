@@ -490,13 +490,7 @@
       "email": "navafsoft@gmail.com",
       "password": "123",
       "cart": {
-        "2": 0,
-        "5": 0,
-        "9": 3,
-        "11": 0,
-        "8503": 12,
-        "8d9d": 7,
-        "b131": 9
+        "75c9": 2
       },
       "isAdmin": true,
       "isBlocked": false
@@ -506,11 +500,7 @@
       "name": "nishaj",
       "email": "nishaj123@gmail.com",
       "password": "123",
-      "cart": {
-        "2": 1,
-        "8": 1,
-        "af7f": 2
-      },
+      "cart": {},
       "isAdmin": false,
       "isBlocked": false
     },
@@ -528,12 +518,7 @@
       "name": "harsha",
       "email": "harsha@gmail.com",
       "password": "123",
-      "cart": {
-        "2": 0,
-        "3": 0,
-        "11": 0,
-        "8213": 0
-      },
+      "cart": {},
       "isAdmin": false,
       "isBlocked": false
     },
