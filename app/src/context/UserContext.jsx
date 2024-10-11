@@ -25,6 +25,11 @@ function UserContext({ children }) {
         if (user.isAdmin) {
           toast.success("ADMIN IS LOGGED");
         }
+
+        if (!user.orders || !Array.isArray(user.orders)) {
+          user.orders = [];
+        }
+        
         setIsLogged(true);
         setCurrUser(user);
         setCart(user.cart || {});

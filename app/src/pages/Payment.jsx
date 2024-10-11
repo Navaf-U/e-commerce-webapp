@@ -6,28 +6,38 @@ import { userData } from "../context/UserContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ProductsData } from "../context/ProductsCont";
 
 function Payment() {
   const [paymentMethod, setPaymentMethod] = useState(null);
-  const { cart, currUser } = useContext(userData);
+  const { cart, currUser} = useContext(userData);
+  const {products} = useContext(ProductsData)
   const navigator = useNavigate();
 
   const paymentMethodsSelection = (method) => {
     setPaymentMethod(method);
   };
 
-  const cartEntries = Object.entries(cart).map(([id, quantity]) => ({
-    id,
-    name: `Product ${id}`,
-    quantity,
-    price: 1000,
+  const cartItems = Object.keys(cart).map((productId) => {
+    const product = products.find((item) => item.id === productId);
+    const quantity = cart[productId];
+    return product ? { ...product, quantity } : null;
+  }).filter(item => item !== null);
+
+  
+  const cartEntries = cartItems.map((item) => ({
+    id: item.id,
+    name: item.name,
+    quantity: item.quantity,
+    price: item.price
   }));
+  
+  
 
   const totalAmount = cartEntries.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+    (sum, item) => sum + (item.price * item.quantity || 0),
     0
   );
-
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -38,18 +48,25 @@ function Payment() {
   const HandleEvent = async (e) => {
     e.preventDefault();
   
+    if (!paymentMethod) {
+      toast.error("Please select a payment method.");
+      return;
+    }
+
     if (user.firstName && user.lastName && user.email && user.address) {
       const OrderedItems = {
-        id: `order${Date.now()}`,
+        id: `order ${Math.floor(Math.random() * 10000)}`,
         name: `${user.firstName} ${user.lastName}`,
         address: user.address,
         items: cartEntries.map((item) => ({
           id: item.id,
           name: item.name,
           quantity: item.quantity,
+          price: item.price,
         })),
         totalAmount,
       };
+
   
       if (!currUser.orders) {
         currUser.orders = [];
@@ -59,9 +76,11 @@ function Payment() {
       try {
         await axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
           orders: currUser.orders,
+          cart:{}
         });
+        localStorage.removeItem("cart")
         toast.success("Order Successful");
-        navigator("/orders");
+        navigator("/cart");
       } catch (error) {
         console.log("Failed to update orders:", error);
         toast.error("Failed to save your order. Please try again.");

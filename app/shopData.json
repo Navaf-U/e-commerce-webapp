@@ -489,31 +489,8 @@
       "name": "navaf",
       "email": "navafsoft@gmail.com",
       "password": "123",
-      "cart": {
-        "1": 9,
-        "2": 1
-      },
-      "orders": [
-        1,
-        {
-          "id": "order1728575025341",
-          "name": "irfan kuttappu",
-          "address": "pandikkad,poolammanna",
-          "items": [
-            {
-              "id": "1",
-              "name": "Product 1",
-              "quantity": 9
-            },
-            {
-              "id": "2",
-              "name": "Product 2",
-              "quantity": 1
-            }
-          ],
-          "totalAmount": 10000
-        }
-      ],
+      "cart": {},
+      "orders": [],
       "isAdmin": true,
       "isBlocked": false
     },
@@ -533,9 +510,7 @@
       "email": "sahad@gmail.com",
       "password": "123",
       "cart": {},
-      "orders": [
-        1
-      ],
+      "orders": [],
       "isAdmin": false,
       "isBlocked": false
     },
@@ -544,9 +519,7 @@
       "name": "harsha",
       "email": "harsha@gmail.com",
       "password": "123",
-      "cart": {
-        "5839": 1
-      },
+      "cart": {},
       "orders": [],
       "isAdmin": false,
       "isBlocked": false
@@ -568,6 +541,37 @@
       "password": "sithara@gmail.com",
       "cart": {},
       "orders": [],
+      "isAdmin": false,
+      "isBlocked": false
+    },
+    {
+      "id": "f01e",
+      "name": "irfan",
+      "email": "irfankuttappu@gmail.com",
+      "password": "123",
+      "cart": {},
+      "orders": [
+        {
+          "id": "order 3764",
+          "name": "irfan muhammed",
+          "address": "pandikkad,poolamanna",
+          "items": [
+            {
+              "id": "af7f",
+              "name": "Chuck 70 Canvas & Suede",
+              "quantity": 1,
+              "price": 6999
+            },
+            {
+              "id": "2b55",
+              "name": "Nike Air Max Ishod",
+              "quantity": 1,
+              "price": 6799
+            }
+          ],
+          "totalAmount": 13798
+        }
+      ],
       "isAdmin": false,
       "isBlocked": false
     }
