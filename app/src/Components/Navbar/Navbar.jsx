@@ -45,7 +45,11 @@ function Navbar() {
             >
               Logout
             </button>
-            <FaBackspace size={20} onClick={toggleDropdown} className="ms-5 mt-3 mb-2"/>
+            <FaBackspace
+              size={20}
+              onClick={toggleDropdown}
+              className="ms-5 mt-3 mb-2"
+            />
           </div>
         )}
       </div>
@@ -75,24 +79,25 @@ function Navbar() {
             <NavLink to="/contact">
               <h1 className="hover-line">Contact</h1>
             </NavLink>
-            { currUser && currUser.isAdmin?( 
+            {currUser && currUser.isAdmin ? (
               <NavLink to="/admin">
-              <h1 className="hover-line font-[600] text-[#BF3131]">Admin</h1>
-            </NavLink> ) : null }
-          </div> 
-          
-
+                <h1 className="hover-line font-[600] text-[#BF3131]">Admin</h1>
+              </NavLink>
+            ) : null}
+          </div>
 
           <div className="flex items-center ps-3">
-           <input
+            <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="bg-white border-[1px] border-[#BF3131] ps-3 py-1 sm:w-[100%] w-[60%] border-r-0  outline-none"
-              placeholder="search...."
+              className="bg-gradient-to-r from-white to-gray-100 border border-[#BF3131] rounded-l-full px-6 py-3 w-full outline-none focus:ring-1 focus:ring-[#BF3131] shadow-lg transition-all duration-300 text-gray-700 placeholder-gray-400"
+              placeholder="Search luxury footwear..."
             />
             <NavLink to="/search">
-              <FaSearch className="bg-white border-[#BF3131]  border-[1px] h-[34px] border-l-0 w-6 " />
+              <button className="bg-[#BF3131] text-white h-[50px] w-[50px] flex items-center justify-center rounded-r-full shadow-lg hover:bg-[#a82626] transition-all duration-300">
+                <FaSearch className="h-5 w-5" />
+              </button>
             </NavLink>
             {isLogged === false ? (
               <NavLink to="/login">
@@ -124,7 +129,10 @@ function Navbar() {
               </div>
             ) : null}
           </div>
-          <FaBars onClick={() => setMenu(true)} className="flex sm:hidden me-2" />
+          <FaBars
+            onClick={() => setMenu(true)}
+            className="flex sm:hidden me-2"
+          />
           <div
             className={`absolute bg-white top-0 z-10 right-0 bottom-0 ${
               menu ? "w-[250px]" : "hidden"
@@ -174,12 +182,16 @@ function Navbar() {
               </NavLink>
             </button>
             <button className=" w-full hover:bg-[#7D0A0A] bg-white">
-            <FaBackspace size={30} onClick={toggleDropdownMenu} className=" ms-5 mt-3 mb-3"/>
+              <FaBackspace
+                size={30}
+                onClick={toggleDropdownMenu}
+                className=" ms-5 mt-3 mb-3"
+              />
             </button>
           </div>
         </div>
-        </div>
       </div>
+    </div>
   );
 }
 

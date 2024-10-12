@@ -1,65 +1,253 @@
-import { useContext} from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductsData } from "../context/ProductsCont";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { userData } from "../context/UserContext";
+import { toast } from "react-toastify";
 
 function AdminActionPage() {
   const { id } = useParams();
-  const {currUser , setLoading}= useContext(userData)
-
-
-  const { products} = useContext(ProductsData);
+  const { currUser, setLoading } = useContext(userData);
+  const { products } = useContext(ProductsData);
+  const [productEdit, setProductEdit] = useState({
+    id: "",
+    name: "",
+    type: "",
+    image: "",
+    price: "",
+    qty: "",
+    description: "",
+    brand: "",
+    rating: "",
+    reviews: "",
+  });
   const productFound = products.find((item) => item.id === id);
 
-  const DeleteProduct = async (ID)=>{
-    setLoading(true)
-    try{
-      await axios.delete(`http://localhost:3000/newProducts/${ID}`)
-    currUser(false);
-
-    }catch(err){
-      console.log(err);
-      
-    }finally{
-      setLoading(false)
+  useEffect(() => {
+    if (productFound) {
+      setProductEdit({
+        id: productFound.id,
+        name: productFound.name,
+        type: productFound.type,
+        image: productFound.image,
+        price: productFound.price,
+        qty: productFound.qty,
+        description: productFound.description,
+        brand: productFound.brand,
+        rating: productFound.rating,
+        reviews: productFound.reviews,
+      });
     }
-  }
- 
+  }, [productFound]);
+
+  const inputValidationCheck = (products) => {
+    if (
+      !productEdit.name ||
+      !productEdit.type ||
+      productEdit.price < 0 ||
+      productEdit.qty < 0 ||
+      productEdit.id < 0 ||
+      !productEdit.id ||
+      !productEdit.qty
+    ) {
+      toast.error("correct the input fields");
+      return false;
+    }
+    const idExists = products.some((product) => product.id === productEdit.id && product.id !== productFound.id)
+      if (idExists) {
+      toast.error("ID already exists. Please choose a different ID.");
+      return false;
+    }
+    return true;
+  };
+
+  const handlerEvent = async (e) => {
+    e.preventDefault();
+    if (!inputValidationCheck(products)) {
+      return;
+    }
+    setLoading(true);
+    try {
+      await axios.put(
+        `http://localhost:3000/newProducts/${productEdit.id}`,
+        productEdit
+      );
+
+      toast.success("Product Edited");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const DeleteProduct = async (ID) => {
+    setLoading(true);
+    try {
+      await axios.delete(`http://localhost:3000/newProducts/${ID}`);
+      currUser(false);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="flex">
-      <div>
+    <div className="flex flex-col lg:flex-row lg:space-x-10 space-y-10 lg:space-y-0 p-6 lg:p-10">
+      {!products.length ? (
+        <p className="text-center">Loading...</p>
+      ) : !productFound ? (
+        <h1 className="text-center text-2xl font-bold">Product Not Found</h1>
+      ) : (
+        <>
+          <div className="flex-1 bg-white p-6 rounded-lg shadow-lg">
+            <div key={productFound.id} className="text-center lg:text-left">
+              <div className="flex justify-center">
+              <img
+                src={productFound.image}
+                alt={productFound.name}
+                className="w-[70%] h-auto mx-auto lg:mx-0 mb-4 rounded-lg shadow-md"
+              />
+              </div>
+                <h2 className="text-2xl text-center text-[#800000] font-bold mb-2">
+                {productFound.name}
+              </h2>
+              <div className="flex justify-between ">
+                <div>
+              <p className="text-lg text-gray-600 mb-2">
+                Price: ${productFound.price}
+              </p>
+              <p className="text-lg text-gray-600 mb-4">
+                Type: {productFound.type}
+              </p>
+                </div>
+                <div>
+                <p className="text-lg text-gray-600 mb-4">
+                Rating: {productFound.rating}
+              </p>
+                <p className="text-lg text-gray-600 mb-4">
+                Reviews: {productFound.rating}
+              </p>
+                </div>
+              </div>
+              <div className="flex justify-center">
+              <button
+                className="bg-[#BF3131] text-white w-full lg:w-48 py-2 rounded-full hover:bg-[#a82626] transition-all duration-300 shadow-lg"
+                onClick={() => DeleteProduct(productFound.id)}
+              >
+                Delete
+              </button>
+              </div>
+            </div>
+          </div>
 
-      
-      {!products.length ? <p>loading....</p> : !productFound ? <h1>not found</h1> :
-        <><div key={productFound.id}>
-
-          <img src={productFound.image} className="w-[130px]" alt="" />
-          {productFound.name}
-        </div>
-        <button className="bg-[#BF3131] w-28" onClick={()=>DeleteProduct(productFound.id)} >Delete</button></>
-       }
-       </div>
-
-       <div>
-        <form action="">
-          <input type="name" placeholder="ID" />
-          <input type="text" placeholder="name" />
-          <option value="">
-            <section>--select type--</section>
-            <section>Men</section>
-            <section>Women</section>
-          </option>
-          <input type="text" placeholder="image" />
-          <input type="number" placeholder="price" />
-          <input type="number" placeholder="qty"  />
-          <input type="text" placeholder="description" />
-          <input type="text" placeholder="brand" />
-          <input type="text" placeholder="rating" />
-          <input type="text" placeholder="reviews" />
-        </form>
-       </div>
+          <div className="flex-1 bg-white p-6 rounded-lg shadow-lg">
+            <form className="flex flex-col space-y-4" onSubmit={handlerEvent}>
+              <input
+                type="text"
+                placeholder="ID"
+                value={productEdit.id}
+                onChange={(e) =>
+                  setProductEdit({ ...productEdit, id: e.target.value })
+                }
+                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+              />
+              <input
+                type="text"
+                placeholder="Name"
+                value={productEdit.name}
+                onChange={(e) =>
+                  setProductEdit({ ...productEdit, name: e.target.value })
+                }
+                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+              />
+              <select
+                value={productEdit.type}
+                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+                onChange={(e) =>
+                  setProductEdit({ ...productEdit, type: e.target.value })
+                }
+              >
+                <option value="men">Men</option>
+                <option value="women">Women</option>
+              </select>
+              <input
+                type="text"
+                placeholder="Image URL"
+                value={productEdit.image}
+                onChange={(e) =>
+                  setProductEdit({ ...productEdit, image: e.target.value })
+                }
+                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+              />
+              <input
+                type="number"
+                placeholder="Price"
+                value={productEdit.price}
+                onChange={(e) =>
+                  setProductEdit({ ...productEdit, price: e.target.value })
+                }
+                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+              />
+              <input
+                type="number"
+                placeholder="Quantity"
+                value={productEdit.qty}
+                onChange={(e) =>
+                  setProductEdit({ ...productEdit, qty: e.target.value })
+                }
+                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+              />
+              <input
+                type="text"
+                placeholder="Description"
+                value={productEdit.description}
+                onChange={(e) =>
+                  setProductEdit({
+                    ...productEdit,
+                    description: e.target.value,
+                  })
+                }
+                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+              />
+              <input
+                type="text"
+                placeholder="Brand"
+                value={productEdit.brand}
+                onChange={(e) =>
+                  setProductEdit({ ...productEdit, brand: e.target.value })
+                }
+                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+              />
+              <input
+                type="text"
+                placeholder="Rating"
+                value={productEdit.rating}
+                onChange={(e) =>
+                  setProductEdit({ ...productEdit, rating: e.target.value })
+                }
+                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+              />
+              <input
+                type="text"
+                placeholder="Reviews"
+                value={productEdit.reviews}
+                onChange={(e) =>
+                  setProductEdit({ ...productEdit, reviews: e.target.value })
+                }
+                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+              />
+              <button
+                type="submit"
+                className="bg-[#BF3131] text-white py-3 rounded-full hover:bg-[#a82626] transition-all duration-300 shadow-lg"
+              >
+                Update Product
+              </button>
+            </form>
+          </div>
+        </>
+      )}
     </div>
   );
 }
