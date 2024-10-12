@@ -36,9 +36,11 @@ function Navbar() {
             <p className="px-4 py-2 text-gray-600 hover:text-white hover:hover:bg-[#800000]">
               {currUser.email}
             </p>
+            <NavLink to="/profile">
             <button className="w-full px-4 py-2 text-left hover:text-white hover:bg-[#800000]">
               View Profile
             </button>
+            </NavLink>
             <button
               onClick={logoutUser}
               className="w-full px-4 py-2 text-left hover:text-white hover:bg-[#800000]"
@@ -91,13 +93,11 @@ function Navbar() {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="bg-gradient-to-r from-white to-gray-100 border border-[#BF3131] rounded-l-full px-6 py-3 w-full outline-none focus:ring-1 focus:ring-[#BF3131] shadow-lg transition-all duration-300 text-gray-700 placeholder-gray-400"
-              placeholder="Search luxury footwear..."
+              className="bg-white border border-[#BF3131] rounded-l-full ps-4 py-2 sm:w-[80%] w-[60%] outline-none shadow-md transition-all duration-300 focus:shadow-lg"
+              placeholder="Search for products..."
             />
             <NavLink to="/search">
-              <button className="bg-[#BF3131] text-white h-[50px] w-[50px] flex items-center justify-center rounded-r-full shadow-lg hover:bg-[#a82626] transition-all duration-300">
-                <FaSearch className="h-5 w-5" />
-              </button>
+              <FaSearch className="bg-[#BF3131] text-white h-[40px] w-[40px] p-2 rounded-r-full shadow-md hover:bg-[#a82626] transition-colors duration-300" />
             </NavLink>
             {isLogged === false ? (
               <NavLink to="/login">

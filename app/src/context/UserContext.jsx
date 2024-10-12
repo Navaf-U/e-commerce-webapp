@@ -150,8 +150,9 @@ function UserContext({ children }) {
 
  
 
-  const PostUserDatas = async (name, email, password, cart) => {
+  const PostUserDatas = async (name, email, password, cart,profilePhoto) => {
     const data = {
+      image:profilePhoto,
       name: name,
       email: email,
       password: password,

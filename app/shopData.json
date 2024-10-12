@@ -486,6 +486,7 @@
   "allUsers": [
     {
       "id": "1",
+      "image": "",
       "name": "navaf",
       "email": "navafsoft@gmail.com",
       "password": "123",
@@ -496,6 +497,7 @@
     },
     {
       "id": "f74d",
+      "image": "",
       "name": "nishaj",
       "email": "nishaj123@gmail.com",
       "password": "123",
@@ -506,6 +508,7 @@
     },
     {
       "id": "3f21",
+      "image": "",
       "name": "sahad",
       "email": "sahad@gmail.com",
       "password": "123",
@@ -516,6 +519,7 @@
     },
     {
       "id": "8164",
+      "image": "",
       "name": "harsha",
       "email": "harsha@gmail.com",
       "password": "123",
@@ -526,6 +530,7 @@
     },
     {
       "id": "71c3",
+      "image": "",
       "name": "GOD",
       "email": "god@gmail.com",
       "password": "123",
@@ -536,6 +541,7 @@
     },
     {
       "id": "6648",
+      "image": "",
       "name": "sithara",
       "email": "sithara@gmail.com",
       "password": "sithara@gmail.com",
@@ -547,6 +553,7 @@
     {
       "id": "f01e",
       "name": "irfan",
+      "image": "",
       "email": "irfankuttappu@gmail.com",
       "password": "123",
       "cart": {},

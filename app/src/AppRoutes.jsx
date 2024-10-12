@@ -22,6 +22,7 @@ import  { userData } from "./context/UserContext";
 import { useContext } from "react";
 import ProductAddPage from "./Admine/ProductAddPage";
 import Orders from "./pages/Orders";
+import UserProfile from "./pages/UserProfile";
 
 function AppRoutes() {
   const { isAdmin } = useContext(userData);
@@ -48,6 +49,7 @@ function AppRoutes() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/profile" element={<UserProfile />} />
           <Route path="*" element={<NotFound />} />
         </Route>
         

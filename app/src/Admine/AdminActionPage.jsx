@@ -116,18 +116,18 @@ function AdminActionPage() {
               <div className="flex justify-between ">
                 <div>
               <p className="text-lg text-gray-600 mb-2">
-                Price: ${productFound.price}
+                Current Price: ${productFound.price}
               </p>
               <p className="text-lg text-gray-600 mb-4">
-                Type: {productFound.type}
+              Current Type: {productFound.type}
               </p>
                 </div>
                 <div>
                 <p className="text-lg text-gray-600 mb-4">
-                Rating: {productFound.rating}
+                Current Rating: {productFound.rating}
               </p>
                 <p className="text-lg text-gray-600 mb-4">
-                Reviews: {productFound.rating}
+                Current Reviews: {productFound.reviews}
               </p>
                 </div>
               </div>
@@ -151,7 +151,7 @@ function AdminActionPage() {
                 onChange={(e) =>
                   setProductEdit({ ...productEdit, id: e.target.value })
                 }
-                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+                className="p-3 border border-red-200 rounded-lg shadow-sm focus-within:ring-[1px] focus-within:ring-[#BF3131] outline-none"
               />
               <input
                 type="text"
@@ -160,11 +160,11 @@ function AdminActionPage() {
                 onChange={(e) =>
                   setProductEdit({ ...productEdit, name: e.target.value })
                 }
-                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+                className="p-3 border border-red-200 rounded-lg shadow-sm focus-within:ring-[1px] focus-within:ring-[#BF3131] outline-none"
               />
               <select
                 value={productEdit.type}
-                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+                className="p-3 border border-red-200 rounded-lg shadow-sm focus-within:ring-[1px] focus-within:ring-[#BF3131] outline-none"
                 onChange={(e) =>
                   setProductEdit({ ...productEdit, type: e.target.value })
                 }
@@ -179,7 +179,7 @@ function AdminActionPage() {
                 onChange={(e) =>
                   setProductEdit({ ...productEdit, image: e.target.value })
                 }
-                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+                className="p-3 border border-red-200 rounded-lg shadow-sm focus-within:ring-[1px] focus-within:ring-[#BF3131] outline-none"
               />
               <input
                 type="number"
@@ -188,7 +188,7 @@ function AdminActionPage() {
                 onChange={(e) =>
                   setProductEdit({ ...productEdit, price: e.target.value })
                 }
-                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+                className="p-3 border border-red-200 rounded-lg shadow-sm focus-within:ring-[1px] focus-within:ring-[#BF3131] outline-none"
               />
               <input
                 type="number"
@@ -197,7 +197,7 @@ function AdminActionPage() {
                 onChange={(e) =>
                   setProductEdit({ ...productEdit, qty: e.target.value })
                 }
-                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+                className="p-3 border border-red-200 rounded-lg shadow-sm focus-within:ring-[1px] focus-within:ring-[#BF3131] outline-none"
               />
               <input
                 type="text"
@@ -209,7 +209,7 @@ function AdminActionPage() {
                     description: e.target.value,
                   })
                 }
-                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+                className="p-3 border border-red-200 rounded-lg shadow-sm focus-within:ring-[1px] focus-within:ring-[#BF3131] outline-none"
               />
               <input
                 type="text"
@@ -218,7 +218,7 @@ function AdminActionPage() {
                 onChange={(e) =>
                   setProductEdit({ ...productEdit, brand: e.target.value })
                 }
-                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+                className="p-3 border border-red-200 rounded-lg shadow-sm focus-within:ring-[1px] focus-within:ring-[#BF3131] outline-none"
               />
               <input
                 type="text"
@@ -227,7 +227,7 @@ function AdminActionPage() {
                 onChange={(e) =>
                   setProductEdit({ ...productEdit, rating: e.target.value })
                 }
-                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+                className="p-3 border border-red-200 rounded-lg shadow-sm focus-within:ring-[1px] focus-within:ring-[#BF3131] outline-none"
               />
               <input
                 type="text"
@@ -236,7 +236,7 @@ function AdminActionPage() {
                 onChange={(e) =>
                   setProductEdit({ ...productEdit, reviews: e.target.value })
                 }
-                className="p-3 border border-gray-300 rounded-lg shadow-sm"
+                className="p-3 border border-red-200 rounded-lg shadow-sm focus-within:ring-[1px] focus-within:ring-[#BF3131] outline-none"
               />
               <button
                 type="submit"

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { TbUserSquare } from "react-icons/tb";
 import axios from "axios";
 
 function AdminUserActionPage() {
@@ -44,7 +43,7 @@ function AdminUserActionPage() {
   return (
     <div className="sm:ps-20 pt-10 px-4 sm:px-0">
       <div className="flex flex-col sm:flex-row sm:gap-28 items-center sm:items-start">
-        <TbUserSquare size={130} />
+        <img src={users.image} alt="" />
         <div className="text-center sm:text-left">
           <p className="text-[28px] sm:text-[36px] font-semibold">{(users.name).toUpperCase()}</p>
           <p className="text-[18px] sm:text-[23px]">{users.email}</p>
