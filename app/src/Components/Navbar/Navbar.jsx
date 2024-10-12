@@ -103,6 +103,13 @@ function Navbar() {
                   Login
                 </button>
               </NavLink>
+            ) : currUser.image ? (
+              <img
+                src={currUser.image}
+                onClick={toggleDropdown}
+                className="ms-5 me-3 w-10 rounded-full cursor-pointer"
+                alt="User profile picture"
+              />
             ) : (
               <RiUserFollowFill
                 size={30}
