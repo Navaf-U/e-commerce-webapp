@@ -1,26 +1,23 @@
 import logo from "../assets/StepPrimeLogo.png";
 import { NavLink } from "react-router-dom";
-import { FaUser } from "react-icons/fa";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaBars, FaBackspace } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import { FaBars } from "react-icons/fa";
-import { useState } from "react";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { ProductsData } from "../../context/ProductsCont";
 import { userData } from "../../context/UserContext";
 import { CiLogout } from "react-icons/ci";
 import { RiUserFollowFill } from "react-icons/ri";
-import { FaBackspace } from "react-icons/fa";
 
 function Navbar() {
   const [menu, setMenu] = useState(false);
   const [currUserDataShows, setCurrUserDataShows] = useState(false);
-  const { search, setSearch } = useContext(ProductsData);
-  const { cartItemNotify } = useContext(ProductsData);
+  const { search, setSearch, cartItemNotify } = useContext(ProductsData);
   const { isLogged, logoutUser, currUser } = useContext(userData);
+
   const toggleDropdown = () => {
     setCurrUserDataShows((prev) => !prev);
   };
+
   const toggleDropdownMenu = () => {
     setMenu((prev) => !prev);
   };
@@ -30,20 +27,20 @@ function Navbar() {
       <div>
         {currUserDataShows && currUser && (
           <div className="fixed right-0 w-48 mt-20 bg-white rounded-md shadow-lg py-2 z-50">
-            <p className="px-4 py-2 font-bold hover:hover:bg-[#800000] hover:text-white">
+            <p className="px-4 py-2 font-bold hover:bg-[#800000] hover:text-white">
               {currUser.name}
             </p>
-            <p className="px-4 py-2 text-gray-600 hover:text-white hover:hover:bg-[#800000]">
+            <p className="px-4 py-2 text-gray-600 hover:bg-[#800000] hover:text-white">
               {currUser.email}
             </p>
             <NavLink to="/profile">
-            <button className="w-full px-4 py-2 text-left hover:text-white hover:bg-[#800000]">
-              View Profile
-            </button>
+              <button className="w-full px-4 py-2 text-left hover:bg-[#800000] hover:text-white">
+                View Profile
+              </button>
             </NavLink>
             <button
               onClick={logoutUser}
-              className="w-full px-4 py-2 text-left hover:text-white hover:bg-[#800000]"
+              className="w-full px-4 py-2 text-left hover:bg-[#800000] hover:text-white"
             >
               Logout
             </button>
@@ -56,16 +53,17 @@ function Navbar() {
         )}
       </div>
 
-      <div className="border-b-2 h-20 w-full fixed bg-white z-50 ">
-        <div className="nav-logo flex justify-around items-center w-full">
+      <div className="border-b-2 h-20 flex justify-center w-full fixed bg-white z-50">
+        <div className="nav-logo flex justify-between items-center w-full px-4">
           <div className="flex items-center">
-            <img src={logo} className="size-20" alt="" />
+            <img src={logo} className="h-12" alt="" />
             <h1 className="nav-logo-title hidden text-[30px] font-[900] lg:flex items-center text-gray-800">
               <span className="text-black">Step</span>
               <span className="text-red-600">Prime</span>
             </h1>
           </div>
-          <div className="gap-4 hidden sm:flex">
+
+          <div className="hidden sm:flex gap-4">
             <NavLink to="/">
               <h1 className="hover-line">Shop</h1>
             </NavLink>
@@ -81,11 +79,11 @@ function Navbar() {
             <NavLink to="/contact">
               <h1 className="hover-line">Contact</h1>
             </NavLink>
-            {currUser && currUser.isAdmin ? (
+            {currUser && currUser.isAdmin && (
               <NavLink to="/admin">
                 <h1 className="hover-line font-[600] text-[#BF3131]">Admin</h1>
               </NavLink>
-            ) : null}
+            )}
           </div>
 
           <div className="flex items-center ps-3">
@@ -101,7 +99,9 @@ function Navbar() {
             </NavLink>
             {isLogged === false ? (
               <NavLink to="/login">
-                <FaUser size={20} className="ms-5 me-2" />
+                <button className="bg-[#BF3131] text-white rounded-lg py-1 px-4 w-20 mx-1 sm:w-auto transition-all duration-300 hover:bg-[#a82626]">
+                  Login
+                </button>
               </NavLink>
             ) : (
               <RiUserFollowFill
@@ -110,10 +110,10 @@ function Navbar() {
                 className="ms-5 me-3 cursor-pointer"
               />
             )}
-            {isLogged === true ? (
+            {isLogged === true && (
               <div className="flex gap-5">
                 <NavLink to="/cart" className="relative">
-                  <div className="absolute top-[-20px] right-[-3px]  bg-red-700 rounded-full h-4 w-4 text-center  mt-2">
+                  <div className="absolute top-[-20px] right-[-3px] bg-red-700 rounded-full h-4 w-4 text-center mt-2">
                     <p className="m-[-3px] text-white text-[13px]">
                       {cartItemNotify()}
                     </p>
@@ -127,16 +127,14 @@ function Navbar() {
                   size={20}
                 />
               </div>
-            ) : null}
+            )}
           </div>
           <FaBars
             onClick={() => setMenu(true)}
             className="flex sm:hidden me-2"
           />
           <div
-            className={`absolute bg-white top-0 z-10 right-0 bottom-0 ${
-              menu ? "w-[250px]" : "hidden"
-            }`}
+            className={`absolute bg-white top-0 z-10 right-0 bottom-0 ${menu ? "w-[250px]" : "hidden"}`}
           >
             <button
               onClick={() => setMenu(false)}
@@ -168,7 +166,7 @@ function Navbar() {
               onClick={() => setMenu(false)}
               className="w-full hover:bg-[#7D0A0A] bg-white hover:text-white"
             >
-              <NavLink>
+              <NavLink to="/orders">
                 <h1 className="font-[500] text-[20px] p-5">Orders</h1>
               </NavLink>
             </button>
@@ -181,11 +179,11 @@ function Navbar() {
                 <h1 className="font-[500] text-[20px] p-5">Contact</h1>
               </NavLink>
             </button>
-            <button className=" w-full hover:bg-[#7D0A0A] bg-white">
+            <button className="w-full hover:bg-[#7D0A0A] bg-white">
               <FaBackspace
                 size={30}
                 onClick={toggleDropdownMenu}
-                className=" ms-5 mt-3 mb-3"
+                className="ms-5 mt-3 mb-3"
               />
             </button>
           </div>

@@ -17,7 +17,9 @@ function UserContext({ children }) {
   const loginUser = async (email, password) => {
     try {
       const { data } = await axios.get("http://localhost:3000/allUsers");
-      const user = data.find((item) => item.email === email && item.password === password);
+      const user = data.find(
+        (item) => item.email === email && item.password === password
+      );
       if (user) {
         if (user.isBlocked) {
           return toast.error("Access Denied");
@@ -29,13 +31,14 @@ function UserContext({ children }) {
         if (!user.orders || !Array.isArray(user.orders)) {
           user.orders = [];
         }
-        
+
         setIsLogged(true);
         setCurrUser(user);
         setCart(user.cart || {});
         localStorage.setItem("isLogged", "true");
         localStorage.setItem("currUser", JSON.stringify(user));
-        const storedCart = JSON.parse(localStorage.getItem(`${user.email}_cart`)) || {};
+        const storedCart =
+          JSON.parse(localStorage.getItem(`${user.email}_cart`)) || {};
         setCart(storedCart);
         localStorage.setItem("cart", JSON.stringify(storedCart));
         if (!user.isAdmin) {
@@ -52,7 +55,9 @@ function UserContext({ children }) {
   };
 
   const logoutUser = () => {
-    const confirmLogout = confirm("You are going to log out. Do you want to continue?");
+    const confirmLogout = confirm(
+      "You are going to log out. Do you want to continue?"
+    );
     if (confirmLogout) {
       setCurrUser(null);
       setIsLogged(false);
@@ -67,14 +72,17 @@ function UserContext({ children }) {
     const saveLog = JSON.parse(localStorage.getItem("currUser"));
 
     const getCart = async (userId) => {
-      const { data } = await axios.get(`http://localhost:3000/allUsers/${userId}`);
+      const { data } = await axios.get(
+        `http://localhost:3000/allUsers/${userId}`
+      );
       setCart(data.cart || {});
     };
 
     if (logged && saveLog) {
       setIsLogged(true);
       setCurrUser(saveLog);
-      const storedCart = JSON.parse(localStorage.getItem(`${saveLog.email}_cart`)) || {};
+      const storedCart =
+        JSON.parse(localStorage.getItem(`${saveLog.email}_cart`)) || {};
       setCart(storedCart);
       getCart(saveLog.id);
     }
@@ -82,7 +90,10 @@ function UserContext({ children }) {
 
   const updateCartInLocalStorage = (updatedCart) => {
     if (currUser) {
-      localStorage.setItem(`${currUser.email}_cart`, JSON.stringify(updatedCart));
+      localStorage.setItem(
+        `${currUser.email}_cart`,
+        JSON.stringify(updatedCart)
+      );
     }
   };
 
@@ -106,7 +117,6 @@ function UserContext({ children }) {
   };
 
   const removeFromCart = (id) => {
-    
     setCart((prev) => {
       const updatedCart = { ...prev };
       if (updatedCart[id] > 0) {
@@ -148,11 +158,9 @@ function UserContext({ children }) {
     });
   };
 
- 
-
-  const PostUserDatas = async (name, email, password, cart,profilePhoto) => {
+  const PostUserDatas = async (name, email, password, cart, profilePhoto) => {
     const data = {
-      image:profilePhoto,
+      image: profilePhoto,
       name: name,
       email: email,
       password: password,
@@ -161,9 +169,10 @@ function UserContext({ children }) {
       isAdmin: false,
       isBlocked: false,
     };
-  
+
     try {
       setLoading(true);
+
       const response = await axios.post("http://localhost:3000/allUsers", data);
       if (response.status === 201) {
         toast.success("User registered successfully");
@@ -177,7 +186,6 @@ function UserContext({ children }) {
       setLoading(false);
     }
   };
-  
 
   const value = {
     currUser,
@@ -192,12 +200,10 @@ function UserContext({ children }) {
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
-    isAdmin
+    isAdmin,
   };
 
-  return (
-    <userData.Provider value={value}>{children}</userData.Provider>
-  );
+  return <userData.Provider value={value}>{children}</userData.Provider>;
 }
 
 export default UserContext;

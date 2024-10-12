@@ -2,9 +2,10 @@ import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { userData } from "../../context/UserContext";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 function SignupCombo() {
-  const { PostUserDatas } = useContext(userData);
+  const { PostUserDatas ,setLoading} = useContext(userData);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -23,9 +24,27 @@ function SignupCombo() {
     }
   };
 
-  const handlerEvent = (e) => {
+  const handlerEvent = async(e) => {
     e.preventDefault();
     const cart = {};
+    setLoading(true);
+    try{
+      const allUsersRes = await axios.get(
+        "http://localhost:3000/allUsers"
+      );
+      const allUsers = allUsersRes.data;
+      const isUserExists = allUsers.find((user) => user.email === email);
+      if (isUserExists) {
+        toast.error("Email already exists. Please use a different email.");
+        setLoading(false);
+        return;
+      }
+    }catch(err){
+      console.log(err);
+      
+    }finally{
+      setLoading(false)
+    }
     if (password === cpassword) {
       PostUserDatas(name, email, password, cart, profilePhoto);
       toast.success("New account created.. Please login");
