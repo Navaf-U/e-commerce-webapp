@@ -8,6 +8,7 @@ import { useContext, useState } from 'react';
 import { userData } from '../context/UserContext';
 import AdminProducts from './AdminProducts';
 import AdminUsersPage from './AdminUsersPage';
+import AdminDashboard from './AdminDashboard';
 
 function AdminMainPage() {
     const { logoutUser,isAdmin } = useContext(userData);
@@ -15,7 +16,7 @@ function AdminMainPage() {
     const handleSwitch = () => {
         switch (adminOption) {
             case 'dashboard':
-                return "nothing";
+                return <AdminDashboard/>;
             case "products":
                 return <AdminProducts />;
             case "users":
