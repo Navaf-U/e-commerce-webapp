@@ -8,6 +8,9 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useContext, useEffect, useState } from "react";
+import axios from 'axios'
+import { userData } from '../context/UserContext';
 
 ChartJS.register(
   CategoryScale,
@@ -19,6 +22,24 @@ ChartJS.register(
 );
 
 const AdminDashboard = () => {
+  const [usersSale,setUsersSale] = useState("")
+  const {setLoading} = useContext(userData)
+
+  useEffect(()=>{
+    const fetchData = async () =>{
+      setLoading(true)
+      try{
+        const {data} = await axios.get("http://localhost:3000/allUsers")
+        setUsersSale(data)
+      } catch(err){
+        console.log(err);
+        
+      }finally{
+        setLoading(false)
+      }
+    }
+    fetchData()
+  },[setLoading])
     
   const data = {
     labels: ["May", "June", "July", "Augest", "September", "October"],
@@ -46,18 +67,18 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <div className="flex justify-evenly">
-        <div>
-          <h1>TOTAL USERS</h1>
-          <p></p>
+      <div className="flex justify-around mt-2">
+        <div className="bg-[#BF3131] rounded-md ">
+          <h1 className="font-[600] text-[16px] px-2 text-white">TOTAL USERS</h1>
+          <p className="text-center text-white font-[700]">{usersSale.length}</p>
         </div>
-        <div>
-          <h1>TOTAL SALES</h1>
-          <p></p>
+        <div className="bg-yellow-300 rounded-md">
+          <h1 className="font-[600] text-[16px] px-2 text-white">TOTAL SALES</h1>
+          <p className="text-center text-white font-[700]">1640</p>
         </div>
-        <div>
-          <h1>WEEKLY SALES</h1>
-          <p></p>
+        <div className="bg-blue-600 rounded-md">
+          <h1 className="font-[600] text-[16px] px-2 text-white">WEEKLY SALES</h1>
+          <p className="text-center text-white font-[700]">80</p>
         </div>
       </div>
       <Bar data={data} options={options} />
