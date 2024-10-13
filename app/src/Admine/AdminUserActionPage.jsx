@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { CgProfile } from "react-icons/cg";
 
 function AdminUserActionPage() {
   const { state } = useLocation();
@@ -43,7 +44,7 @@ function AdminUserActionPage() {
   return (
     <div className="sm:ps-20 pt-10 px-4 sm:px-0">
       <div className="flex flex-col sm:flex-row sm:gap-28 items-center sm:items-start">
-        <img src={users.image} alt="" />
+       {users.image? <img src={users.image} className="h-auto w-48 rounded-md" alt="" />:<CgProfile size={150}/>}
         <div className="text-center sm:text-left">
           <p className="text-[28px] sm:text-[36px] font-semibold">{(users.name).toUpperCase()}</p>
           <p className="text-[18px] sm:text-[23px]">{users.email}</p>
