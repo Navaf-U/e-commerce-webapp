@@ -10,13 +10,20 @@ import { ProductsData } from "../context/ProductsCont";
 
 function Payment() {
   const [paymentMethod, setPaymentMethod] = useState(null);
-  const { cart, currUser} = useContext(userData);
-  const {products} = useContext(ProductsData)
+  const { cart, currUser,setCart} = useContext(userData);
+  const {products} = useContext(ProductsData);
   const navigator = useNavigate();
 
   const paymentMethodsSelection = (method) => {
     setPaymentMethod(method);
   };
+
+  const emptyCart = ()=>{
+    const empty = {}
+
+    setCart(empty)
+    toast.success("Payment successful! Cart has been cleared.");
+  }
 
   const cartItems = Object.keys(cart).map((productId) => {
     const product = products.find((item) => item.id === productId);
@@ -80,6 +87,7 @@ function Payment() {
         });
         localStorage.removeItem("cart")
         toast.success("Order Successful");
+        emptyCart()
         navigator("/cart");
       } catch (error) {
         console.log("Failed to update orders:", error);

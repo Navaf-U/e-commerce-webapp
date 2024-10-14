@@ -196,6 +196,7 @@ function UserContext({ children }) {
     loading,
     setLoading,
     cart,
+    setCart,
     addToCart,
     removeFromCart,
     increaseQuantity,

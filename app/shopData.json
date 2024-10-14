@@ -487,12 +487,30 @@
   "allUsers": [
     {
       "id": "1",
-      "image": "",
+      "image": "https://i.pinimg.com/736x/a4/d6/13/a4d6136949deb1e924e3a5a05c2e8999.jpg",
       "name": "navaf",
       "email": "navafsoft@gmail.com",
       "password": "123",
-      "cart": {},
-      "orders": [],
+      "cart": {
+        "1": 2,
+        "3": 4
+      },
+      "orders": [
+        {
+          "id": "order 2307",
+          "name": "navaf u",
+          "address": "manjeri,pandikkad",
+          "items": [
+            {
+              "id": "2",
+              "name": "Men’s Classic Blue",
+              "quantity": 1,
+              "price": "1599"
+            }
+          ],
+          "totalAmount": 1599
+        }
+      ],
       "isAdmin": true,
       "isBlocked": false
     },
@@ -525,7 +543,28 @@
       "email": "harsha@gmail.com",
       "password": "123",
       "cart": {},
-      "orders": [],
+      "orders": [
+        {
+          "id": "order 8832",
+          "name": "asa ak",
+          "address": "sda",
+          "items": [
+            {
+              "id": "1",
+              "name": "Men’s Black Running",
+              "quantity": 2,
+              "price": "799"
+            },
+            {
+              "id": "2",
+              "name": "Men’s Classic Blue",
+              "quantity": 2,
+              "price": "1599"
+            }
+          ],
+          "totalAmount": 4796
+        }
+      ],
       "isAdmin": false,
       "isBlocked": false
     },

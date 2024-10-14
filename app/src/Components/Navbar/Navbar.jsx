@@ -107,7 +107,7 @@ function Navbar() {
               <img
                 src={currUser.image}
                 onClick={toggleDropdown}
-                className="ms-5 me-3 w-10 rounded-full cursor-pointer"
+                className="ms-5 me-3 w-20 h-[50px] rounded-full cursor-pointer"
                 alt="User profile picture"
               />
             ) : (

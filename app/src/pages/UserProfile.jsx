@@ -47,7 +47,7 @@ function UserProfile() {
       {currUser && (
         <>
           {image ? (
-            <img src={image} className="w-28 h-auto rounded-full mb-4" alt={currUser.name} />
+            <img src={image} className="w-36 h-[150px] rounded-full mb-4" alt={currUser.name} />
           ) : (
             <div className="w-28 h-28 bg-gray-300 rounded-full mb-4 flex items-center justify-center">
               <span>No Photo</span>
