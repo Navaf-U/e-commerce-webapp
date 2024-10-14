@@ -9,6 +9,8 @@ import { userData } from '../context/UserContext';
 import AdminProducts from './AdminProducts';
 import AdminUsersPage from './AdminUsersPage';
 import AdminDashboard from './AdminDashboard';
+import { NavLink } from 'react-router-dom';
+import { TiArrowBackOutline } from "react-icons/ti";
 
 function AdminMainPage() {
     const { logoutUser,isAdmin } = useContext(userData);
@@ -53,6 +55,11 @@ function AdminMainPage() {
                        <div onClick={logoutUser} className='AdminLogout flex justify-center ps-2 items-center flex-row gap-2 hover:bg-pink-700 w-full h-12 md:h-16 rounded-md'>
                            <BiLogOutCircle />
                            <button>Logout</button>
+                       </div>
+                       <div className='AdminLogout flex justify-center ps-2 items-center flex-row gap-2 hover:bg-pink-700 w-full h-12 md:h-16 rounded-md'>
+                           <NavLink to="/">
+                           <button><TiArrowBackOutline/></button>
+                           </NavLink>
                        </div>
                    </div>
                </div>

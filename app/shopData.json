@@ -622,8 +622,26 @@
       "name": "zera",
       "email": "zerah@gmail.com",
       "password": "123",
-      "cart": {},
-      "orders": [],
+      "cart": {
+        "2": 1,
+        "0e5f": 2
+      },
+      "orders": [
+        {
+          "id": "order 9524",
+          "name": "muhammed shadin",
+          "address": "manjer",
+          "items": [
+            {
+              "id": "2",
+              "name": "Men’s Classic Blue",
+              "quantity": 1,
+              "price": "1599"
+            }
+          ],
+          "totalAmount": 1599
+        }
+      ],
       "isAdmin": false,
       "isBlocked": false
     }

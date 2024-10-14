@@ -5,9 +5,9 @@ import axios from "axios";
 import { userData } from "../context/UserContext";
 import { toast } from "react-toastify";
 
-function AdminActionPage() {
+function AdminProductActionPage() {
   const { id } = useParams();
-  const { currUser, setLoading } = useContext(userData);
+  const { setCurrUser, setLoading } = useContext(userData);
   const { products } = useContext(ProductsData);
   const [productEdit, setProductEdit] = useState({
     id: "",
@@ -40,22 +40,16 @@ function AdminActionPage() {
     }
   }, [productFound]);
 
-  const inputValidationCheck = (products) => {
+  const inputValidationCheck = () => {
     if (
       !productEdit.name ||
       !productEdit.type ||
       productEdit.price < 0 ||
       productEdit.qty < 0 ||
-      productEdit.id < 0 ||
       !productEdit.id ||
       !productEdit.qty
     ) {
       toast.error("correct the input fields");
-      return false;
-    }
-    const idExists = products.some((product) => product.id === productEdit.id && product.id !== productFound.id)
-      if (idExists) {
-      toast.error("ID already exists. Please choose a different ID.");
       return false;
     }
     return true;
@@ -85,7 +79,7 @@ function AdminActionPage() {
     setLoading(true);
     try {
       await axios.delete(`http://localhost:3000/newProducts/${ID}`);
-      currUser(false);
+      setCurrUser(null);
     } catch (err) {
       console.log(err);
     } finally {
@@ -147,6 +141,7 @@ function AdminActionPage() {
               <input
                 type="text"
                 placeholder="ID"
+                readOnly
                 value={productEdit.id}
                 onChange={(e) =>
                   setProductEdit({ ...productEdit, id: e.target.value })
@@ -252,4 +247,4 @@ function AdminActionPage() {
   );
 }
 
-export default AdminActionPage;
+export default AdminProductActionPage;

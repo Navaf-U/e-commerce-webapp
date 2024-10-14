@@ -16,13 +16,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Contact from "./pages/Contact";
 import AdmineMainPage from "./Admine/AdminMainPage";
-import AdmineActionPage from "./Admine/AdminActionPage";
 import AdminUserActionPage from "./Admine/AdminUserActionPage";
 import  { userData } from "./context/UserContext";
 import { useContext } from "react";
 import ProductAddPage from "./Admine/ProductAddPage";
 import Orders from "./pages/Orders";
 import UserProfile from "./pages/UserProfile";
+import AdminProductActionPage from "./Admine/AdminProductActionPage";
 
 function AppRoutes() {
   const { isAdmin } = useContext(userData);
@@ -59,7 +59,7 @@ function AppRoutes() {
           />
       <Route
             path="/adminProducts/:id"
-            element={ isAdmin ? <AdmineActionPage /> : <NotFound />}
+            element={ isAdmin ? <AdminProductActionPage /> : <NotFound />}
           />
           <Route
             path="/adminUsers/:ID"
