@@ -22,11 +22,13 @@ function Orders() {
         setLoading(false);
       }
     };
-    fetchData();
-  }, [currUser.id, setLoading, setCurrUser]);
+    if (currUser) {
+      fetchData();
+    }
+  }, [setLoading, setCurrUser, currUser]);
 
   if (!currUser || !currUser.orders) {
-    return <div className="text-center mt-10">Loading...</div>;
+    return <div className="text-center mt-5">Loading user data...</div>;
   }
 
   return (
