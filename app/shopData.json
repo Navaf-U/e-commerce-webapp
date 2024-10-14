@@ -492,8 +492,7 @@
       "email": "navafsoft@gmail.com",
       "password": "123",
       "cart": {
-        "1": 2,
-        "3": 4
+        "5484": 1
       },
       "orders": [
         {
@@ -509,6 +508,20 @@
             }
           ],
           "totalAmount": 1599
+        },
+        {
+          "id": "order 3488",
+          "name": "irfan kuttappu",
+          "address": "pandikkad,poolamanna",
+          "items": [
+            {
+              "id": "5484",
+              "name": "Air Jordan 1 Low",
+              "quantity": 1,
+              "price": 8995
+            }
+          ],
+          "totalAmount": 8995
         }
       ],
       "isAdmin": true,
@@ -542,29 +555,10 @@
       "name": "harsha",
       "email": "harsha@gmail.com",
       "password": "123",
-      "cart": {},
-      "orders": [
-        {
-          "id": "order 8832",
-          "name": "asa ak",
-          "address": "sda",
-          "items": [
-            {
-              "id": "1",
-              "name": "Men’s Black Running",
-              "quantity": 2,
-              "price": "799"
-            },
-            {
-              "id": "2",
-              "name": "Men’s Classic Blue",
-              "quantity": 2,
-              "price": "1599"
-            }
-          ],
-          "totalAmount": 4796
-        }
-      ],
+      "cart": {
+        "13": 2
+      },
+      "orders": [],
       "isAdmin": false,
       "isBlocked": false
     },

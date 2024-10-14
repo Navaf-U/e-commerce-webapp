@@ -83,12 +83,11 @@ function Payment() {
       try {
         await axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
           orders: currUser.orders,
-          cart:{}
         });
         localStorage.removeItem("cart")
         toast.success("Order Successful");
         emptyCart()
-        navigator("/cart");
+        navigator("/orders");
       } catch (error) {
         console.log("Failed to update orders:", error);
         toast.error("Failed to save your order. Please try again.");

@@ -189,6 +189,7 @@ function UserContext({ children }) {
 
   const value = {
     currUser,
+    setCurrUser,
     isLogged,
     loginUser,
     logoutUser,
