@@ -28,7 +28,7 @@ function ProductAddPage() {
         className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg space-y-4"
         onSubmit={DefaultFun}
       >
-        <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center">Add Product</h2>
+        <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center">Add Products</h2>
 
         <input
           type="text"
