@@ -33,10 +33,7 @@ function AdminUsersPage() {
           <h1>Please log in as admin to view users</h1>
         </div>
       ) : (
-        <div className="h-[100vh] overflow-scroll">
-          <h1 className="text-[12px] font-[500] text-end">
-            Current User :{currUser.id} {currUser.name} {currUser.email}
-          </h1>
+        <div className="h-[100vh] overflow-scroll mt-2">
           <table className="min-w-full text-center table-auto">
             <thead>
               <tr className="bg-[#BF3131] text-white">

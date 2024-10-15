@@ -9,8 +9,8 @@ import {
   Legend,
 } from "chart.js";
 import { useContext, useEffect, useState } from "react";
-import axios from 'axios'
-import { userData } from '../context/UserContext';
+import axios from "axios";
+import { userData } from "../context/UserContext";
 import { ProductsData } from "../context/ProductsCont";
 
 ChartJS.register(
@@ -23,26 +23,25 @@ ChartJS.register(
 );
 
 const AdminDashboard = () => {
-  const [usersSale,setUsersSale] = useState("")
-  const {setLoading} = useContext(userData)
-  const {products} = useContext(ProductsData)
+  const [usersSale, setUsersSale] = useState("");
+  const { setLoading } = useContext(userData);
+  const { products } = useContext(ProductsData);
 
-  useEffect(()=>{
-    const fetchData = async () =>{
-      setLoading(true)
-      try{
-        const {data} = await axios.get("http://localhost:3000/allUsers")
-        setUsersSale(data)
-      } catch(err){
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const { data } = await axios.get("http://localhost:3000/allUsers");
+        setUsersSale(data);
+      } catch (err) {
         console.log(err);
-        
-      }finally{
-        setLoading(false)
+      } finally {
+        setLoading(false);
       }
-    }
-    fetchData()
-  },[setLoading])
-    
+    };
+    fetchData();
+  }, [setLoading]);
+
   const data = {
     labels: ["May", "June", "July", "Augest", "September", "October"],
     datasets: [
@@ -71,19 +70,29 @@ const AdminDashboard = () => {
     <>
       <div className="flex justify-evenly mt-0.5">
         <div className="bg-[#BF3131] rounded-md w-56 text-center">
-          <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">TOTAL USERS</h1>
-          <p className="text-center text-white font-[700]">{usersSale.length}</p>
+          <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">
+            TOTAL USERS
+          </h1>
+          <p className="text-center text-white font-[700]">
+            {usersSale.length}
+          </p>
         </div>
         <div className="bg-blue-600 rounded-md w-56 text-center">
-          <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">TOTAL PRODUCTS</h1>
+          <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">
+            TOTAL PRODUCTS
+          </h1>
           <p className="text-center text-white font-[700]">{products.length}</p>
         </div>
         <div className="bg-yellow-300 rounded-md w-56 text-center">
-          <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">WEEKLY SALES</h1>
+          <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">
+            WEEKLY SALES
+          </h1>
           <p className="text-center text-white font-[700]">80</p>
         </div>
         <div className="bg-lime-500 rounded-md w-56 text-center">
-          <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">TOTAL SALES</h1>
+          <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">
+            TOTAL SALES
+          </h1>
           <p className="text-center text-white font-[700]">1640</p>
         </div>
       </div>

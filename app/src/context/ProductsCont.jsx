@@ -4,13 +4,12 @@ import { userData } from "./UserContext";
 
 export const ProductsData = createContext();
 
-
 // eslint-disable-next-line react/prop-types
 function ProductsCont({ children }) {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
-  
-  const { currUser,cart,setLoading } = useContext(userData) || {};
+
+  const { currUser, cart, setLoading } = useContext(userData) || {};
 
   const getTotalCartAmount = () => {
     let total = 0;
@@ -26,61 +25,63 @@ function ProductsCont({ children }) {
   const cartItemNotify = () => {
     let totalNotify = 0;
     for (let i in cart) {
-
-      const productExist = products.find((item)=>item.id==i)
+      const productExist = products.find((item) => item.id == i);
 
       if (cart[i] > 0 && productExist) {
-        
         totalNotify += cart[i];
       }
     }
     return totalNotify;
   };
-  
+
   useEffect(() => {
     const fetchProductsData = async () => {
-      setLoading(true)
+      setLoading(true);
       try {
-        const {data} = await axios.get("http://localhost:3000/newProducts");
+        const { data } = await axios.get("http://localhost:3000/newProducts");
         setProducts(data);
-
       } catch (err) {
         console.log(err);
-      }finally{
-        setLoading(false)
+      } finally {
+        setLoading(false);
       }
     };
     fetchProductsData();
   }, [currUser, setLoading]);
 
+  const PostProducts = (
+    name,
+    type,
+    image,
+    price,
+    rating,
+    reviews,
+    brand,
+    description
+  ) => {
+    const datas = {
+      name: name,
+      type: type,
+      image: image,
+      price: price,
+      rating: rating,
+      reviews: reviews,
+      brand: brand,
+      description: description,
+    };
 
-  const PostProducts= (name,type,image,price,rating,reviews,brand,description)=> {
-    const datas ={
-      name:name,
-      type:type,
-      image:image,
-      price:price,
-      rating:rating,
-      reviews:reviews,
-      brand:brand,
-      description:description
-    }
-
-    const AddProducts = async ()=>{
-      setLoading(true)
-      try{
-      await axios.post("http://localhost:3000/newProducts" , datas) 
-      }catch(err){
+    const AddProducts = async () => {
+      setLoading(true);
+      try {
+        await axios.post("http://localhost:3000/newProducts", datas);
+      } catch (err) {
         console.log(err);
-        
-      }finally{
-        setLoading(false)
-        
+      } finally {
+        setLoading(false);
       }
-    }
-    AddProducts()
-
-  }
+    };
+    AddProducts();
+  };
 
   const currency = "₹";
 
@@ -91,7 +92,7 @@ function ProductsCont({ children }) {
     setSearch,
     getTotalCartAmount,
     PostProducts,
-    cartItemNotify
+    cartItemNotify,
   };
 
   return (

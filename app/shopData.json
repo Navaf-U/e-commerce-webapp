@@ -6,7 +6,7 @@
       "type": "men",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-005-400x400.jpg",
       "price": "799",
-      "qty": "1",
+      "qty": "10",
       "description": "Comfortable and durable black running shoes for men.",
       "brand": "Recycled Shoes",
       "rating": "4.6",
@@ -491,9 +491,7 @@
       "name": "navaf",
       "email": "navafsoft@gmail.com",
       "password": "123",
-      "cart": {
-        "5484": 1
-      },
+      "cart": {},
       "orders": [
         {
           "id": "order 2307",
@@ -522,6 +520,27 @@
             }
           ],
           "totalAmount": 8995
+        },
+        {
+          "id": "order 875",
+          "name": "fxrg jdjwad",
+          "address": "bridgeon",
+          "items": [
+            {
+              "id": "1",
+              "name": "Men’s Black Running",
+              "quantity": 2,
+              "price": "799"
+            }
+          ],
+          "totalAmount": 1598
+        },
+        {
+          "id": "order 2202",
+          "name": "fdgd bddg",
+          "address": "grdgt",
+          "items": [],
+          "totalAmount": 0
         }
       ],
       "isAdmin": true,
@@ -590,7 +609,9 @@
       "image": "",
       "email": "irfankuttappu@gmail.com",
       "password": "123",
-      "cart": {},
+      "cart": {
+        "9bc3": 3
+      },
       "orders": [
         {
           "id": "order 3764",
@@ -611,6 +632,20 @@
             }
           ],
           "totalAmount": 13798
+        },
+        {
+          "id": "order 5385",
+          "name": "irfan irfu",
+          "address": "pandikkad",
+          "items": [
+            {
+              "id": "9bc3",
+              "name": "Black Flame",
+              "quantity": 3,
+              "price": 4000
+            }
+          ],
+          "totalAmount": 12000
         }
       ],
       "isAdmin": false,
@@ -622,10 +657,7 @@
       "name": "zera",
       "email": "zerah@gmail.com",
       "password": "123",
-      "cart": {
-        "2": 1,
-        "0e5f": 2
-      },
+      "cart": {},
       "orders": [
         {
           "id": "order 9524",

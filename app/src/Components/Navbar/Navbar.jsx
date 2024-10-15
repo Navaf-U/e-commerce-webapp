@@ -91,7 +91,7 @@ function Navbar() {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="bg-white border border-[#BF3131] rounded-l-full ps-4 py-2 sm:w-[80%] w-[60%] outline-none shadow-md transition-all duration-300 focus:shadow-lg"
+              className="bg-white border border-[#BF3131] h-[40px] rounded-l-full ps-4 py-1.5 sm:w-[80%] w-[60%] outline-none shadow-md transition-all duration-300 focus:shadow-lg"
               placeholder="Search for products..."
             />
             <NavLink to="/search">

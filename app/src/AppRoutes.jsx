@@ -23,9 +23,13 @@ import ProductAddPage from "./Admine/ProductAddPage";
 import Orders from "./pages/Orders";
 import UserProfile from "./pages/UserProfile";
 import AdminProductActionPage from "./Admine/AdminProductActionPage";
+import { ProductsData } from "./context/ProductsCont";
+
 
 function AppRoutes() {
-  const { isAdmin } = useContext(userData);
+  const { isAdmin ,currUser} = useContext(userData);
+  
+  const {cartItemNotify} = useContext(ProductsData)
   return (
     <>
       <ToastContainer draggable />
@@ -44,7 +48,7 @@ function AppRoutes() {
           <Route path="/search" element={<Search />} />
           <Route path="/products/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/payment" element={<Payment />} />
+          <Route path="/payment" element={ cartItemNotify() > 0 && currUser ? <Payment />  : "Cart Empty or Please Signup or Login" }/>
           <Route path="/orders" element={<Orders />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />

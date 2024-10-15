@@ -28,11 +28,23 @@ function AdminProducts() {
       <div className="flex flex-col md:flex-row justify-between items-center mb-4">
         <div className="flex gap-4 mb-4 md:mb-0">
           <label className="flex items-center">
-            <input type="checkbox" name="men" checked={men} onChange={handleCheckbox} className="mr-2" />
+            <input
+              type="checkbox"
+              name="men"
+              checked={men}
+              onChange={handleCheckbox}
+              className="mr-2"
+            />
             Men
           </label>
           <label className="flex items-center">
-            <input type="checkbox" name="women" checked={women} onChange={handleCheckbox} className="mr-2" />
+            <input
+              type="checkbox"
+              name="women"
+              checked={women}
+              onChange={handleCheckbox}
+              className="mr-2"
+            />
             Women
           </label>
         </div>
@@ -51,21 +63,36 @@ function AdminProducts() {
           <thead>
             <tr className="bg-gray-200">
               <th className="p-2 text-xs md:text-sm">ID</th>
-              <th className="p-2 text-xs md:text-sm hidden sm:table-cell">IMAGE</th>
+              <th className="p-2 text-xs md:text-sm hidden sm:table-cell">
+                IMAGE
+              </th>
               <th className="p-2 text-xs md:text-sm">NAME</th>
-              <th className="p-2 text-xs md:text-sm hidden sm:table-cell">TYPE</th>
+              <th className="p-2 text-xs md:text-sm hidden sm:table-cell">
+                TYPE
+              </th>
               <th className="p-2 text-xs md:text-sm">PRICE</th>
-              <th className="p-2 text-xs md:text-sm hidden sm:table-cell">BRAND</th>
-              <th className="p-2 text-xs md:text-sm hidden md:table-cell">RATING</th>
-              <th className="p-2 text-xs md:text-sm hidden md:table-cell">REVIEWS</th>
+              <th className="p-2 text-xs md:text-sm hidden sm:table-cell">
+                BRAND
+              </th>
+              <th className="p-2 text-xs md:text-sm hidden md:table-cell">
+                RATING
+              </th>
+              <th className="p-2 text-xs md:text-sm hidden md:table-cell">
+                REVIEWS
+              </th>
               <th className="p-2 text-xs md:text-sm">ACTION</th>
             </tr>
           </thead>
           <tbody>
             {filteredProducts.length > 0 ? (
               filteredProducts.map((item) => (
-                <tr key={item.id} className="border-b hover:bg-gray-100 transition">
-                  <td className="py-2 font-semibold text-xs md:text-sm">{item.id}</td>
+                <tr
+                  key={item.id}
+                  className="border-b hover:bg-gray-100 transition"
+                >
+                  <td className="py-2 font-semibold text-xs md:text-sm">
+                    {item.id}
+                  </td>
                   <td className="py-2 hidden sm:table-cell">
                     <img
                       src={item.image}
@@ -74,11 +101,19 @@ function AdminProducts() {
                     />
                   </td>
                   <td className="py-2 text-xs md:text-sm">{item.name}</td>
-                  <td className="py-2 hidden sm:table-cell text-xs md:text-sm">{item.type}</td>
+                  <td className="py-2 hidden sm:table-cell text-xs md:text-sm">
+                    {item.type}
+                  </td>
                   <td className="py-2 text-xs md:text-sm">{item.price}</td>
-                  <td className="py-2 hidden sm:table-cell text-xs md:text-sm">{item.brand}</td>
-                  <td className="py-2 hidden md:table-cell text-xs md:text-sm">{item.rating}</td>
-                  <td className="py-2 hidden md:table-cell text-xs md:text-sm">{item.reviews}</td>
+                  <td className="py-2 hidden sm:table-cell text-xs md:text-sm">
+                    {item.brand}
+                  </td>
+                  <td className="py-2 hidden md:table-cell text-xs md:text-sm">
+                    {item.rating}
+                  </td>
+                  <td className="py-2 hidden md:table-cell text-xs md:text-sm">
+                    {item.reviews}
+                  </td>
                   <td className="py-2">
                     <NavLink to={`/adminProducts/${item.id}`}>
                       <button className="bg-blue-500 text-white px-3 py-1 rounded text-xs md:text-sm">

@@ -57,7 +57,7 @@ function AdminProductActionPage() {
 
   const handlerEvent = async (e) => {
     e.preventDefault();
-    if (!inputValidationCheck(products)) {
+    if (!inputValidationCheck()) {
       return;
     }
     setLoading(true);
@@ -98,40 +98,40 @@ function AdminProductActionPage() {
           <div className="flex-1 bg-white p-6 rounded-lg shadow-lg">
             <div key={productFound.id} className="text-center lg:text-left">
               <div className="flex justify-center">
-              <img
-                src={productFound.image}
-                alt={productFound.name}
-                className="w-[70%] h-auto mx-auto lg:mx-0 mb-4 rounded-lg shadow-md"
-              />
+                <img
+                  src={productFound.image}
+                  alt={productFound.name}
+                  className="w-[70%] h-auto mx-auto lg:mx-0 mb-4 rounded-lg shadow-md"
+                />
               </div>
-                <h2 className="text-2xl text-center text-[#800000] font-bold mb-2">
+              <h2 className="text-2xl text-center text-[#800000] font-bold mb-2">
                 {productFound.name}
               </h2>
               <div className="flex justify-between ">
                 <div>
-              <p className="text-lg text-gray-600 mb-2">
-                Current Price: ${productFound.price}
-              </p>
-              <p className="text-lg text-gray-600 mb-4">
-              Current Type: {productFound.type}
-              </p>
+                  <p className="text-lg text-gray-600 mb-2">
+                    Current Price: ${productFound.price}
+                  </p>
+                  <p className="text-lg text-gray-600 mb-4">
+                    Current Type: {productFound.type}
+                  </p>
                 </div>
                 <div>
-                <p className="text-lg text-gray-600 mb-4">
-                Current Rating: {productFound.rating}
-              </p>
-                <p className="text-lg text-gray-600 mb-4">
-                Current Reviews: {productFound.reviews}
-              </p>
+                  <p className="text-lg text-gray-600 mb-4">
+                    Current Rating: {productFound.rating}
+                  </p>
+                  <p className="text-lg text-gray-600 mb-4">
+                    Current Reviews: {productFound.reviews}
+                  </p>
                 </div>
               </div>
               <div className="flex justify-center">
-              <button
-                className="bg-[#BF3131] text-white w-full lg:w-48 py-2 rounded-full hover:bg-[#a82626] transition-all duration-300 shadow-lg"
-                onClick={() => DeleteProduct(productFound.id)}
-              >
-                Delete
-              </button>
+                <button
+                  className="bg-[#BF3131] text-white w-full lg:w-48 py-2 rounded-full hover:bg-[#a82626] transition-all duration-300 shadow-lg"
+                  onClick={() => DeleteProduct(productFound.id)}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           </div>
