@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -11,6 +12,7 @@ function UserContext({ children }) {
   const [currUser, setCurrUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState({});
+  const navigate = useNavigate()
 
   const isAdmin = currUser !== null && currUser.isAdmin ? true : false;
 
@@ -61,6 +63,7 @@ function UserContext({ children }) {
     if (confirmLogout) {
       setCurrUser(null);
       setIsLogged(false);
+      navigate("/")
       localStorage.removeItem("isLogged");
       localStorage.removeItem("currUser");
       localStorage.removeItem("cart");

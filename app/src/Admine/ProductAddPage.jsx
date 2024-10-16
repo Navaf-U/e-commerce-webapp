@@ -21,6 +21,7 @@ function ProductAddPage() {
     PostProducts(name, type, image, price, rating, reviews, brand, description);
     toast.success("Product Added")
   };
+  
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-6">

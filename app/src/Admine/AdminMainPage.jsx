@@ -47,17 +47,17 @@ function AdminMainPage() {
               />
               <hr className="border-[#80808066] w-full mt-5 mb-5" />
               <div className="flex flex-col text-[14px] md:text-[16px] w-full font-[700] items-center">
-                <div className="AdminDashboard flex justify-center ps-2 gap-1 items-center flex-row hover:bg-[#BF3131] pe-5 w-full h-12 md:h-16 rounded-md">
-                  <MdOutlineDashboard className="mt-1" />
-                  <button onClick={() => setAdminOption("dashboard")}>
+                <div className="AdminDashboard flex justify-start ps-16 gap-1 items-center flex-row hover:bg-[#BF3131] pe-5 w-full h-12 md:h-16 rounded-md">
+                  <MdOutlineDashboard size={22} className="mt-1" />
+                  <button className="ms-1" onClick={() => setAdminOption("dashboard")}>
                     Dashboard
                   </button>
                 </div>
-                <div className="AdminUsers flex justify-center ps-2 items-center flex-row gap-2 hover:bg-[#BF3131] h-12 md:h-16 w-full rounded-md">
+                <div className="AdminUsers flex justify-start ps-16 items-center flex-row gap-2 hover:bg-[#BF3131] h-12 md:h-16 w-full rounded-md">
                   <FiUsers />
-                  <button onClick={() => setAdminOption("users")}>Users</button>
+                  <button className="ms-2" onClick={() => setAdminOption("users")}> Users</button>
                 </div>
-                <div className="AdminProducts flex justify-center ps-2 items-center flex-row gap-2 hover:bg-[#BF3131] pe-5 w-full h-12 md:h-16 rounded-md">
+                <div className="AdminProducts flex justify-start ps-16 items-center flex-row gap-2 hover:bg-[#BF3131] pe-5 w-full h-12 md:h-16 rounded-md">
                   <MdOutlineProductionQuantityLimits />
                   <button onClick={() => setAdminOption("products")}>
                     Products
@@ -65,7 +65,7 @@ function AdminMainPage() {
                 </div>
                 <div
                   onClick={logoutUser}
-                  className="AdminLogout flex justify-center ps-2 items-center flex-row gap-2 hover:bg-[#BF3232] w-full h-12 md:h-16 rounded-md"
+                  className="AdminLogout flex justify-start ps-16 items-center flex-row gap-2 hover:bg-[#BF3232] w-full h-12 md:h-16 rounded-md"
                 >
                   <BiLogOutCircle />
                   <button>Logout</button>

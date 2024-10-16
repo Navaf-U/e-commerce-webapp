@@ -1,28 +1,11 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation} from "react-router-dom";
 import axios from "axios";
 import { CgProfile } from "react-icons/cg";
 
 function AdminUserActionPage() {
   const { state } = useLocation();
   const [users, setUsers] = useState(state?.item);
-  const navigate = useNavigate();
-
-  const DeleteUser = async (userID, email) => {
-    if (!userID) return;
-
-    const cartKey = `${email}_cart`;
-    if (localStorage.getItem(cartKey)) {
-      localStorage.removeItem(cartKey);
-    }
-    try {
-      await axios.delete(`http://localhost:3000/allUsers/${userID}`);
-      navigate("/admin");
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const toggleBlockUser = async (Id) => {
     if (!Id) return;
 
@@ -58,12 +41,6 @@ function AdminUserActionPage() {
             {users.isAdmin ? "Administrator" : "User"}
           </p>
           <div className="flex gap-5 sm:gap-0">
-            <button
-              onClick={() => DeleteUser(users.id, users.email)}
-              className="bg-[#BF3131] w-32 h-10 hover:bg-[#800000] active:bg-[#BF3131] hover:text-white rounded-2xl sm:mt-10 mt-4"
-            >
-              Remove
-            </button>
             <button
               onClick={() => toggleBlockUser(users.id)}
               className={`sm:ms-8 ${

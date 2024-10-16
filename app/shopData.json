@@ -520,27 +520,6 @@
             }
           ],
           "totalAmount": 8995
-        },
-        {
-          "id": "order 875",
-          "name": "fxrg jdjwad",
-          "address": "bridgeon",
-          "items": [
-            {
-              "id": "1",
-              "name": "Men’s Black Running",
-              "quantity": 2,
-              "price": "799"
-            }
-          ],
-          "totalAmount": 1598
-        },
-        {
-          "id": "order 2202",
-          "name": "fdgd bddg",
-          "address": "grdgt",
-          "items": [],
-          "totalAmount": 0
         }
       ],
       "isAdmin": true,
