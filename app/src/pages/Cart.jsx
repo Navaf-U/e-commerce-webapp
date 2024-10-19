@@ -48,19 +48,19 @@ const Cart = () => {
               </p>
               <div className="flex">
               <button
-                className="text-[22px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%]"
-                onClick={() => increaseQuantity(item.id)}
+                className="text-[30px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%] active:bg-black"
+                onClick={() => decreaseQuantity(item.id)}
               >
-                +
+                -
               </button>
               <button className="bg-red-800 h-12 text-white flex items-center justify-center w-24 mb-2 sm:mb-0">
                 {quantity}
                 </button>
-                <button
-                className="text-[30px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%]"
-                onClick={() => decreaseQuantity(item.id)}
+              <button
+                className="text-[22px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%] active:bg-black"
+                onClick={() => increaseQuantity(item.id)}
               >
-                -
+                +
               </button>
               </div>
               <p className="flex-1 text-center mb-2 sm:mb-0">
