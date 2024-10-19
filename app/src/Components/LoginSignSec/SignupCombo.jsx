@@ -3,9 +3,10 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { userData } from "../../context/UserContext";
 import { toast } from "react-toastify";
 import axios from "axios";
+import Loading from "../Loading/Loading";
 
 function SignupCombo() {
-  const { PostUserDatas ,setLoading} = useContext(userData);
+  const { PostUserDatas ,setLoading,loading} = useContext(userData);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -56,7 +57,8 @@ function SignupCombo() {
 
   return (
     <div>
-      <div className="login-signup w-full min-h-screen pt-16 pb-20">
+      {loading ? <Loading /> :(
+        <div className="login-signup w-full min-h-screen pt-16 pb-20">
         <form onSubmit={handlerEvent}>
           <div className="login-cont w-[90%] max-w-[580px] h-auto bg-white m-auto px-6 py-10 md:px-10 md:py-14">
             <h1 className="pb-5 font-bold text-2xl md:text-4xl">Sign Up</h1>
@@ -138,6 +140,7 @@ function SignupCombo() {
           </div>
         </form>
       </div>
+      )}
     </div>
   );
 }

@@ -12,6 +12,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { userData } from "../context/UserContext";
 import { ProductsData } from "../context/ProductsCont";
+import Loading from "../Components/Loading/Loading";
 
 ChartJS.register(
   CategoryScale,
@@ -24,7 +25,7 @@ ChartJS.register(
 
 const AdminDashboard = () => {
   const [usersSale, setUsersSale] = useState("");
-  const { setLoading } = useContext(userData);
+  const { setLoading,loading } = useContext(userData);
   const { products } = useContext(ProductsData);
 
   useEffect(() => {
@@ -68,35 +69,37 @@ const AdminDashboard = () => {
 
   return (
     <>
+    {loading? <Loading /> :(
       <div className="flex justify-evenly mt-0.5">
-        <div className="bg-[#BF3131] rounded-md w-56 text-center">
-          <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">
-            TOTAL USERS
-          </h1>
-          <p className="text-center text-white font-[700]">
-            {usersSale.length}
-          </p>
-        </div>
-        <div className="bg-blue-600 rounded-md w-56 text-center">
-          <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">
-            TOTAL PRODUCTS
-          </h1>
-          <p className="text-center text-white font-[700]">{products.length}</p>
-        </div>
-        <div className="bg-yellow-300 rounded-md w-56 text-center">
-          <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">
-            WEEKLY SALES
-          </h1>
-          <p className="text-center text-white font-[700]">80</p>
-        </div>
-        <div className="bg-lime-500 rounded-md w-56 text-center">
-          <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">
-            TOTAL SALES
-          </h1>
-          <p className="text-center text-white font-[700]">1640</p>
-        </div>
+      <div className="bg-[#BF3131] rounded-md w-56 text-center">
+        <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">
+          TOTAL USERS
+        </h1>
+        <p className="text-center text-white font-[700]">
+          {usersSale.length}
+        </p>
       </div>
-      <Bar data={data} options={options} />
+      <div className="bg-blue-600 rounded-md w-56 text-center">
+        <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">
+          TOTAL PRODUCTS
+        </h1>
+        <p className="text-center text-white font-[700]">{products.length}</p>
+      </div>
+      <div className="bg-yellow-300 rounded-md w-56 text-center">
+        <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">
+          WEEKLY SALES
+        </h1>
+        <p className="text-center text-white font-[700]">80</p>
+      </div>
+      <div className="bg-lime-500 rounded-md w-56 text-center">
+        <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">
+          TOTAL SALES
+        </h1>
+        <p className="text-center text-white font-[700]">1640</p>
+      </div>
+    </div>
+    )}
+    <Bar data={data} options={options} />
     </>
   );
 };

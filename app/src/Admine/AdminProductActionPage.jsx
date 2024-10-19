@@ -4,10 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { userData } from "../context/UserContext";
 import { toast } from "react-toastify";
+import Loading from "../Components/Loading/Loading";
 
 function AdminProductActionPage() {
   const { id } = useParams();
-  const { setLoading } = useContext(userData);
+  const { setLoading,loading } = useContext(userData);
   const { products } = useContext(ProductsData);
   const navigate = useNavigate()
   const [productEdit, setProductEdit] = useState({
@@ -70,6 +71,7 @@ function AdminProductActionPage() {
 
       toast.success("Product Edited");
     } catch (err) {
+      toast.error("Error updating product. Please try again.")
       console.log(err);
     } finally {
       setLoading(false);
@@ -82,6 +84,7 @@ function AdminProductActionPage() {
       await axios.delete(`http://localhost:3000/newProducts/${ID}`);
       navigate("/admin")
     } catch (err) {
+      toast.error("Error deleting product. Please try again.");
       console.log(err);
     } finally {
       setLoading(false);
@@ -89,7 +92,9 @@ function AdminProductActionPage() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row lg:space-x-10 space-y-10 lg:space-y-0 p-6 lg:p-10">
+    <>
+    {loading ? <Loading/> :(
+      <div className="flex flex-col lg:flex-row lg:space-x-10 space-y-10 lg:space-y-0 p-6 lg:p-10">
       {!products.length ? (
         <p className="text-center">Loading...</p>
       ) : !productFound ? (
@@ -245,6 +250,9 @@ function AdminProductActionPage() {
         </>
       )}
     </div>
+    ) }
+    
+    </>
   );
 }
 

@@ -17,6 +17,7 @@ function UserContext({ children }) {
   const isAdmin = currUser !== null && currUser.isAdmin ? true : false;
 
   const loginUser = async (email, password) => {
+    setLoading(true)
     try {
       const { data } = await axios.get("http://localhost:3000/allUsers");
       const user = data.find(
@@ -75,11 +76,19 @@ function UserContext({ children }) {
     const saveLog = JSON.parse(localStorage.getItem("currUser"));
 
     const getCart = async (userId) => {
-      const { data } = await axios.get(
-        `http://localhost:3000/allUsers/${userId}`
-      );
-      setCart(data.cart || {});
-    };
+      setLoading(true)
+      try{
+        const { data } = await axios.get(
+          `http://localhost:3000/allUsers/${userId}`
+        );
+        setCart(data.cart || {});
+      }catch(err){
+        console.log(err);
+        
+      }finally{
+        setLoading(false)
+      }
+      }
 
     if (logged && saveLog){
       setIsLogged(true);
@@ -173,8 +182,8 @@ function UserContext({ children }) {
       isBlocked: false,
     };
 
+    setLoading(true);
     try {
-      setLoading(true);
 
       const response = await axios.post("http://localhost:3000/allUsers", data);
       if (response.status === 201) {

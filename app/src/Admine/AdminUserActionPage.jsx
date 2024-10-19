@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useLocation} from "react-router-dom";
 import axios from "axios";
 import { CgProfile } from "react-icons/cg";
+import Loading from "../Components/Loading/Loading";
 
 function AdminUserActionPage() {
   const { state } = useLocation();
-  const [users, setUsers] = useState(state?.item);
+  const [users, setUsers,loading,setLoading] = useState(state?.item);
   const toggleBlockUser = async (Id) => {
     if (!Id) return;
-
+    setLoading(true)
     try {
       const { data } = await axios.get(`http://localhost:3000/allUsers/${Id}`);
       const updatedStatus = !data.isBlocked;
@@ -21,11 +22,15 @@ function AdminUserActionPage() {
       }));
     } catch (err) {
       console.log(err);
-    }
-  };
+  }finally{
+    setLoading(false)
+  }  
+};
 
   return (
-    <div className="sm:ps-20 pt-10 px-4 sm:px-0">
+    <div className="flex justify-center items-center">
+    {loading ? <Loading/> : (
+      <div className="sm:ps-20 pt-10 px-4 sm:px-0">
       <div className="flex flex-col sm:flex-row sm:gap-28 items-center sm:items-start">
         {users.image ? (
           <img src={users.image} className="h-auto w-48 rounded-md" alt="" />
@@ -109,6 +114,8 @@ function AdminUserActionPage() {
           )}
         </div>
       </div>
+    </div>
+    )}
     </div>
   );
 }
