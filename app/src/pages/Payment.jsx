@@ -7,10 +7,11 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ProductsData } from "../context/ProductsCont";
+import Loading from "../Components/Loading/Loading";
 
 function Payment() {
   const [paymentMethod, setPaymentMethod] = useState(null);
-  const { cart, currUser, setCart } = useContext(userData);
+  const { cart, currUser, setCart,loading,setLoading } = useContext(userData);
   const { products } = useContext(ProductsData);
   const navigator = useNavigate();
 
@@ -52,10 +53,12 @@ function Payment() {
   });
 
   const HandleEvent = async (e) => {
+    setLoading(true)
     e.preventDefault();
 
     if (!paymentMethod) {
       toast.error("Please select a payment method.");
+      setLoading(false);
       return;
     }
 
@@ -89,13 +92,20 @@ function Payment() {
       } catch (error) {
         console.log("Failed to update orders:", error);
         toast.error("Failed to save your order. Please try again.");
+      }finally{
+        setLoading(false)
       }
     } else {
       toast.error("User information is incomplete");
+      setLoading(false);
     }
   };
 
+  if (loading) {
+    return <Loading />;
+  }
   return (
+    
     <div className="flex justify-center py-10">
       <div className="payment-page max-w-md w-full p-6 rounded-lg shadow-lg border border-gray-300 bg-white">
         <h1 className="text-2xl font-semibold text-center">Payment Options</h1>

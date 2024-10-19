@@ -10,7 +10,7 @@ export const userData = createContext();
 function UserContext({ children }) {
   const [isLogged, setIsLogged] = useState(false);
   const [currUser, setCurrUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [cart, setCart] = useState({});
   const navigate = useNavigate()
 
@@ -81,7 +81,7 @@ function UserContext({ children }) {
       setCart(data.cart || {});
     };
 
-    if (logged && saveLog) {
+    if (logged && saveLog){
       setIsLogged(true);
       setCurrUser(saveLog);
       const storedCart =
@@ -92,7 +92,7 @@ function UserContext({ children }) {
   }, []);
 
   const updateCartInLocalStorage = (updatedCart) => {
-    if (currUser) {
+    if (currUser){
       localStorage.setItem(
         `${currUser.email}_cart`,
         JSON.stringify(updatedCart)

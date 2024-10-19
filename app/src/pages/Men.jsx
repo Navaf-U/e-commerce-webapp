@@ -2,15 +2,14 @@ import { useContext } from "react";
 import { ProductsData } from "../context/ProductsCont";
 import Card from "../Components/Shared/Card";
 import { userData } from "../context/UserContext";
+import Loading from "../Components/Loading/Loading";
 
 function Men() {
   const { products } = useContext(ProductsData);
   const { loading } = useContext(userData);
   return (
-    <div className="flex flex-wrap">
-      {loading && (
-        <div className="text-center py-2 text-[40px]">Loading user data...</div>
-      )}
+    <div className="flex flex-wrap justify-center">
+      {loading && <Loading />}
       {products.map((item) => {
         if (item.type === "men") {
           return (

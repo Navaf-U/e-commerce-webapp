@@ -7,6 +7,8 @@ import { FaPersonWalkingArrowRight } from "react-icons/fa6";
 import menAd from "../Components/assets/menAd.jpg";
 import womenAd from "../Components/assets/womenAd.jpg";
 import NewsLetter from "../Components/NewsLetter/NewsLetter";
+import Button from '@mui/material/Button';
+
 
 function Shop() {
   const { products } = useContext(ProductsData);
@@ -17,9 +19,11 @@ function Shop() {
       <Hero />
       <div>
         <div className="shadow-lg pb-5">&nbsp;</div>
-        <h1 className="text-4xl font-extrabold text-center text-slate-900 tracking-wide leading-tight">
+        <div className="flex justify-center items-center my-5 bg-black">
+        <Button variant="outlined" className="text-[50px] font-extrabold text-center text-slate-900 tracking-wide leading-tight mt-10">
           Popular Shoes
-        </h1>
+        </Button>
+        </div>
       </div>
       <div className="flex items-center justify-center flex-wrap">
         {products.map((item) => {

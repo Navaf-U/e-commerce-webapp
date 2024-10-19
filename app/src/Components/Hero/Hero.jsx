@@ -1,6 +1,5 @@
 import { FaArrowRight } from "react-icons/fa";
 import mainBgAd from "../assets/heroBg-3.jpg";
-
 const Hero = () => {
   return (
     <div

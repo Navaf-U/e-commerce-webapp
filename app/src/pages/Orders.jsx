@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import { userData } from "../context/UserContext";
 import axios from "axios";
+import Loading from "../Components/Loading/Loading";
 
 function Orders() {
-  const { currUser, setLoading, setCurrUser } = useContext(userData);
+  const { currUser, setLoading, setCurrUser,loading } = useContext(userData);
   const [, setUsers] = useState(null);
 
   useEffect(() => {
@@ -25,8 +27,10 @@ function Orders() {
     if (currUser) {
       fetchData();
     }
-  }, [setLoading, setCurrUser, currUser]);
-
+  }, [setLoading, setCurrUser]);
+  if (loading) {
+    return <Loading />;
+  }
   if (!currUser || !currUser.orders) {
     return <div className="text-center mt-5">Loading user data...</div>;
   }

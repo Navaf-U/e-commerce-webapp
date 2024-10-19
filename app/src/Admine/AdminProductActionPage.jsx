@@ -1,14 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { ProductsData } from "../context/ProductsCont";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { userData } from "../context/UserContext";
 import { toast } from "react-toastify";
 
 function AdminProductActionPage() {
   const { id } = useParams();
-  const { setCurrUser, setLoading } = useContext(userData);
+  const { setLoading } = useContext(userData);
   const { products } = useContext(ProductsData);
+  const navigate = useNavigate()
   const [productEdit, setProductEdit] = useState({
     id: "",
     name: "",
@@ -79,7 +80,7 @@ function AdminProductActionPage() {
     setLoading(true);
     try {
       await axios.delete(`http://localhost:3000/newProducts/${ID}`);
-      setCurrUser(null);
+      navigate("/admin")
     } catch (err) {
       console.log(err);
     } finally {

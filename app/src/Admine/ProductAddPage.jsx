@@ -9,7 +9,7 @@ function ProductAddPage() {
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
   const [brand, setBrand] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState("");
   const [rating, setRating] = useState("");
   const [reviews, setReviews] = useState("");
 //   const navigate = useNavigate();
