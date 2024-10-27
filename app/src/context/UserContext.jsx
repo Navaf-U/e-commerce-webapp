@@ -38,6 +38,7 @@ function UserContext({ children }) {
         setIsLogged(true);
         setCurrUser(user);
         setCart(user.cart || {});
+        navigate("/")
         localStorage.setItem("isLogged", "true");
         localStorage.setItem("currUser", JSON.stringify(user));
         const storedCart =

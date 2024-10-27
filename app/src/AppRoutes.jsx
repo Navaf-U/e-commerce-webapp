@@ -27,7 +27,7 @@ import { ProductsData } from "./context/ProductsCont";
 
 
 function AppRoutes() {
-  const { isAdmin ,currUser} = useContext(userData);
+  const { isAdmin ,currUser,isLogged} = useContext(userData);
   
   const {cartItemNotify} = useContext(ProductsData)
   return (
@@ -50,8 +50,8 @@ function AppRoutes() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/payment" element={ cartItemNotify() > 0 && currUser ? <Payment />  : "Cart Empty or Please Signup or Login" }/>
           <Route path="/orders" element={<Orders />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/login" element={ !isLogged ? <LoginPage /> :<NotFound/>} />
+          <Route path="/signup" element={!isLogged ? <SignupPage /> : <NotFound/>} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="*" element={<NotFound />} />
