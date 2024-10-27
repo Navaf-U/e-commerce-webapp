@@ -16,6 +16,25 @@ function UserContext({ children }) {
 
   const isAdmin = currUser !== null && currUser.isAdmin ? true : false;
 
+  useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem("cart"));
+    if (savedCart) {
+      setCart(savedCart); // Restore the cart from localStorage
+    }
+
+    const savedUser = JSON.parse(localStorage.getItem("currUser"));
+    if (savedUser) {
+      setCurrUser(savedUser); // Restore the user from localStorage
+    }
+  }, []);
+
+  useEffect(() => {
+    if (cart) {
+      localStorage.setItem("cart", JSON.stringify(cart)); // Save the cart to localStorage
+    }
+  }, [cart]);
+
+
   const loginUser = async (email, password) => {
     setLoading(true)
     try {

@@ -46,11 +46,15 @@ function Orders() {
             <h3 className="text-lg font-semibold mt-4">Items:</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {item.items.map((i) => (
-                <div key={i.id} className="border p-4 rounded-lg">
+                <div key={i.id} className="border p-4 rounded-lg flex justify-around">
+                  <div>
                   <h4 className="font-semibold">{i.name}</h4>
                   <p>Quantity: {i.quantity}</p>
                   <p>Price: ${i.price}</p>
-                  <p><img src={i.image} alt="" /></p>
+                  </div>
+                  <div>
+                  <p><img src={i.image} width={140} alt="" /></p>
+                  </div>
                 </div>
               ))}
             </div>

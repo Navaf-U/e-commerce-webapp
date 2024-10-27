@@ -87,9 +87,10 @@ function Payment() {
         await axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
           orders: currUser.orders,
         });
-        localStorage.removeItem("cart");
+        localStorage.setItem('currUser', JSON.stringify(currUser));
         toast.success("Order Successful");
         emptyCart();
+        localStorage.setItem('cart', JSON.stringify(cart));
         navigator("/orders");
       } catch (error) {
         console.log("Failed to update orders:", error);

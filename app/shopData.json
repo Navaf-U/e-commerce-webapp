@@ -492,8 +492,8 @@
       "email": "navafsoft@gmail.com",
       "password": "123",
       "cart": {
-        "5839": 1,
-        "86ec": 4
+        "86ec": 4,
+        "e2af": 2
       },
       "orders": [
         {
@@ -511,33 +511,19 @@
           "totalAmount": 1599
         },
         {
-          "id": "order 3488",
-          "name": "irfan kuttappu",
-          "address": "pandikkad,poolamanna",
+          "id": "order 4874",
+          "name": "irfan 1",
+          "address": "nopial",
           "items": [
             {
-              "id": "5484",
-              "name": "Air Jordan 1 Low",
-              "quantity": 1,
-              "price": 8995
+              "id": "e2af",
+              "name": "Star BB Shift CX",
+              "quantity": 2,
+              "price": 9499,
+              "image": "https://www.converse.in/media/catalog/product/a/1/a11994c_c_08x1.jpg"
             }
           ],
-          "totalAmount": 8995
-        },
-        {
-          "id": "order 878",
-          "name": "navaf manjeri",
-          "address": "manjeri,pandikkad",
-          "items": [
-            {
-              "id": "5839",
-              "name": "SOFTRIDE Enzo Evo",
-              "quantity": 1,
-              "price": 5000,
-              "image": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_350,h_350/global/377048/02/sv01/fnd/IND/fmt/png/SOFTRIDE-Enzo-Evo-Unisex-Running-Shoes"
-            }
-          ],
-          "totalAmount": 5000
+          "totalAmount": 18998
         }
       ],
       "isAdmin": true,
@@ -596,7 +582,23 @@
       "email": "sithara@gmail.com",
       "password": "sithara@gmail.com",
       "cart": {},
-      "orders": [],
+      "orders": [
+        {
+          "id": "order 9315",
+          "name": "dwadaw dwa",
+          "address": "sss",
+          "items": [
+            {
+              "id": "2",
+              "name": "Men’s Classic Blue",
+              "quantity": 1,
+              "price": "1599",
+              "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-019-600x600.jpg"
+            }
+          ],
+          "totalAmount": 1599
+        }
+      ],
       "isAdmin": false,
       "isBlocked": false
     },
