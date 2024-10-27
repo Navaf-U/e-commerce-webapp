@@ -5,7 +5,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { useState, useContext } from "react";
 import { ProductsData } from "../../context/ProductsCont";
 import { userData } from "../../context/UserContext";
-import { CiLogout } from "react-icons/ci";
+import { IoMdLogOut } from "react-icons/io";
 import { RiUserFollowFill } from "react-icons/ri";
 
 function Navbar() {
@@ -65,19 +65,19 @@ function Navbar() {
 
           <div className="hidden sm:flex gap-4">
             <NavLink to="/">
-              <h1 className="hover-line">Shop</h1>
+              <h1 className="hover-line hover:font-semibold">Shop</h1>
             </NavLink>
             <NavLink to="/men">
-              <h1 className="hover-line">Men</h1>
+              <h1 className="hover-line hover:font-semibold">Men</h1>
             </NavLink>
             <NavLink to="/women">
-              <h1 className="hover-line">Women</h1>
+              <h1 className="hover-line hover:font-semibold">Women</h1>
             </NavLink>
             <NavLink to="/orders">
-              <h1 className="hover-line">Orders</h1>
+              <h1 className="hover-line hover:font-semibold">Orders</h1>
             </NavLink>
             <NavLink to="/contact">
-              <h1 className="hover-line">Contact</h1>
+              <h1 className="hover-line hover:font-semibold">Contact</h1>
             </NavLink>
             {currUser && currUser.isAdmin && (
               <NavLink to="/admin">
@@ -125,11 +125,10 @@ function Navbar() {
                       {cartItemNotify()}
                     </p>
                   </div>
-                  <IoCartOutline className="ms-3" size={25} />
+                  <IoCartOutline className="ms-3 hover:text-[#BF3131]" size={25} />
                 </NavLink>
-
-                <CiLogout
-                  className="cursor-pointer me-5"
+                <IoMdLogOut
+                  className="cursor-pointer me-5 hover:text-[#BF3131]"
                   onClick={logoutUser}
                   size={20}
                 />

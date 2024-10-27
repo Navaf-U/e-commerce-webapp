@@ -38,6 +38,7 @@ function Payment() {
     name: item.name,
     quantity: item.quantity,
     price: item.price,
+    image:item.image
   }));
 
   const totalAmount = cartEntries.reduce(
@@ -72,6 +73,7 @@ function Payment() {
           name: item.name,
           quantity: item.quantity,
           price: item.price,
+          image:item.image
         })),
         totalAmount,
       };

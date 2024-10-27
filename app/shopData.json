@@ -492,6 +492,7 @@
       "email": "navafsoft@gmail.com",
       "password": "123",
       "cart": {
+        "5839": 1,
         "86ec": 4
       },
       "orders": [
@@ -522,6 +523,21 @@
             }
           ],
           "totalAmount": 8995
+        },
+        {
+          "id": "order 878",
+          "name": "navaf manjeri",
+          "address": "manjeri,pandikkad",
+          "items": [
+            {
+              "id": "5839",
+              "name": "SOFTRIDE Enzo Evo",
+              "quantity": 1,
+              "price": 5000,
+              "image": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_350,h_350/global/377048/02/sv01/fnd/IND/fmt/png/SOFTRIDE-Enzo-Evo-Unisex-Running-Shoes"
+            }
+          ],
+          "totalAmount": 5000
         }
       ],
       "isAdmin": true,

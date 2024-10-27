@@ -50,6 +50,7 @@ function Orders() {
                   <h4 className="font-semibold">{i.name}</h4>
                   <p>Quantity: {i.quantity}</p>
                   <p>Price: ${i.price}</p>
+                  <p><img src={i.image} alt="" /></p>
                 </div>
               ))}
             </div>
