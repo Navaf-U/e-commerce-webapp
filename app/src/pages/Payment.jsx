@@ -20,8 +20,8 @@ function Payment() {
   };
 
   const emptyCart = () => {
-    const empty = {};
-    setCart(empty);
+    setCart({});
+    localStorage.removeItem("cart")
     toast.success("Payment successful! Cart has been cleared.");
   };
 
@@ -86,11 +86,11 @@ function Payment() {
       try {
         await axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
           orders: currUser.orders,
+          cart:{}
         });
         localStorage.setItem('currUser', JSON.stringify(currUser));
         toast.success("Order Successful");
         emptyCart();
-        localStorage.setItem('cart', JSON.stringify(cart));
         navigator("/orders");
       } catch (error) {
         console.log("Failed to update orders:", error);
