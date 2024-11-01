@@ -12,7 +12,12 @@ function Card({ id, price, image, type, name, rating }) {
   };
 
   return (
-    <div className="group">
+    <div className="group animate-slideY" 
+    style={{
+      animationDuration:"800ms", 
+      '--tw-translate-y':'15px',
+      '--tw-translate-y-70':"0px",
+    }} >
       <div className="h-[450px] w-[700px] relative m-10 flex max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md transition-all duration-500 ease-in-out group-hover:shadow-xl group-hover:shadow-gray-500">
         <NavLink
           to={`/products/${id}`}

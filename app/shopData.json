@@ -101,7 +101,7 @@
       "name": "Women’s Blue Training",
       "type": "women",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-003-600x600.jpg",
-      "price": 660,
+      "price": "662",
       "qty": 1,
       "description": "Blue training shoes designed for women.",
       "brand": "Recycled Shoes",
@@ -492,8 +492,8 @@
       "email": "navafsoft@gmail.com",
       "password": "123",
       "cart": {
-        "86ec": 4,
-        "e2af": 2
+        "5": 2,
+        "86ec": 4
       },
       "orders": [
         {
@@ -583,21 +583,6 @@
       "password": "sithara@gmail.com",
       "cart": {},
       "orders": [
-        {
-          "id": "order 8538",
-          "name": "john doe",
-          "address": "americayaaaa",
-          "items": [
-            {
-              "id": "1",
-              "name": "Men’s Black Running",
-              "quantity": 1,
-              "price": "799",
-              "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-005-400x400.jpg"
-            }
-          ],
-          "totalAmount": 799
-        },
         {
           "id": "order 3871",
           "name": "sithara sith",
