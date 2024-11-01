@@ -1,5 +1,6 @@
 import logo from "../assets/StepPrimeLogo.png";
-import { NavLink } from "react-router-dom";
+import Swal from 'sweetalert2';
+import { Link, NavLink } from "react-router-dom";
 import { FaSearch, FaBars, FaBackspace } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { useState, useContext } from "react";
@@ -7,17 +8,16 @@ import { ProductsData } from "../../context/ProductsCont";
 import { userData } from "../../context/UserContext";
 import { IoMdLogOut } from "react-icons/io";
 import { RiUserFollowFill } from "react-icons/ri";
-import Swal from 'sweetalert2';
 function Navbar() {
   const [menu, setMenu] = useState(false);
   const [currUserDataShows, setCurrUserDataShows] = useState(false);
   const { search, setSearch, cartItemNotify } = useContext(ProductsData);
   const { isLogged, currUser,logoutUser } = useContext(userData);
-
+    
   const toggleDropdown = () => {
     setCurrUserDataShows((prev) => !prev);
   };
-
+  
   const toggleDropdownMenu = () => {
     setMenu((prev) => !prev);
   };
@@ -32,7 +32,7 @@ function Navbar() {
       confirmButtonText: "Yes, logout",
     }).then((result) => {
       if (result.isConfirmed) {
-        logoutUser(); // Call your logout function here
+        logoutUser();
       }
     });
   };
@@ -70,6 +70,7 @@ function Navbar() {
 
       <div className="border-b-2 h-20 flex justify-center w-full fixed bg-white z-50">
         <div className="nav-logo flex justify-between items-center w-full px-4">
+          <Link to="/">
           <div className="flex items-center">
             <img src={logo} className="h-12" alt="" />
             <h1 className="nav-logo-title hidden text-[30px] font-[900] lg:flex items-center text-gray-800">
@@ -77,6 +78,7 @@ function Navbar() {
               <span className="text-red-600">Prime</span>
             </h1>
           </div>
+          </Link>
 
           <div className="hidden sm:flex gap-4">
             <NavLink to="/">
@@ -211,7 +213,6 @@ function Navbar() {
           </div>
         </div>
         </div>
-        
     </div>
   );
 }
