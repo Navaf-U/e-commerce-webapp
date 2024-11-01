@@ -1,6 +1,14 @@
 .Adminlayout {
   position: relative;
   z-index: 1;
+  background: rgba(20, 20, 30, 0.85);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  overflow: hidden; 
+  transition: all 0.3s ease; 
+}
+
+.Adminlayout:hover {
+  transform: scale(1.02); 
 }
 
 .Adminlayout::before {
@@ -8,16 +16,11 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: linear-gradient(
-      to bottom right,
-      rgba(0, 0, 0, 0.635),
-      rgb(0, 0, 0)
-    ),
-    url("D:\project\e-commerce-webapp\app\src\Components\assets\admineLayoutBg.jpg");
-  background-size: cover;
-  background-position: center;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 20%, rgba(20, 20, 30, 0.5) 40%);
   z-index: -1;
   pointer-events: none;
   height: 100%;
   width: 100%;
 }
+
+

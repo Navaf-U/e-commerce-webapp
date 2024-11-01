@@ -1,5 +1,4 @@
 import "./AdmineStyle.css";
-import AdminePhoto from "../Components/assets/AdminePhoto.png";
 import { MdOutlineDashboard } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
@@ -11,7 +10,7 @@ import AdminUsersPage from "./AdminUsersPage";
 import AdminDashboard from "./AdminDashboard";
 import { NavLink } from "react-router-dom";
 import { TiArrowBackOutline } from "react-icons/ti";
-
+import logo from '../Components/assets/StepPrimeLogo.png'
 function AdminMainPage() {
   const { logoutUser, isAdmin } = useContext(userData);
   const [adminOption, setAdminOption] = useState("dashboard");
@@ -34,41 +33,33 @@ function AdminMainPage() {
         "Cant Access the Page"
       ) : (
         <div className="flex flex-col md:flex-row gap-5 h-auto">
-          <div className="Adminlayout flex h-screen pt-5 md:w-[18%] w-full text-white flex-col gap-5">
-            <h1 className="text-[24px] md:text-[30px] font-[500] ms-3">
-              Step Prime
-            </h1>
+          <div className="Adminlayout  flex h-screen pt-5 md:w-[10%] w-full text-white flex-col gap-5">
+            <img src={logo} alt="" />
             <hr className="border-[#80808066] w-full" />
             <div className="flex flex-col justify-center items-center">
-              <img
-                src={AdminePhoto}
-                className="ms-3 w-[50%] md:w-[35%]"
-                alt=""
-              />
               <hr className="border-[#80808066] w-full mt-5 mb-5" />
               <div className="flex flex-col text-[14px] md:text-[16px] w-full font-[700] items-center">
-                <div className="AdminDashboard flex justify-start ps-16 gap-1 items-center flex-row hover:bg-[#BF3131] pe-5 w-full h-12 md:h-16 rounded-md">
-                  <MdOutlineDashboard size={22} className="mt-1" />
-                  <button className="ms-1" onClick={() => setAdminOption("dashboard")}>
-                    Dashboard
+                <div  onClick={() => setAdminOption("dashboard")} className="AdminDashboard flex justify-center gap-1 items-center flex-row hover:bg-[#BF3131] pe-5 w-full h-12 md:h-16 rounded-md">
+                  
+                  <button className="ms-6 flex justify-center">
+                  <MdOutlineDashboard size={30}  />
                   </button>
                 </div>
-                <div className="AdminUsers flex justify-start ps-16 items-center flex-row gap-2 hover:bg-[#BF3131] h-12 md:h-16 w-full rounded-md">
-                  <FiUsers />
-                  <button className="ms-2" onClick={() => setAdminOption("users")}> Users</button>
+                <div onClick={() => setAdminOption("users")} className="AdminUsers flex justify-center items-center flex-row gap-2 hover:bg-[#BF3131] h-12 md:h-16 w-full rounded-md">
+                  <button className="ms-2"> <FiUsers size={27} /></button>
                 </div>
-                <div className="AdminProducts flex justify-start ps-16 items-center flex-row gap-2 hover:bg-[#BF3131] pe-5 w-full h-12 md:h-16 rounded-md">
-                  <MdOutlineProductionQuantityLimits />
-                  <button onClick={() => setAdminOption("products")}>
-                    Products
+                <div onClick={() => setAdminOption("products")} className="AdminProducts flex justify-center  items-center flex-row gap-2 hover:bg-[#BF3131]  w-full h-12 md:h-16 rounded-md">
+                  <button>
+                  <MdOutlineProductionQuantityLimits size={30} />
                   </button>
                 </div>
                 <div
                   onClick={logoutUser}
-                  className="AdminLogout flex justify-start ps-16 items-center flex-row gap-2 hover:bg-[#BF3232] w-full h-12 md:h-16 rounded-md"
+                  className="AdminLogout flex justify-center items-center flex-row gap-2 hover:bg-[#BF3232] w-full h-12 md:h-16 rounded-md"
                 >
-                  <BiLogOutCircle />
-                  <button>Logout</button>
+                  <button>
+                  <BiLogOutCircle size={30}/>
+                  </button>
                 </div>
                 <div className="mt-7">
                   <NavLink to="/">
