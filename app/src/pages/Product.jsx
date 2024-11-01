@@ -1,4 +1,4 @@
-import logo from "../Components/assets/StepPrimeLogo.png";
+import logo from "../Components/assets/shoe-navaf.svg";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useContext, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
@@ -59,7 +59,7 @@ function Product() {
               </h2>
             </div>
             <div className="right-section md:w-[50%] mt-4 md:mt-0 flex flex-col items-center justify-center">
-              <img src={logo} className="h-[200px] mt-[-50px]" alt="" />
+              <img src={logo} className="h-[200px] w-[40%] mt-[-20px]" alt="" />
               <p className="text-[50px] font-bold text-center text-sm md:text-base px-2 mt-[-20px]">
                 Brand: {findProduct.brand}
               </p>

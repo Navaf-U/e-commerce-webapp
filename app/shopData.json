@@ -491,24 +491,8 @@
       "name": "navaf",
       "email": "navafsoft@gmail.com",
       "password": "123",
-      "cart": {
-        "86ec": 4
-      },
+      "cart": {},
       "orders": [
-        {
-          "id": "order 2307",
-          "name": "navaf u",
-          "address": "manjeri,pandikkad",
-          "items": [
-            {
-              "id": "2",
-              "name": "Men’s Classic Blue",
-              "quantity": 1,
-              "price": "1599"
-            }
-          ],
-          "totalAmount": 1599
-        },
         {
           "id": "order 4874",
           "name": "irfan 1",
@@ -523,6 +507,36 @@
             }
           ],
           "totalAmount": 18998
+        },
+        {
+          "id": "order 3231",
+          "name": "navaf u",
+          "address": "Manjeri,malappuram",
+          "items": [
+            {
+              "id": "e2af",
+              "name": "Star BB Shift CX",
+              "quantity": 1,
+              "price": 9499,
+              "image": "https://www.converse.in/media/catalog/product/a/1/a11994c_c_08x1.jpg"
+            }
+          ],
+          "totalAmount": 9499
+        },
+        {
+          "id": "order 6555",
+          "name": "navaf u",
+          "address": "Manjeri,Malappuram",
+          "items": [
+            {
+              "id": "af7f",
+              "name": "Chuck 70 Canvas & Suede",
+              "quantity": 2,
+              "price": 6999,
+              "image": "https://www.converse.in/media/catalog/product/a/0/a08574c_c_08x1.jpg"
+            }
+          ],
+          "totalAmount": 13998
         }
       ],
       "isAdmin": true,

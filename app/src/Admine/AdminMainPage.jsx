@@ -48,7 +48,7 @@ function AdminMainPage() {
                   <button className="ms-2"> <FiUsers size={27} /></button>
                 </div>
                 <div onClick={() => setAdminOption("products")} className="AdminProducts flex justify-center  items-center flex-row gap-2 hover:bg-[#BF3131]  w-full h-12 md:h-16 rounded-md">
-                  <button>
+                  <button className="ms-1">
                   <MdOutlineProductionQuantityLimits size={30} />
                   </button>
                 </div>

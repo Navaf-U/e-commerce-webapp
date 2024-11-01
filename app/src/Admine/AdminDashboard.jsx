@@ -33,8 +33,8 @@ const AdminDashboard = () => {
         series: [
           usersSale.length,           
           products.length,            
-          61,                         
-          90                          
+          61,
+          90              
         ],
         chart: {
           height: 390,

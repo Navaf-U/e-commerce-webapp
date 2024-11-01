@@ -1,4 +1,4 @@
-import logo from "../assets/StepPrimeLogo.png";
+import logo from "../assets/shoe-navaf.svg";
 import Swal from 'sweetalert2';
 import { Link, NavLink } from "react-router-dom";
 import { FaSearch, FaBars, FaBackspace } from "react-icons/fa";
@@ -8,6 +8,7 @@ import { ProductsData } from "../../context/ProductsCont";
 import { userData } from "../../context/UserContext";
 import { IoMdLogOut } from "react-icons/io";
 import { RiUserFollowFill } from "react-icons/ri";
+
 function Navbar() {
   const [menu, setMenu] = useState(false);
   const [currUserDataShows, setCurrUserDataShows] = useState(false);
@@ -17,7 +18,7 @@ function Navbar() {
   const toggleDropdown = () => {
     setCurrUserDataShows((prev) => !prev);
   };
-  
+
   const toggleDropdownMenu = () => {
     setMenu((prev) => !prev);
   };
@@ -38,7 +39,6 @@ function Navbar() {
   };
   return (
     <div className="pb-20">
-
       <div>
         {currUserDataShows && currUser && (
           <div className="fixed right-0 w-48 mt-20 bg-white rounded-md shadow-lg py-2 z-50">
@@ -73,13 +73,8 @@ function Navbar() {
           <Link to="/">
           <div className="flex items-center">
             <img src={logo} className="h-12" alt="" />
-            <h1 className="nav-logo-title hidden text-[30px] font-[900] lg:flex items-center text-gray-800">
-              <span className="text-black">Step</span>
-              <span className="text-red-600">Prime</span>
-            </h1>
           </div>
           </Link>
-
           <div className="hidden sm:flex gap-4">
             <NavLink to="/">
               <h1 className="hover-line hover:font-semibold">Shop</h1>
