@@ -2,7 +2,8 @@ import { useContext, useState } from "react";
 import { ProductsData } from "../context/ProductsCont";
 // import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { useNavigate } from "react-router-dom";
+import { IoCloseOutline } from "react-icons/io5";
 function ProductAddPage() {
   const [name, setName] = useState("");
   const [type, setType] = useState("");
@@ -15,16 +16,21 @@ function ProductAddPage() {
 //   const navigate = useNavigate();
 
   const { PostProducts } = useContext(ProductsData);
-
+  const navigate = useNavigate()
   const DefaultFun = (e) => {
     e.preventDefault();
     PostProducts(name, type, image, price, rating, reviews, brand, description);
     toast.success("Product Added")
   };
+
+  const handlerForMain = ()=>{
+    navigate('/admin')
+  }
   
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-6">
+           <IoCloseOutline onClick={handlerForMain} className="cursor-pointer bg-[#80808069] rounded-full hover:text-[#BA3131] position fixed left-4 top-2" size={40}/>
       <form
         className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg space-y-4"
         onSubmit={DefaultFun}

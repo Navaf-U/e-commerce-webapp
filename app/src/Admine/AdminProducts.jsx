@@ -56,6 +56,15 @@ function AdminProducts() {
             Add Product
           </button>
         </NavLink>
+
+        <NavLink to="/addproducts" className="position fixed right-10 bottom-14">
+          <button
+            type="button"
+            className="px-8 py-4 bg-red-600 text-white text-lg rounded-md hover:bg-red-700 transition"
+          >
+            Add Product
+          </button>
+        </NavLink>
       </div>
 
       <div className="overflow-x-auto">

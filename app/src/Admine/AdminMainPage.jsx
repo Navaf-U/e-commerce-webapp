@@ -74,7 +74,7 @@ function AdminMainPage() {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-[82%]">{handleSwitch()}</div>
+          <div className="w-full md:w-[100%]">{handleSwitch()}</div>
         </div>
       )}
     </div>
