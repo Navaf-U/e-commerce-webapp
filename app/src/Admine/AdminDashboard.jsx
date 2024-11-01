@@ -1,32 +1,16 @@
-import { Bar } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { userData } from "../context/UserContext";
 import { ProductsData } from "../context/ProductsCont";
+import ApexCharts from 'apexcharts';
 import Loading from "../Components/Loading/Loading";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
 const AdminDashboard = () => {
-  const [usersSale, setUsersSale] = useState("");
-  const { setLoading,loading } = useContext(userData);
+  const [usersSale, setUsersSale] = useState(null);
+  const { setLoading, loading } = useContext(userData);
   const { products } = useContext(ProductsData);
+  const chartRef = useRef(null);
+  const chartInstance = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,63 +27,73 @@ const AdminDashboard = () => {
     fetchData();
   }, [setLoading]);
 
-  const data = {
-    labels: ["May", "June", "July", "Augest", "September", "October"],
-    datasets: [
-      {
-        label: "Sales",
-        data: [65, 59, 80, 81, 56, 55],
-        backgroundColor: "rgba(75, 192, 192, 0.6)",
-      },
-    ],
-  };
+  useEffect(() => {
+    if (usersSale && products && chartRef.current) {
+      const options = {
+        series: [
+          usersSale.length,           
+          products.length,            
+          61,                         
+          90                          
+        ],
+        chart: {
+          height: 390,
+          type: 'radialBar',
+        },
+        plotOptions: {
+          radialBar: {
+            offsetY: 0,
+            startAngle: 0,
+            endAngle: 270,
+            hollow: {
+              margin: 5,
+              size: '30%',
+              background: 'transparent',
+            },
+            dataLabels: {
+              name: { show: false },
+              value: { show: false },
+            },
+            barLabels: {
+              enabled: true,
+              useSeriesColors: true,
+              offsetX: -8,
+              fontSize: '16px',
+              formatter: function(seriesName, opts) {
+                return seriesName + ": " + opts.w.globals.series[opts.seriesIndex];
+              },
+            },
+          },
+        },
+        colors: ['#1ab7ea', '#0084ff', '#39539E', '#0077B5'],
+        labels: ['Total Users', 'Total Products', 'Weekly Sales', 'Monthly Sales'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            legend: { show: false },
+          },
+        }],
+      };
 
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Monthly Sales",
-      },
-    },
-  };
+      if (!chartInstance.current) {
+        chartInstance.current = new ApexCharts(chartRef.current, options);
+        chartInstance.current.render();
+      } else {
+        chartInstance.current.updateSeries(options.series);
+      }
+    }
+
+    return () => {
+      if (chartInstance.current) {
+        chartInstance.current.destroy();
+        chartInstance.current = null;
+      }
+    };
+  }, [usersSale, products]);
 
   return (
-    <div className="h-auto">
-    {loading? <Loading /> :(
-      <div className="flex justify-evenly mt-0.5">
-      <div className="bg-[#BF3131] rounded-md w-56 text-center">
-        <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">
-          TOTAL USERS
-        </h1>
-        <p className="text-center text-white font-[700]">
-          {usersSale.length}
-        </p>
-      </div>
-      <div className="bg-blue-600 rounded-md w-56 text-center">
-        <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">
-          TOTAL PRODUCTS
-        </h1>
-        <p className="text-center text-white font-[700]">{products.length}</p>
-      </div>
-      <div className="bg-yellow-300 rounded-md w-56 text-center">
-        <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">
-          WEEKLY SALES
-        </h1>
-        <p className="text-center text-white font-[700]">80</p>
-      </div>
-      <div className="bg-lime-500 rounded-md w-56 text-center">
-        <h1 className="font-[600] text-[16px] px-2 text-white shadow-lg">
-          TOTAL SALES
-        </h1>
-        <p className="text-center text-white font-[700]">1640</p>
-      </div>
-    </div>
-    )}
-    <Bar data={data} options={options} />
+    <div className="h-screen pt-20">
+      {loading ? <Loading /> : <div id="chart" ref={chartRef}></div>}
     </div>
   );
 };

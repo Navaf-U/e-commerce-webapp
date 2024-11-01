@@ -28,19 +28,18 @@ function AdminMainPage() {
   };
 
   return (
-    <div className="w-full h-screen  overflow-x-auto">
+    <div className="w-full h-screen overflow-x-auto">
       {!isAdmin ? (
         "Cant Access the Page"
       ) : (
-        <div className="flex flex-col md:flex-row gap-5 h-auto">
-          <div className="Adminlayout  flex h-screen pt-5 md:w-[10%] w-full text-white flex-col gap-5">
+        <div className="flex flex-col md:flex-row gap-5">
+          <div className="Adminlayout flex h-screen pt-5 md:w-[10%] w-full text-white flex-col gap-5">
             <img src={logo} alt="" />
             <hr className="border-[#80808066] w-full" />
             <div className="flex flex-col justify-center items-center">
               <hr className="border-[#80808066] w-full mt-5 mb-5" />
               <div className="flex flex-col text-[14px] md:text-[16px] w-full font-[700] items-center">
                 <div  onClick={() => setAdminOption("dashboard")} className="AdminDashboard flex justify-center gap-1 items-center flex-row hover:bg-[#BF3131] pe-5 w-full h-12 md:h-16 rounded-md">
-                  
                   <button className="ms-6 flex justify-center">
                   <MdOutlineDashboard size={30}  />
                   </button>

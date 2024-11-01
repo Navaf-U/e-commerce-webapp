@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import { ProductsData } from "../context/ProductsCont";
-// import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
@@ -13,10 +12,9 @@ function ProductAddPage() {
   const [price, setPrice] = useState("");
   const [rating, setRating] = useState("");
   const [reviews, setReviews] = useState("");
-//   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const { PostProducts } = useContext(ProductsData);
-  const navigate = useNavigate()
   const DefaultFun = (e) => {
     e.preventDefault();
     PostProducts(name, type, image, price, rating, reviews, brand, description);
