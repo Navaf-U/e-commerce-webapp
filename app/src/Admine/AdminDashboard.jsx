@@ -68,7 +68,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <>
+    <div className="h-auto">
     {loading? <Loading /> :(
       <div className="flex justify-evenly mt-0.5">
       <div className="bg-[#BF3131] rounded-md w-56 text-center">
@@ -100,7 +100,7 @@ const AdminDashboard = () => {
     </div>
     )}
     <Bar data={data} options={options} />
-    </>
+    </div>
   );
 };
 

@@ -5,7 +5,7 @@
       "name": "Men’s Black Running",
       "type": "men",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-005-400x400.jpg",
-      "price": "799",
+      "price": "798",
       "qty": "10",
       "description": "Comfortable and durable black running shoes for men.",
       "brand": "Recycled Shoes",
@@ -101,7 +101,7 @@
       "name": "Women’s Blue Training",
       "type": "women",
       "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-003-600x600.jpg",
-      "price": "662",
+      "price": "660",
       "qty": 1,
       "description": "Blue training shoes designed for women.",
       "brand": "Recycled Shoes",
@@ -492,7 +492,7 @@
       "email": "navafsoft@gmail.com",
       "password": "123",
       "cart": {
-        "5": 2,
+        "5": 4,
         "86ec": 4
       },
       "orders": [

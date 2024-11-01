@@ -29,12 +29,12 @@ function AdminMainPage() {
   };
 
   return (
-    <div className="w-full  overflow-x-auto">
+    <div className="w-full h-screen  overflow-x-auto">
       {!isAdmin ? (
         "Cant Access the Page"
       ) : (
         <div className="flex flex-col md:flex-row gap-5 h-auto">
-          <div className="Adminlayout flex pt-5 md:w-[18%] w-full text-white flex-col gap-5">
+          <div className="Adminlayout flex h-screen pt-5 md:w-[18%] w-full text-white flex-col gap-5">
             <h1 className="text-[24px] md:text-[30px] font-[500] ms-3">
               Step Prime
             </h1>
@@ -74,7 +74,7 @@ function AdminMainPage() {
                   <NavLink to="/">
                     <button>
                       <TiArrowBackOutline
-                        className="hover:bg-[red] rounded-full"
+                        className="hover:text-[#BA3131] rounded-full"
                         size={27}
                       />
                     </button>

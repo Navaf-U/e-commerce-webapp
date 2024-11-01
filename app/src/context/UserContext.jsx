@@ -59,17 +59,12 @@ function UserContext({ children }) {
   };
 
   const logoutUser = () => {
-    const confirmLogout = confirm(
-      "You are going to log out. Do you want to continue?"
-    );
-    if (confirmLogout) {
       setCurrUser(null);
       setIsLogged(false);
       navigate("/")
       localStorage.removeItem("isLogged");
       localStorage.removeItem("currUser");
       localStorage.removeItem("cart");
-    }
   };
 
   useEffect(() => {

@@ -7,12 +7,12 @@ import { ProductsData } from "../../context/ProductsCont";
 import { userData } from "../../context/UserContext";
 import { IoMdLogOut } from "react-icons/io";
 import { RiUserFollowFill } from "react-icons/ri";
-
+import Swal from 'sweetalert2';
 function Navbar() {
   const [menu, setMenu] = useState(false);
   const [currUserDataShows, setCurrUserDataShows] = useState(false);
   const { search, setSearch, cartItemNotify } = useContext(ProductsData);
-  const { isLogged, logoutUser, currUser } = useContext(userData);
+  const { isLogged, currUser,logoutUser } = useContext(userData);
 
   const toggleDropdown = () => {
     setCurrUserDataShows((prev) => !prev);
@@ -22,8 +22,23 @@ function Navbar() {
     setMenu((prev) => !prev);
   };
 
+  const popupHandler = () => {
+    Swal.fire({
+      title: "Are you sure you want to logout?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#BF3131",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, logout",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logoutUser(); // Call your logout function here
+      }
+    });
+  };
   return (
     <div className="pb-20">
+
       <div>
         {currUserDataShows && currUser && (
           <div className="fixed right-0 w-48 mt-20 bg-white rounded-md shadow-lg py-2 z-50">
@@ -39,7 +54,7 @@ function Navbar() {
               </button>
             </NavLink>
             <button
-              onClick={logoutUser}
+              onClick={popupHandler}
               className="w-full px-4 py-2 text-left hover:bg-[#800000] hover:text-white"
             >
               Logout
@@ -97,6 +112,7 @@ function Navbar() {
             <NavLink to="/search">
               <FaSearch className="bg-[#BF3131] text-white h-[40px] w-[40px] p-2 rounded-r-full shadow-md hover:bg-[#a82626] transition-colors duration-300" />
             </NavLink>
+
             {isLogged === false ? (
               <NavLink to="/login">
                 <button className="bg-[#BF3131] text-white rounded-lg py-1 px-4 w-20 mx-1 sm:w-auto transition-all duration-300 hover:bg-[#a82626]">
@@ -129,7 +145,7 @@ function Navbar() {
                 </NavLink>
                 <IoMdLogOut
                   className="cursor-pointer me-5 hover:text-[#BF3131]"
-                  onClick={logoutUser}
+                  onClick={popupHandler}
                   size={20}
                 />
               </div>
@@ -194,7 +210,8 @@ function Navbar() {
             </button>
           </div>
         </div>
-      </div>
+        </div>
+        
     </div>
   );
 }

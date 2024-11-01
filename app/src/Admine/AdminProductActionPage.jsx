@@ -5,6 +5,7 @@ import axios from "axios";
 import { userData } from "../context/UserContext";
 import { toast } from "react-toastify";
 import Loading from "../Components/Loading/Loading";
+import { IoCloseOutline } from "react-icons/io5";
 
 function AdminProductActionPage() {
   const { id } = useParams();
@@ -90,9 +91,14 @@ function AdminProductActionPage() {
       setLoading(false);
     }
   };
+  
+  const handlerForMain = ()=>{
+    navigate('/admin')
+  }
 
   return (
     <>
+    <IoCloseOutline onClick={handlerForMain} className="cursor-pointer bg-[#80808069] rounded-full hover:text-[#BA3131] position fixed left-4 top-2" size={40}/>
     {loading ? <Loading/> :(
       <div className="flex flex-col lg:flex-row lg:space-x-10 space-y-10 lg:space-y-0 p-6 lg:p-10">
       {!products.length ? (

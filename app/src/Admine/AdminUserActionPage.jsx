@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useLocation} from "react-router-dom";
+import { useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 import { CgProfile } from "react-icons/cg";
 import Loading from "../Components/Loading/Loading";
-
+import { IoCloseOutline } from "react-icons/io5";
 function AdminUserActionPage() {
   const { state } = useLocation();
+  const navigate = useNavigate()
   const [users, setUsers,loading,setLoading] = useState(state?.item);
   const toggleBlockUser = async (Id) => {
     if (!Id) return;
@@ -26,9 +27,14 @@ function AdminUserActionPage() {
     setLoading(false)
   }  
 };
+const handlerForMain = ()=>{
+  navigate('/admin')
+}
 
   return (
+    
     <div className="flex justify-center items-center">
+     <IoCloseOutline onClick={handlerForMain} className="cursor-pointer bg-[#80808069] rounded-full hover:text-[#BA3131] position fixed left-4 top-2" size={40}/>
     {loading ? <Loading/> : (
       <div className="sm:ps-20 pt-10 px-4 sm:px-0">
       <div className="flex flex-col sm:flex-row sm:gap-28 items-center sm:items-start">

@@ -2,22 +2,32 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { userData } from "../../context/UserContext";
 import { FaStar } from "react-icons/fa";
+import { useInView } from "react-intersection-observer"; // Import the hook
 
 // eslint-disable-next-line react/prop-types
 function Card({ id, price, image, type, name, rating }) {
   const { addToCart } = useContext(userData);
+
+  // Use the useInView hook
+  const { ref, inView } = useInView({
+    threshold: 0.1, // Trigger when 10% of the card is visible
+  });
 
   const handleAddToCart = () => {
     addToCart(id, 1);
   };
 
   return (
-    <div className="group animate-slideY" 
-    style={{
-      animationDuration:"800ms", 
-      '--tw-translate-y':'15px',
-      '--tw-translate-y-70':"0px",
-    }} >
+    <div
+      ref={ref} // Set the ref to the card container
+      className={`group animate-slideY ${
+        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+      style={{
+        animationDuration: "800ms",
+        transition: "opacity 0.5s ease, transform 0.5s ease",
+      }}
+    >
       <div className="h-[450px] w-[700px] relative m-10 flex max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md transition-all duration-500 ease-in-out group-hover:shadow-xl group-hover:shadow-gray-500">
         <NavLink
           to={`/products/${id}`}
