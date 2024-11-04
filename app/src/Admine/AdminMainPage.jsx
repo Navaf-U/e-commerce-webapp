@@ -10,7 +10,8 @@ import AdminUsersPage from "./AdminUsersPage";
 import AdminDashboard from "./AdminDashboard";
 import { NavLink } from "react-router-dom";
 import { TiArrowBackOutline } from "react-icons/ti";
-import logo from '../Components/assets/shoe-navaf.svg'
+import logo from '../Components/assets/whiteLogoSmaller.svg'
+import Swal from "sweetalert2";
 function AdminMainPage() {
   const { logoutUser, isAdmin } = useContext(userData);
   const [adminOption, setAdminOption] = useState("dashboard");
@@ -27,14 +28,32 @@ function AdminMainPage() {
     }
   };
 
+  const popupHandler = () => {
+    Swal.fire({
+      title: "Are you sure you want to logout?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#BF3131",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, logout",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logoutUser();
+      }
+    });
+  };
+  // addedLogoSmallerVersion
+
   return (
     <div className="w-full h-screen overflow-x-auto">
       {!isAdmin ? (
         "Cant Access the Page"
       ) : (
         <div className="flex flex-col md:flex-row gap-5">
-          <div className="Adminlayout flex h-screen pt-5 md:w-[10%] w-full text-white flex-col gap-5">
-            <img src={logo} alt="" />
+          <div className="Adminlayout flex items-center h-screen pt-5 md:w-[10%] w-full text-white flex-col gap-5">
+            <div className="w-20 flex justify-center items-center">
+            <img src={logo}  alt="" />
+            </div>
             <hr className="border-[#80808066] w-full" />
             <div className="flex flex-col justify-center items-center">
               <hr className="border-[#80808066] w-full mt-5 mb-5" />
@@ -53,7 +72,7 @@ function AdminMainPage() {
                   </button>
                 </div>
                 <div
-                  onClick={logoutUser}
+                  onClick={popupHandler}
                   className="AdminLogout flex justify-center items-center flex-row gap-2 hover:bg-[#BF3232] w-full h-12 md:h-16 rounded-md"
                 >
                   <button>

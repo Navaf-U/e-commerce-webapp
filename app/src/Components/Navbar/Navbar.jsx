@@ -8,6 +8,7 @@ import { ProductsData } from "../../context/ProductsCont";
 import { userData } from "../../context/UserContext";
 import { IoMdLogOut } from "react-icons/io";
 import { RiUserFollowFill } from "react-icons/ri";
+import smallerLogo from '../assets/logoSmallerV.svg'
 
 function Navbar() {
   const [menu, setMenu] = useState(false);
@@ -71,8 +72,11 @@ function Navbar() {
       <div className="border-b-2 h-20 flex justify-center w-full fixed bg-white z-50">
         <div className="nav-logo flex justify-between items-center w-full px-4">
           <Link to="/">
-          <div className="flex items-center">
+          <div className="md:flex items-center hidden ">
             <img src={logo} className="h-12" alt="" />
+          </div>
+          <div className="md:hidden w-12 me-2">
+          <img src={smallerLogo} alt="" />
           </div>
           </Link>
           <div className="hidden sm:flex gap-4">
