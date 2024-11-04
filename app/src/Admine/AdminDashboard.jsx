@@ -7,10 +7,13 @@ import Loading from "../Components/Loading/Loading";
 
 const AdminDashboard = () => {
   const [usersSale, setUsersSale] = useState(null);
-  const { setLoading, loading } = useContext(userData);
+  const { setLoading, loading ,users} = useContext(userData);
   const { products } = useContext(ProductsData);
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
+
+  console.log(users);
+  
 
   useEffect(() => {
     const fetchData = async () => {

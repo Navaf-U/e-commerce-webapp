@@ -10,7 +10,7 @@ import AdminUsersPage from "./AdminUsersPage";
 import AdminDashboard from "./AdminDashboard";
 import { NavLink } from "react-router-dom";
 import { TiArrowBackOutline } from "react-icons/ti";
-import logo from '../Components/assets/StepPrimeLogo.png'
+import logo from '../Components/assets/shoe-navaf.svg'
 function AdminMainPage() {
   const { logoutUser, isAdmin } = useContext(userData);
   const [adminOption, setAdminOption] = useState("dashboard");
