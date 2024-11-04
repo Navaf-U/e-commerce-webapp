@@ -6,6 +6,8 @@ function AdminProducts() {
   const { products } = useContext(ProductsData);
   const [men, setMen] = useState(false);
   const [women, setWomen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 5;
 
   const handleCheckbox = (e) => {
     const { name, checked } = e.target;
@@ -22,6 +24,18 @@ function AdminProducts() {
     if (!men && !women) return true;
     return false;
   });
+
+  // pagination checkings
+  
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="h-screen w-full overflow-y-auto p-4 bg-gray-100">
@@ -57,7 +71,10 @@ function AdminProducts() {
           </button>
         </NavLink>
 
-        <NavLink to="/addproducts" className="position fixed right-10 bottom-14">
+        <NavLink
+          to="/addproducts"
+          className="position fixed right-10 bottom-14"
+        >
           <button
             type="button"
             className="px-8 py-4 bg-red-600 text-white text-lg rounded-md hover:bg-red-700 transition"
@@ -93,8 +110,8 @@ function AdminProducts() {
             </tr>
           </thead>
           <tbody>
-            {filteredProducts.length > 0 ? (
-              filteredProducts.map((item) => (
+            {currentProducts.length > 0 ? (
+              currentProducts.map((item) => (
                 <tr
                   key={item.id}
                   className="border-b hover:bg-gray-100 transition"
@@ -141,6 +158,24 @@ function AdminProducts() {
             )}
           </tbody>
         </table>
+      </div>
+
+      {/* this is  pagination Controls */}
+
+      <div className="flex justify-center mt-6 space-x-2">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => handlePageChange(index + 1)}
+            className={`px-4 py-2 rounded ${
+              currentPage === index + 1
+                ? "bg-[#BF3131] text-white"
+                : "bg-gray-300"
+            }`}
+          >
+            {index + 1}
+          </button>
+        ))}
       </div>
     </div>
   );
