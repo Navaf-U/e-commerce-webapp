@@ -1,7 +1,7 @@
-import Navbar from "./Components/Navbar/Navbar";
-import { Outlet, Route, Routes} from "react-router-dom";
-import Shop from "./pages/Shop";
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
+import Navbar from "./Components/Navbar/Navbar";
+import Shop from "./pages/Shop";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
@@ -12,17 +12,17 @@ import Layout from "./Layout/Layout";
 import Payment from "./pages/Payment";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Contact from "./pages/Contact";
 import AdmineMainPage from "./Admine/AdminMainPage";
 import AdminUserActionPage from "./Admine/AdminUserActionPage";
-import  { userData } from "./context/UserContext";
-import { useContext } from "react";
 import ProductAddPage from "./Admine/ProductAddPage";
 import Orders from "./pages/Orders";
 import UserProfile from "./pages/UserProfile";
 import AdminProductActionPage from "./Admine/AdminProductActionPage";
+import { Outlet, Route, Routes} from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import  { userData } from "./context/UserContext";
+import { useContext } from "react";
 import { ProductsData } from "./context/ProductsCont";
 
 

@@ -1,17 +1,17 @@
 import "./AdmineStyle.css";
+import logo from '../Components/assets/whiteLogoSmaller.svg'
+import Swal from "sweetalert2";
+import AdminProducts from "./AdminProducts";
+import AdminUsersPage from "./AdminUsersPage";
+import AdminDashboard from "./AdminDashboard";
 import { MdOutlineDashboard } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { BiLogOutCircle } from "react-icons/bi";
 import { useContext, useState } from "react";
 import { userData } from "../context/UserContext";
-import AdminProducts from "./AdminProducts";
-import AdminUsersPage from "./AdminUsersPage";
-import AdminDashboard from "./AdminDashboard";
 import { NavLink } from "react-router-dom";
 import { TiArrowBackOutline } from "react-icons/ti";
-import logo from '../Components/assets/whiteLogoSmaller.svg'
-import Swal from "sweetalert2";
 function AdminMainPage() {
   const { logoutUser, isAdmin } = useContext(userData);
   const [adminOption, setAdminOption] = useState("dashboard");

@@ -1,8 +1,8 @@
+import axios from "axios";
+import Loading from "../Components/Loading/Loading";
 import { useState } from "react";
 import { useLocation, useNavigate} from "react-router-dom";
-import axios from "axios";
 import { CgProfile } from "react-icons/cg";
-import Loading from "../Components/Loading/Loading";
 import { IoCloseOutline } from "react-icons/io5";
 function AdminUserActionPage() {
   const { state } = useLocation();

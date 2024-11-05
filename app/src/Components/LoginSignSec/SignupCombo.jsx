@@ -1,9 +1,9 @@
+import axios from "axios";
+import Loading from "../Loading/Loading";
 import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { userData } from "../../context/UserContext";
 import { toast } from "react-toastify";
-import axios from "axios";
-import Loading from "../Loading/Loading";
 
 function SignupCombo() {
   const { PostUserDatas ,setLoading,loading} = useContext(userData);

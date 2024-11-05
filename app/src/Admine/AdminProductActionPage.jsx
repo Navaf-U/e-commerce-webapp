@@ -1,10 +1,10 @@
+import axios from "axios";
+import Loading from "../Components/Loading/Loading";
 import { useContext, useEffect, useState } from "react";
 import { ProductsData } from "../context/ProductsCont";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import { userData } from "../context/UserContext";
 import { toast } from "react-toastify";
-import Loading from "../Components/Loading/Loading";
 import { IoCloseOutline } from "react-icons/io5";
 
 function AdminProductActionPage() {

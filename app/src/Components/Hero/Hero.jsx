@@ -1,5 +1,5 @@
-import { FaArrowRight } from "react-icons/fa";
 import mainBgAd from "../assets/heroBg-3.jpg";
+import { FaArrowRight } from "react-icons/fa";
 const Hero = () => {
   return (
     <div
