@@ -1,8 +1,8 @@
+import Card from "../Components/Shared/Card";
+import Loading from "../Components/Loading/Loading";
 import { useContext } from "react";
 import { ProductsData } from "../context/ProductsCont";
-import Card from "../Components/Shared/Card";
 import { userData } from "../context/UserContext";
-import Loading from "../Components/Loading/Loading";
 
 function Men() {
   const { products } = useContext(ProductsData);

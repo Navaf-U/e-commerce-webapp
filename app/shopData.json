@@ -491,7 +491,9 @@
       "name": "navaf",
       "email": "navafsoft@gmail.com",
       "password": "123",
-      "cart": {},
+      "cart": {
+        "2": 1
+      },
       "orders": [
         {
           "id": "order 4874",

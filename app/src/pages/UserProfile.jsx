@@ -1,6 +1,6 @@
+import axios from "axios";
 import { useContext, useState } from "react";
 import { userData } from "../context/UserContext";
-import axios from "axios";
 
 function UserProfile() {
   const { currUser, setCurrUser } = useContext(userData);

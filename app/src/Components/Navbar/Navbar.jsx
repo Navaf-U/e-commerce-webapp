@@ -1,5 +1,6 @@
 import logo from "../assets/shoe-navaf.svg";
 import Swal from 'sweetalert2';
+import smallerLogo from '../assets/logoSmallerV.svg'
 import { Link, NavLink } from "react-router-dom";
 import { FaSearch, FaBars, FaBackspace } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
@@ -8,7 +9,6 @@ import { ProductsData } from "../../context/ProductsCont";
 import { userData } from "../../context/UserContext";
 import { IoMdLogOut } from "react-icons/io";
 import { RiUserFollowFill } from "react-icons/ri";
-import smallerLogo from '../assets/logoSmallerV.svg'
 
 function Navbar() {
   const [menu, setMenu] = useState(false);

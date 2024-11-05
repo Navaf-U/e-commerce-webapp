@@ -1,13 +1,13 @@
-import { useContext, useState } from "react";
+import Loading from "../Components/Loading/Loading";
 import MasterCard from "../Components/assets/MasterCard.png";
 import PayPal from "../Components/assets/PayPal.png";
 import RazorPay from "../Components/assets/RazorPay.png";
+import axios from "axios";
+import { useContext, useState } from "react";
 import { userData } from "../context/UserContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { ProductsData } from "../context/ProductsCont";
-import Loading from "../Components/Loading/Loading";
 
 function Payment() {
   const [paymentMethod, setPaymentMethod] = useState(null);

@@ -1,13 +1,13 @@
-import { useContext } from "react";
-import { NavLink } from "react-router-dom";
 import Hero from "../Components/Hero/Hero";
-import { ProductsData } from "../context/ProductsCont";
-import Card from "../Components/Shared/Card";
-import { FaPersonWalkingArrowRight } from "react-icons/fa6";
 import menAd from "../Components/assets/menAd.jpg";
 import womenAd from "../Components/assets/womenAd.jpg";
 import NewsLetter from "../Components/NewsLetter/NewsLetter";
 import Button from '@mui/material/Button';
+import Card from "../Components/Shared/Card";
+import { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import { ProductsData } from "../context/ProductsCont";
+import { FaPersonWalkingArrowRight } from "react-icons/fa6";
 
 
 function Shop() {

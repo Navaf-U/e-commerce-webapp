@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect, useState } from "react";
-import { userData } from "../context/UserContext";
 import axios from "axios";
 import Loading from "../Components/Loading/Loading";
+import { useContext, useEffect, useState } from "react";
+import { userData } from "../context/UserContext";
 
 function Orders() {
   const { currUser, setLoading, setCurrUser,loading } = useContext(userData);
