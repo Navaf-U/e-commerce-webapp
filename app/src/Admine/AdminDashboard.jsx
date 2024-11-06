@@ -7,14 +7,10 @@ import { ProductsData } from "../context/ProductsCont";
 
 const AdminDashboard = () => {
   const [usersSale, setUsersSale] = useState(null);
-  const { setLoading, loading ,users} = useContext(userData);
+  const { setLoading, loading} = useContext(userData);
   const { products } = useContext(ProductsData);
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
-
-  console.log(users);
-  
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -95,12 +91,12 @@ const AdminDashboard = () => {
   }, [usersSale, products]);
 
   return (
-    <div className="flex justify-around items-center">
+    <div className="flex flex-col md:flex-row justify-around items-center">
       <div className="pt-20">
       {loading ? <Loading /> : <div id="chart" ref={chartRef}></div>}
       </div>
       <div className="pt-20">
-    <iframe className="w-[500px] rounded-lg h-[300px]" src="https://www.chartbase.so/embed/8673b331-969e-4a51-8966-b7bc6d3e519e" ></iframe>
+    <iframe className=" w-[400px] ms-1 h-[200px] md:w-[500px] md:h-[300px]  rounded-lg" src="https://www.chartbase.so/embed/8673b331-969e-4a51-8966-b7bc6d3e519e" ></iframe>
       </div>
     </div>
   );
