@@ -95,8 +95,13 @@ const AdminDashboard = () => {
   }, [usersSale, products]);
 
   return (
-    <div className="h-screen pt-20">
+    <div className="flex justify-around items-center">
+      <div className="pt-20">
       {loading ? <Loading /> : <div id="chart" ref={chartRef}></div>}
+      </div>
+      <div className="pt-20">
+    <iframe className="w-[500px] rounded-lg h-[300px]" src="https://www.chartbase.so/embed/8673b331-969e-4a51-8966-b7bc6d3e519e" ></iframe>
+      </div>
     </div>
   );
 };

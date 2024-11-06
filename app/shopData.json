@@ -491,9 +491,7 @@
       "name": "navaf",
       "email": "navafsoft@gmail.com",
       "password": "123",
-      "cart": {
-        "2": 1
-      },
+      "cart": {},
       "orders": [
         {
           "id": "order 4874",
@@ -539,6 +537,56 @@
             }
           ],
           "totalAmount": 13998
+        },
+        {
+          "id": "order 7419",
+          "name": "jhon jason",
+          "address": "California",
+          "items": [
+            {
+              "id": "2",
+              "name": "Men’s Classic Blue",
+              "quantity": 1,
+              "price": "1599",
+              "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-019-600x600.jpg"
+            },
+            {
+              "id": "4",
+              "name": "Men’s Earth-Tone Sneaker",
+              "quantity": 1,
+              "price": 749,
+              "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-017-600x600.jpg"
+            },
+            {
+              "id": "5",
+              "name": "Men’s Green Running",
+              "quantity": 1,
+              "price": 769,
+              "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-007-600x600.jpg"
+            },
+            {
+              "id": "6",
+              "name": "Men’s Moonstone Sneaker",
+              "quantity": 1,
+              "price": 749,
+              "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-018-600x600.jpg"
+            },
+            {
+              "id": "8",
+              "name": "Men’s Red Running",
+              "quantity": 1,
+              "price": 1049,
+              "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-006-600x600.jpg"
+            },
+            {
+              "id": "9",
+              "name": "Women’s Blue Training",
+              "quantity": 1,
+              "price": "660",
+              "image": "https://websitedemos.net/recycled-shoe-store-04/wp-content/uploads/sites/983/2021/11/recycled-shoe-product-image-003-600x600.jpg"
+            }
+          ],
+          "totalAmount": 5575
         }
       ],
       "isAdmin": true,
