@@ -12,8 +12,8 @@ import { productsJs } from "../Components/Shared/DataJson";
 
 function Shop() {
   const { products } = useContext(ProductsData);
-const showProduct = products?products:productsJs
-  
+  const showProduct = products.length != 0 ? products : productsJs
+
   return (
     <div>
       <Hero />
