@@ -8,11 +8,11 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { ProductsData } from "../context/ProductsCont";
 import { FaPersonWalkingArrowRight } from "react-icons/fa6";
-
+import { productsJs } from "../Components/Shared/DataJson";
 
 function Shop() {
   const { products } = useContext(ProductsData);
-
+const showProduct = products?products:productsJs
   
   return (
     <div>
@@ -26,7 +26,7 @@ function Shop() {
         </div>
       </div>
       <div className="flex items-center justify-center flex-wrap">
-        {products.map((item) => {
+        {showProduct.map((item) => {
           return (
             <Card
               key={item.id}
