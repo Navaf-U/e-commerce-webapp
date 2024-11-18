@@ -1,7 +1,15 @@
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
+import Loading from "../Components/Loading/Loading";
+import { useContext } from "react";
+import { userData } from "../context/UserContext";
 function Contact() {
+  const {loading} = useContext(userData) 
   return (
+    <>  
+    <div className="flex w-full  justify-center items-center">
+      {loading && <Loading />}
+    </div>
     <div className="w-full flex justify-center mt-10">
       <div className="contact-main flex flex-col lg:flex-row justify-evenly items-center w-full lg:max-w-[1200px] px-5 lg:px-0 gap-10 lg:gap-5">
         <div className="flex flex-col gap-5 bg-[#BF3131] text-white text-center p-6 rounded-md w-full lg:w-[45%] justify-center items-center">
@@ -60,6 +68,7 @@ function Contact() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

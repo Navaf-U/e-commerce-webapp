@@ -1,14 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import { ProductsData } from "../context/ProductsCont";
 import { NavLink } from "react-router-dom";
-
+import { productsJs } from "../Components/Shared/DataJson";
 function Search() {
   const { products, search } = useContext(ProductsData);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const filteredDatas = products.filter((item) =>
+    const filteredDatas = products.length != 0 ? products.filter((item) =>
       item.name.toLowerCase().includes(search.toLowerCase())
+    ):(
+      productsJs.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      )
     );
 
     setData(filteredDatas.length > 0 ? filteredDatas : null);

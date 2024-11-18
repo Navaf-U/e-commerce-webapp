@@ -5,8 +5,10 @@ import { NavLink } from "react-router-dom";
 import { userData } from "../context/UserContext";
 
 const Cart = () => {
+
   const { products, currency, getTotalCartAmount , cartItemNotify } = useContext(ProductsData);
   const { cart, removeFromCart, increaseQuantity, decreaseQuantity } = useContext(userData);  
+  
   return (
     <div className="cart-items mx-auto my-8 max-w-screen-lg p-4">
       <h2 className="text-2xl font-bold text-center mb-6">Your Cart</h2>
