@@ -8,8 +8,8 @@ const userSchema = mongoose.Schema(
     cart: { type: mongoose.Types.ObjectId, ref: "cart" },
     isBlocked: { type: Boolean, default: false },
   },
-  { timesstamps: true }
+  { timestamps: true }
 );
 
-const userModel = mongoose.model.User || mongoose.model("User", userSchema);
+const userModel = mongoose.models.User || mongoose.model("User", userSchema);
 export default userModel;
