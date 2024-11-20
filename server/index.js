@@ -22,7 +22,7 @@ const ConnectDB = async ()=>{
         console.log("DB CONNECTED")
 })
     
-    await mongoose.connect(`${process.env.HOST}`)
+    await mongoose.connect(`${process.env.HOST}/shopDb`)
 }
 
 ConnectDB()

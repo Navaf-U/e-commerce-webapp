@@ -13,7 +13,7 @@ const userRegister = async (req,res)=>{
         // emailChecking
         const exists = await User.findOne({email})
         if(exists){
-            res.status(400).send("user exists")
+           return res.status(400).send("user exists")
         }
         // password Hashing + salt
         const hashedPassword = await bcrypt.hash(password,10) 
@@ -25,7 +25,7 @@ const userRegister = async (req,res)=>{
         const user = await newUser.save()
         
         const token = createToken(user._id)
-        res.json({success:true,token})
+        res.json({success:true,token,user})
     } catch (error) {
         console.log(error)
     }
@@ -40,7 +40,7 @@ const loginUser = async(req,res)=>{
         }
         const isMatch = await bcrypt.compare(password,user.password)
         if(!isMatch){
-            return res.status(400).send('invalid credintails')
+            return res.status(400).send('invalid credentials')
         }
         const token = createToken(user._id)
         res.json({success:true,token,user})
