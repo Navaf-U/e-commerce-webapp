@@ -12,19 +12,21 @@ const getUserCart = async (req,res)=>{
     if(data){
         res.status(200).json(data)
     }else{
+        // if no cart,will return empty array
         res.status(200).json({products:[]})
     }
 
 }
 
 
-const updateUserCart = async (req,res)=>{
+const updateUserCart = async (req,res,next)=>{
     const {productID,quantity} = req.body;
     if(quantity<1){
-        res.json({message:error.message})       
+        //if quantity is lesser than 1 ,will send error
+        next(new CustomError(`Invalid quantity: ${quantity}`, 400));       
     }
 
-    let cart = await Cart.findOne({UserID:req.user.id})
+    let cart = await Cart.findOne({userID:req.user.id})
      // if user does not have cart,will create one
     if(!cart){
         cart = new Cart({

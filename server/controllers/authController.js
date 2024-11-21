@@ -1,14 +1,14 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import User from '../models/usersSchema.js'
-
+import CustomError from '../utils/customError.js'
 // createToken
 const createToken = (id)=>{
-    return jwt.sign({id},process.env.JWT_TOKEN)
+    console.log('Signing token with secret:', process.env.JWT_TOKEN);
+    return jwt.sign({id}, process.env.JWT_TOKEN);
 }
 
 const userRegister = async (req,res)=>{
-    try {
         const {name,email,password} = req.body
         // emailChecking
         const exists = await User.findOne({email})
@@ -22,35 +22,30 @@ const userRegister = async (req,res)=>{
             email,
             password:hashedPassword
         })
+
+        // creating token and adding user to db
         const user = await newUser.save()
-        
         const token = createToken(user._id)
         res.json({success:true,token,user})
-    } catch (error) {
-        console.log(error)
-    }
 }
 
 
-const loginUser = async(req,res)=>{
-    try {
+const loginUser = async(req,res,next)=>{
         const {email , password} = req.body;
         const user = await User.findOne({email})
         
         if(!user){
-            return res.status(400).send("User doesn't exist")
+            return next(new CustomError("User doesn't exist",401))
         }
 
         const isMatch = await bcrypt.compare(password,user.password)
         if(!isMatch){
-            return res.status(400).send('Incorrect password')
+            return next(new CustomError("Incorrect password",401)) 
         }
+        // creating token for logged user
         const token = createToken(user._id)
         res.json({success:true,token,user})
-    } catch (error) {
-        console.log(error)
-        res.json({error:error.message})
-    }
 }
+
 
 export {userRegister,loginUser}
