@@ -1,6 +1,6 @@
 import express from 'express'
 import tryCatch from '../utils/tryCatch.js'
-import {allProducts,getProductById,getProductCategory} from '../controllers/user/userProductController.js'
+import {allProducts,getProductById,getProductCategory} from '../controllers/user/productController.js'
 import { getUserCart, removeFromCart, updateUserCart } from "../controllers/user/cartController.js"
 import { tokenVerify } from '../middlewares/tokenVerify.js'
 

@@ -4,7 +4,6 @@ import User from '../models/usersSchema.js'
 import CustomError from '../utils/customError.js'
 // createToken
 const createToken = (id)=>{
-    console.log('Signing token with secret:', process.env.JWT_TOKEN);
     return jwt.sign({id}, process.env.JWT_TOKEN);
 }
 
