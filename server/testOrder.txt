@@ -1,0 +1,14 @@
+{
+  "products": [
+    {
+      "productID": "673db4ac29a5fca45aaad7ac",
+      "quantity": 2
+    }
+  ],
+  "address": {
+    "city": "Malappuram",
+    "state": "Kerala",
+    "zip": "676521"
+  },
+  "totalAmount": 149.99
+}

@@ -41,9 +41,13 @@ const loginUser = async(req,res,next)=>{
         if(!isMatch){
             return next(new CustomError("Incorrect password",401)) 
         }
+        const userDetails = {
+            name:user.name,
+            email:user.email
+        }
         // creating token for logged user
         const token = createToken(user._id)
-        res.json({success:true,token,user})
+        res.json({success:true,token,data:userDetails})
 }
 
 

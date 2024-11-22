@@ -16,8 +16,8 @@ const orderSchema = new mongoose.Schema(
     //without stripe session id and things
     sessionID:{type:String},
     purchasedDate:{type:Date,default:Date.now},
-    address:{type:Object,required:true},
-    totalAmount:{type:Number,required:true},
+    address:{type:Object},
+    totalAmount:{type:Number},
     paymentStatus:{type:String,default:"pending"},
     shippingStatus:{type:String,default:"pending"},
     },

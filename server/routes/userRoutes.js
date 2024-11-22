@@ -4,6 +4,7 @@ import { tokenVerify } from '../middlewares/tokenVerify.js'
 import {allProducts,getProductById,getProductCategory} from '../controllers/user/productController.js'
 import { getUserCart, removeFromCart, updateUserCart } from "../controllers/user/cartController.js"
 import { addToWishList, getUserWishList, removeFromWishList } from '../controllers/user/wishListController.js'
+import { cancelOneOrder, getAllOrders, getOneOrder, orderCashOnDelivery } from '../controllers/user/orderController.js'
 
 const router = express.Router()
 
@@ -23,4 +24,11 @@ router
 .get("/wishlist", tokenVerify , tryCatch(getUserWishList))
 .post("/wishlist",tokenVerify, tryCatch(addToWishList))
 .delete("/wishlist",tokenVerify,tryCatch(removeFromWishList))
+
+// order routes
+.get("/orders",tokenVerify,tryCatch(getAllOrders))
+.get("/orders/:orderID",tokenVerify,tryCatch(getOneOrder))
+.post("/orders/cod",tokenVerify,tryCatch(orderCashOnDelivery)) //create new order w payment status cod   
+.patch("/orders/cancel/:orderID",tokenVerify,tryCatch(cancelOneOrder))
+
 export default router
