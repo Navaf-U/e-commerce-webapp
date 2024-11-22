@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
-import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes.js";
+import ConnectDB from './config/connectDB.js'
 import connectCloudinary from "./config/cloudinary.js";
 import userRoutes from "./routes/userRoutes.js";
 const app = express();
@@ -18,14 +18,6 @@ app.get("/", (req, res) => {
   res.send("BACKEND running");
 });
 //mongoDb connect
-const ConnectDB = async () => {
-  mongoose.connection.on("connected", () => {
-    console.log("DB CONNECTED");
-  });
-
-  await mongoose.connect(`${process.env.HOST}/shopDb`);
-};
-
 ConnectDB();
 // cloudinaryConnects
 connectCloudinary();
