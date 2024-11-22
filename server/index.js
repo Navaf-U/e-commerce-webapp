@@ -23,9 +23,9 @@ app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 
 // undefined endpoint will handle
-// app.all("*",(req,res)=>{
-//   res.status(400).json({message:'cannot access the endpoint'})
-// })
+app.all("*",(req,res)=>{
+  res.status(400).json({message:'cannot access the endpoint'})
+})
 
 app.get("/", (req, res) => {
   res.send("BACKEND running");
@@ -35,4 +35,5 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`server running on ${PORT}`);
 });
+
 app.use(manageError)
