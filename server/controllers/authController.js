@@ -1,7 +1,8 @@
-import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import User from '../models/usersSchema.js'
+import bcrypt from 'bcrypt'
 import CustomError from '../utils/customError.js'
+
 // createToken
 const createToken = (id)=>{
     return jwt.sign({id}, process.env.JWT_TOKEN);
@@ -25,7 +26,7 @@ const userRegister = async (req,res)=>{
         // creating token and adding user to db
         const user = await newUser.save()
         const token = createToken(user._id)
-        res.json({success:true,token,user})
+        res.json({success:true,token})
 }
 
 
@@ -47,7 +48,7 @@ const loginUser = async(req,res,next)=>{
         }
         // creating token for logged user
         const token = createToken(user._id)
-        res.json({success:true,token,data:userDetails})
+        res.json({success:true,token})
 }
 
 

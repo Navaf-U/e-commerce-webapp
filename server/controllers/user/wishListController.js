@@ -33,13 +33,12 @@ if(!newWishList){
         products:[productID ]
     })
     await newWishList.save()
-    return res.status(200).json(newWishList)
+    return res.status(200).json({message:"added to wishlist"})
 }
 res.status(200).json(newWishList)
 }
 
-// deleting WishList
-
+// remove item from WishList
 const removeFromWishList = async(req,res,next)=>{
     const {productID} = req.body;
     const removeWishList = await WishList.findOneAndUpdate(
@@ -48,7 +47,7 @@ const removeFromWishList = async(req,res,next)=>{
         {new:true}
     )
     if(removeWishList){
-        res.status(201).json(removeWishList)
+        res.status(201).json({message:"removed from wishlist"})
     }else{
         next(new CustomError("product does not found in wishlist",404))
     }

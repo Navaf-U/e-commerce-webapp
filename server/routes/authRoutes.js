@@ -1,6 +1,6 @@
 import express from 'express'
-import { loginUser, userRegister } from '../controllers/authController.js'
 import tryCatch from '../utils/tryCatch.js'
+import { loginUser, userRegister } from '../controllers/authController.js'
 
 // route for user, the path starts with /api/user/
 const router = express.Router()

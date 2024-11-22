@@ -1,10 +1,10 @@
+import Cart from "../../models/cartSchema.js";
 import Order from "../../models/ordersSchema.js";
 import CustomError from "../../utils/customError.js";
-import Cart from "../../models/cartSchema.js";
 
 //cash on delivery order
 const orderCashOnDelivery = async (req, res, next) => {
-  // populating the order to just might order deletion by admin
+  // populating the order, if might order deletion by admin
   const newOrder = await new Order({
     ...req.body,
     userID: req.user.id,
@@ -81,7 +81,7 @@ const cancelOneOrder = async (req, res, next) => {
   if (!cancelOrder) {
     return next(new CustomError("no order found", 404));
   }
-  res.status(200).json({ message: "Order Cancelled", order: cancelOrder });
+  res.status(200).json({ message: "Order Cancelled" });
 };
 
 export {orderCashOnDelivery,getAllOrders,getOneOrder,cancelOneOrder}

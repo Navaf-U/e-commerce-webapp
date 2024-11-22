@@ -49,7 +49,7 @@ const updateUserCart = async (req, res, next) => {
     path: "products.productID",
     select: "name price image,",
   });
-  res.status(200).json(cartSaved);
+  res.status(200).json({message:"cart updated"});
 };
 
 const removeFromCart = async (req, res) => {
@@ -64,7 +64,7 @@ const removeFromCart = async (req, res) => {
       path: "products.productID",
       select: "name price image",
     });
-    res.status(200).json(cart);
+    res.status(200).json({message:"item removed"});
   } else {
     res.status(404).json({ message: "Product not found in the cart" });
   }
