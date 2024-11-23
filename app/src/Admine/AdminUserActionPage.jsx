@@ -12,9 +12,9 @@ function AdminUserActionPage() {
     if (!Id) return;
     setLoading(true)
     try {
-      const { data } = await axios.get(`http://localhost:3000/allUsers/${Id}`);
+      const { data } = await axios.get(`http://localhost:4000/allUsers/${Id}`);
       const updatedStatus = !data.isBlocked;
-      await axios.patch(`http://localhost:3000/allUsers/${Id}`, {
+      await axios.patch(`http://localhost:4000/allUsers/${Id}`, {
         isBlocked: updatedStatus,
       });
       setUsers((prevUser) => ({

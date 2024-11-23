@@ -21,7 +21,7 @@ function UserProfile() {
   const updateUserProfile = async (updatedUser) => {
     try {
       setLoading(true);
-      await axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, updatedUser);
+      await axios.patch(`http://localhost:4000/allUsers/${currUser.id}`, updatedUser);
       setCurrUser(updatedUser);
     } catch (error) {
       console.error("Error updating profile:", error);

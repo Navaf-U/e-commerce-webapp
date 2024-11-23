@@ -84,7 +84,7 @@ function Payment() {
       currUser.orders.push(OrderedItems);
 
       try {
-        await axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
+        await axios.patch(`http://localhost:4000/allUsers/${currUser.id}`, {
           orders: currUser.orders,
           cart:{}
         });

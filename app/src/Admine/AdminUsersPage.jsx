@@ -11,7 +11,7 @@ function AdminUsersPage() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const { data } = await axios.get("http://localhost:3000/allUsers");
+      const { data } = await axios.get("http://localhost:4000/allUsers");
       setUsers(data);
     };
     fetchUser();

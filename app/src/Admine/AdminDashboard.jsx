@@ -15,7 +15,7 @@ const AdminDashboard = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const { data } = await axios.get("http://localhost:3000/allUsers");
+        const { data } = await axios.get("http://localhost:4000/allUsers");
         setUsersSale(data);
       } catch (err) {
         console.log(err);

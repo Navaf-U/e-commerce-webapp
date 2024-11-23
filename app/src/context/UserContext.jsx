@@ -19,7 +19,7 @@ function UserContext({ children }) {
   const loginUser = async (email, password) => {
     setLoading(true)
     try {
-      const { data } = await axios.get("http://localhost:3000/allUsers");
+      const { data } = await axios.get("http://localhost:4000/allUsers");
       const user = data.find(
         (item) => item.email === email && item.password === password
       );
@@ -75,7 +75,7 @@ function UserContext({ children }) {
       setLoading(true)
       try{
         const { data } = await axios.get(
-          `http://localhost:3000/allUsers/${userId}`
+          `http://localhost:4000/allUsers/${userId}`
         );
         setCart(data.cart || {});
       }catch(err){
@@ -114,7 +114,7 @@ function UserContext({ children }) {
           [id]: existingQuant + quantity,
         };
         updateCartInLocalStorage(updatedCart);
-        axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
+        axios.patch(`http://localhost:4000/allUsers/${currUser.id}`, {
           cart: updatedCart,
         });
         return updatedCart;
@@ -131,7 +131,7 @@ function UserContext({ children }) {
         delete updatedCart[id];
       }
       updateCartInLocalStorage(updatedCart);
-      axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
+      axios.patch(`http://localhost:4000/allUsers/${currUser.id}`, {
         cart: updatedCart,
       });
       return updatedCart;
@@ -145,7 +145,7 @@ function UserContext({ children }) {
         [id]: (oldCart[id] || 0) + 1,
       };
       updateCartInLocalStorage(updatedCart);
-      axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
+      axios.patch(`http://localhost:4000/allUsers/${currUser.id}`, {
         cart: updatedCart,
       });
       return updatedCart;
@@ -159,7 +159,7 @@ function UserContext({ children }) {
         [id]: oldCart[id] > 1 ? oldCart[id] - 1 : 1,
       };
       updateCartInLocalStorage(updatedCart);
-      axios.patch(`http://localhost:3000/allUsers/${currUser.id}`, {
+      axios.patch(`http://localhost:4000/allUsers/${currUser.id}`, {
         cart: updatedCart,
       });
       return updatedCart;
@@ -181,7 +181,7 @@ function UserContext({ children }) {
     setLoading(true);
     try {
 
-      const response = await axios.post("http://localhost:3000/allUsers", data);
+      const response = await axios.post("http://localhost:4000/allUsers", data);
       if (response.status === 201) {
         toast.success("User registered successfully");
         setCurrUser(response.data);

@@ -12,7 +12,7 @@ function Orders() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const { data } = await axios.get("http://localhost:3000/allUsers");
+        const { data } = await axios.get("http://localhost:4000/allUsers");
         setUsers(data);
         const currentUser = data.find((user) => user.id === currUser.id);
         if (currentUser) {

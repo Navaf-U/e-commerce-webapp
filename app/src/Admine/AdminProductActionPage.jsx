@@ -66,7 +66,7 @@ function AdminProductActionPage() {
     setLoading(true);
     try {
       await axios.put(
-        `http://localhost:3000/newProducts/${productEdit.id}`,
+        `http://localhost:4000/newProducts/${productEdit.id}`,
         productEdit
       );
 
@@ -82,7 +82,7 @@ function AdminProductActionPage() {
   const DeleteProduct = async (ID) => {
     setLoading(true);
     try {
-      await axios.delete(`http://localhost:3000/newProducts/${ID}`);
+      await axios.delete(`http://localhost:4000/newProducts/${ID}`);
       navigate("/admin")
     } catch (err) {
       toast.error("Error deleting product. Please try again.");
