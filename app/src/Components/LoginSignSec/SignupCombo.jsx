@@ -31,7 +31,7 @@ function SignupCombo() {
     setLoading(true);
     try{
       const allUsersRes = await axios.get(
-        "http://localhost:3000/allUsers"
+        "http://localhost:4000/allUsers"
       );
       const allUsers = allUsersRes.data;
       const isUserExists = allUsers.find((user) => user.email === email);
