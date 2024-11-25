@@ -23,10 +23,9 @@ const userRegister = async (req,res)=>{
             password:hashedPassword
         })
         
-        // creating token and adding user to db
-        const user = await newUser.save()
-        const token = createToken(user._id)
-        res.json({success:true,token})
+        // adding user to db
+        await newUser.save()
+        res.json({success:true , message:"user registered"})
 }
 
 
@@ -40,7 +39,7 @@ const loginUser = async(req,res,next)=>{
 
         const isMatch = await bcrypt.compare(password,user.password)
         if(!isMatch){
-            return next(new CustomError("Incorrect password",401)) 
+            return next(new CustomError("Incorrect password",401))
         }
         // creating token for logged user
         const token = createToken(user._id)

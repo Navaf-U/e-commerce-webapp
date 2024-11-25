@@ -13,7 +13,7 @@ router
 // product routes
 .get("/products",tryCatch(allProducts))
 .get("/product/:id",tryCatch(getProductById))
-.get("/products/:type",tryCatch(getProductCategory))
+.get("/products/category/:type",tryCatch(getProductCategory))
 
 // cart routes
 .get("/cart",tokenVerify,tryCatch(getUserCart))

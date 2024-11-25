@@ -38,7 +38,6 @@ const orderCashOnDelivery = async (req, res, next) => {
 };
 
 // to get all orders by user
-
 const getAllOrders = async (req, res) => {
   const newOrders = await Order.find({ userID: req.user.id })
     .populate("products.productID", "name price image")

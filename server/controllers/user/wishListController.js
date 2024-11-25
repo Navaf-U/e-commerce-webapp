@@ -41,6 +41,9 @@ res.status(200).json(newWishList)
 // remove item from WishList
 const removeFromWishList = async(req,res,next)=>{
     const {productID} = req.body;
+    if(!productID){
+        return next(new CustomError("product is required",400))
+    }
     const removeWishList = await WishList.findOneAndUpdate(
         {userID : req.user.id},
         {$pull:{products:productID}},
