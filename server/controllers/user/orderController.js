@@ -29,12 +29,12 @@ const orderCashOnDelivery = async (req, res, next) => {
     { userID: req.user.id },
     { $set: { products: [] } }
   );
-  let cart = await currUserCart.save();
-  let order = await (
-    await newOrder.save()
-  ).populate("products.productID", "name price image");
+  await currUserCart.save();
+  await (
+  await newOrder.save()
+  )
 
-  res.status(201).json({ data: order, cart: cart });
+  res.status(201).json({message:"Order placed successfully"});
 };
 
 // to get all orders by user
