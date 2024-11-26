@@ -1,6 +1,6 @@
 import express from "express";
 import tryCatch from "../utils/tryCatch.js";
-import { blockUser, getAllUsers, getOneUser } from "../controllers/admin/userController.js";
+import { blockUser, getAllUsers, getOneUser } from "../controllers/admin/adminUserController.js";
 const router = express.Router()
 
 router

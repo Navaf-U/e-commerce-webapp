@@ -11,7 +11,7 @@ const getAllUsers = async (req,res)=>{
 }
 
 const getOneUser = async (req,res,next)=>{
-    const user = await User.findById(req.params.id)
+    const user = await User.findById(req.params.id,{ password : 0 })
     if(!user){
         return next(CustomError("User not found",404))
     }
@@ -26,7 +26,7 @@ const blockUser = async (req,res) => {
     // will toggle the user block property true/false
     user.isBlocked = !user.isBlocked
     await user.save()
-    res.status(200).json({user})
+    res.status(200).json({message: user.isBlocked ? `${user.email} is blocked` : `${user.email} is unblocked` })
 }
 
 
