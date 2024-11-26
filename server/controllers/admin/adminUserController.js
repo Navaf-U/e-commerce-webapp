@@ -13,7 +13,7 @@ const getAllUsers = async (req,res)=>{
 const getOneUser = async (req,res,next)=>{
     const user = await User.findById(req.params.id,{ password : 0 })
     if(!user){
-        return next(CustomError("User not found",404))
+        return next(new CustomError("User not found",404))
     }
     res.status(200).json({user})
 }
@@ -21,7 +21,7 @@ const getOneUser = async (req,res,next)=>{
 const blockUser = async (req,res) => {
     const user = await User.findById(req.params.id)
     if(!user){
-        return next(CustomError("User not found",404))
+        return next(new CustomError("User not found",404))
     }
     // will toggle the user block property true/false
     user.isBlocked = !user.isBlocked
