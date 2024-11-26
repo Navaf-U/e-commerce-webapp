@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import connectDB from './config/connectDB.js'
 import userRoutes from "./routes/userRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 import manageError from "./middlewares/manageError.js";
 import connectCloudinary from "./config/cloudinary.js";
 
@@ -21,6 +22,7 @@ app.use(express.json());
 //base path, api endpoints
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
+app.use("/admin",adminRoutes)
 
 // undefined endpoint will handle
 app.all("*",(req,res)=>{

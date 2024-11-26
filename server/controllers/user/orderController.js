@@ -30,9 +30,7 @@ const orderCashOnDelivery = async (req, res, next) => {
     { $set: { products: [] } }
   );
   await currUserCart.save();
-  await (
-  await newOrder.save()
-  )
+  await newOrder.save();
 
   res.status(201).json({message:"Order placed successfully"});
 };
