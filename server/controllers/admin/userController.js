@@ -2,8 +2,7 @@ import User from '../../models/usersSchema.js'
 import CustomError from '../../utils/customError.js'
 
 const getAllUsers = async (req,res)=>{
-    const users = User.find().sort({createdAt : -1 })
-
+    const users = await User.find({},{ password : 0 }).sort({createdAt : -1 })
     if(users){
         return res.status(200).json({users})
     }else{
