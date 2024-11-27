@@ -12,7 +12,7 @@ const createProducts = async (req, res, next) => {
 
 const updateProducts = async (req, res, next) => {
   const updatedProduct = await Product.findOneAndUpdate(
-    req.params.id,
+    {_id:req.params.id},
     { $set: req.body },
     { new: true }
   );
