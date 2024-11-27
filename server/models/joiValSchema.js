@@ -17,7 +17,8 @@ const joiProductSchema = joi.object({
         description:joi.string().optional(),
         brand:joi.string().required(),
         rating:joi.number().required().min(1).max(5),
-        reviews:joi.number().optional()
+        reviews:joi.number().optional(),
+        isDeleted:joi.boolean().default(false).optional()
 })
 
 export {joiUserSchema,joiProductSchema}
