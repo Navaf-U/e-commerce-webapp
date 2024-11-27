@@ -1,0 +1,23 @@
+import joi from 'joi'
+
+const joiUserSchema = joi.object({
+    name:joi.string().required(),
+    email:joi.string().email().required(),
+    password:joi.string().min(4).required(),
+    isBlocked:joi.boolean().default(false).optional(),
+    refreshToken:joi.string().optional()
+})
+
+const joiProductSchema = joi.object({
+        name:joi.string().required(),
+        type:joi.string().required(),
+        image:joi.string().required(),
+        price:joi.number().required(),
+        qty:joi.number().required(),
+        description:joi.string().optional(),
+        brand:joi.string().required(),
+        rating:joi.number().required().min(1).max(5),
+        reviews:joi.number().optional()
+})
+
+export {joiUserSchema,joiProductSchema}
