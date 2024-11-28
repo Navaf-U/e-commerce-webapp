@@ -22,3 +22,15 @@ export const tokenVerify = (req, res, next) => {
     next(new CustomError(error || "failed to verify authentication", 500));
   }
 };
+
+export const verifyTokenAdmin = (req,res,next)=>{
+  verifyToken(req,res,async()=>{
+    if(!req.user){
+      return next(new CustomError("You are not authorized",403))
+    }
+    if(req.user.role !=="admin"){
+      return next(new CustomError("You are not authorized",403))
+    }
+    next()
+  })
+}
