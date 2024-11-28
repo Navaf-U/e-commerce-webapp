@@ -1,5 +1,5 @@
 import Orders from '../../models/ordersSchema.js'
-import CustomError from '../../utils/customError';
+import CustomError from '../../utils/customError.js';
 
 // get all the total orders
 const getTotalOrders = async (req,res)=>{
