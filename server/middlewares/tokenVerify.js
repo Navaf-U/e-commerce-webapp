@@ -28,7 +28,6 @@ export const verifyTokenAdmin = (req,res,next)=>{
     if(!req.user){
       return next(new CustomError("You are not authorized",403))
     }
-    console.log('checking user is role : ' , req.user.role)
     if(req.user.role !== "admin"){
       return next(new CustomError("You are not an admin",403))
     }

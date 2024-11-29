@@ -2,7 +2,7 @@ import Products from "../../models/productsSchema.js";
 
 // to fetch all the products
 const allProducts = async (req, res) => {
-  const product = await Products.find();
+  const product = await Products.find({ isDeleted: false });
   if (!product) {
     return res.status(204).json({ message: "no item in products" });
   }

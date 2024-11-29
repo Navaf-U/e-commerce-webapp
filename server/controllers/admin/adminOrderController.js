@@ -23,12 +23,15 @@ const getOrderByUser = async (req,res)=>{
      res.status(200).json({ data : orders })
 }
 // get the total number of orders
-const totalNumberOfOrders = async (req,res)=>{
-    const totalOrders = await Orders.find().countDocuments()
+const totalPurchaseOfOrders = async (req,res)=>{
+    const totalOrders = await Orders.find()
     if(!totalOrders){
         return res.status(200).json({message:"No orders found"})
     }
-    res.status(200).json({data:totalOrders})
+    const confirmedOrders = totalOrders.filter(
+        (order)=> order.shippingStatus !== "Cancelled"
+    )
+    res.status(200).json({data:confirmedOrders.length})
 }
 
 // will update the shipping status 
@@ -72,4 +75,4 @@ const getTotalRevenue = async (req,res)=>{
     res.status(200).json({data:revenue})
 }
 
-export {getTotalOrders,totalNumberOfOrders,updateShippingStatus,updatePaymentStatus,getOrderByUser,getTotalRevenue}
+export {getTotalOrders,totalPurchaseOfOrders,updateShippingStatus,updatePaymentStatus,getOrderByUser,getTotalRevenue}
