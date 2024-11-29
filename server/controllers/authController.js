@@ -5,8 +5,8 @@ import CustomError from "../utils/customError.js";
 import { joiUserSchema } from "../models/joiValSchema.js";
 
 // createToken
-const createToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_TOKEN);
+const createToken = (id,role,expiresIn) => {
+  return jwt.sign({ id ,role }, process.env.JWT_TOKEN,{expiresIn});
 };
 
 const userRegister = async (req, res,next) => {
@@ -51,7 +51,7 @@ const loginUser = async (req, res, next) => {
     return next(new CustomError("Incorrect password", 401));
   }
   // creating token for logged user
-  const token = createToken(user._id);
+  const token = createToken(user._id,user.role,"1h");
   res.json({ message:"You've successfully logged in", token });
 };
 

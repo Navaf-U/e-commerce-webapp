@@ -44,10 +44,6 @@ const updateUserCart = async (req, res, next) => {
   }
 
   await cart.save();
-  // await cartSaved.populate({
-  //   path: "products.productID",
-  //   select: "name price image",
-  // });
   res.status(200).json({message:"cart updated"});
 };
 

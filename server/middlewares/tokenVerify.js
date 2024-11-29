@@ -24,13 +24,14 @@ export const tokenVerify = (req, res, next) => {
 };
 
 export const verifyTokenAdmin = (req,res,next)=>{
-  verifyToken(req,res,async()=>{
+  tokenVerify(req,res,async()=>{
     if(!req.user){
       return next(new CustomError("You are not authorized",403))
     }
-    if(req.user.role !=="admin"){
-      return next(new CustomError("You are not authorized",403))
+    console.log('checking user is role : ' , req.user.role)
+    if(req.user.role !== "admin"){
+      return next(new CustomError("You are not an admin",403))
     }
-    next()
+   await next()
   })
 }

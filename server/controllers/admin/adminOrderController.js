@@ -41,7 +41,7 @@ const updateShippingStatus = async (req,res,next)=>{
     if(!order){
         return next(new CustomError("Order not found",400))
     }
-    res.status(200).json({message:"Order status updated successfully"})
+    res.status(200).json({message:"Order shipping status updated successfully"})
 }
 
 // updating the payment status
@@ -54,7 +54,7 @@ const updatePaymentStatus = async (req,res,next)=>{
     if(!order){
         return next(new CustomError("Order not found",400))
     }
-    res.status(200).json({message:"Order status updated successfully"})
+    res.status(200).json({message:"Order payment status updated successfully"})
 }
 
 // getting the total revenue
@@ -63,10 +63,10 @@ const getTotalRevenue = async (req,res)=>{
     if(!totalOrders){
         return res.status(200).json({message:"No orders found"})
     }
-    const cancelledOrders = totalOrders.filter(
+    const confirmedOrders = totalOrders.filter(
         (order)=> order.shippingStatus !== "Cancelled"
     )
-    const revenue = cancelledOrders.reduce((acc,order)=>{
+    const revenue = confirmedOrders.reduce((acc,order)=>{
         return acc + order.totalAmount;
     },0);
     res.status(200).json({data:revenue})
