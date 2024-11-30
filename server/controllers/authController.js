@@ -55,4 +55,22 @@ const loginUser = async (req, res, next) => {
   res.json({ message:"You've successfully logged in", token });
 };
 
-export { userRegister, loginUser };
+const adminLogin = async (req, res, next) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    return next(new CustomError("User doesn't exist", 401));
+  }
+  if(user.role !== "admin"){
+    return next(new CustomError("You are not an admin", 403));
+  }
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    return next(new CustomError("Incorrect password", 401));
+  }
+  // creating token for logged admin
+  const token = createToken(user._id,user.role,"1h");
+  res.json({ message:"Admin successfully logged in", token });
+};
+
+export { userRegister, loginUser, adminLogin };

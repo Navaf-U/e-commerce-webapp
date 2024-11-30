@@ -5,9 +5,13 @@ import { verifyTokenAdmin } from "../middlewares/tokenVerify.js";
 import { blockUser, getAllUsers, getOneUser } from "../controllers/admin/adminUserController.js";
 import { createProducts, deleteProducts, updateProducts } from "../controllers/admin/adminPorductController.js";
 import { getOrderByUser, getTotalOrders, getTotalRevenue, totalPurchaseOfOrders, updatePaymentStatus, updateShippingStatus } from "../controllers/admin/adminOrderController.js";
+import { adminLogin, loginUser } from "../controllers/authController.js";
 const router = express.Router()
 
 router
+
+// admin login section
+.post("/login",tryCatch(adminLogin))
 
 // admin users routers
 .get("/users",verifyTokenAdmin,tryCatch(getAllUsers))
