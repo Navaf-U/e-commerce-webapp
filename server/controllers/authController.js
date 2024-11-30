@@ -8,6 +8,9 @@ import { joiUserSchema } from "../models/joiValSchema.js";
 const createToken = (id,role,expiresIn) => {
   return jwt.sign({ id ,role }, process.env.JWT_TOKEN,{expiresIn});
 };
+const createRefreshToken = (id,role,expiresIn) => {
+  return jwt.sign({ id ,role }, process.env.JWT_REFRESH_TOKEN,{expiresIn});
+};
 
 const userRegister = async (req, res,next) => {
   //validating with joi
@@ -52,8 +55,19 @@ const loginUser = async (req, res, next) => {
   }
   // creating token for logged user
   const token = createToken(user._id,user.role,"1h");
+  const refreshToken = createRefreshToken(user._id,user.role,"1d");
+  user.refreshToken = refreshToken;
+  await user.save();
+
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure:false,
+    sameSite:"none",
+  })
   res.json({ message:"You've successfully logged in", token });
 };
+
+
 
 const adminLogin = async (req, res, next) => {
   const { email, password } = req.body;
@@ -70,7 +84,31 @@ const adminLogin = async (req, res, next) => {
   }
   // creating token for logged admin
   const token = createToken(user._id,user.role,"1h");
+  const refreshToken = createRefreshToken(user._id, user.role, "1d");
+  user.refreshToken = refreshToken;
+  await user.save();
+
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure:false,
+    sameSite:"none",
+  })
   res.json({ message:"Admin successfully logged in", token });
 };
+
+// controller to handle refresh
+const refreshingToken = async (req, res) => {
+  const refreshToken = req.cookies.refreshToken;
+  if (!refreshToken) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN); 
+  const user = await User.findById(decoded.id);
+  if(!user){  
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  const token = createToken(user._id,user.role,"1h");
+  res.status(200).json({message:"token refreshed", token });
+}
 
 export { userRegister, loginUser, adminLogin };
