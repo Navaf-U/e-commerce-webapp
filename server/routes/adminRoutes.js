@@ -6,6 +6,7 @@ import { blockUser, getAllUsers, getOneUser } from "../controllers/admin/adminUs
 import { createProducts, deleteProducts, updateProducts } from "../controllers/admin/adminPorductController.js";
 import { getOrderByUser, getTotalOrders, getTotalRevenue, totalPurchaseOfOrders, updatePaymentStatus, updateShippingStatus } from "../controllers/admin/adminOrderController.js";
 import { adminLogin, loginUser } from "../controllers/authController.js";
+import { allProducts, getProductById, getProductCategory } from "../controllers/publicController.js";
 const router = express.Router()
 
 router
@@ -19,9 +20,14 @@ router
 .patch("/user/:id",verifyTokenAdmin,tryCatch(blockUser))
 
 // admin product routes
-.post("/product",verifyTokenAdmin,tryCatch(createProducts))
-.put("/product/:id",verifyTokenAdmin,tryCatch(updateProducts))
+.get("/products",verifyTokenAdmin,tryCatch(allProducts)) 
+.get("/product/:id",verifyTokenAdmin,tryCatch(getProductById))
+.get("/products/category/:type",verifyTokenAdmin,tryCatch(getProductCategory))
+//--
+.post("/product/create",verifyTokenAdmin,tryCatch(createProducts))
+.put("/product/update/:id",verifyTokenAdmin,tryCatch(updateProducts))
 .patch("/product/:id",verifyTokenAdmin,tryCatch(deleteProducts))
+
 
 // admin cart routes
 .get("/carts",verifyTokenAdmin,tryCatch(getAllUserCarts))

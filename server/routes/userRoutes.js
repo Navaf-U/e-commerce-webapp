@@ -2,7 +2,7 @@ import express from 'express'
 import tryCatch from '../utils/tryCatch.js'
 import { tokenVerify } from '../middlewares/tokenVerify.js'
 import { getUserCart, removeFromCart, updateUserCart } from "../controllers/user/cartController.js"
-import {allProducts,getProductById,getProductCategory} from '../controllers/user/productController.js'
+import {allProducts,getProductById,getProductCategory} from '../controllers/publicController.js'
 import { addToWishList, getUserWishList, removeFromWishList } from '../controllers/user/wishListController.js'
 import { cancelOneOrder, getAllOrders, getOneOrder, orderCashOnDelivery } from '../controllers/user/orderController.js'
 
