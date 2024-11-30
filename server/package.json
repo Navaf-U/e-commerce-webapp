@@ -24,7 +24,8 @@
     "mongoose": "^8.8.2",
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
-    "server": "file:"
+    "server": "file:",
+    "stripe": "^17.4.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"

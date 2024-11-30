@@ -1,15 +1,21 @@
 import Product from "../../models/productsSchema.js";
 import CustomError from "../../utils/customError.js";
+import { joiProductSchema } from '../../models/joiValSchema.js';
 const createProducts = async (req, res, next) => {
   const { value, error } = joiProductSchema.validate(req.body);
-  if (error) return next(new CustomError(error.details[0].message, 400));
-  if (!req.file || !req.file.path)
+  if (error){
+    return next(new CustomError(error.details[0].message, 400));
+  } 
+  if ( !req.file || !req.file.path){
     return next(new CustomError("Image is required", 400));
+  }
   const newProduct = new Product({
     ...value,
     image: req.file.path,
   });
-  if (newProduct) return next(new CustomError("Product not created", 400));
+  if ( !newProduct ){
+    return next(new CustomError("Product not created", 400));
+  } 
   await newProduct.save();
   res.status(201).json({
     message: "Product created successfully",

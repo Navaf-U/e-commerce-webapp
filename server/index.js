@@ -9,15 +9,19 @@ import connectCloudinary from "./config/cloudinary.js";
 
 
 dotenv.config();
-const app = express();
-const PORT = process.env.PORT || 3000;
-
 //mongoDb connect AND cloudinaryConnects
 connectDB();
 connectCloudinary();
+const app = express();
+const PORT = process.env.PORT || 3000;
+
 
 // middleware
 app.use(express.json());
+app.get("/", (req, res) => {
+  res.send("BACKEND running");
+});
+
 
 //base path, api endpoints
 app.use("/auth", authRoutes);
@@ -30,9 +34,6 @@ app.all("*",(req,res)=>{
   res.status(400).json({message:'cannot access the endpoint'})
 })
 
-app.get("/", (req, res) => {
-  res.send("BACKEND running");
-});
 
 
 app.listen(PORT, () => {
