@@ -1,6 +1,7 @@
 import Cart from "../../models/cartSchema.js";
 import Order from "../../models/ordersSchema.js";
 import Stripe from "stripe";
+import Product from "../../models/productsSchema.js";
 import CustomError from "../../utils/customError.js";
 
 //cash on delivery order
@@ -55,7 +56,7 @@ const orderWithStripe = async (req, res, next) => {
       };
     })
   );
-  const newTotal = Math.round(totalAmount);
+  const newTotal = Math.round(totalAmount*100);
   // creating the stripe line items
   const lineItems = productDetails.map((item) => ({
     price_data: {
@@ -64,7 +65,7 @@ const orderWithStripe = async (req, res, next) => {
         name: item.name,
         images: [item.image],
       },
-      unit_amount: Math.round(item.price * item.quantity),
+      unit_amount: Math.round(item.price * item.quantity * 100),
     },
     quantity: item.quantity,
   }));
