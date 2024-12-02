@@ -56,7 +56,7 @@ const orderWithStripe = async (req, res, next) => {
       };
     })
   );
-  const newTotal = Math.round(totalAmount*100);
+  const newTotal = Math.round(totalAmount);
   // creating the stripe line items
   const lineItems = productDetails.map((item) => ({
     price_data: {
@@ -65,7 +65,7 @@ const orderWithStripe = async (req, res, next) => {
         name: item.name,
         images: [item.image],
       },
-      unit_amount: Math.round(item.price * item.quantity * 100),
+      unit_amount: Math.round(item.price * 100),
     },
     quantity: item.quantity,
   }));

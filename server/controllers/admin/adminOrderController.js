@@ -62,18 +62,28 @@ const updatePaymentStatus = async (req,res,next)=>{
 
 // getting the total revenue
 const getTotalRevenue = async (req,res)=>{
-    const totalOrders = await Orders.find()
-    if(!totalOrders){
+    const totalStats = await Orders.aggregate([
+        {$match:{shippingStatus:{$ne:"Cancelled"},paymentStatus:"Paid"}},
+        { $unwind: "$products" }, // Deconstruct the `products` array
+        {
+            $group: {
+                _id: null,
+                totalRevenue: { $sum: "$totalAmount" }, // Sum of total amounts
+                totalOrders: { $sum: 1 }, // Count of orders
+                totalProductsSold: { $sum: 1 } // Count of products sold (modify if tracking quantities)
+            }
+        }
+    ])
+    if(totalStats.length === 0){
         return res.status(200).json({message:"No orders found"})
     }
-    // will get revenue if order is not cancelled and is paid 
-    const confirmedOrders = totalOrders.filter(
-        (order)=> order.shippingStatus !== "Cancelled" && order.paymentStatus === "Paid" 
-    )
-    const revenue = confirmedOrders.reduce((acc,order)=>{
-        return acc + order.totalAmount;
-    },0);
-    res.status(200).json({data:revenue})
+    res.status(200).json({
+        data:{
+            totalRevenue : totalStats[0].totalRevenue,
+            totalOrders : totalStats[0].totalOrders,
+            totalProductsSold : totalStats[0].totalProductsSold
+        }
+    })
 }
 
 export {getTotalOrders,totalPurchaseOfOrders,updateShippingStatus,updatePaymentStatus,getOrderByUser,getTotalRevenue}
