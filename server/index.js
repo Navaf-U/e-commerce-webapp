@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
 //base path, api endpoints
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
-app.use("/admin",adminRoutes)
+app.use("/admin",adminRoutes);
 
 
 // undefined endpoint will handle

@@ -66,8 +66,9 @@ const getTotalRevenue = async (req,res)=>{
     if(!totalOrders){
         return res.status(200).json({message:"No orders found"})
     }
+    // will get revenue if order is not cancelled and is paid 
     const confirmedOrders = totalOrders.filter(
-        (order)=> order.shippingStatus !== "Cancelled"
+        (order)=> order.shippingStatus !== "Cancelled" && order.paymentStatus === "Paid" 
     )
     const revenue = confirmedOrders.reduce((acc,order)=>{
         return acc + order.totalAmount;
