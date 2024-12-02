@@ -28,10 +28,10 @@ router
 // order routes
 .get("/orders",tokenVerify,tryCatch(getAllOrders))
 .get("/orders/:orderID",tokenVerify,tryCatch(getOneOrder))
-.post("/orders/cod",tokenVerify,tryCatch(orderCashOnDelivery)) //create new order w payment status cod   
-.post("/orders/stripe/checkout" ,tokenVerify,tryCatch(orderWithStripe)) // create new order with stripe
-.put("/orders/:orderID",tokenVerify,tryCatch(StripeSuccess))  // success route for stripe
 .get("/orders/publickey",tokenVerify,tryCatch(publicKeySend)) // getting stripe public key on the client
-.patch("/orders/stripe/success/:sessionID",tokenVerify,tryCatch(cancelOneOrder))
+.post("/orders/cod",tokenVerify,tryCatch(orderCashOnDelivery)) //create new order w payment status cod   
+.post("/orders/stripe/checkout" ,tokenVerify,tryCatch(orderWithStripe)) // create new order with stripe will provide session ID
+.patch("/orders/stripe/success/:sessionID",tokenVerify,tryCatch(StripeSuccess)) // success route for stripe
+.patch("/orders/cancel/:orderID",tokenVerify,tryCatch(cancelOneOrder)) // cancel one order  
 
 export default router
