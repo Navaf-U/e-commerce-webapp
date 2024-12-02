@@ -101,24 +101,22 @@ const orderWithStripe = async (req, res, next) => {
     });
 };
 
-const StripeSuccess = async (req, res) => {
-  const sessionID = req.query.sessionID;
-  const order = await Order.findOne({ sessionID: sessionID });
-  if (!order) return res.status(404).json({ message: "Order not found" });
-  // checking if the order is already in the cart
-  let currUserCart = await Cart.findOne({ userID: req.user.id });
-  let currUserCartProducts = currUserCart.products;
-  currUserCart.products = currUserCartProducts.filter((prod) => {
-    return !order.products.some(
-      (item) => item.productID.toString() === prod.productID.toString()
-    );
-  });
-  currUserCart.products = currUserCartProducts;
-  await currUserCart.save();
+const StripeSuccess = async (req, res , next) => {
+  const sessionID = req.params.sessionID;
+  //finding the order using sessionID
+  const order = await Order.findOne({sessionID : sessionID});
+  if(!order) return next(new CustomError("Order not found", 404));
+  // updating the order status
   order.paymentStatus = "Paid";
-  order.shippingStatus = "pending";
+  order.shippingStatus = "Pending";
   await order.save();
-  res.status(200).json({ message: "Order placed successfully" });
+
+  // will make cart empty after purchase
+  await Cart.findOneAndUpdate(
+    { userID: req.user.id },
+    { $set: { products: [] } }
+  ) 
+  res.status(200).json({message:"Payment successful! Cart has been cleared"});
 };
 
 // to get all orders by user

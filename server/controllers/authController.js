@@ -120,7 +120,6 @@ const logout = async (req, res) => {
     httpOnly: true,
     secure: false,
     sameSite: "none",
-    
   });
   res.json({ message: "You've successfully logged out" });
 };

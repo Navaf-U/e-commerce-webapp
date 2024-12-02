@@ -13,7 +13,6 @@ const getUserWishList = async (req,res)=>{
     }
 }
 
-
 const addToWishList = async (req,res,next)=>{
     const {productID} = req.body;
     if(!productID){
