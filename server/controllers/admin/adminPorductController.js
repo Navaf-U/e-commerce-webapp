@@ -6,6 +6,7 @@ const createProducts = async (req, res, next) => {
   if (error) {
     return next(new CustomError(error.details[0].message, 400));
   }
+  //req.file will have the meta data's
   if (!req.file || !req.file.path) {
     return next(new CustomError("Image is required", 400));
   }
@@ -25,8 +26,12 @@ const createProducts = async (req, res, next) => {
 const updateProducts = async (req, res, next) => {
   const newProduct = await Product.findById(req.params.id);
   if (!newProduct) return next(new CustomError("Product not found", 404));
+  //will update prod image if uploaded new
   let image = newProduct.image;
   if (req.file) image = req.file.path;
+  // updating the product with img
+  newProduct.set({ ...req.body, image });
+  // save the updated product
   await newProduct.save();
   res.status(200).json({ message: "Product updated successfully" });
 };
