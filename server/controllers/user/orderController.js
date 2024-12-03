@@ -14,12 +14,13 @@ const orderCashOnDelivery = async (req, res, next) => {
 
   if (!newOrder) return next(new CustomError("order not created", 400));
 
-  // will check if any product got deleted by admin
-  const checkUnavailableProduct = newOrder.products.some(
-    (prod) => prod.isDeleted === true
-  );
+  const unavailableProduct = await Product.find({
+    _id:{$in:newOrder.products.map((prod) => prod.productID)},
+    isDeleted:true
+  })
 
-  if (checkUnavailableProduct) {
+
+  if (unavailableProduct) {
     return next(new CustomError("some product not available", 400));
   }
 
@@ -41,9 +42,9 @@ const orderCashOnDelivery = async (req, res, next) => {
 // to make an order with stripe
 const orderWithStripe = async (req, res, next) => {
   const { products, address, totalAmount } = req.body;
-  if (!products || !address || !totalAmount)
+  if (!products || !address || !totalAmount){
     return next(new CustomError("All fields are required", 400));
-
+  }
   // getting the details of the product
   const productDetails = await Promise.all(
     products.map(async (item) => {

@@ -78,7 +78,7 @@ const getTotalStats = async (req, res) => {
       },
     },
   ]);
-  if (totalStats.length === 0) {
+  if (totalStats.length === 0){
     return res.status(200).json({ message: "No orders found" });
   }
   res.status(200).json({
