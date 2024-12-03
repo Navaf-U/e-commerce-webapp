@@ -25,8 +25,8 @@ router
 .get("/product/:id",verifyTokenAdmin,tryCatch(getProductById))
 .get("/products/category/:type",verifyTokenAdmin,tryCatch(getProductCategory))
 //--
-.post("/product/create",verifyTokenAdmin, upload.single("image"),tryCatch(createProducts))
-.put("/product/update/:id",verifyTokenAdmin,tryCatch(updateProducts))
+.post("/product",verifyTokenAdmin, upload.single("image"),tryCatch(createProducts))
+.put("/product/update/:id",verifyTokenAdmin,upload.single("image"),tryCatch(updateProducts))
 .patch("/product/:id",verifyTokenAdmin,tryCatch(deleteProducts))
 
 

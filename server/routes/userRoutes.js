@@ -27,7 +27,7 @@ router
 
 // order routes
 .get("/orders",tokenVerify,tryCatch(getAllOrders))
-.get("/orders/:orderID",tokenVerify,tryCatch(getOneOrder))
+.get("/orders/order/:orderID",tokenVerify,tryCatch(getOneOrder))
 .get("/orders/publickey",tokenVerify,tryCatch(publicKeySend)) // getting stripe public key on the client
 .post("/orders/cod",tokenVerify,tryCatch(orderCashOnDelivery)) //create new order w payment status cod   
 .post("/orders/stripe/checkout" ,tokenVerify,tryCatch(orderWithStripe)) // create new order with stripe will provide session ID

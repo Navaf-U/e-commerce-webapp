@@ -38,9 +38,11 @@ const updateProducts = async (req, res, next) => {
 
 // will toggle isDeleted based on its current value
 const deleteProducts = async (req, res, next) => {
+  //to access the deleted key
+  const prod = await Product.findById(req.params.id);
   const deletedProduct = await Product.findByIdAndUpdate(
     req.params.id,
-    { $set: { isDeleted: !isDeleted } },
+    { $set: { isDeleted: !prod.isDeleted } },
     { new: true }
   );
   if (!deletedProduct) return next(new CustomError("Product not found", 404));

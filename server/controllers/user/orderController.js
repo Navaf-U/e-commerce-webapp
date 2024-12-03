@@ -3,6 +3,7 @@ import Order from "../../models/ordersSchema.js";
 import Stripe from "stripe";
 import Product from "../../models/productsSchema.js";
 import CustomError from "../../utils/customError.js";
+import mongoose from "mongoose";
 
 //cash on delivery order
 const orderCashOnDelivery = async (req, res, next) => {
@@ -136,6 +137,10 @@ const getAllOrders = async (req, res) => {
 
 // to get single order
 const getOneOrder = async (req, res, next) => {
+  // will validate the ObjectId format
+  if (!mongoose.Types.ObjectId.isValid(req.params.orderID)) {
+    return next(new CustomError("Invalid order ID", 400));
+  }
   const singleOrder = await Order.findOne({
     // get order by params
     _id: req.params.orderID,
@@ -170,6 +175,6 @@ const cancelOneOrder = async (req, res, next) => {
   res.status(200).json({ message: "Order Cancelled" });
 };
 
-const publicKeySend = async (req,res)=>{res.status(200).json({publicKey:process.env.STRIPE_PUBLIC_KEY})}
+const publicKeySend = async (req,res)=>{res.status(200).json({stripePublicKey:process.env.STRIPE_PUBLIC_KEY})}
 
 export { orderCashOnDelivery, getAllOrders, getOneOrder, cancelOneOrder , orderWithStripe , StripeSuccess , publicKeySend};
