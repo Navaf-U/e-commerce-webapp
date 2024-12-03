@@ -6,7 +6,7 @@ import { getAllUserCarts } from "../controllers/admin/adminCartController.js";
 import { verifyTokenAdmin } from "../middlewares/tokenVerify.js";
 import { blockUser, getAllUsers, getOneUser } from "../controllers/admin/adminUserController.js";
 import { createProducts, deleteProducts, updateProducts } from "../controllers/admin/adminPorductController.js";
-import { getOrderByUser, getTotalOrders, getTotalRevenue, totalPurchaseOfOrders, updatePaymentStatus, updateShippingStatus } from "../controllers/admin/adminOrderController.js";
+import { getOrderByUser, getTotalOrders, getTotalStats, totalPurchaseOfOrders, updatePaymentStatus, updateShippingStatus } from "../controllers/admin/adminOrderController.js";
 import { allProducts, getProductById, getProductCategory } from "../controllers/publicController.js";
 const router = express.Router()
 
@@ -38,7 +38,7 @@ router
 .get("/orders",verifyTokenAdmin,tryCatch(getTotalOrders))
 .get("/orders/user/:id",verifyTokenAdmin,tryCatch(getOrderByUser))
 .get("/orders/total",verifyTokenAdmin,tryCatch(totalPurchaseOfOrders))
-.get("/orders/revenue",verifyTokenAdmin,tryCatch(getTotalRevenue))
+.get("/orders/stats",verifyTokenAdmin,tryCatch(getTotalStats))
 .patch("/orders/shipping/:id",verifyTokenAdmin,tryCatch(updateShippingStatus))
 .patch("/orders/payment/:id",verifyTokenAdmin,tryCatch(updatePaymentStatus))
 

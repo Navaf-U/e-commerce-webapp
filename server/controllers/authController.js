@@ -88,7 +88,7 @@ const adminLogin = async (req, res, next) => {
   const refreshToken = createRefreshToken(user._id, user.role, "1d");
   user.refreshToken = refreshToken;
   await user.save();
-
+//name /value /options
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
     secure: false,
