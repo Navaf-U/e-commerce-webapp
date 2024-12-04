@@ -90,9 +90,9 @@ const adminLogin = async (req, res, next) => {
   await user.save();
 //name /value /options
   res.cookie("refreshToken", refreshToken, {
-    httpOnly: true,
+    httpOnly: true, 
     secure: false,
-    sameSite: "none",
+    sameSite: "none", //can change to strict
   });
   res.json({ message: "Admin successfully logged in", token });
 };

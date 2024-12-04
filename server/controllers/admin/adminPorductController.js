@@ -1,6 +1,7 @@
 import Product from "../../models/productsSchema.js";
 import CustomError from "../../utils/customError.js";
 import { joiProductSchema } from "../../models/joiValSchema.js";
+
 const createProducts = async (req, res, next) => {
   const { value, error } = joiProductSchema.validate(req.body);
   if (error) {
@@ -48,8 +49,8 @@ const deleteProducts = async (req, res, next) => {
   if (!deletedProduct) return next(new CustomError("Product not found", 404));
   res.status(200).json({
     message: deletedProduct.isDeleted
-      ? `Product is deleted successfully`
-      : `Product is restored successfully`,
+      ? `Product '${deletedProduct.name}' is deleted successfully`
+      : `Product '${deletedProduct.name}' is restored successfully`,
   });
 };
 

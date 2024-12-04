@@ -28,6 +28,7 @@ const totalPurchaseOfOrders = async (req, res) => {
     { $match: { shippingStatus: { $ne: "Cancelled" } } },
     { $count: "confirmedOrders" }, //will count matching orders
   ]);
+  //if no orders aggregate will return empty array so..
   if (confirmedOrders.length === 0) {
     return res.status(200).json({ message: "No orders found" });
   }
@@ -68,7 +69,7 @@ const updatePaymentStatus = async (req, res, next) => {
 const getTotalStats = async (req, res) => {
   const totalStats = await Orders.aggregate([
     { $match: { shippingStatus: { $ne: "Cancelled" }, paymentStatus: "Paid" } },
-    { $unwind: "$products" }, // Deconstruct the `products` array
+    { $unwind: "$products" }, // deconstruct the 'products' array
     {
       $group: {
         _id: null,

@@ -11,7 +11,7 @@ const storage = new CloudinaryStorage({
     }
 })
 
-//multer middleware
+//multer middleware 
 const upload  = multer({storage})
 
 
