@@ -38,7 +38,7 @@ function ProductsCont({ children }) {
     const fetchProductsData = async () => {
       setLoading(true);
       try {
-        const { data } = await axios.get("http://localhost:3000/user/all/products");
+        const { data } = await axios.get("http://localhost:3000/user/products");
         setProducts(data.data);
       }
       catch (err) {

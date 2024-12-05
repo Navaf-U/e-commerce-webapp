@@ -10,7 +10,11 @@ function Product() {
   const { products, currency } = useContext(ProductsData);
   const { isLogged, addToCart } = useContext(userData);
   const [quantity, setQuantity] = useState(1);
+
+console.log(products)
   const findProduct = products.find((item) => item.id === id);
+
+
   const menFiltered = products.filter((item) => item.type === "men");
   const womenFiltered = products.filter((item) => item.type === "women");
 

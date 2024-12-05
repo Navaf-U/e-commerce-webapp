@@ -5,26 +5,28 @@ import { userData } from "../context/UserContext";
 import axios from "axios";
 
 function Men() {
- const [men, setMen] = useState([]);
+  const [men, setMen] = useState([]);
   const { loading } = useContext(userData);
   useEffect(() => {
-     const fetchData = async () => {
-        try {
-          const {data} = await axios.get("http://localhost:3000/user/products/category/men");
-          setMen(data.data);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      };
-      fetchData();
-    },[])
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(
+          "http://localhost:3000/user/products/category/men"
+        );
+        setMen(data.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
-    <>  
-    <div className="flex w-full  justify-center items-center">
-      {loading && <Loading />}
-    </div>
-    <div className="flex flex-wrap justify-center">
-      {men.map((item) => {
+    <>
+      <div className="flex w-full  justify-center items-center">
+        {loading && <Loading />}
+      </div>
+      <div className="flex flex-wrap justify-center">
+        {men.map((item) => {
           return (
             <Card
               key={item.id}
@@ -35,8 +37,8 @@ function Men() {
               name={item.name}
             />
           );
-      })}
-    </div>
+        })}
+      </div>
     </>
   );
 }
