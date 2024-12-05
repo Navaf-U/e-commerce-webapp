@@ -19,7 +19,7 @@ function UserContext({ children }) {
   const loginUser = async (email, password) => {
     setLoading(true)
     try {
-      const { data } = await axios.get("http://localhost:4000/allUsers");
+      const { data } = await axios.get("");
       const user = data.find(
         (item) => item.email === email && item.password === password
       );

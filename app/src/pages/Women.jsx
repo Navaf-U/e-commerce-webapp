@@ -9,7 +9,7 @@ function Women() {
   useEffect(() => {
      const fetchData = async () => {
         try {
-          const {data} = await axios.get("http://localhost:3000/user/products/category/men");
+          const {data} = await axios.get("http://localhost:3000/user/products/category/women");
           setWomen(data.data);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -26,9 +26,9 @@ function Women() {
       {women.map((item) => {
           return (
             <Card
-              key={item.id}
+              key={item._id}
+              id={item._id}
               image={item.image}
-              id={item.id}
               rating={item.rating}
               name={item.name}
               price={item.price}

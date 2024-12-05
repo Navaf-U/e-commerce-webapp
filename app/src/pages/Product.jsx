@@ -1,24 +1,62 @@
 import logo from "../Components/assets/shoe-navaf.svg";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { ProductsData } from "../context/ProductsCont";
 import { userData } from "../context/UserContext";
+import axios from "axios";
 
 function Product() {
   const { id } = useParams();
   const { products, currency } = useContext(ProductsData);
   const { isLogged, addToCart } = useContext(userData);
   const [quantity, setQuantity] = useState(1);
+  const [product,setProduct]= useState([])
+  const [women, setWomen] = useState([]);
+  const [men, setMen] = useState([]);
 
-console.log(products)
-  const findProduct = products.find((item) => item.id === id);
+  useEffect(()=>{
+    const findProduct = async() => {
+      try{
+        const {data} = await axios.get(`http://localhost:3000/user/product/${id}`)
+        setProduct(data)
+      }catch(err){
+        console.log(err)
+      }
+    }
+    findProduct()
+  },[id])
 
 
-  const menFiltered = products.filter((item) => item.type === "men");
-  const womenFiltered = products.filter((item) => item.type === "women");
+  useEffect(() => {
+    const menFiltered = async () => {
+      try {
+        const { data } = await axios.get(
+          "http://localhost:3000/user/products/category/men"
+        );
+        setMen(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    menFiltered();
+  }, []);
 
-  const FinalRating = Number(findProduct?.rating || 0);
+  useEffect(() => {
+    const womenFiltered = async () => {
+      try {
+        const { data } = await axios.get(
+          "http://localhost:3000/user/products/category/women"
+        );
+        setWomen(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    womenFiltered();
+  }, []);
+
+  const FinalRating = Number(product?.rating || 0);
 
   const Stars = (rating) => {
     const fullStars = Math.floor(rating);
@@ -38,37 +76,37 @@ console.log(products)
     <div>
       {!products.length ? (
         <p>Loading...</p>
-      ) : !findProduct ? (
+      ) : !product ? (
         <p>Product not found</p>
       ) : (
         <div>
           <div className="flex flex-col md:flex-row justify-around px-4 py-6">
             <div className="left-section md:w-[40%] flex flex-col items-center">
               <img
-                src={findProduct.image}
+                src={product.image}
                 className="w-[100%] max-w-[300px] mb-4"
                 alt=""
               />
               <h4 className="text-[24px] text-center font-bold">
-                {findProduct.name}
+                {product.name}
               </h4>
-              <h3 className="text-[20px] text-center font-normal">{`Type: ${findProduct.type}`}</h3>
-              <h3 className="text-[24px] text-center font-bold">{`Price: ${findProduct.price}${currency}`}</h3>
+              <h3 className="text-[20px] text-center font-normal">{`Type: ${product.type}`}</h3>
+              <h3 className="text-[24px] text-center font-bold">{`Price: ${product.price}${currency}`}</h3>
               <div className="flex items-center justify-center mt-2">
                 <h3 className="text-[24px] font-bold">{`${FinalRating}`}</h3>
                 <p className="mt-1 flex ml-2">{Stars(FinalRating)}</p>
               </div>
               <h2 className="font-bold text-[17px] mt-5 text-red-500">
-                It has {findProduct.reviews} reviews
+                It has {product.reviews} reviews
               </h2>
             </div>
             <div className="right-section md:w-[50%] mt-4 md:mt-0 flex flex-col items-center justify-center">
               <img src={logo} className="h-[200px] w-[40%] mt-[-20px]" alt="" />
               <p className="text-[50px] font-bold text-center text-sm md:text-base px-2 mt-[-20px]">
-                Brand: {findProduct.brand}
+                Brand: {product.brand}
               </p>
               <p className="text-[50px] font-light text-center text-sm md:text-base px-2">
-                {findProduct.description}
+                {product.description}
               </p>
               <h1 className="text-[20px] font-semibold">Quantity:</h1>
               <div className="flex gap-5 border-[4px] w-[30%] justify-between border-[#BF3131] my-5 ">
@@ -82,10 +120,14 @@ console.log(products)
                 >
                   -
                 </button>
-                <button className="text-[30px] font-semibold">{quantity}</button>
+                <button className="text-[30px] font-semibold">
+                  {quantity}
+                </button>
                 <button
                   className="text-[22px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%]"
-                  onClick={() => setQuantity((prevQuantity) => prevQuantity + 1)}
+                  onClick={() =>
+                    setQuantity((prevQuantity) => prevQuantity + 1)
+                  }
                 >
                   +
                 </button>
@@ -110,22 +152,24 @@ console.log(products)
               Trending Now - You&apos;ll Love These
             </h1>
             <div>
-              {findProduct.type === "men" ? (
+              {product.type === "men" ? (
                 <div className="flex flex-wrap gap-7 mt-28 ms-14">
-                  {menFiltered.map((item) => {
+                  {men.map((item) => {
                     return (
-                      <h1 className="font-semibold" key={item.id}>
-                        <img src={item.image} className="w-36" alt="" /> {item.name}
+                      <h1 className="font-semibold" key={item._id}>
+                        <img src={item.image} className="w-36" alt="" />{" "}
+                        {item.name}
                       </h1>
                     );
                   })}
                 </div>
               ) : (
                 <div className="flex flex-wrap gap-7 mt-28 ms-16">
-                  {womenFiltered.map((item) => {
+                  {women.map((item) => {
                     return (
-                      <h1 className="font-semibold" key={item.id}>
-                        <img src={item.image} className="w-36" alt="" /> {item.name}
+                      <h1 className="font-semibold" key={item._id}>
+                        <img src={item.image} className="w-36" alt="" />{" "}
+                        {item.name}
                       </h1>
                     );
                   })}

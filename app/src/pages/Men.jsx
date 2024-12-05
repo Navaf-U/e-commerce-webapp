@@ -29,8 +29,8 @@ function Men() {
         {men.map((item) => {
           return (
             <Card
-              key={item.id}
-              id={item.id}
+              key={item._id}
+              id={item._id}
               image={item.image}
               rating={item.rating}
               price={item.price}
