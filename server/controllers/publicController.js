@@ -21,10 +21,10 @@ const getProductById = async (req, res) => {
 // get the product by checking the category
 const getProductCategory = async (req, res) => {
   const productCategory = await Products.find({ type: req.params.type });
-  if (!productCategory) {
-    return res.status(404).json({ message: "category not found" });
+  if (!productCategory || productCategory.length === 0) {
+    return res.status(404).json({data: [], message: "category not found" });
   }
-  res.json({ data: productCategory });
+  res.json({ data: productCategory, message: "category found" });
 };
 
 export { allProducts, getProductById, getProductCategory };
