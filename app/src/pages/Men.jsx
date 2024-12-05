@@ -1,22 +1,30 @@
 import Card from "../Components/Shared/Card";
 import Loading from "../Components/Loading/Loading";
-import { useContext } from "react";
-import { ProductsData } from "../context/ProductsCont";
+import { useContext, useEffect, useState } from "react";
 import { userData } from "../context/UserContext";
-import { productsJs } from "../Components/Shared/DataJson";
+import axios from "axios";
 
 function Men() {
-  const { products } = useContext(ProductsData);
+ const [men, setMen] = useState([]);
   const { loading } = useContext(userData);
-  const showProduct = products.length != 0 ? products : productsJs
+  useEffect(() => {
+     const fetchData = async () => {
+        try {
+          const {data} = await axios.get("http://localhost:3000/user/products/category/men");
+          setMen(data.data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      fetchData();
+    },[])
   return (
     <>  
     <div className="flex w-full  justify-center items-center">
       {loading && <Loading />}
     </div>
     <div className="flex flex-wrap justify-center">
-      {showProduct.map((item) => {
-        if (item.type === "men") {
+      {men.map((item) => {
           return (
             <Card
               key={item.id}
@@ -27,7 +35,6 @@ function Men() {
               name={item.name}
             />
           );
-        }
       })}
     </div>
     </>
