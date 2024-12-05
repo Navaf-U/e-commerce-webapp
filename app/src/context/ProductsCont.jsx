@@ -40,8 +40,7 @@ function ProductsCont({ children }) {
       try {
         const { data } = await axios.get("http://localhost:3000/user/products");
         setProducts(data.data);
-      }
-      catch (err) {
+      } catch (err) {
         console.log(err);
       } finally {
         setLoading(false);
@@ -74,7 +73,7 @@ function ProductsCont({ children }) {
     const AddProducts = async () => {
       setLoading(true);
       try {
-        await axios.post("http://localhost:4000/newProducts", datas);
+        await axios.post("http://localhost:3000/admin/product", datas);
       } catch (err) {
         console.log(err);
       } finally {

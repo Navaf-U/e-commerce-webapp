@@ -1,14 +1,15 @@
 import logo from "../Components/assets/shoe-navaf.svg";
+import axios from "axios";
+import Loading from "../Components/Loading/Loading";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { ProductsData } from "../context/ProductsCont";
 import { userData } from "../context/UserContext";
-import axios from "axios";
 
 function Product() {
   const { id } = useParams();
-  const { products, currency } = useContext(ProductsData);
+  const { currency } = useContext(ProductsData);
   const { isLogged, addToCart } = useContext(userData);
   const [quantity, setQuantity] = useState(1);
   const [product,setProduct]= useState([])
@@ -74,8 +75,8 @@ function Product() {
 
   return (
     <div>
-      {!products.length ? (
-        <p>Loading...</p>
+      {product.length === 0 ? (
+        <Loading/>
       ) : !product ? (
         <p>Product not found</p>
       ) : (

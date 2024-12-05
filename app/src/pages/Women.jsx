@@ -7,23 +7,26 @@ function Women() {
   const [women, setWomen] = useState([]);
   const { loading } = useContext(userData);
   useEffect(() => {
-     const fetchData = async () => {
-        try {
-          const {data} = await axios.get("http://localhost:3000/user/products/category/women");
-          setWomen(data.data);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      };
-      fetchData();
-    },[])
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(
+          "http://localhost:3000/user/products/category/women"
+        );
+
+        setWomen(data.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchData();
+  }, []);
   return (
-    <>  
-    <div className="flex w-full  justify-center items-center">
-      {loading && <Loading />}
-    </div>
-    <div className="flex flex-wrap justify-center">
-      {women.map((item) => {
+    <>
+      <div className="flex w-full  justify-center items-center">
+        {loading && <Loading />}
+      </div>
+      <div className="flex flex-wrap justify-center">
+        {women.map((item) => {
           return (
             <Card
               key={item._id}
@@ -34,8 +37,8 @@ function Women() {
               price={item.price}
             />
           );
-      })}
-    </div>
+        })}
+      </div>
     </>
   );
 }
