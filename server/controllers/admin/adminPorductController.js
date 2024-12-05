@@ -4,6 +4,10 @@ import { joiProductSchema } from "../../models/joiValSchema.js";
 
 const createProducts = async (req, res, next) => {
   const { value, error } = joiProductSchema.validate(req.body);
+  const product = await Product.findOne({name:value.name})
+  if(product){
+    return next(new CustomError("Product already exists",400))
+  }
   if (error) {
     return next(new CustomError(error.details[0].message, 400));
   }
@@ -25,6 +29,10 @@ const createProducts = async (req, res, next) => {
 };
 
 const updateProducts = async (req, res, next) => {
+  //checking id format valid or not
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return next(new CustomError("Invalid ID format", 400)); 
+}
   const newProduct = await Product.findById(req.params.id);
   if (!newProduct) return next(new CustomError("Product not found", 404));
   //will update prod image if uploaded new
@@ -39,6 +47,10 @@ const updateProducts = async (req, res, next) => {
 
 // will toggle isDeleted based on its current value
 const deleteProducts = async (req, res, next) => {
+  //checking id format valid or not
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return next(new CustomError("Invalid ID format", 400)); 
+}
   //to access the deleted key
   const prod = await Product.findById(req.params.id);
   const deletedProduct = await Product.findByIdAndUpdate(

@@ -14,6 +14,10 @@ const getTotalOrders = async (req, res) => {
 
 // get all the order of user
 const getOrderByUser = async (req, res) => {
+  //checking id format valid or not
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return next(new CustomError("Invalid ID format", 400)); 
+}
   const orders = await Orders.find({ userID: req.params.id })
     .populate("products.productID", "name price image")
     .sort({ createdAt: -1 });
@@ -37,6 +41,10 @@ const totalPurchaseOfOrders = async (req, res) => {
 
 // will update the shipping status
 const updateShippingStatus = async (req, res, next) => {
+  //checking id format valid or not
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return next(new CustomError("Invalid ID format", 400)); 
+}
   const order = await Orders.findOneAndUpdate(
     { _id: req.params.id },
     { $set: { shippingStatus: req.body.status } },
@@ -52,6 +60,10 @@ const updateShippingStatus = async (req, res, next) => {
 
 // updating the payment status
 const updatePaymentStatus = async (req, res, next) => {
+  //checking id format valid or not
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return next(new CustomError("Invalid ID format", 400)); 
+}
   const order = await Orders.findOneAndUpdate(
     { _id: req.params.id },
     { $set: { paymentStatus: req.body.status } },

@@ -11,7 +11,7 @@ const router = express.Router()
 router
 
 // product routes
-.get("/products",tryCatch(allProducts))
+.get("/all/products",tryCatch(allProducts))
 .get("/product/:id",tryCatch(getProductById))
 .get("/products/category/:type",tryCatch(getProductCategory))
 

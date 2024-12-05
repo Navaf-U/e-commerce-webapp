@@ -51,7 +51,7 @@ const loginUser = async (req, res, next) => {
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    return next(new CustomError("Incorrect password", 401));
+    return next(new CustomError("Invalid credentials", 401));
   }
   // creating token for logged user
   const token = createToken(user._id, user.role, "1h");
@@ -80,7 +80,7 @@ const adminLogin = async (req, res, next) => {
   }
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    return next(new CustomError("Incorrect password", 401));
+    return next(new CustomError("Invalid credentials", 401));
   }
 
   // creating token for logged admin
@@ -90,7 +90,7 @@ const adminLogin = async (req, res, next) => {
   await user.save();
 //name /value /options
   res.cookie("refreshToken", refreshToken, {
-    httpOnly: true, 
+    httpOnly: true,
     secure: false,
     sameSite: "none", //can change to strict
   });

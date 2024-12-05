@@ -1,5 +1,6 @@
-import express from "express";
+import cors from "cors";
 import dotenv from "dotenv";
+import express from "express";
 import connectDB from './config/connectDB.js'
 import userRoutes from "./routes/userRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
@@ -14,12 +15,13 @@ connectDB();
 connectCloudinary();
 const app = express();
 const PORT = process.env.PORT || 3000;
+app.use(cors());
 
 
 // middleware
 app.use(express.json());
 app.get("/", (req, res) => {
-  res.send("BACKEND running");
+  res.send("BACKEND Running");
 });
 
 
@@ -33,7 +35,6 @@ app.use("/admin",adminRoutes);
 app.all("*",(req,res)=>{
   res.status(400).json({message:'cannot access the endpoint'})
 })
-
 
 
 app.listen(PORT, () => {

@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 import User from '../../models/usersSchema.js'
 import CustomError from '../../utils/customError.js'
 
@@ -11,6 +12,10 @@ const getAllUsers = async (req,res)=>{
 }
 
 const getOneUser = async (req,res,next)=>{
+    //checking id format valid or not
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        return next(new CustomError("Invalid ID format", 400)); 
+    }
     const user = await User.findById(req.params.id,{ password : 0 })
     if(!user){
         return next(new CustomError("User not found",404))
@@ -19,6 +24,10 @@ const getOneUser = async (req,res,next)=>{
 }
 
 const blockUser = async (req,res) => {
+    //checking id format valid or not
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        return next(new CustomError("Invalid ID format", 400)); 
+    }
     const user = await User.findById(req.params.id)
     if(!user){
         return next(new CustomError("User not found",404))
