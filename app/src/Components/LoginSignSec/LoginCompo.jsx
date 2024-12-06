@@ -1,23 +1,31 @@
-import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { userData } from "../../context/UserContext";
-
+import axiosErrorManager from "../../util/axiosErrorManage";
+import { toast } from "react-toastify";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { useState } from "react";
 
 function LoginCombo() {
-  const { loginUser, isLogged } = useContext(userData);
+  // const { isLogged } = useContext(userData);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigates = useNavigate();
 
-  const handleFunc = (e) => {
+  const handleFunc = async(e) => {
     e.preventDefault();
-    loginUser(email, password);
-  };
-  useEffect(() => {
-    if (isLogged) {
+    try{
+      //sending logging det to server
+      const response = await axios.post("http://localhost:3000/auth/login", {email,password},{withCredentials: true});
+      const token = response.data.token
+      if(token){
+        Cookies.set("token", token, { expires: 1/24 }); //will expire in 1 day
+      }
+      toast.success("Logged in successfully");
       navigates("/");
+    }catch(error){
+      toast.error(axiosErrorManager(error));
     }
-  }, [navigates, isLogged]);
+  };
   return (
     <div>
       <div className="login-signup w-full min-h-screen pt-16 pb-20">
