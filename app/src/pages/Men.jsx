@@ -3,6 +3,7 @@ import Loading from "../Components/Loading/Loading";
 import { useContext, useEffect, useState } from "react";
 import { userData } from "../context/UserContext";
 import axios from "axios";
+import axiosErrorManager from "../util/axiosErrorManage";
 
 function Men() {
   const [men, setMen] = useState([]);
@@ -15,7 +16,7 @@ function Men() {
         );
         setMen(data.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error(axiosErrorManager( error))
       }
     };
     fetchData();

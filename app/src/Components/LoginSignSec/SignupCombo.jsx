@@ -1,58 +1,19 @@
-import axios from "axios";
 import Loading from "../Loading/Loading";
 import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { userData } from "../../context/UserContext";
-import { toast } from "react-toastify";
 
 function SignupCombo() {
-  const { PostUserDatas ,setLoading,loading} = useContext(userData);
+  const { PostUserDatas,loading} = useContext(userData);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [cpassword, setCpassword] = useState("");
-  const [profilePhoto, setProfilePhoto] = useState("");
   const navigate = useNavigate();
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfilePhoto(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const handlerEvent = async(e) => {
     e.preventDefault();
-    const cart = {};
-    setLoading(true);
-    try{
-      const allUsersRes = await axios.get(
-        "http://localhost:4000/allUsers"
-      );
-      const allUsers = allUsersRes.data;
-      const isUserExists = allUsers.find((user) => user.email === email);
-      if (isUserExists) {
-        toast.error("Email already exists. Please use a different email.");
-        setLoading(false);
-        return;
-      }
-    }catch(err){
-      console.log(err);
-      
-    }finally{
-      setLoading(false)
-    }
-    if (password === cpassword) {
-      PostUserDatas(name, email, password, cart, profilePhoto);
-      toast.success("New account created.. Please login");
+      PostUserDatas(name, email, password);
       navigate("/login");
-    } else {
-      toast.error("password not matching");
-    }
   };
 
   return (
@@ -65,21 +26,6 @@ function SignupCombo() {
             <hr className="border-t-4 border-b-2 border-l border-[#7D0A0A]" />
             <br />
             <div className="loginsignup-fields flex flex-col gap-6">
-              <input
-                type="file"
-                id="user-pfp"
-                onChange={handleFileChange}
-                className="bg-gray-200 h-14 md:h-16 w-full ps-5 border-gray-500 outline-none text-[#5c5c5c] text-base md:text-lg"
-              />
-              {profilePhoto && (
-                <div className="flex justify-center mt-2">
-                  <img
-                    src={profilePhoto}
-                    alt="Preview"
-                    className="w-32 h-32 rounded-full object-cover"
-                  />
-                </div>
-              )}
               <input
                 type="text"
                 id="signup-name"
@@ -102,14 +48,6 @@ function SignupCombo() {
                 required
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
-                className="bg-gray-200 h-14 md:h-16 w-full ps-5 border-gray-500 outline-none text-[#5c5c5c] text-base md:text-lg"
-              />
-              <input
-                type="password"
-                id="signup-cpassword"
-                required
-                placeholder="Confirm Password"
-                onChange={(e) => setCpassword(e.target.value)}
                 className="bg-gray-200 h-14 md:h-16 w-full ps-5 border-gray-500 outline-none text-[#5c5c5c] text-base md:text-lg"
               />
             </div>

@@ -6,28 +6,30 @@ import { useContext, useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { ProductsData } from "../context/ProductsCont";
 import { userData } from "../context/UserContext";
+import axiosErrorManager from "../util/axiosErrorManage";
 
 function Product() {
   const { id } = useParams();
   const { currency } = useContext(ProductsData);
   const { isLogged, addToCart } = useContext(userData);
   const [quantity, setQuantity] = useState(1);
-  const [product,setProduct]= useState([])
+  const [product, setProduct] = useState([]);
   const [women, setWomen] = useState([]);
   const [men, setMen] = useState([]);
 
-  useEffect(()=>{
-    const findProduct = async() => {
-      try{
-        const {data} = await axios.get(`http://localhost:3000/user/product/${id}`)
-        setProduct(data)
-      }catch(err){
-        console.log(err)
+  useEffect(() => {
+    const findProduct = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:3000/user/product/${id}`
+        );
+        setProduct(data);
+      } catch (err) {
+        console.error(axiosErrorManager(err));
       }
-    }
-    findProduct()
-  },[id])
-
+    };
+    findProduct();
+  }, [id]);
 
   useEffect(() => {
     const menFiltered = async () => {
@@ -37,7 +39,7 @@ function Product() {
         );
         setMen(data.data);
       } catch (error) {
-        console.log(error);
+        console.error(axiosErrorManager(error));
       }
     };
     menFiltered();
@@ -51,7 +53,7 @@ function Product() {
         );
         setWomen(data.data);
       } catch (error) {
-        console.log(error);
+        console.error(axiosErrorManager(error));
       }
     };
     womenFiltered();
@@ -76,7 +78,7 @@ function Product() {
   return (
     <div>
       {product.length === 0 ? (
-        <Loading/>
+        <Loading />
       ) : !product ? (
         <p>Product not found</p>
       ) : (

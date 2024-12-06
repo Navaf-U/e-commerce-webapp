@@ -1,8 +1,8 @@
 import axios from "axios";
+import axiosErrorManager from "../util/axiosErrorManage";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
 // eslint-disable-next-line react-refresh/only-export-components
 export const userData = createContext();
 
@@ -166,30 +166,20 @@ function UserContext({ children }) {
     });
   };
 
-  const PostUserDatas = async (name, email, password, cart, profilePhoto) => {
+  const PostUserDatas = async (name, email, password) => {
     const data = {
-      image: profilePhoto,
       name: name,
       email: email,
       password: password,
-      cart: cart,
-      orders: [],
-      isAdmin: false,
-      isBlocked: false,
     };
 
     setLoading(true);
     try {
-
-      const response = await axios.post("http://localhost:4000/allUsers", data);
-      if (response.status === 201) {
+      const response = await axios.post("http://localhost:3000/auth/register", data);
         toast.success("User registered successfully");
         setCurrUser(response.data);
-        localStorage.setItem("currUser", JSON.stringify(response.data));
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("Registration failed. Please try again.");
+      }catch (error) {
+      toast.error(axiosErrorManager(error));
     } finally {
       setLoading(false);
     }

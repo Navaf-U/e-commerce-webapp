@@ -3,6 +3,7 @@ import Card from "../Components/Shared/Card";
 import { useContext, useEffect, useState } from "react";
 import { userData } from "../context/UserContext";
 import axios from "axios";
+import axiosErrorManager from "../util/axiosErrorManage";
 function Women() {
   const [women, setWomen] = useState([]);
   const { loading } = useContext(userData);
@@ -15,7 +16,7 @@ function Women() {
 
         setWomen(data.data);
       } catch (error) {
-        console.log(error.message);
+        console.error(axiosErrorManager( error))
       }
     };
     fetchData();
