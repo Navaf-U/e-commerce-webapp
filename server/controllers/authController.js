@@ -66,7 +66,20 @@ const loginUser = async (req, res, next) => {
     sameSite: "none",
   });
 
-  res.json({ message: "You've successfully logged in", token });
+  const cUser = {
+    id: user._id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  }
+  //sending user details to client (for curr user)
+  res.cookie("currentUser", JSON.stringify(cUser),{
+    httpOnly: true, //to allow front end access 
+    secure: false,
+    sameSite: "none",
+  });
+  res.json({ message: "user successfully logged in", token , user:cUser });
+
 };
 
 const adminLogin = async (req, res, next) => {
@@ -88,13 +101,15 @@ const adminLogin = async (req, res, next) => {
   const refreshToken = createRefreshToken(user._id, user.role, "1d");
   user.refreshToken = refreshToken;
   await user.save();
-//name /value /options
+
+  //sending refreshToken to cookie
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
     secure: false,
     sameSite: "none", //can change to strict
   });
   res.json({ message: "Admin successfully logged in", token });
+
 };
 
 // controller to handle refresh
