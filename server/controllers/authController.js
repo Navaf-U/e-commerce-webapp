@@ -62,23 +62,27 @@ const loginUser = async (req, res, next) => {
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    secure: false,
+    secure: true,
     sameSite: "none",
   });
 
-  const cUser = {
+  const currentUser = {
     id: user._id,
     name: user.name,
     email: user.email,
     role: user.role,
   }
   //sending user details to client (for curr user)
-  res.cookie("currentUser", JSON.stringify(cUser),{
-    httpOnly: true, //to allow front end access 
-    secure: false,
+  res.cookie("currentUser", JSON.stringify(currentUser))
+
+  //sending token to cookie
+  res.cookie("token", token, {
+    httpOnly: false,
+    secure: true,
     sameSite: "none",
   });
-  res.json({ message: "user successfully logged in", token , user:cUser });
+
+  res.json({ message: "user successfully logged in" });
 
 };
 
