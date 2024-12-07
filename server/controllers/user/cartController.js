@@ -4,9 +4,10 @@ import Cart from "../../models/cartSchema.js";
 const getUserCart = async (req, res) => {
   const data = await Cart.findOne({ userID: req.user.id }).populate({
     path: "products.productID",
-    // to specify which fields to populate
+    // to specify which fields to populate  
     select: "name price image",
   });
+  
   if (data) {
     res.status(200).json(data);
   } else {
@@ -55,7 +56,7 @@ const removeFromCart = async (req, res) => {
     { new: true }
   );
   if (cart) {
-    res.status(200).json({message:"item removed"});
+    res.status(200).json({message:"item removed",cart:cart.products || []});
   } else {
     res.status(404).json({ message: "Product not found in the cart" });
   }
