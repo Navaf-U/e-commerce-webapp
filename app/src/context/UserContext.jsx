@@ -3,6 +3,7 @@ import axiosErrorManager from "../util/axiosErrorManage";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
 // eslint-disable-next-line react-refresh/only-export-components
 export const userData = createContext();
 
@@ -14,8 +15,23 @@ function UserContext({ children }) {
   const [cart, setCart] = useState({});
   const navigate = useNavigate()
 
-  const isAdmin = currUser !== null && currUser.isAdmin ? true : false;
+  const isAdmin = currUser !== null && currUser.role ? "admin" : "user";
 
+
+  useEffect(() => {
+    const cookieUser = Cookies.get("currentUser");
+    console.log("token is",cookieUser)
+    if (cookieUser) {
+
+      try {
+        setCurrUser(JSON.parse(decodeURIComponent(cookieUser)));
+      } catch (error) {
+        console.error("Failed to parse currentUser cookie:", error);
+      }
+    }
+  }, []);
+
+console.log("currUser",currUser)
   const loginUser = async (email, password) => {
     setLoading(true)
     try {

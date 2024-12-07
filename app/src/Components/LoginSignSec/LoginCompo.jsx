@@ -16,9 +16,9 @@ function LoginCombo() {
     try{
       //sending logging det to server
       const response = await axios.post("http://localhost:3000/auth/login", {email,password},{withCredentials: true});
-      const token = response.data.token
+      const token = await response.data.token
       if(token){
-        Cookies.set("token", token, { expires: 1/24 }); //will expire in 1 day
+        Cookies.set("token", token, { expires: 1/24 }); //will expire in 1 hr
       }
       toast.success("Logged in successfully");
       navigates("/");
