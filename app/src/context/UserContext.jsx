@@ -9,7 +9,6 @@ export const userData = createContext();
 
 // eslint-disable-next-line react/prop-types
 function UserContext({ children }) {
-  const [isLogged, setIsLogged] = useState(false);
   const [currUser, setCurrUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [cart, setCart] = useState({});
@@ -22,9 +21,8 @@ function UserContext({ children }) {
     const cookieUser = Cookies.get("currentUser");
     console.log("token is",cookieUser)
     if (cookieUser) {
-
       try {
-        setCurrUser(JSON.parse(decodeURIComponent(cookieUser)));
+        setCurrUser(JSON.parse(cookieUser));
       } catch (error) {
         console.error("Failed to parse currentUser cookie:", error);
       }
@@ -32,56 +30,21 @@ function UserContext({ children }) {
   }, []);
 
 console.log("currUser",currUser)
-  const loginUser = async (email, password) => {
-    setLoading(true)
-    try {
-      const { data } = await axios.get("");
-      const user = data.find(
-        (item) => item.email === email && item.password === password
-      );
-      if (user) {
-        if (user.isBlocked) {
-          return toast.error("Access Denied");
-        }
-        if (user.isAdmin) {
-          toast.success("ADMIN IS LOGGED");
-        }
 
-        if (!user.orders || !Array.isArray(user.orders)) {
-          user.orders = [];
-        }
 
-        setIsLogged(true);
-        setCurrUser(user);
-        setCart(user.cart || {});
-        navigate("/")
-        localStorage.setItem("isLogged", "true");
-        localStorage.setItem("currUser", JSON.stringify(user));
-        const storedCart =
-          JSON.parse(localStorage.getItem(`${user.email}_cart`)) || {};
-        setCart(storedCart);
-        localStorage.setItem("cart", JSON.stringify(storedCart));
-        if (!user.isAdmin) {
-          toast.success(`User logged in`);
-        }
-      } else {
-        toast.error("Invalid Email or Password");
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+const logoutUser = async () => {
+  try {
+    // Call the logout API on the server
+    await axios.post("http://localhost:3000/auth/logout",{},{withCredentials: true});
+    navigate("/");  // Navigate to the homepage or login page
+    toast.success("Logged out successfully");
+    setCurrUser(null);
+  } catch (err) {
+    console.error(err, ": error in logout");
+    toast.error("Error logging out");
+  }
+};
 
-  const logoutUser = () => {
-      setCurrUser(null);
-      setIsLogged(false);
-      navigate("/")
-      localStorage.removeItem("isLogged");
-      localStorage.removeItem("currUser");
-      localStorage.removeItem("cart");
-  };
 
   useEffect(() => {
     const logged = localStorage.getItem("isLogged") === "true";
@@ -103,7 +66,6 @@ console.log("currUser",currUser)
       }
 
     if (logged && saveLog){
-      setIsLogged(true);
       setCurrUser(saveLog);
       const storedCart =
         JSON.parse(localStorage.getItem(`${saveLog.email}_cart`)) || {};
@@ -204,8 +166,6 @@ console.log("currUser",currUser)
   const value = {
     currUser,
     setCurrUser,
-    isLogged,
-    loginUser,
     logoutUser,
     PostUserDatas,
     loading,

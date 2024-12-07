@@ -2,28 +2,30 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axiosErrorManager from "../../util/axiosErrorManage";
 import { toast } from "react-toastify";
 import axios from "axios";
-import Cookies from "js-cookie";
 import { useState } from "react";
 
 function LoginCombo() {
   // const { isLogged } = useContext(userData);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const navigates = useNavigate();
-
-  const handleFunc = async(e) => {
+  const [password, setPassword] = useState("");
+  const [, setIsLogged] = useState(false);
+  const  [, setLoading] = useState(false);
+  const handleFunc = async (e) => {
     e.preventDefault();
-    try{
-      //sending logging det to server
-      const response = await axios.post("http://localhost:3000/auth/login", {email,password},{withCredentials: true});
-      const token = await response.data.token
-      if(token){
-        Cookies.set("token", token, { expires: 1/24 }); //will expire in 1 hr
-      }
-      toast.success("Logged in successfully");
-      navigates("/");
-    }catch(error){
+    setLoading(true);
+    try {
+     await axios.post(
+        "http://localhost:3000/auth/login", 
+        { email, password },
+        { withCredentials: true } //ensure cookies are sent and received
+      );
+        setIsLogged(true);
+        navigates("/");
+    } catch (error) {
       toast.error(axiosErrorManager(error));
+    } finally {
+      setLoading(false); // Stop loading once the login process is finished
     }
   };
   return (

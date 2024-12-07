@@ -14,7 +14,7 @@ function Navbar() {
   const [menu, setMenu] = useState(false);
   const [currUserDataShows, setCurrUserDataShows] = useState(false);
   const { search, setSearch, cartItemNotify } = useContext(ProductsData);
-  const { isLogged, currUser,logoutUser } = useContext(userData);
+  const { currUser,logoutUser } = useContext(userData);
     
   const toggleDropdown = () => {
     setCurrUserDataShows((prev) => !prev);
@@ -114,7 +114,7 @@ function Navbar() {
               <FaSearch className="bg-[#BF3131] text-white h-[40px] w-[40px] p-2 rounded-r-full shadow-md hover:bg-[#a82626] transition-colors duration-300" />
             </NavLink>
 
-            {isLogged === false ? (
+            {currUser === null ? (
               <NavLink to="/login">
                 <button className="bg-[#BF3131] text-white rounded-lg py-1 px-4 w-20 mx-1 sm:w-auto transition-all duration-300 hover:bg-[#a82626]">
                   Login
@@ -134,7 +134,7 @@ function Navbar() {
                 className="ms-5 me-3 cursor-pointer"
               />
             )}
-            {isLogged === true && (
+            {currUser === !null && (
               <div className="flex gap-5">
                 <NavLink to="/cart" className="relative">
                   <div className="absolute top-[-20px] right-[-3px] bg-red-700 rounded-full h-4 w-4 text-center mt-2">
