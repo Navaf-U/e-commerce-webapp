@@ -31,7 +31,21 @@ function UserContext({ children }) {
 
 console.log("currUser",currUser)
 
-
+const loginUser = async (email, password) => {
+  try {
+     await axios.post(
+      "http://localhost:3000/auth/login",
+      { email, password },
+      { withCredentials: true }
+    );
+    const cookieUser = Cookies.get("currentUser");
+    setCurrUser(JSON.parse(cookieUser));
+    navigate("/");  // Navigate to the homepage or login page
+    toast.success("Logged in successfully");
+  } catch (err) {
+    toast.error(axiosErrorManager(err));
+  }
+}
 const logoutUser = async () => {
   try {
     // Call the logout API on the server
@@ -166,6 +180,7 @@ const logoutUser = async () => {
   const value = {
     currUser,
     setCurrUser,
+    loginUser,
     logoutUser,
     PostUserDatas,
     loading,

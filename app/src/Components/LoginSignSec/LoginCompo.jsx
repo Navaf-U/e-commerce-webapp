@@ -1,31 +1,20 @@
-import { NavLink, useNavigate } from "react-router-dom";
-import axiosErrorManager from "../../util/axiosErrorManage";
-import { toast } from "react-toastify";
-import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { userData } from "../../context/UserContext.jsx";
 
 function LoginCombo() {
+  const {loginUser} = useContext(userData) 
   // const { isLogged } = useContext(userData);
   const [email, setEmail] = useState("");
-  const navigates = useNavigate();
+  // const navigates = useNavigate();
   const [password, setPassword] = useState("");
-  const [, setIsLogged] = useState(false);
-  const  [, setLoading] = useState(false);
+  // const [, setIsLogged] = useState(false);
   const handleFunc = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    try {
-     await axios.post(
-        "http://localhost:3000/auth/login", 
-        { email, password },
-        { withCredentials: true } //ensure cookies are sent and received
-      );
-        setIsLogged(true);
-        navigates("/");
-    } catch (error) {
-      toast.error(axiosErrorManager(error));
-    } finally {
-      setLoading(false); // Stop loading once the login process is finished
+    try{
+      await loginUser(email, password);
+    }catch(err){
+      console.log(err)
     }
   };
   return (
