@@ -11,7 +11,7 @@ export const userData = createContext();
 function UserContext({ children }) {
   const [currUser, setCurrUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [cart, setCart] = useState({});
+  const [cart,setCart] = useState([]);
   const navigate = useNavigate()
 
   const isAdmin = currUser !== null && currUser.role ? "admin" : "user";
@@ -19,7 +19,7 @@ function UserContext({ children }) {
 
   useEffect(() => {
     const cookieUser = Cookies.get("currentUser");
-    console.log("token is",cookieUser)
+    // console.log("token is",cookieUser)
     if (cookieUser) {
       try {
         setCurrUser(JSON.parse(cookieUser));
@@ -29,8 +29,25 @@ function UserContext({ children }) {
     }
   }, []);
 
-console.log("currUser",currUser)
 
+
+useEffect(()=>{
+  const getUserCart = async() => {
+    try {
+      const token = Cookies.get("token");
+    const data = await axios.get(`http://localhost:3000/user/cart`,{
+      headers: {
+        token: `Bearer ${token}`}}
+      )
+      setCart(data.data?.products)
+    }catch(error) {
+      console.log(error)
+    }
+  }
+
+
+getUserCart()
+},[])
 const loginUser = async (email, password) => {
   try {
      await axios.post(
@@ -54,39 +71,11 @@ const logoutUser = async () => {
     toast.success("Logged out successfully");
     setCurrUser(null);
   } catch (err) {
-    console.error(err, ": error in logout");
-    toast.error("Error logging out");
+    toast.error(axiosErrorManager(err));
   }
 };
 
 
-  useEffect(() => {
-    const logged = localStorage.getItem("isLogged") === "true";
-    const saveLog = JSON.parse(localStorage.getItem("currUser"));
-
-    const getCart = async (userId) => {
-      setLoading(true)
-      try{
-        const { data } = await axios.get(
-          `http://localhost:4000/allUsers/${userId}`
-        );
-        setCart(data.cart || {});
-      }catch(err){
-        console.log(err);
-        
-      }finally{
-        setLoading(false)
-      }
-      }
-
-    if (logged && saveLog){
-      setCurrUser(saveLog);
-      const storedCart =
-        JSON.parse(localStorage.getItem(`${saveLog.email}_cart`)) || {};
-      setCart(storedCart);
-      getCart(saveLog.id);
-    }
-  }, []);
 
   const updateCartInLocalStorage = (updatedCart) => {
     if (currUser){
@@ -97,37 +86,23 @@ const logoutUser = async () => {
     }
   };
 
-  const addToCart = (id, quantity) => {
-    if (currUser) {
-      setCart((prev) => {
-        const existingQuant = prev[id] || 0;
-        const updatedCart = {
-          ...prev,
-          [id]: existingQuant + quantity,
-        };
-        updateCartInLocalStorage(updatedCart);
-        axios.patch(`http://localhost:4000/allUsers/${currUser.id}`, {
-          cart: updatedCart,
-        });
-        return updatedCart;
-      });
-    } else {
-      toast.alert("please login");
-    }
+  const addToCart = () => {
+    
   };
 
-  const removeFromCart = (id) => {
-    setCart((prev) => {
-      const updatedCart = { ...prev };
-      if (updatedCart[id] > 0) {
-        delete updatedCart[id];
-      }
-      updateCartInLocalStorage(updatedCart);
-      axios.patch(`http://localhost:4000/allUsers/${currUser.id}`, {
-        cart: updatedCart,
-      });
-      return updatedCart;
-    });
+  const removeFromCart = async (id) => {
+    const token = Cookies.get("token");
+    try {
+       const res = await axios.delete(
+        `http://localhost:3000/user/cart`, {
+          headers: { token: `Bearer ${token}` },
+          data: { productID: id },}
+      );
+      setCart(res.data.cart);
+      toast.success(res.data.message);
+    } catch (error) {
+      console.error(axiosErrorManager(error));
+    }
   };
 
   const increaseQuantity = (id) => {
