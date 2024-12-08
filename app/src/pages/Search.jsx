@@ -25,7 +25,7 @@ function Search() {
           {data.map((item) => (
             <li
               className="border-[1px] border-[#BF3131] text-center w-full md:w-[40%] text-[20px] p-5"
-              key={item.id}
+              key={item._id}
             >
               <NavLink
                 to={`/products/${item.id}`}

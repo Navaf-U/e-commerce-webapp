@@ -76,7 +76,9 @@ function UserContext({ children }) {
       }
     };
 
-
+    useEffect(() => {
+      getUserCart();
+    }, []);
 
   const addToCart = async(id,q) => {
     try {

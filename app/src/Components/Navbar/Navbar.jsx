@@ -13,8 +13,8 @@ import { RiUserFollowFill } from "react-icons/ri";
 function Navbar() {
   const [menu, setMenu] = useState(false);
   const [currUserDataShows, setCurrUserDataShows] = useState(false);
-  const { search, setSearch, cartItemNotify } = useContext(ProductsData);
-  const { currUser,logoutUser } = useContext(userData);
+  const { search, setSearch } = useContext(ProductsData);
+  const { currUser,logoutUser,cart } = useContext(userData);
     
   const toggleDropdown = () => {
     setCurrUserDataShows((prev) => !prev);
@@ -139,7 +139,7 @@ function Navbar() {
                 <NavLink to="/cart" className="relative">
                   <div className="absolute top-[-20px] right-[-3px] bg-red-700 rounded-full h-4 w-4 text-center mt-2">
                     <p className="m-[-3px] text-white text-[13px]">
-                      {cartItemNotify()}
+                      {cart.length}
                     </p>
                   </div>
                   <IoCartOutline className="ms-3 hover:text-[#BF3131]" size={25} />

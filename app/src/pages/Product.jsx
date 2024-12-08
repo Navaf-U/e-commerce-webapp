@@ -11,7 +11,7 @@ import axiosErrorManager from "../util/axiosErrorManage";
 function Product() {
   const { id } = useParams();
   const { currency } = useContext(ProductsData);
-  const { isLogged, addToCart } = useContext(userData);
+  const { currUser, addToCart } = useContext(userData);
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState([]);
   const [women, setWomen] = useState([]);
@@ -99,9 +99,6 @@ function Product() {
                 <h3 className="text-[24px] font-bold">{`${FinalRating}`}</h3>
                 <p className="mt-1 flex ml-2">{Stars(FinalRating)}</p>
               </div>
-              <h2 className="font-bold text-[17px] mt-5 text-red-500">
-                It has {product.reviews} reviews
-              </h2>
             </div>
             <div className="right-section md:w-[50%] mt-4 md:mt-0 flex flex-col items-center justify-center">
               <img src={logo} className="h-[200px] w-[40%] mt-[-20px]" alt="" />
@@ -135,7 +132,7 @@ function Product() {
                   +
                 </button>
               </div>
-              {isLogged === true ? (
+              {currUser !== null  ? (
                 <NavLink to="/cart" onClick={() => addToCart(id, quantity)}>
                   <button className="mt-8 w-[350px] h-[70px] rounded-md bg-[#BF3131] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#7D0A0A] focus:outline-none focus:ring-4 focus:ring-blue-300">
                     Add to Cart
