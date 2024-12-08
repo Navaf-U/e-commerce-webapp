@@ -11,11 +11,10 @@ export const userData = createContext();
 function UserContext({ children }) {
   const [currUser, setCurrUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [cart,setCart] = useState([]);
-  const navigate = useNavigate()
+  const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
 
   const isAdmin = currUser !== null && currUser.role ? "admin" : "user";
-
 
   useEffect(() => {
     const cookieUser = Cookies.get("currentUser");
@@ -30,78 +29,95 @@ function UserContext({ children }) {
   }, []);
 
 
-
-useEffect(()=>{
-  const getUserCart = async() => {
+  const loginUser = async (email, password) => {
     try {
-      const token = Cookies.get("token");
-    const data = await axios.get(`http://localhost:3000/user/cart`,{
-      headers: {
-        token: `Bearer ${token}`}}
-      )
-      setCart(data.data?.products)
-    }catch(error) {
-      console.log(error)
-    }
-  }
-
-
-getUserCart()
-},[])
-const loginUser = async (email, password) => {
-  try {
-     await axios.post(
-      "http://localhost:3000/auth/login",
-      { email, password },
-      { withCredentials: true }
-    );
-    const cookieUser = Cookies.get("currentUser");
-    setCurrUser(JSON.parse(cookieUser));
-    navigate("/");  // Navigate to the homepage or login page
-    toast.success("Logged in successfully");
-  } catch (err) {
-    toast.error(axiosErrorManager(err));
-  }
-}
-const logoutUser = async () => {
-  try {
-    // Call the logout API on the server
-    await axios.post("http://localhost:3000/auth/logout",{},{withCredentials: true});
-    navigate("/");  // Navigate to the homepage or login page
-    toast.success("Logged out successfully");
-    setCurrUser(null);
-  } catch (err) {
-    toast.error(axiosErrorManager(err));
-  }
-};
-
-
-
-  const updateCartInLocalStorage = (updatedCart) => {
-    if (currUser){
-      localStorage.setItem(
-        `${currUser.email}_cart`,
-        JSON.stringify(updatedCart)
+      await axios.post(
+        "http://localhost:3000/auth/login",
+        { email, password },
+        { withCredentials: true }
       );
+      const cookieUser = Cookies.get("currentUser");
+      setCurrUser(JSON.parse(cookieUser));
+      navigate("/"); // Navigate to the homepage or login page
+      toast.success("Logged in successfully");
+    } catch (err) {
+      toast.error(axiosErrorManager(err));
+    }
+  };
+  const logoutUser = async () => {
+    try {
+      // Call the logout API on the server
+      await axios.post(
+        "http://localhost:3000/auth/logout",
+        {},
+        { withCredentials: true }
+      );
+      navigate("/"); // Navigate to the homepage or login page
+      toast.success("Logged out successfully");
+      setCurrUser(null);
+    } catch (err) {
+      toast.error(axiosErrorManager(err));
     }
   };
 
-  const addToCart = () => {
-    
+
+  useEffect(() => {
+    const getUserCart = async () => {
+      try {
+        const token = Cookies.get("token");
+        const data = await axios.get(`http://localhost:3000/user/cart`, {
+          headers: {
+            token: `Bearer ${token}`,
+          },
+        });
+        setCart(data.data?.products);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getUserCart();
+  }, [cart])  ;
+
+
+
+  const addToCart = async(id,q) => {
+    try {
+      const token = Cookies.get("token");
+      await axios.post(`http://localhost:3000/user/cart`, {
+        productID:id,
+        quantity:q 
+       },
+       { headers: { token: `Bearer ${token}` } },
+       { withCredentials: true })
+       setCart((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
+       console.log(cart)
+      toast.success("Product added to cart");
+    } catch (error) {
+      toast.error(axiosErrorManager(error));
+    }
   };
 
   const removeFromCart = async (id) => {
     const token = Cookies.get("token");
     try {
-       const res = await axios.delete(
-        `http://localhost:3000/user/cart`, {
-          headers: { token: `Bearer ${token}` },
-          data: { productID: id },}
-      );
+      const res = await axios.delete(`http://localhost:3000/user/cart`, {
+        headers: { token: `Bearer ${token}` },
+        data: { productID: id },
+      });
       setCart(res.data.cart);
+      console.log(typeof res.data.cart, res.data.cart);
       toast.success(res.data.message);
     } catch (error) {
       console.error(axiosErrorManager(error));
+    }
+  };
+  const updateCartInLocalStorage = (updatedCart) => {
+    if (currUser) {
+      localStorage.setItem(
+        `${currUser.email}_cart`,
+        JSON.stringify(updatedCart)
+      );
     }
   };
 
@@ -142,10 +158,13 @@ const logoutUser = async () => {
 
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:3000/auth/register", data);
-        toast.success("User registered successfully");
-        setCurrUser(response.data);
-      }catch (error) {
+      const response = await axios.post(
+        "http://localhost:3000/auth/register",
+        data
+      );
+      toast.success("User registered successfully");
+      setCurrUser(response.data);
+    } catch (error) {
       toast.error(axiosErrorManager(error));
     } finally {
       setLoading(false);

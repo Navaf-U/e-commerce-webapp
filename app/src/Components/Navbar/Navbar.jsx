@@ -134,7 +134,7 @@ function Navbar() {
                 className="ms-5 me-3 cursor-pointer"
               />
             )}
-            {currUser === !null && (
+            {currUser !== null && (
               <div className="flex gap-5">
                 <NavLink to="/cart" className="relative">
                   <div className="absolute top-[-20px] right-[-3px] bg-red-700 rounded-full h-4 w-4 text-center mt-2">
