@@ -61,7 +61,7 @@ function UserContext({ children }) {
   };
 
 
-  useEffect(() => {
+
     const getUserCart = async () => {
       try {
         const token = Cookies.get("token");
@@ -76,9 +76,6 @@ function UserContext({ children }) {
       }
     };
 
-    getUserCart();
-  }, [cart])  ;
-
 
 
   const addToCart = async(id,q) => {
@@ -91,12 +88,13 @@ function UserContext({ children }) {
        { headers: { token: `Bearer ${token}` } },
        { withCredentials: true })
        setCart((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
-       console.log(cart)
+       await getUserCart();
       toast.success("Product added to cart");
     } catch (error) {
       toast.error(axiosErrorManager(error));
     }
   };
+
 
   const removeFromCart = async (id) => {
     const token = Cookies.get("token");
@@ -106,7 +104,7 @@ function UserContext({ children }) {
         data: { productID: id },
       });
       setCart(res.data.cart);
-      console.log(typeof res.data.cart, res.data.cart);
+      await getUserCart();
       toast.success(res.data.message);
     } catch (error) {
       console.error(axiosErrorManager(error));
