@@ -112,42 +112,24 @@ function UserContext({ children }) {
       console.error(axiosErrorManager(error));
     }
   };
-  const updateCartInLocalStorage = (updatedCart) => {
-    if (currUser) {
-      localStorage.setItem(
-        `${currUser.email}_cart`,
-        JSON.stringify(updatedCart)
-      );
-    }
-  };
 
-  const increaseQuantity = (id) => {
-    setCart((oldCart) => {
-      const updatedCart = {
-        ...oldCart,
-        [id]: (oldCart[id] || 0) + 1,
-      };
-      updateCartInLocalStorage(updatedCart);
-      axios.patch(`http://localhost:4000/allUsers/${currUser.id}`, {
-        cart: updatedCart,
-      });
-      return updatedCart;
+//updating cart quantity
+const updateCart = async (productID,quantity) => {
+  try {
+    const token = Cookies.get("token");
+    const res = await axios.post(`http://localhost:3000/user/cart`, {
+      productID,
+      quantity
+    }, {
+      headers: { token: `Bearer ${token}` },
     });
-  };
+    setCart(res.data.cart);
+    await getUserCart();
+  } catch (error) {
+    console.error(axiosErrorManager(error));
+  }
+};
 
-  const decreaseQuantity = (id) => {
-    setCart((oldCart) => {
-      const updatedCart = {
-        ...oldCart,
-        [id]: oldCart[id] > 1 ? oldCart[id] - 1 : 1,
-      };
-      updateCartInLocalStorage(updatedCart);
-      axios.patch(`http://localhost:4000/allUsers/${currUser.id}`, {
-        cart: updatedCart,
-      });
-      return updatedCart;
-    });
-  };
 
   const PostUserDatas = async (name, email, password) => {
     const data = {
@@ -183,8 +165,7 @@ function UserContext({ children }) {
     setCart,
     addToCart,
     removeFromCart,
-    increaseQuantity,
-    decreaseQuantity,
+    updateCart,
     isAdmin,
   };
 

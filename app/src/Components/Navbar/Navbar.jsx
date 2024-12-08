@@ -15,7 +15,7 @@ function Navbar() {
   const [currUserDataShows, setCurrUserDataShows] = useState(false);
   const { search, setSearch } = useContext(ProductsData);
   const { currUser,logoutUser,cart } = useContext(userData);
-    
+  const cartLength = cart ? cart.length : 0;
   const toggleDropdown = () => {
     setCurrUserDataShows((prev) => !prev);
   };
@@ -42,7 +42,7 @@ function Navbar() {
     <div className="pb-20">
       <div>
         {currUserDataShows && currUser && (
-          <div className="fixed right-0 w-48 mt-20 bg-white rounded-md shadow-lg py-2 z-50">
+          <div className="fixed right-0 w-48 mt-20 bg-[#fff9f9]  shadow-lg py-2 z-50">
             <p className="px-4 py-2 font-bold hover:bg-[#800000] hover:text-white">
               {currUser.name}
             </p>
@@ -129,9 +129,9 @@ function Navbar() {
               />
             ) : (
               <RiUserFollowFill
-                size={30}
+                size={37}
                 onClick={toggleDropdown}
-                className="ms-5 me-3 cursor-pointer"
+                className="ms-5 me-3 cursor-pointer hover:text-[#BF3131]"
               />
             )}
             {currUser !== null && (
@@ -139,7 +139,7 @@ function Navbar() {
                 <NavLink to="/cart" className="relative">
                   <div className="absolute top-[-20px] right-[-3px] bg-red-700 rounded-full h-4 w-4 text-center mt-2">
                     <p className="m-[-3px] text-white text-[13px]">
-                      {cart.length}
+                      {cartLength}
                     </p>
                   </div>
                   <IoCartOutline className="ms-3 hover:text-[#BF3131]" size={25} />

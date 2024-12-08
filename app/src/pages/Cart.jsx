@@ -7,13 +7,21 @@ import { userData } from "../context/UserContext";
 const Cart = () => {
 
   const { currency } = useContext(ProductsData);
-  const { cart, removeFromCart } = useContext(userData);  
+  const { cart, removeFromCart , updateCart } = useContext(userData);  
+  const cartLength = cart ? cart.length : 0;
+const increaseQuantity = (productID,quantity) => {
+  updateCart(productID,quantity+1)
   
-  // console.log(cart)
+}
+const decreaseQuantity = (productID,quantity) => {
+  updateCart(productID,quantity-1)
+  
+}
+  
   return (
     <div className="cart-items mx-auto my-8 max-w-screen-lg p-4">
       <h2 className="text-2xl font-bold text-center mb-6">Your Cart</h2>
-      {cart.length === 0 ? (
+      {!cart ||cartLength === 0 ? (
         <p className="text-center text-lg">Your cart is empty.</p>
       ) : (
         <div className="hidden sm:flex flex-col sm:flex-row items-center py-4 px-4 bg-[#c95555] text-white rounded-lg shadow-md mb-4">
@@ -28,7 +36,7 @@ const Cart = () => {
         </div>
       )}
     
-      {cart.map((item,index) => {
+      {cart?.map((item,index) => {
         return (
             <div
               key={index}
@@ -49,21 +57,22 @@ const Cart = () => {
               <div className="flex">
               <button
                 className="text-[30px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%] active:bg-black"
-                // onClick={() => decreaseQuantity(item.id)}
+                onClick={() => decreaseQuantity(item.productID._id , item.quantity)}
               >
                 -
               </button>
               <button className="bg-red-800 h-12 text-white flex items-center justify-center w-24 mb-2 sm:mb-0">
+                {item.quantity}
                 </button>
               <button
                 className="text-[22px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%] active:bg-black"
-                // onClick={() => increaseQuantity(item.id)}
+                onClick={() => increaseQuantity(item.productID._id , item.quantity)}
               >
                 +
               </button>
               </div>
               <p className="flex-1 text-center mb-2 sm:mb-0">
-                {currency}
+                {currency} {item.productID.price * item.quantity}
               </p>
               <button
                 onClick={() => removeFromCart(item.productID._id)}

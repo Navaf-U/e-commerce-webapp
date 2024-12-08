@@ -27,7 +27,7 @@ import { useContext } from "react";
 
 function AppRoutes() {
   const { isAdmin ,cart,currUser} = useContext(userData);
-  
+  const cartLength = cart ? cart.length : 0;
   return (
     <>
       <ToastContainer draggable />
@@ -46,7 +46,7 @@ function AppRoutes() {
           <Route path="/search" element={<Search />} />
           <Route path="/products/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/payment" element={ cart.length > 0 && currUser ? <Payment />  : "Cart Empty or Please Signup or Login" }/>
+          <Route path="/payment" element={ cartLength && currUser ? <Payment />  : "Cart Empty or Please Signup or Login" }/>
           <Route path="/orders" element={<Orders />} />
           <Route path="/login" element={ currUser === null ? <LoginPage /> :<NotFound/>} />
           <Route path="/signup" element={currUser === null ? <SignupPage /> : <NotFound/>} />

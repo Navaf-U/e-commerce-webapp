@@ -9,13 +9,9 @@ function UserProfile() {
     <div className="flex flex-col items-center p-4">
       {currUser && (
         <>
-          { currUser.image ? (
-            <img className="w-36 h-[150px] rounded-full mb-4" alt={currUser.name} />
-          ) : (
             <div className="w-28 h-28 bg-gray-300 rounded-full mb-4 flex items-center justify-center">
               <span>No Photo</span>
             </div>
-          )}
           <p className="text-lg font-semibold">{currUser.name}</p>
           <p className="text-lg font-semibold">{currUser.email}</p>
         </>
