@@ -18,6 +18,10 @@ const getUserCart = async (req, res) => {
 
 const updateUserCart = async (req, res, next) => {
   const { productID, quantity } = req.body;
+  
+  if (!productID || !quantity) {
+    return next(new CustomError("Product ID and quantity are required.", 400));
+  }
   if (quantity < 1) {
     //if quantity is lesser than 1 ,will send error
     next(new CustomError(`Invalid quantity: ${quantity}`, 400));
