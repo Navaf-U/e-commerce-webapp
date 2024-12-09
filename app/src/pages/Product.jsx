@@ -12,7 +12,6 @@ function Product() {
   const { id } = useParams();
   const { currency } = useContext(ProductsData);
   const { currUser, addToCart } = useContext(userData);
-  const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState([]);
   const [women, setWomen] = useState([]);
   const [men, setMen] = useState([]);
@@ -108,32 +107,8 @@ function Product() {
               <p className="text-[50px] font-light text-center text-sm md:text-base px-2">
                 {product.description}
               </p>
-              <h1 className="text-[20px] font-semibold">Quantity:</h1>
-              <div className="flex gap-5 border-[4px] w-[30%] justify-between border-[#BF3131] my-5 ">
-                <button
-                  className="text-[30px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%]"
-                  onClick={() =>
-                    setQuantity((prevQuantity) =>
-                      prevQuantity > 1 ? prevQuantity - 1 : 1
-                    )
-                  }
-                >
-                  -
-                </button>
-                <button className="text-[30px] font-semibold">
-                  {quantity}
-                </button>
-                <button
-                  className="text-[22px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%]"
-                  onClick={() =>
-                    setQuantity((prevQuantity) => prevQuantity + 1)
-                  }
-                >
-                  +
-                </button>
-              </div>
               {currUser !== null  ? (
-                <NavLink to="/cart" onClick={() => addToCart(id, quantity)}>
+                <NavLink to="/cart" onClick={() => addToCart(id, 1)}>
                   <button className="mt-8 w-[350px] h-[70px] rounded-md bg-[#BF3131] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#7D0A0A] focus:outline-none focus:ring-4 focus:ring-blue-300">
                     Add to Cart
                   </button>

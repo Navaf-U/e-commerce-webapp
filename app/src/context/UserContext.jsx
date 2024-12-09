@@ -10,7 +10,7 @@ export const userData = createContext();
 // eslint-disable-next-line react/prop-types
 function UserContext({ children }) {
   const [currUser, setCurrUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState([]);
   const navigate = useNavigate();
 
@@ -114,21 +114,7 @@ function UserContext({ children }) {
   };
 
 //updating cart quantity
-const updateCart = async (productID,quantity) => {
-  try {
-    const token = Cookies.get("token");
-    const res = await axios.post(`http://localhost:3000/user/cart`, {
-      productID,
-      quantity
-    }, {
-      headers: { token: `Bearer ${token}` },
-    });
-    setCart(res.data.cart);
-    await getUserCart();
-  } catch (error) {
-    console.error(axiosErrorManager(error));
-  }
-};
+
 
 
   const PostUserDatas = async (name, email, password) => {
@@ -165,7 +151,7 @@ const updateCart = async (productID,quantity) => {
     setCart,
     addToCart,
     removeFromCart,
-    updateCart,
+    // updateCart,
     isAdmin,
   };
 
