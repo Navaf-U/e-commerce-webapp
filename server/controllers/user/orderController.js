@@ -15,16 +15,6 @@ const orderCashOnDelivery = async (req, res, next) => {
 
   if (!newOrder) return next(new CustomError("order not created", 400));
 
-  const unavailableProduct = await Product.find({
-    _id:{$in:newOrder.products.map((prod) => prod.productID)},
-    isDeleted:true
-  })
-
-
-  if (unavailableProduct) {
-    return next(new CustomError("some product not available", 400));
-  }
-
   // getting the status for payment and delivery
   newOrder.paymentStatus = "Cash On Delivery";
   newOrder.shippingStatus = "Processing";
@@ -43,7 +33,7 @@ const orderCashOnDelivery = async (req, res, next) => {
 // to make an order with stripe
 const orderWithStripe = async (req, res, next) => {
   const { products, address, totalAmount } = req.body;
-  if (!products || !address || !totalAmount){
+  if (!products || !address || !totalAmount) {
     return next(new CustomError("All fields are required", 400));
   }
   // getting the details of the product
@@ -94,20 +84,18 @@ const orderWithStripe = async (req, res, next) => {
 
   await newOrder.save();
 
-  res
-    .status(201)
-    .json({
-      message: "Order placed successfully",
-      sessionID: session.id,
-      stripeUrl: session.url,
-    });
+  res.status(201).json({
+    message: "Order placed successfully",
+    sessionID: session.id,
+    stripeUrl: session.url,
+  });
 };
 
-const StripeSuccess = async (req, res , next) => {
+const StripeSuccess = async (req, res, next) => {
   const sessionID = req.params.sessionID;
   //finding the order using sessionID
-  const order = await Order.findOne({sessionID : sessionID});
-  if(!order) return next(new CustomError("Order not found", 404));
+  const order = await Order.findOne({ sessionID: sessionID });
+  if (!order) return next(new CustomError("Order not found", 404));
   // updating the order status
   order.paymentStatus = "Paid";
   order.shippingStatus = "Pending";
@@ -117,8 +105,10 @@ const StripeSuccess = async (req, res , next) => {
   await Cart.findOneAndUpdate(
     { userID: req.user.id },
     { $set: { products: [] } }
-  ) 
-  res.status(200).json({message:"Payment successful! Cart has been cleared"});
+  );
+  res
+    .status(200)
+    .json({ message: "Payment successful! Cart has been cleared" });
 };
 
 // to get all orders by user
@@ -167,7 +157,7 @@ const cancelOneOrder = async (req, res, next) => {
   if (!cancelOrder) {
     return next(new CustomError("no order found", 404));
   }
-  if (cancelOrder.paymentStatus === "Paid"){
+  if (cancelOrder.paymentStatus === "Paid") {
     return next(new CustomError("Payment already done", 400));
   }
   cancelOrder.shippingStatus = "Cancelled";
@@ -175,6 +165,16 @@ const cancelOneOrder = async (req, res, next) => {
   res.status(200).json({ message: "Order Cancelled" });
 };
 
-const publicKeySend = async (req,res)=>{res.status(200).json({stripePublicKey:process.env.STRIPE_PUBLIC_KEY})}
+const publicKeySend = async (req, res) => {
+  res.status(200).json({ stripePublicKey: process.env.STRIPE_PUBLIC_KEY });
+};
 
-export { orderCashOnDelivery, getAllOrders, getOneOrder, cancelOneOrder , orderWithStripe , StripeSuccess , publicKeySend};
+export {
+  orderCashOnDelivery,
+  getAllOrders,
+  getOneOrder,
+  cancelOneOrder,
+  orderWithStripe,
+  StripeSuccess,
+  publicKeySend,
+};
