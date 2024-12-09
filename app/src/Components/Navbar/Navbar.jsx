@@ -1,7 +1,7 @@
 import logo from "../assets/shoe-navaf.svg";
 import sLogo from "../assets/logoSmallerV.svg";
-import Swal from 'sweetalert2';
-import smallerLogo from '../assets/logoSmallerV.svg'
+import Swal from "sweetalert2";
+import smallerLogo from "../assets/logoSmallerV.svg";
 import { Link, NavLink } from "react-router-dom";
 import { FaSearch, FaBars, FaBackspace } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
@@ -15,8 +15,10 @@ function Navbar() {
   const [menu, setMenu] = useState(false);
   const [currUserDataShows, setCurrUserDataShows] = useState(false);
   const { search, setSearch } = useContext(ProductsData);
-  const { currUser,logoutUser,cart , isAdmin } = useContext(userData);
+  const { currUser, logoutUser, cart, wishlist, isAdmin } =
+    useContext(userData);
   const cartLength = cart ? cart.length : 0;
+  const wishlistLength = wishlist ? wishlist.length : 0;
   const toggleDropdown = () => {
     setCurrUserDataShows((prev) => !prev);
   };
@@ -73,13 +75,13 @@ function Navbar() {
       <div className="border-b-2 h-20 flex justify-center w-full fixed bg-white z-50">
         <div className="nav-logo flex justify-between items-center w-full px-4">
           <Link to="/">
-          <div className="md:flex items-center hidden ">
-            <img src={logo} className="h-12 hidden lg:flex" alt="" />
-            <img src={sLogo} className="h-12 lg:hidden" alt="" />
-          </div>
-          <div className="md:hidden w-12 me-2">
-          <img src={smallerLogo} alt="" className="me-5" />
-          </div>
+            <div className="md:flex items-center hidden ">
+              <img src={logo} className="h-12 hidden lg:flex" alt="" />
+              <img src={sLogo} className="h-12 lg:hidden" alt="" />
+            </div>
+            <div className="md:hidden w-12 me-2">
+              <img src={smallerLogo} alt="" className="me-5" />
+            </div>
           </Link>
           <div className="hidden sm:flex gap-4">
             <NavLink to="/">
@@ -131,24 +133,34 @@ function Navbar() {
               />
             ) : (
               <RiUserFollowFill
-              size={25}
+                size={25}
                 onClick={toggleDropdown}
                 className="ms-5 w-14  me-3 cursor-pointer hover:text-[#BF3131]"
               />
             )}
             {currUser !== null && (
               <div className="flex gap-5">
-                <NavLink to="/wishlist">
+                <NavLink to="/wishlist" className="relative">
+                  <div className="absolute top-[-18px] right-[13px] sm:right-[-3px] bg-red-700 rounded-full h-4 w-4 text-center mt-2">
+                    <p className="m-[-2px] text-white text-[12px]">
+                      {wishlistLength}
+                    </p>
+                  </div>
                   <CiHeart className="hover:text-[#BF3131]" size={25} />
                 </NavLink>
+
                 <NavLink to="/cart" className="relative">
                   <div className="absolute top-[-19px] right-[14px] sm:right-[-10px] bg-red-700 rounded-full h-4 w-4 text-center mt-2">
                     <p className="m-[-3px] text-white text-[13px]">
                       {cartLength}
                     </p>
                   </div>
-                  <IoCartOutline className=" hover:text-[#BF3131] sm:me-[-5px] ms-[-5px] me-[20px]" size={25} />
+                  <IoCartOutline
+                    className=" hover:text-[#BF3131] sm:me-[-5px] ms-[-5px] me-[20px]"
+                    size={25}
+                  />
                 </NavLink>
+
                 <IoMdLogOut
                   className="cursor-pointer me-5 ho hidden sm:flex hover:text-[#BF3131] "
                   onClick={popupHandler}
@@ -162,7 +174,9 @@ function Navbar() {
             className="flex sm:hidden me-2"
           />
           <div
-            className={`absolute bg-white top-0 z-10 right-0 bottom-0 ${menu ? "w-[250px]" : "hidden"}`}
+            className={`absolute bg-white top-0 z-10 right-0 bottom-0 ${
+              menu ? "w-[250px]" : "hidden"
+            }`}
           >
             <button
               onClick={() => setMenu(false)}
@@ -216,7 +230,7 @@ function Navbar() {
             </button>
           </div>
         </div>
-        </div>
+      </div>
     </div>
   );
 }

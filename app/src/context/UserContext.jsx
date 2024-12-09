@@ -29,7 +29,6 @@ function UserContext({ children }) {
     }
   }, []);
 
-
   const loginUser = async (email, password) => {
     try {
       await axios.post(
@@ -61,43 +60,59 @@ function UserContext({ children }) {
     }
   };
 
-    const getUserWishList = async () => {
-      try {
-        const token = Cookies.get("token");
-        const data = await axios.get(`http://localhost:3000/user/wishlist`, {
-          headers: {
-            token: `Bearer ${token}`,
-          },
-        });
-        setWishlist(data.data?.products);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const getUserWishList = async () => {
+    try {
+      const token = Cookies.get("token");
+      const data = await axios.get(`http://localhost:3000/user/wishlist`, {
+        headers: {
+          token: `Bearer ${token}`,
+        },
+      });
+      setWishlist(data.data?.products);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    useEffect(() => {
-      getUserWishList();
-    }, []);
+  useEffect(() => {
+    getUserWishList();
+  }, []);
 
-   const removeFromWishist = async (id) => {
+  const addToWishlist = async (id) => {
+    try {
+      const token = Cookies.get("token");
+      await axios.post(
+        `http://localhost:3000/user/wishlist`,
+        {
+          productID: id,
+        },
+        { headers: { token: `Bearer ${token}` } },
+        { withCredentials: true }
+      );
+      await getUserWishList();
+      toast.success("Product added to wishlist");
+    } catch (error) {
+      toast.error(axiosErrorManager(error));
+    }
+  };
+
+  const removeFromWishlist = async (id) => {
     const token = Cookies.get("token");
     try {
       const res = await axios.delete(`http://localhost:3000/user/wishlist`, {
         headers: { token: `Bearer ${token}` },
         data: { productID: id },
       });
-      setWishlist(res.data.products);
       await getUserWishList();
       toast.success(res.data.message);
     } catch (error) {
       console.error(axiosErrorManager(error));
     }
-   } 
+  };
 
-   
-   //cart section
+  //cart section
 
-   const getUserCart = async () => {
+  const getUserCart = async () => {
     try {
       const token = Cookies.get("token");
       const data = await axios.get(`http://localhost:3000/user/cart`, {
@@ -115,23 +130,24 @@ function UserContext({ children }) {
     getUserCart();
   }, []);
 
-  const addToCart = async(id,q) => {
+  const addToCart = async (id, q) => {
     try {
       const token = Cookies.get("token");
-      await axios.post(`http://localhost:3000/user/cart`, {
-        productID:id,
-        quantity:q 
-       },
-       { headers: { token: `Bearer ${token}` } },
-       { withCredentials: true })
-       setCart((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
-       await getUserCart();
-      toast.success("Product added to cart");
+     const res = await axios.post(
+        `http://localhost:3000/user/cart`,
+        {
+          productID: id,
+          quantity: q,
+        },
+        { headers: { token: `Bearer ${token}` } },
+        { withCredentials: true }
+      );
+      await getUserCart();
+      toast.success(res.data.message);
     } catch (error) {
       toast.error(axiosErrorManager(error));
     }
   };
-
 
   const removeFromCart = async (id) => {
     const token = Cookies.get("token");
@@ -140,7 +156,6 @@ function UserContext({ children }) {
         headers: { token: `Bearer ${token}` },
         data: { productID: id },
       });
-      setCart(res.data.cart);
       await getUserCart();
       toast.success(res.data.message);
     } catch (error) {
@@ -148,9 +163,7 @@ function UserContext({ children }) {
     }
   };
 
-//updating cart quantity
-
-
+  //updating cart quantity
 
   const PostUserDatas = async (name, email, password) => {
     const data = {
@@ -187,7 +200,8 @@ function UserContext({ children }) {
     wishlist,
     addToCart,
     removeFromCart,
-    removeFromWishist,
+    removeFromWishlist,
+    addToWishlist,
     isAdmin,
   };
 

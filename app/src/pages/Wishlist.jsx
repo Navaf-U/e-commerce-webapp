@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { userData } from "../context/UserContext"
 import { NavLink } from "react-router-dom";
 import { FaRegTrashCan } from "react-icons/fa6";
+
 function Wishlist() {
     const {wishlist,removeFromWishlist} = useContext(userData)
 
@@ -36,7 +37,6 @@ function Wishlist() {
                 className="text-[#333] hover:text-red-800 transition-colors duration-200 me-4"
               />
             </button>
-
            <div className="flex justify-between items-center px-5 w-full">
            <NavLink to={`/products/${item._id}`}>
               <img

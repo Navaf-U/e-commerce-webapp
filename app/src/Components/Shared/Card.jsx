@@ -2,12 +2,14 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { userData } from "../../context/UserContext";
 import { FaStar } from "react-icons/fa";
+import { CiHeart } from "react-icons/ci";
 import { useInView } from "react-intersection-observer"; // Import the hook
-
+import { FaHeart } from "react-icons/fa";
 // eslint-disable-next-line react/prop-types
 function Card({ id, price, image, type, name, rating }) {
-  const { addToCart } = useContext(userData);
+  const { wishlist,addToCart,addToWishlist,removeFromWishlist } = useContext(userData);
 
+  const isInWishlist = wishlist.some((product) => product._id === id);
   // Use the useInView hook
   const { ref, inView } = useInView({
     threshold: 0.1, // Trigger when 10% of the card is visible
@@ -17,6 +19,13 @@ function Card({ id, price, image, type, name, rating }) {
     addToCart(id, 1);
   };
 
+  const handleAddToWishlist = () => {
+  if(isInWishlist){
+    removeFromWishlist(id)
+  }else{
+    addToWishlist(id)
+  }
+  }
   return (
     <div
       ref={ref} // Set the ref to the card container
@@ -34,10 +43,19 @@ function Card({ id, price, image, type, name, rating }) {
           className="transition-transform duration-500 ease-in-out hover:scale-105 justify-center w-full me-5 mt-5 flex h-60 overflow-hidden rounded-xl"
         >
           <img className="object-cover w-full" src={image} alt="product image" />
+        </NavLink>
           <span className="absolute top-0 left-2 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
             {type}
           </span>
-        </NavLink>
+          <span onClick={()=>{handleAddToWishlist(id)}} className="absolute cursor-pointer text-[#BF3131]  hover:text-[#7D0A0A] top-5 right-2 m-2 rounded-full px- text-center text-sm font-medium">
+          {isInWishlist ? (
+            <FaHeart size={28} className="mt-1 me-1"/>
+          ) : (
+            (
+            <CiHeart size={35} />
+          )
+          )}
+          </span>
         <NavLink to="" className="relative mx-3 mt-3 flex justify-center overflow-hidden rounded-xl">
           <p className="text-1xl font-bold pt-4 text-slate-900">{name}</p>
         </NavLink>
