@@ -12,6 +12,7 @@ function UserContext({ children }) {
   const [currUser, setCurrUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
   const navigate = useNavigate();
 
   const isAdmin = currUser !== null && currUser.role ? "admin" : "user";
@@ -60,25 +61,59 @@ function UserContext({ children }) {
     }
   };
 
-
-
-    const getUserCart = async () => {
+    const getUserWishList = async () => {
       try {
         const token = Cookies.get("token");
-        const data = await axios.get(`http://localhost:3000/user/cart`, {
+        const data = await axios.get(`http://localhost:3000/user/wishlist`, {
           headers: {
             token: `Bearer ${token}`,
           },
         });
-        setCart(data.data?.products);
+        setWishlist(data.data?.products);
       } catch (error) {
         console.log(error);
       }
     };
 
     useEffect(() => {
-      getUserCart();
+      getUserWishList();
     }, []);
+
+   const removeFromWishist = async (id) => {
+    const token = Cookies.get("token");
+    try {
+      const res = await axios.delete(`http://localhost:3000/user/wishlist`, {
+        headers: { token: `Bearer ${token}` },
+        data: { productID: id },
+      });
+      setWishlist(res.data.products);
+      await getUserWishList();
+      toast.success(res.data.message);
+    } catch (error) {
+      console.error(axiosErrorManager(error));
+    }
+   } 
+
+   
+   //cart section
+
+   const getUserCart = async () => {
+    try {
+      const token = Cookies.get("token");
+      const data = await axios.get(`http://localhost:3000/user/cart`, {
+        headers: {
+          token: `Bearer ${token}`,
+        },
+      });
+      setCart(data.data?.products);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getUserCart();
+  }, []);
 
   const addToCart = async(id,q) => {
     try {
@@ -149,9 +184,10 @@ function UserContext({ children }) {
     setLoading,
     cart,
     setCart,
+    wishlist,
     addToCart,
     removeFromCart,
-    // updateCart,
+    removeFromWishist,
     isAdmin,
   };
 

@@ -4,6 +4,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Shop from "./pages/Shop";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
+import Wishlist from "./pages/Wishlist";
 import NotFound from "./pages/NotFound";
 import Men from "./pages/Men";
 import Women from "./pages/Women";
@@ -46,6 +47,7 @@ function AppRoutes() {
           <Route path="/search" element={<Search />} />
           <Route path="/products/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/wishlist" element={<Wishlist/>} />
           <Route path="/payment" element={ cartLength && currUser ? <Payment />  : "Cart Empty or Please Signup or Login" }/>
           <Route path="/orders" element={<Orders />} />
           <Route path="/login" element={ currUser === null ? <LoginPage /> :<NotFound/>} />

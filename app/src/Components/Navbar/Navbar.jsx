@@ -1,4 +1,5 @@
 import logo from "../assets/shoe-navaf.svg";
+import sLogo from "../assets/logoSmallerV.svg";
 import Swal from 'sweetalert2';
 import smallerLogo from '../assets/logoSmallerV.svg'
 import { Link, NavLink } from "react-router-dom";
@@ -9,12 +10,12 @@ import { ProductsData } from "../../context/ProductsCont";
 import { userData } from "../../context/UserContext";
 import { IoMdLogOut } from "react-icons/io";
 import { RiUserFollowFill } from "react-icons/ri";
-
+import { CiHeart } from "react-icons/ci";
 function Navbar() {
   const [menu, setMenu] = useState(false);
   const [currUserDataShows, setCurrUserDataShows] = useState(false);
   const { search, setSearch } = useContext(ProductsData);
-  const { currUser,logoutUser,cart } = useContext(userData);
+  const { currUser,logoutUser,cart , isAdmin } = useContext(userData);
   const cartLength = cart ? cart.length : 0;
   const toggleDropdown = () => {
     setCurrUserDataShows((prev) => !prev);
@@ -73,15 +74,16 @@ function Navbar() {
         <div className="nav-logo flex justify-between items-center w-full px-4">
           <Link to="/">
           <div className="md:flex items-center hidden ">
-            <img src={logo} className="h-12" alt="" />
+            <img src={logo} className="h-12 hidden lg:flex" alt="" />
+            <img src={sLogo} className="h-12 lg:hidden" alt="" />
           </div>
           <div className="md:hidden w-12 me-2">
-          <img src={smallerLogo} alt="" />
+          <img src={smallerLogo} alt="" className="me-5" />
           </div>
           </Link>
           <div className="hidden sm:flex gap-4">
             <NavLink to="/">
-              <h1 className="hover-line hover:font-semibold">Shop</h1>
+              <h1 className="hover-line ms-3 hover:font-semibold">Shop</h1>
             </NavLink>
             <NavLink to="/men">
               <h1 className="hover-line hover:font-semibold">Men</h1>
@@ -95,7 +97,7 @@ function Navbar() {
             <NavLink to="/contact">
               <h1 className="hover-line hover:font-semibold">Contact</h1>
             </NavLink>
-            {currUser && currUser.isAdmin && (
+            {currUser && isAdmin && (
               <NavLink to="/admin">
                 <h1 className="hover-line font-[600] text-[#BF3131]">Admin</h1>
               </NavLink>
@@ -129,23 +131,26 @@ function Navbar() {
               />
             ) : (
               <RiUserFollowFill
-                size={37}
+              size={25}
                 onClick={toggleDropdown}
-                className="ms-5 me-3 cursor-pointer hover:text-[#BF3131]"
+                className="ms-5 w-14  me-3 cursor-pointer hover:text-[#BF3131]"
               />
             )}
             {currUser !== null && (
               <div className="flex gap-5">
+                <NavLink to="/wishlist">
+                  <CiHeart className="hover:text-[#BF3131]" size={25} />
+                </NavLink>
                 <NavLink to="/cart" className="relative">
-                  <div className="absolute top-[-20px] right-[-3px] bg-red-700 rounded-full h-4 w-4 text-center mt-2">
+                  <div className="absolute top-[-19px] right-[14px] sm:right-[-10px] bg-red-700 rounded-full h-4 w-4 text-center mt-2">
                     <p className="m-[-3px] text-white text-[13px]">
                       {cartLength}
                     </p>
                   </div>
-                  <IoCartOutline className="ms-3 hover:text-[#BF3131]" size={25} />
+                  <IoCartOutline className=" hover:text-[#BF3131] sm:me-[-5px] ms-[-5px] me-[20px]" size={25} />
                 </NavLink>
                 <IoMdLogOut
-                  className="cursor-pointer me-5 hover:text-[#BF3131]"
+                  className="cursor-pointer me-5 ho hidden sm:flex hover:text-[#BF3131] "
                   onClick={popupHandler}
                   size={20}
                 />
