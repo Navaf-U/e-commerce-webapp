@@ -49,7 +49,7 @@ const updateUserCart = async (req, res, next) => {
   }
 
   await cart.save();
-  res.status(200).json({message:"cart updated"});
+  res.status(200).json({message:"Product added to cart"});
 };
 
 const removeFromCart = async (req, res) => {
