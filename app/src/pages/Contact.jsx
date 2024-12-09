@@ -1,8 +1,7 @@
-import { FaPhoneAlt } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
-import Loading from "../Components/Loading/Loading";
 import { useContext } from "react";
 import { userData } from "../context/UserContext";
+import Loading from "../Components/Loading/Loading";
 function Contact() {
   const {loading} = useContext(userData) 
   return (
@@ -15,13 +14,9 @@ function Contact() {
         <div className="flex flex-col gap-5 bg-[#BF3131] text-white text-center p-6 rounded-md w-full lg:w-[45%] justify-center items-center">
           <span className="font-[700] text-[20px]">GET IN TOUCH WITH US</span>
           <p className="text-wrap mx-3">
-            Have any questions or need support? We&apos;re here to assist! Reach out via phone, email, or social media, and we’ll respond as soon as possible. Your satisfaction matters, and we’re happy to help with anything you need.
+            Have any questions or need support? We&apos;re here to assist! Reach out via email, or social media, and we&apos;ll respond as soon as possible. Your satisfaction matters, and we&apos;re happy to help with anything you need.
           </p>
           <div className="text-[18px]">
-            Call us directly at
-            <h1 className="font-[500] flex mt-2 gap-1">
-              <FaPhoneAlt className="mt-1" size={16} /> +91 8113819146
-            </h1>
             <h1 className="flex gap-1"><MdOutlineEmail className="mt-1"/> navafsoft@gmail.com</h1>
           </div>
           <p className="underline cursor-pointer">See all numbers and locations</p>

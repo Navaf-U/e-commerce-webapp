@@ -1,4 +1,4 @@
-import StepPrimeLogo from "../assets/StepPrimeLogo.png";
+import StepPrimeLogo from "../assets/shoe-navaf.svg";
 import {
   FaInstagramSquare,
   FaPinterest,
@@ -9,14 +9,8 @@ function Footer() {
   return (
     <div className="main-footer flex flex-col mt-40 items-center gap-10 px-4 md:px-10">
       <div className="footer-logo flex items-center gap-4">
-        <img src={StepPrimeLogo} alt="" className="h-16 w-16 md:h-20 md:w-20" />
-        <h1
-          className="footer-title nav-logo 
-   text-[30px] font-[900]  items-center text-gray-800"
-        >
-          <span className="text-black">Step</span>
-          <span className="text-red-600">Prime</span>
-        </h1>
+        <img src={StepPrimeLogo} alt="" className="h-16 w-16 md:h-20 md:w-36" />
+
       </div>
       <ul className="flex flex-col md:flex-row list-none gap-10 text-[#252525] text-lg">
         <li className="cursor-pointer">Company</li>

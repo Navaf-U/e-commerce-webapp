@@ -94,7 +94,7 @@ const Cart = () => {
             </p>
             <div className="flex">
               <button
-                className="text-[30px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%] active:bg-black"
+                className="text-[30px] shadow-sm shadow-black bg-red-800 active:bg-[#800000] text-white w-[30%]"
                 onClick={() =>
                   decreaseQuantity(item.productID._id, item.quantity)
                 }
@@ -105,7 +105,7 @@ const Cart = () => {
                 {item.quantity}
               </button>
               <button
-                className="text-[22px] bg-[#BF3131] hover:bg-[#800000] text-white w-[30%] active:bg-black"
+                className="text-[22px] shadow-sm shadow-black bg-red-800 active:bg-[#800000] text-white w-[30%]"
                 onClick={() =>
                   increaseQuantity(item.productID._id, item.quantity)
                 }
@@ -128,7 +128,6 @@ const Cart = () => {
           </div>
         );
       })}
-      {/* <div clasy */}
     </div>
   );
 };
