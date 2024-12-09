@@ -1,19 +1,17 @@
 import Loading from "../Loading/Loading";
 import { useContext, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { userData } from "../../context/UserContext";
 
 function SignupCombo() {
-  const { PostUserDatas,loading} = useContext(userData);
+  const { registerUser,loading} = useContext(userData);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
   const handlerEvent = async(e) => {
     e.preventDefault();
-      PostUserDatas(name, email, password);
-      navigate("/login");
+      registerUser(name, email, password);
   };
 
   return (

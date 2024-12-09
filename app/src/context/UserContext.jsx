@@ -1,9 +1,9 @@
-import axios from "axios";
-import axiosErrorManager from "../util/axiosErrorManage";
-import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import axiosErrorManager from "../util/axiosErrorManage";
+import axiosInstance from "../util/axiosInstance";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { createContext, useEffect, useState } from "react";
 // eslint-disable-next-line react-refresh/only-export-components
 export const userData = createContext();
 
@@ -15,7 +15,7 @@ function UserContext({ children }) {
   const [wishlist, setWishlist] = useState([]);
   const navigate = useNavigate();
 
-  const isAdmin = currUser !== null && currUser.role === "admin" ? true : false ;
+  const isAdmin = currUser !== null && currUser.role === "admin" ? true : false;
 
   useEffect(() => {
     const cookieUser = Cookies.get("currentUser");
@@ -31,8 +31,7 @@ function UserContext({ children }) {
 
   const loginUser = async (email, password) => {
     try {
-      await axios.post(
-        "http://localhost:3000/auth/login",
+      await axiosInstance.post("auth/login",
         { email, password },
         { withCredentials: true }
       );
@@ -47,8 +46,8 @@ function UserContext({ children }) {
   const logoutUser = async () => {
     try {
       // Call the logout API on the server
-      await axios.post(
-        "http://localhost:3000/auth/logout",
+      await axiosInstance.post(
+        "auth/logout",
         {},
         { withCredentials: true }
       );
@@ -62,12 +61,7 @@ function UserContext({ children }) {
 
   const getUserWishList = async () => {
     try {
-      const token = Cookies.get("token");
-      const data = await axios.get(`http://localhost:3000/user/wishlist`, {
-        headers: {
-          token: `Bearer ${token}`,
-        },
-      });
+      const data = await axiosInstance.get(`user/wishlist`);
       setWishlist(data.data?.products);
     } catch (error) {
       console.log(error);
@@ -80,15 +74,9 @@ function UserContext({ children }) {
 
   const addToWishlist = async (id) => {
     try {
-      const token = Cookies.get("token");
-      await axios.post(
-        `http://localhost:3000/user/wishlist`,
-        {
-          productID: id,
-        },
-        { headers: { token: `Bearer ${token}` } },
-        { withCredentials: true }
-      );
+      await axiosInstance.post(`user/wishlist`, {
+        productID: id,
+      });
       await getUserWishList();
       toast.success("Product added to wishlist");
     } catch (error) {
@@ -97,10 +85,8 @@ function UserContext({ children }) {
   };
 
   const removeFromWishlist = async (id) => {
-    const token = Cookies.get("token");
     try {
-      const res = await axios.delete(`http://localhost:3000/user/wishlist`, {
-        headers: { token: `Bearer ${token}` },
+      const res = await axiosInstance.delete(`user/wishlist`, {
         data: { productID: id },
       });
       await getUserWishList();
@@ -114,12 +100,7 @@ function UserContext({ children }) {
 
   const getUserCart = async () => {
     try {
-      const token = Cookies.get("token");
-      const data = await axios.get(`http://localhost:3000/user/cart`, {
-        headers: {
-          token: `Bearer ${token}`,
-        },
-      });
+      const data = await axiosInstance.get(`/user/cart`);
       setCart(data.data?.products);
     } catch (error) {
       console.log(error);
@@ -132,15 +113,12 @@ function UserContext({ children }) {
 
   const addToCart = async (id, q) => {
     try {
-      const token = Cookies.get("token");
-     const res = await axios.post(
-        `http://localhost:3000/user/cart`,
+      const res = await axiosInstance.post(
+        `user/cart`,
         {
           productID: id,
           quantity: q,
-        },
-        { headers: { token: `Bearer ${token}` } },
-        { withCredentials: true }
+        }
       );
       await getUserCart();
       toast.success(res.data.message);
@@ -150,10 +128,8 @@ function UserContext({ children }) {
   };
 
   const removeFromCart = async (id) => {
-    const token = Cookies.get("token");
     try {
-      const res = await axios.delete(`http://localhost:3000/user/cart`, {
-        headers: { token: `Bearer ${token}` },
+      const res = await axiosInstance.delete(`user/cart`, {
         data: { productID: id },
       });
       await getUserCart();
@@ -165,7 +141,7 @@ function UserContext({ children }) {
 
   //updating cart quantity
 
-  const PostUserDatas = async (name, email, password) => {
+  const registerUser = async (name, email, password) => {
     const data = {
       name: name,
       email: email,
@@ -174,12 +150,12 @@ function UserContext({ children }) {
 
     setLoading(true);
     try {
-      const response = await axios.post(
-        "http://localhost:3000/auth/register",
+      const response = await axiosInstance.post(
+        "auth/register",
         data
       );
-      toast.success("User registered successfully");
-      setCurrUser(response.data);
+      navigate("/login")
+      toast.success(response.data.message);
     } catch (error) {
       toast.error(axiosErrorManager(error));
     } finally {
@@ -192,7 +168,7 @@ function UserContext({ children }) {
     setCurrUser,
     loginUser,
     logoutUser,
-    PostUserDatas,
+    registerUser,
     loading,
     setLoading,
     cart,

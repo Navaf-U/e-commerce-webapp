@@ -2,8 +2,8 @@ import Card from "../Components/Shared/Card";
 import Loading from "../Components/Loading/Loading";
 import { useContext, useEffect, useState } from "react";
 import { userData } from "../context/UserContext";
-import axios from "axios";
 import axiosErrorManager from "../util/axiosErrorManage";
+import axiosInstance from "../util/axiosInstance";
 
 function Men() {
   const [men, setMen] = useState([]);
@@ -11,8 +11,8 @@ function Men() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(
-          "http://localhost:3000/user/products/category/men"
+        const { data } = await axiosInstance.get(
+          "user/products/category/men"
         );
         setMen(data.data);
       } catch (error) {

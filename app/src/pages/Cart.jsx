@@ -1,11 +1,11 @@
+import Cookies from "js-cookie";
+import axiosInstance from "../util/axiosInstance";
+import axiosErrorManager from "../util/axiosErrorManage";
 import { useContext } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { ProductsData } from "../context/ProductsCont";
 import { NavLink } from "react-router-dom";
 import { userData } from "../context/UserContext";
-import axios from "axios";
-import Cookies from "js-cookie";
-import axiosErrorManager from "../util/axiosErrorManage";
 const Cart = () => {
   const { currency } = useContext(ProductsData);
   const { cart, removeFromCart, setLoading, setCart } = useContext(userData);
@@ -25,8 +25,8 @@ const Cart = () => {
     setLoading(true);
     try {
       const token = Cookies.get("token");
-      await axios.post(
-        `http://localhost:3000/user/cart`,
+      await axiosInstance.post(
+        `user/cart`,
         {
           productID,
           quantity,

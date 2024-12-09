@@ -1,5 +1,4 @@
 import logo from "../Components/assets/shoe-navaf.svg";
-import axios from "axios";
 import Loading from "../Components/Loading/Loading";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
@@ -7,6 +6,7 @@ import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { ProductsData } from "../context/ProductsCont";
 import { userData } from "../context/UserContext";
 import axiosErrorManager from "../util/axiosErrorManage";
+import axiosInstance from "../util/axiosInstance";
 
 function Product() {
   const { id } = useParams();
@@ -21,8 +21,8 @@ function Product() {
   useEffect(() => {
     const findProduct = async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:3000/user/product/${id}`
+        const { data } = await axiosInstance.get(
+          `user/product/${id}`
         );
         setProduct(data);
       } catch (err) {
@@ -35,8 +35,8 @@ function Product() {
   useEffect(() => {
     const menFiltered = async () => {
       try {
-        const { data } = await axios.get(
-          "http://localhost:3000/user/products/category/men"
+        const { data } = await axiosInstance.get(
+          "user/products/category/men"
         );
         setMen(data.data);
       } catch (error) {
@@ -49,8 +49,8 @@ function Product() {
   useEffect(() => {
     const womenFiltered = async () => {
       try {
-        const { data } = await axios.get(
-          "http://localhost:3000/user/products/category/women"
+        const { data } = await axiosInstance.get(
+          "user/products/category/women"
         );
         setWomen(data.data);
       } catch (error) {

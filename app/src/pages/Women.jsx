@@ -2,16 +2,16 @@ import Loading from "../Components/Loading/Loading";
 import Card from "../Components/Shared/Card";
 import { useContext, useEffect, useState } from "react";
 import { userData } from "../context/UserContext";
-import axios from "axios";
 import axiosErrorManager from "../util/axiosErrorManage";
+import axiosInstance from "../util/axiosInstance";
 function Women() {
   const [women, setWomen] = useState([]);
   const { loading } = useContext(userData);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(
-          "http://localhost:3000/user/products/category/women"
+        const { data } = await axiosInstance.get(
+          "user/products/category/women"
         );
 
         setWomen(data.data);
