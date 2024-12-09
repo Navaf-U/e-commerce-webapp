@@ -3,7 +3,7 @@ import axios from "axios";
 import Loading from "../Components/Loading/Loading";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { ProductsData } from "../context/ProductsCont";
 import { userData } from "../context/UserContext";
 import axiosErrorManager from "../util/axiosErrorManage";
@@ -11,10 +11,12 @@ import axiosErrorManager from "../util/axiosErrorManage";
 function Product() {
   const { id } = useParams();
   const { currency } = useContext(ProductsData);
-  const { currUser, addToCart } = useContext(userData);
+  const { currUser, addToCart, cart } = useContext(userData);
   const [product, setProduct] = useState([]);
   const [women, setWomen] = useState([]);
   const [men, setMen] = useState([]);
+  const navigate = useNavigate(); 
+  const productInCart = cart.some((item) => item.productID._id === id);
 
   useEffect(() => {
     const findProduct = async () => {
@@ -57,6 +59,15 @@ function Product() {
     };
     womenFiltered();
   }, []);
+
+  const handleAddToCart = () => {
+    if (!productInCart) {
+      addToCart(id, 1);
+      navigate("/cart")
+    }else{
+      navigate("/cart")
+    }
+  };
 
   const FinalRating = Number(product?.rating || 0);
 
@@ -107,12 +118,12 @@ function Product() {
               <p className="text-[50px] font-light text-center text-sm md:text-base px-2">
                 {product.description}
               </p>
-              {currUser !== null  ? (
-                <NavLink to="/cart" onClick={() => addToCart(id, 1)}>
+              {currUser !== null ? (
+                <div onClick={() => handleAddToCart(id, 1)}>
                   <button className="mt-8 w-[350px] h-[70px] rounded-md bg-[#BF3131] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#7D0A0A] focus:outline-none focus:ring-4 focus:ring-blue-300">
-                    Add to Cart
+                    { productInCart ? "Go to Cart" : "Add to Cart"}
                   </button>
-                </NavLink>
+                </div>
               ) : (
                 <NavLink to="/login">
                   <button className="mt-8 w-[200px] h-[50px] rounded-md bg-[#333] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#7D0A0A] focus:outline-none focus:ring-4 focus:ring-blue-300">

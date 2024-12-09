@@ -141,7 +141,7 @@ function Navbar() {
             {currUser !== null && (
               <div className="flex gap-5">
                 <NavLink to="/wishlist" className="relative">
-                  <div className="absolute top-[-18px] right-[13px] sm:right-[-3px] bg-red-700 rounded-full h-4 w-4 text-center mt-2">
+                  <div className="absolute top-[-18px] right-[-3px] bg-red-700 rounded-full h-4 w-4 text-center mt-2">
                     <p className="m-[-2px] text-white text-[12px]">
                       {wishlistLength}
                     </p>

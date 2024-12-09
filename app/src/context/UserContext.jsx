@@ -15,7 +15,7 @@ function UserContext({ children }) {
   const [wishlist, setWishlist] = useState([]);
   const navigate = useNavigate();
 
-  const isAdmin = currUser !== null && currUser.role ? "admin" : "user";
+  const isAdmin = currUser !== null && currUser.role === "admin" ? true : false ;
 
   useEffect(() => {
     const cookieUser = Cookies.get("currentUser");
