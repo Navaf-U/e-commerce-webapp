@@ -16,7 +16,7 @@ const orderCashOnDelivery = async (req, res, next) => {
   if (!newOrder) return next(new CustomError("order not created", 400));
 
   // getting the status for payment and delivery
-  newOrder.paymentStatus = "Cash On Delivery";
+  newOrder.paymentStatus = "COD";
   newOrder.shippingStatus = "Processing";
 
   // will make cart empty after purchase
