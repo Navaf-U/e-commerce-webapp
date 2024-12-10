@@ -48,7 +48,7 @@ function AppRoutes() {
           <Route path="/products/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist/>} />
-          <Route path="/payment" element={ cartLength && currUser ? <Payment />  : "Cart Empty or Please Signup or Login" }/>
+          <Route path="/payment" element={ cartLength && currUser ? <Payment />  : <NotFound/> }/>
           <Route path="/orders" element={<Orders />} />
           <Route path="/login" element={ currUser === null ? <LoginPage /> :<NotFound/>} />
           <Route path="/signup" element={currUser === null ? <SignupPage /> : <NotFound/>} />
