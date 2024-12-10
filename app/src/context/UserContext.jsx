@@ -88,9 +88,9 @@ function UserContext({ children }) {
         { email, password },
         { withCredentials: true }
       );
-      const cookieUser = Cookies.get("currentUser");
-      setCurrUser(JSON.parse(cookieUser));
-      navigate("/admin")
+      const cookieAdmin = Cookies.get("currentUser");
+      setCurrUser(JSON.parse(cookieAdmin));
+      navigate("/")
       toast.success("Admin logged in successfully");
     } catch (err) {
       toast.error(axiosErrorManager(err));

@@ -1,5 +1,7 @@
 import { useContext, useState } from "react";
 import { userData } from "../context/UserContext";
+import axiosErrorManager from "../util/axiosErrorManage";
+import { toast } from "react-toastify";
 
 function AdminLogin() {
   const {adminLogin} = useContext(userData) 
@@ -13,7 +15,7 @@ function AdminLogin() {
     try{
       await adminLogin(email, password);
     }catch(err){
-      console.log(err)
+      toast.error(axiosErrorManager(err))
     }
   };
   return (
