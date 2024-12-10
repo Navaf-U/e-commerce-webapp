@@ -1,14 +1,14 @@
-import { useContext, useState } from "react";
-import { ProductsData } from "../context/ProductsCont";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import axiosErrorManager from "../util/axiosErrorManage";
+import axiosInstance from "../util/axiosInstance";
 
 function AdminProducts() {
-  const { products } = useContext(ProductsData);
+  const [products, setProducts] = useState([]);
   const [men, setMen] = useState(false);
   const [women, setWomen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 5;
-
   const handleCheckbox = (e) => {
     const { name, checked } = e.target;
     if (name === "men") {
@@ -18,6 +18,20 @@ function AdminProducts() {
     }
   };
 
+  // did for the products resetting if deleted
+  const fetchProducts = async () => {
+    try {
+      const { data } = await axiosInstance.get("user/products");
+      setProducts(data.data);
+    } catch (error) {
+      console.error(axiosErrorManager(error));
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   const filteredProducts = products.filter((item) => {
     if (men && item.type === "men") return true;
     if (women && item.type === "women") return true;
@@ -26,7 +40,7 @@ function AdminProducts() {
   });
 
   // pagination checkings
-  
+
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -70,18 +84,6 @@ function AdminProducts() {
             Add Product
           </button>
         </NavLink>
-
-        <NavLink
-          to="/addproducts"
-          className="position fixed right-10 bottom-14"
-        >
-          <button
-            type="button"
-            className="px-8 py-4 bg-red-600 text-white text-lg rounded-md hover:bg-red-700 transition"
-          >
-            Add Product
-          </button>
-        </NavLink>
       </div>
 
       <div className="overflow-x-auto">
@@ -113,7 +115,7 @@ function AdminProducts() {
             {currentProducts.length > 0 ? (
               currentProducts.map((item) => (
                 <tr
-                  key={item.id}
+                  key={item._id}
                   className="border-b hover:bg-gray-100 transition"
                 >
                   <td className="py-2 font-semibold text-xs md:text-sm">
@@ -141,7 +143,7 @@ function AdminProducts() {
                     {item.reviews}
                   </td>
                   <td className="py-2">
-                    <NavLink to={`/adminProducts/${item.id}`}>
+                    <NavLink to={`/admin/product/${item._id}`}>
                       <button className="bg-blue-500 text-white px-3 py-1 rounded text-xs md:text-sm">
                         Action
                       </button>
