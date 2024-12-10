@@ -18,28 +18,34 @@ function ProductAddPage() {
   const DefaultFun = (e) => {
     e.preventDefault();
     PostProducts(name, type, image, price, rating, reviews, brand, description);
-    toast.success("Product Added")
+    toast.success("Product Added");
   };
 
-  const handlerForMain = ()=>{
-    navigate('/admin')
-  }
-  
+  const handlerForMain = () => {
+    navigate("/admin");
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-6">
-           <IoCloseOutline onClick={handlerForMain} className="cursor-pointer bg-[#80808069] rounded-full hover:text-[#BA3131] position fixed left-4 top-2" size={40}/>
+      <IoCloseOutline
+        onClick={handlerForMain}
+        className="cursor-pointer bg-[#80808069] rounded-full hover:text-[#BA3131] position fixed left-4 top-2"
+        size={40}
+      />
       <form
         className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg space-y-4"
         onSubmit={DefaultFun}
       >
-        <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center">Add Products</h2>
+        <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center">
+          Add Products
+        </h2>
 
         <input
           type="text"
           placeholder="Name"
           className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BF3131]"
-          value={name} onChange={(e) => setName(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
 
         <select

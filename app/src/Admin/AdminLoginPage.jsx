@@ -4,7 +4,7 @@ import axiosErrorManager from "../util/axiosErrorManage";
 import { toast } from "react-toastify";
 
 function AdminLogin() {
-  const {adminLogin} = useContext(userData) 
+  const { adminLogin } = useContext(userData);
   // const { isLogged } = useContext(userData);
   const [email, setEmail] = useState("");
   // const navigates = useNavigate();
@@ -12,10 +12,10 @@ function AdminLogin() {
   // const [, setIsLogged] = useState(false);
   const handleFunc = async (e) => {
     e.preventDefault();
-    try{
+    try {
       await adminLogin(email, password);
-    }catch(err){
-      toast.error(axiosErrorManager(err))
+    } catch (err) {
+      toast.error(axiosErrorManager(err));
     }
   };
   return (
@@ -23,7 +23,9 @@ function AdminLogin() {
       <div className="login-signup w-full min-h-screen pt-16 pb-20">
         <form action="" onSubmit={handleFunc}>
           <div className="login-cont w-[90%] max-w-[580px] h-auto bg-white m-auto px-6 py-10 md:px-10 md:py-14">
-            <h1 className="pb-5 font-bold text-2xl md:text-4xl text-center">Admin Login</h1>
+            <h1 className="pb-5 font-bold text-2xl md:text-4xl text-center">
+              Admin Login
+            </h1>
             <hr className="border-t-4 border-b-2 border-l border-[cyan]" />
             <br />
             <div className="loginsignup-fields flex flex-col gap-6">
