@@ -112,6 +112,23 @@ const adminLogin = async (req, res, next) => {
     secure: false,
     sameSite: "none", //can change to strict
   });
+
+  const currentUser = {
+    id: user._id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  }
+  //sending user details to client (for curr user)
+  res.cookie("currentUser", JSON.stringify(currentUser))
+
+  //sending token to cookie
+  res.cookie("token", token, {
+    httpOnly: false,
+    secure: true,
+    sameSite: "none",
+  });
+
   res.json({ message: "Admin successfully logged in", token });
 
 };
@@ -134,7 +151,7 @@ const refreshingToken = async (req, res, next) => {
 
 // controller to handle logout
 const logout = async (req, res) => {
-  //clearing refresh token cookie
+  //clearing refresh token from cookie
   res.clearCookie("refreshToken", {
     httpOnly: true,
     secure: true,
