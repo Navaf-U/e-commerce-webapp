@@ -1,8 +1,9 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { userData } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import axiosInstance from "../util/axiosInstance";
+import axiosErrorManager from "../util/axiosErrorManage";
 
 function AdminUsersPage() {
   const [users, setUsers] = useState([]);
@@ -11,20 +12,15 @@ function AdminUsersPage() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const { data } = await axios.get("http://localhost:4000/allUsers");
-      setUsers(data);
+      try {
+        const { data } = await axiosInstance.get("/admin/users");
+        setUsers(data.users.filter((item) => item.isBlocked === false));
+      } catch (err) {
+        toast.error(axiosErrorManager(err));
+      }
     };
     fetchUser();
   }, []);
-
-  useEffect(() => {
-    const func = () => {
-      if (!currUser) {
-        toast.error("Admin, please login");
-      }
-    };
-    func();
-  }, [currUser]);
 
   return (
     <>
@@ -44,18 +40,16 @@ function AdminUsersPage() {
               </tr>
             </thead>
             <tbody>
-              {users.map((item) => (
-                <tr key={item.id} className="border-b">
+              {users?.map((item) => (
+                <tr key={item._id} className="border-b">
                   <td className="py-2 font-semibold text-xs md:text-sm">
-                    {item.id}
+                    {item._id}
                   </td>
                   <td className="py-2 text-xs md:text-sm">{item.name}</td>
                   <td className="py-2 text-xs md:text-sm">{item.email}</td>
                   <td className="py-2">
                     <button
-                      onClick={() =>
-                        navigate(`/adminUsers/${item.id}`, { state: { item } })
-                      }
+                      onClick={() => navigate(`/admin/user/${item._id}`)}
                       className="bg-blue-500 text-white px-3 py-1 rounded text-xs md:text-sm"
                     >
                       Action
