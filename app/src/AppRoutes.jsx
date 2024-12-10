@@ -59,13 +59,13 @@ function AppRoutes() {
           <Route path="*" element={<NotFound />} />
         </Route>
         
+        <Route
+              path="/admin/login"
+              element={ <AdminLogin />}
+            />
       <Route
             path="/admin"
             element={ isAdmin ? <AdminMainPage /> : <NotFound />}
-          />
-      <Route
-            path="/admin/login"
-            element={ isAdmin ? <AdminLogin /> : <NotFound />}
           />
       <Route
             path="/adminProducts/:id"
