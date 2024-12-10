@@ -4,6 +4,7 @@ import axiosInstance from "../util/axiosInstance";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
+import axios from "axios";
 // eslint-disable-next-line react-refresh/only-export-components
 export const userData = createContext();
 
@@ -28,9 +29,32 @@ function UserContext({ children }) {
     }
   }, []);
 
+  const registerUser = async (name, email, password) => {
+    const data = {
+      name: name,
+      email: email,
+      password: password,
+    };
+
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        "auth/register",
+        data
+      );
+      navigate("/login")
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error(axiosErrorManager(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   const loginUser = async (email, password) => {
     try {
-      await axiosInstance.post("auth/login",
+      await axios.post("http://localhost:3000/auth/login",
         { email, password },
         { withCredentials: true }
       );
@@ -38,7 +62,6 @@ function UserContext({ children }) {
       setCurrUser(JSON.parse(cookieUser));
       navigate("/")
       toast.success("Logged in successfully");
-      await getUserCart();
     } catch (err) {
       toast.error(axiosErrorManager(err));
     }
@@ -58,6 +81,22 @@ function UserContext({ children }) {
       toast.error(axiosErrorManager(err));
     }
   };
+
+  const adminLogin = async (email, password) => {
+    try {
+      await axios.post("http://localhost:3000/admin/login",
+        { email, password },
+        { withCredentials: true }
+      );
+      const cookieUser = Cookies.get("currentUser");
+      setCurrUser(JSON.parse(cookieUser));
+      navigate("/admin")
+      toast.success("Admin logged in successfully");
+    } catch (err) {
+      toast.error(axiosErrorManager(err));
+    }
+  };
+
 
   const getUserWishList = async () => {
     try {
@@ -141,43 +180,24 @@ function UserContext({ children }) {
 
   //updating cart quantity
 
-  const registerUser = async (name, email, password) => {
-    const data = {
-      name: name,
-      email: email,
-      password: password,
-    };
 
-    setLoading(true);
-    try {
-      const response = await axiosInstance.post(
-        "auth/register",
-        data
-      );
-      navigate("/login")
-      toast.success(response.data.message);
-    } catch (error) {
-      toast.error(axiosErrorManager(error));
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const value = {
     currUser,
     setCurrUser,
+    registerUser,
     loginUser,
     logoutUser,
-    registerUser,
+    adminLogin,
     loading,
     setLoading,
     cart,
     setCart,
-    wishlist,
     addToCart,
     removeFromCart,
-    removeFromWishlist,
+    wishlist,
     addToWishlist,
+    removeFromWishlist,
     isAdmin,
   };
 

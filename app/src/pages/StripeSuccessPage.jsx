@@ -26,7 +26,8 @@ function StripeSuccess() {
       }
     };
     success();
-  }, [sessionID, navigate]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sessionID]);
 
   return (
     <div>

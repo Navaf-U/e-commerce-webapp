@@ -41,27 +41,18 @@ function Orders() {
               <h2 className="text-lg font-semibold">
                 Order Status: {item.shippingStatus}
               </h2>
-              {item.shippingStatus === "Processing" && (
-                <div className="flex gap-1">
-                  <p className="text-red-600 font-semibold">Order is pending</p>
-                  <MdOutlinePending size={20} className="text-red-600 mt-[3px]" />
-                </div>
-              )}
             </div>
-            {item.shippingStatus === "Delivered" && (
-              <div className="flex gap-1">
-                <p className="text-green-600 font-semibold">
-                  Order is delivered
-                </p>
-                <SiTicktick size={15} className="text-green-600 mt-[4px]" />
-              </div> 
-            )}
-            {item.paymentStatus === "Paid" && (
+            {item.paymentStatus === "Paid" ? (
               <div className="flex gap-1">
                 <p className="text-green-600 font-semibold">Order is paid</p>
                 <SiTicktick size={15} className="text-green-600 mt-[4px]" />
               </div>
-            )}
+            ) : item.paymentStatus === "COD" ? (
+              <div className="flex gap-1">
+                <p className="text-red-600 font-semibold">Order is unpaid</p>
+                <MdOutlinePending size={22} className="text-red-600 " />
+              </div>
+            ) : null}
             <h2 className="text-xl font-[700]">Order ID: {item._id}</h2>
             <h2 className="">name: {item.firstName + " " + item.lastName}</h2>
             <h2 className="">email: {item.email}</h2>
@@ -71,7 +62,7 @@ function Orders() {
             </p>
             <h5 className="text-gray-600 text-xl font-medium">
               Total : <span className="text-[black]">{currency}</span>
-              <span className="text-[red]">{item.totalAmount}</span>
+              <span className={`${item.paymentStatus === "Paid" ? "text-green-600" : "text-red-600"}`} >{item.totalAmount}</span>
             </h5>
             <h3 className="text-lg font-semibold mt-4">Items:</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
