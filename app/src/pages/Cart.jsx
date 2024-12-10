@@ -128,6 +128,24 @@ const Cart = () => {
           </div>
         );
       })}
+       {cart.length !== 0 && (
+          <div className="order-options mt-6 p-4 bg-white shadow-md rounded-lg">
+            <h3 className="text-lg font-semibold text-center mb-4">
+              Ready to Order?
+            </h3>
+            <p className="text-center text-gray-600 mb-4">
+              You have {cart.length} items in your cart. Proceed to checkout now!
+            </p>
+            <div className="flex justify-center">
+              <NavLink
+                to="/payment"
+                className="bg-[#c95555] text-white py-2 px-6 rounded-lg font-semibold hover:bg-red-700 transition duration-300"
+              >
+                Proceed to Payment
+              </NavLink>
+            </div>
+          </div>
+        )}
     </div>
   );
 };

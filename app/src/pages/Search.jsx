@@ -28,7 +28,7 @@ function Search() {
               key={item._id}
             >
               <NavLink
-                to={`/products/${item.id}`}
+                to={`/products/${item._id}`}
                 className="flex justify-center"
               >
                 <img src={item.image} className="w-52" alt={item.name} />

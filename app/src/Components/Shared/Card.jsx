@@ -62,7 +62,7 @@ function Card({ id, price, image, type, name, rating }) {
         <div className="mt-4 px-5 pb-5">
           <div className="mt-2 mb-5 flex justify-around">
             <p>
-              <span className="text-[130%] font-bold text-slate-900">{price}₹</span>
+              <span className="text-[130%] font-bold text-slate-900">₹{price}</span>
             </p>
             <p className="flex">
               <span className="text-1xl flex text-center font-bold text-slate-900">

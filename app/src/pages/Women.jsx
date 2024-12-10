@@ -13,7 +13,6 @@ function Women() {
         const { data } = await axiosInstance.get(
           "user/products/category/women"
         );
-
         setWomen(data.data);
       } catch (error) {
         console.error(axiosErrorManager( error))

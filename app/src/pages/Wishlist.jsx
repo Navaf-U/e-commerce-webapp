@@ -2,10 +2,27 @@ import { useContext } from "react"
 import { userData } from "../context/UserContext"
 import { NavLink } from "react-router-dom";
 import { FaRegTrashCan } from "react-icons/fa6";
+import axiosErrorManager from "../util/axiosErrorManage";
+import { toast } from "react-toastify";
 
 function Wishlist() {
-    const {wishlist,removeFromWishlist} = useContext(userData)
-
+    const {wishlist,removeFromWishlist,addToCart} = useContext(userData)
+ const handleAddToCart = async(id) => {
+    try{
+      const [cartRes,wishRes] = await Promise.all([
+        addToCart(id,1),
+        removeFromWishlist(id)
+      ])
+      console.log(cartRes)
+      if (cartRes && wishRes) {
+        toast.success(cartRes.data.message )
+      }else{
+        toast.error(wishRes.data.message)
+      }
+    } catch(err){
+      axiosErrorManager(err)
+    }
+  }
   return (
     <div className="cart-items mx-auto my-8 max-w-screen-lg p-4">
       <h2 className="text-2xl font-bold text-center mb-6">Your Wishlist</h2>
@@ -17,6 +34,7 @@ function Wishlist() {
           <p className="text-start ms-20">Product</p>
           <p className=" text-center">Title</p>
           <p className=" text-end ">Price</p>
+          <p></p>
           </div>
         </div>
       )}
@@ -52,6 +70,15 @@ function Wishlist() {
               
               {item.price}
             </p>
+            
+            <div className="hidden sm:flex justify-center" onClick={() => handleAddToCart(item._id)}>
+              <NavLink
+                className="bg-[#333] text-white py-2 px-6 rounded-lg font-semibold hover:bg-[#000] transition duration-300"
+              >
+                ADD TO CART
+              </NavLink>
+            </div>            
+            
             <button
               onClick={() => removeFromWishlist(item._id)}
               className="ml-4  sm:hidden mb-2 me-[-20px] sm:mb-0"
@@ -62,6 +89,13 @@ function Wishlist() {
               />
             </button>
            </div>
+            <div className="flex sm:hidden justify-center" onClick={() => handleAddToCart(item._id)}>
+              <NavLink
+                className="bg-[#333] text-white py-2 px-6 rounded-lg font-semibold hover:bg-[#000] transition duration-300"
+              >
+                ADD TO CART
+              </NavLink>
+            </div>
           </div>
         );
       })}
