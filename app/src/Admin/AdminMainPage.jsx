@@ -1,4 +1,4 @@
-import "./AdmineStyle.css";
+import "./AdminStyle.css";
 import logo from '../Components/assets/whiteLogoSmaller.svg'
 import Swal from "sweetalert2";
 import AdminProducts from "./AdminProducts";

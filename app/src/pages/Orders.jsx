@@ -11,7 +11,6 @@ function Orders() {
   const { currUser, loading } = useContext(userData);
   const { currency } = useContext(ProductsData);
   const [orders, setOrders] = useState(null);
-
   useEffect(() => {
     const fetchOrder = async () => {
       try {
@@ -56,6 +55,12 @@ function Orders() {
                 </p>
                 <SiTicktick size={15} className="text-green-600 mt-[4px]" />
               </div> 
+            )}
+            {item.paymentStatus === "Paid" && (
+              <div className="flex gap-1">
+                <p className="text-green-600 font-semibold">Order is paid</p>
+                <SiTicktick size={15} className="text-green-600 mt-[4px]" />
+              </div>
             )}
             <h2 className="text-xl font-[700]">Order ID: {item._id}</h2>
             <h2 className="">name: {item.firstName + " " + item.lastName}</h2>

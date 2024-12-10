@@ -14,16 +14,17 @@ import Payment from "./pages/Payment";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import Contact from "./pages/Contact";
-import AdmineMainPage from "./Admine/AdminMainPage";
-import AdminUserActionPage from "./Admine/AdminUserActionPage";
-import ProductAddPage from "./Admine/ProductAddPage";
+import AdminMainPage from "./Admin/AdminMainPage";
+import AdminUserActionPage from "./Admin/AdminUserActionPage";
+import ProductAddPage from "./Admin/ProductAddPage";
 import Orders from "./pages/Orders";
 import UserProfile from "./pages/UserProfile";
-import AdminProductActionPage from "./Admine/AdminProductActionPage";
+import AdminProductActionPage from "./Admin/AdminProductActionPage";
 import { Outlet, Route, Routes} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import  { userData } from "./context/UserContext";
 import { useContext } from "react";
+import { StripeSuccess } from "../../server/controllers/user/orderController";
 
 
 function AppRoutes() {
@@ -54,12 +55,13 @@ function AppRoutes() {
           <Route path="/signup" element={currUser === null ? <SignupPage /> : <NotFound/>} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<UserProfile />} />
+          <Route path="/success/:sessionID" element={<StripeSuccess />} />
           <Route path="*" element={<NotFound />} />
         </Route>
         
       <Route
             path="/admin"
-            element={ isAdmin ? <AdmineMainPage /> : <NotFound />}
+            element={ isAdmin ? <AdminMainPage /> : <NotFound />}
           />
       <Route
             path="/adminProducts/:id"
