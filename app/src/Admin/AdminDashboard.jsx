@@ -131,7 +131,7 @@ const AdminDashboard = () => {
           text: 'Revenue',
         },
         grid: {
-          drawOnChartArea: false, // Prevent gridlines from overlapping
+          drawOnChartArea: false,
         },
       },
     },

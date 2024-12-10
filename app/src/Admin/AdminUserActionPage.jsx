@@ -9,6 +9,7 @@ import axiosErrorManager from "../util/axiosErrorManage";
 import { toast } from "react-toastify";
 function AdminUserActionPage() {
   const [user, setUser] = useState(null);
+  const [orders, setOrders] = useState([]);
   const { loading, setLoading } = useContext(userData);
   const navigate = useNavigate();
   const { ID } = useParams();
@@ -37,13 +38,27 @@ function AdminUserActionPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const { data } = await axiosInstance.get(`/admin/orders/user/${ID}`);
+        setOrders(data.data);
+      } catch (err) {
+        toast.error(axiosErrorManager(err));
+      }
+    };
+    fetchOrders();
+  }, [ID]);
+  console.log(orders);
+
   const handlerForMain = () => {
     navigate("/admin");
   };
 
   return (
     user && (
-      <div className="flex justify-center items-center">
+      <div className="flex flex-col sm:flex-row justify-center items-center">
         <IoCloseOutline
           onClick={handlerForMain}
           className="cursor-pointer bg-[#80808069] rounded-full hover:text-[#BA3131] position fixed left-4 top-2"
@@ -52,7 +67,7 @@ function AdminUserActionPage() {
         {loading ? (
           <Loading />
         ) : (
-          <div className="sm:ps-20 pt-10 px-4 sm:px-0">
+          <div className="sm:ps-20 px-4 sm:px-0">
             <div className="flex flex-col sm:flex-row sm:gap-28 items-center sm:items-start">
               {user.image ? (
                 <img
@@ -111,44 +126,50 @@ function AdminUserActionPage() {
             </div>
           </div>
         )}
+        <div className="sm:order-1 order-2 mt-10 sm:mt-0 sm:w-[50%]">
+          <div className="container mx-auto px-4 py-8">
+            <h1 className="text-2xl font-bold text-center mb-6">Your Orders</h1>
+            {orders.length > 0 ? (
+              orders.map((order) => (
+                <div
+                  key={order._id}
+                  className="bg-white shadow-md rounded-lg p-6 mb-4"
+                >
+                  <h2 className="text-xl font-[700]">Order ID: {order._id}</h2>
+                  <p className="text-gray-600">
+                    Purchased Date:
+                    {/* convert the date into human readable :) */}
+                    {new Date(order.purchasedDate).toLocaleString()}
+                  </p>
+                  <p className="text-gray-600">
+                    Payment Status: {order.paymentStatus}
+                  </p>
+                  <p className="text-gray-600">
+                    Shipping Status: {order.shippingStatus}
+                  </p>
+                  <h3 className="text-lg font-semibold mt-4">Products:</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {order.products.map((product) => (
+                      <div key={product.productID._id} className="border p-4 rounded-lg">
+                        <h4 className="font-semibold">{product.productID.name}</h4>
+                        <p>Quantity: {product.productID.quantity}</p>
+                        <p>Price: ₹{product.productID.price}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="font-semibold text-lg mt-4">
+                    Total Amount: ₹{order.totalAmount}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <div className="text-center text-gray-500">No orders found.</div>
+            )}
+          </div>
+        </div>
       </div>
     )
   );
 }
 
-{
-  /* <div>
-                  <div className="container mx-auto px-4 py-8">
-                    <h1 className="text-2xl font-bold text-center mb-6">
-                      Your Orders
-                    </h1>
-                    {user.length > 0 ? (
-                      user.orders.map((item) => (
-                        <div
-                          key={item.id}
-                          className="bg-white shadow-md rounded-lg p-6 mb-4"
-                        >
-                          <h2 className="text-xl font-[700]">{item.name}</h2>
-                          <p className="text-gray-600">{item.address}</p>
-                          <img src={item.image} alt="" />
-                          <h3 className="text-lg font-semibold mt-4">Items:</h3>
-                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {item.items.map((i) => (
-                              <div key={i.id} className="border p-4 rounded-lg">
-                                <h4 className="font-semibold">{i.name}</h4>
-                                <p>Quantity: {i.quantity}</p>
-                                <p>Price: ${i.price}</p>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="text-center text-gray-500">
-                        No orders found.
-                      </div>
-                    )}
-                  </div>
-                </div> */
-}
 export default AdminUserActionPage;
