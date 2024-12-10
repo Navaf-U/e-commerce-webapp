@@ -32,8 +32,8 @@ const orderCashOnDelivery = async (req, res, next) => {
 
 // to make an order with stripe
 const orderWithStripe = async (req, res, next) => {
-  const { products, address, totalAmount } = req.body;
-  if (!products || !address || !totalAmount) {
+  const { products, address, totalAmount , firstName, lastName, email, mobile } = req.body;
+  if (!products || !address || !totalAmount || !firstName || !lastName || !email || !mobile) {
     return next(new CustomError("All fields are required", 400));
   }
   // getting the details of the product
@@ -68,13 +68,17 @@ const orderWithStripe = async (req, res, next) => {
     payment_method_types: ["card"],
     line_items: lineItems,
     mode: "payment",
-    success_url: `http://localhost:3000/success/{CHECKOUT_SESSION_ID}`,
-    cancel_url: `http://localhost:3000/cancel`,
+    success_url: `http://localhost:5173/success/{CHECKOUT_SESSION_ID}`,
+    cancel_url: `http://localhost:5173/cancel`,
   });
   const newOrder = await new Order({
     userID: req.user.id,
     products,
     address,
+    firstName,
+    lastName,
+    email,
+    mobile,
     totalAmount: newTotal,
     paymentStatus: "Pending",
     shippingStatus: "Processing",
