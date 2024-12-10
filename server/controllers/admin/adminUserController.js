@@ -28,16 +28,30 @@ const blockUser = async (req,res) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
         return next(new CustomError("Invalid ID format", 400)); 
     }
-    const user = await User.findById(req.params.id)
+    const user = await User.findById(req.params.id,{password:0})
     if(!user){
         return next(new CustomError("User not found",404))
     }
     // will toggle the user block property true/false
-    user.isBlocked = !user.isBlocked
+    user.isBlocked = true
     await user.save()
-    res.status(200).json({message: user.isBlocked ? `${user.email} is blocked` : `${user.email} is unblocked` })
+    res.status(200).json({message:"User blocked successfully",user})
+}
+const unblockUser = async (req,res) => {
+    //checking id format valid or not
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        return next(new CustomError("Invalid ID format", 400)); 
+    }
+    const user = await User.findById(req.params.id,{password:0})
+    if(!user){
+        return next(new CustomError("User not found",404))
+    }
+    // will toggle the user block property true/false
+    user.isBlocked = false
+    await user.save()
+    res.status(200).json({message:"User unblocked successfully",user})
 }
 
 
 
-export {getAllUsers,getOneUser,blockUser}
+export {getAllUsers,getOneUser,blockUser,unblockUser}
