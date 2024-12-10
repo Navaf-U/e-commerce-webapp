@@ -30,7 +30,7 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
       try {
         // request to refresh token
-        const response = await axios.get("/auth/refreshtoken");
+        const response = await axios.post("/auth/refreshtoken");
         const newAccessToken = response.data.token;
 
         //update the instance's header

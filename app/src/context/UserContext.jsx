@@ -19,7 +19,6 @@ function UserContext({ children }) {
 
   useEffect(() => {
     const cookieUser = Cookies.get("currentUser");
-    // console.log("token is",cookieUser)
     if (cookieUser) {
       try {
         setCurrUser(JSON.parse(cookieUser));
@@ -37,8 +36,9 @@ function UserContext({ children }) {
       );
       const cookieUser = Cookies.get("currentUser");
       setCurrUser(JSON.parse(cookieUser));
-      navigate("/"); // Navigate to the homepage or login page
+      navigate("/")
       toast.success("Logged in successfully");
+      await getUserCart();
     } catch (err) {
       toast.error(axiosErrorManager(err));
     }

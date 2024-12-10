@@ -63,8 +63,6 @@ function Payment() {
         setCart([]);
         navigator("/orders");
       }
-      setCart([]);
-      toast.success("Order placed successfully.");
     } catch (error) {
       toast.error(axiosErrorManager(error));
     } finally {
