@@ -1,6 +1,16 @@
 import Product from "../../models/productsSchema.js";
 import CustomError from "../../utils/customError.js";
 import { joiProductSchema } from "../../models/joiValSchema.js";
+import mongoose from "mongoose";
+
+const adminAllProducts = async (req, res) => {
+  const product = await Product.find();
+  if (!product) {
+    return res.status(204).json({ message: "no item in products" });
+  }
+  res.status(200).json({ data: product });
+};
+
 
 const createProducts = async (req, res, next) => {
   const { value, error } = joiProductSchema.validate(req.body);
@@ -52,18 +62,29 @@ const deleteProducts = async (req, res, next) => {
     return next(new CustomError("Invalid ID format", 400)); 
 }
   //to access the deleted key
-  const prod = await Product.findById(req.params.id);
   const deletedProduct = await Product.findByIdAndUpdate(
     req.params.id,
-    { $set: { isDeleted: !prod.isDeleted } },
+    { $set: { isDeleted: true } },
     { new: true }
   );
   if (!deletedProduct) return next(new CustomError("Product not found", 404));
   res.status(200).json({
-    message: deletedProduct.isDeleted
-      ? `Product '${deletedProduct.name}' is deleted successfully`
-      : `Product '${deletedProduct.name}' is restored successfully`,
-  });
+    message: "Product deleted successfully"});
+};
+const restoreProducts = async (req, res, next) => {
+  //checking id format valid or not
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return next(new CustomError("Invalid ID format", 400)); 
+}
+  //to access the deleted key
+  const restoredProduct = await Product.findByIdAndUpdate(
+    req.params.id,
+    { $set: { isDeleted: false } },
+    { new: true }
+  );
+  if (!restoredProduct) return next(new CustomError("Product not found", 404));
+  res.status(200).json({
+    message: "Product restored successfully"});
 };
 
-export { createProducts, updateProducts, deleteProducts };
+export { createProducts, updateProducts, deleteProducts ,restoreProducts ,adminAllProducts };
