@@ -24,7 +24,8 @@ import { Outlet, Route, Routes} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import  { userData } from "./context/UserContext";
 import { useContext } from "react";
-import StripeSuccessComp from "./pages/StripeSuccessComp.jsx";
+import StripeSuccessPage from "./pages/StripeSuccessPage.jsx";
+import AdminLogin from "./Admin/AdminLoginPage.jsx";
 
 function AppRoutes() {
   const { isAdmin ,cart,currUser} = useContext(userData);
@@ -54,7 +55,7 @@ function AppRoutes() {
           <Route path="/signup" element={currUser === null ? <SignupPage /> : <NotFound/>} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<UserProfile />} />
-          <Route path="/success/:sessionID" element={<StripeSuccessComp/>} />
+          <Route path="/success/:sessionID" element={<StripeSuccessPage/>} />
           <Route path="*" element={<NotFound />} />
         </Route>
         
@@ -63,11 +64,15 @@ function AppRoutes() {
             element={ isAdmin ? <AdminMainPage /> : <NotFound />}
           />
       <Route
+            path="/admin/login"
+            element={ isAdmin ? <AdminLogin /> : <NotFound />}
+          />
+      <Route
             path="/adminProducts/:id"
             element={ isAdmin ? <AdminProductActionPage /> : <NotFound />}
           />
           <Route
-            path="/adminUsers/:ID"
+            path="/admin/user/:ID"
             element={ isAdmin ? <AdminUserActionPage /> : <NotFound />}
           />
           <Route
