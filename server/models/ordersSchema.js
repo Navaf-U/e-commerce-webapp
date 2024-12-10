@@ -16,6 +16,10 @@ const orderSchema = new mongoose.Schema(
     //without stripe session id and things
     sessionID:{type:String},
     purchasedDate:{type:Date,default:Date.now},
+    firstName:{type:String,required:true},
+    lastName:{type:String,required:true},
+    email:{type:String,required:true},
+    mobile:{type:String,required:true},
     address:{type:Object,required:true},
     totalAmount:{type:Number , required:true},
     paymentStatus:{type:String,default:"pending"},

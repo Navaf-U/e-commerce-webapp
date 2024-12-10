@@ -1,4 +1,5 @@
 import Cart from "../../models/cartSchema.js";
+import CustomError from "../../utils/customError.js";
 
 // to get the userCart
 const getUserCart = async (req, res) => {

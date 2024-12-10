@@ -2,8 +2,8 @@ import Cart from "../../models/cartSchema.js";
 import Order from "../../models/ordersSchema.js";
 import Stripe from "stripe";
 import Product from "../../models/productsSchema.js";
-import CustomError from "../../utils/customError.js";
 import mongoose from "mongoose";
+import CustomError from "../../utils/customError.js";
 
 //cash on delivery order
 const orderCashOnDelivery = async (req, res, next) => {
