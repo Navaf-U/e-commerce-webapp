@@ -14,7 +14,6 @@ function ProductAddPage() {
     type: "",
     price: "",
     qty: "",
-    rating: "",
     reviews: "",
     brand: "",
     description: "",
@@ -30,8 +29,6 @@ function ProductAddPage() {
       formData.append("type", formValue.type);
       formData.append("price", formValue.price);
       formData.append("qty", formValue.qty);
-      formData.append("rating", formValue.rating);
-      formData.append("reviews", formValue.reviews);
       formData.append("brand", formValue.brand);
       formData.append("description", formValue.description);
       formData.append("image", image);
@@ -56,8 +53,6 @@ function ProductAddPage() {
       type: "",
       price: "",
       qty: "",
-      rating: "",
-      reviews: "",
       brand: "",
       description: "",
     })
@@ -126,24 +121,6 @@ function ProductAddPage() {
         />
 
         <input
-          type="number"
-          placeholder="Rating"
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BF3131]"
-          onChange={(e) =>
-            setFormValue({ ...formValue, rating: e.target.value })
-          }
-        />
-
-        <input
-          type="number"
-          placeholder="Reviews"
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BF3131]"
-          onChange={(e) =>
-            setFormValue({ ...formValue, reviews: e.target.value })
-          }
-        />
-
-        <input
           type="text"
           placeholder="Brand"
           className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BF3131]"
@@ -160,7 +137,6 @@ function ProductAddPage() {
             setFormValue({ ...formValue, description: e.target.value })
           }
         />
-
         <button
           type="submit"
           onClick={AddProducts}

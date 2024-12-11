@@ -39,7 +39,7 @@ function UserContext({ children }) {
     setLoading(true);
     try {
       const response = await axios.post(
-        "auth/register",
+        "http://localhost:3000/auth/register",
         data
       );
       navigate("/login")
