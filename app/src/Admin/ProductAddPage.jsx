@@ -1,24 +1,71 @@
 import { useContext, useState } from "react";
-import { ProductsData } from "../context/ProductsCont";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
+import axiosInstance from "../util/axiosInstance";
+import axiosErrorManager from "../util/axiosErrorManage";
+import { userData } from "../context/UserContext";
+import { ProductsData } from "../context/ProductsCont";
 function ProductAddPage() {
-  const [name, setName] = useState("");
-  const [type, setType] = useState("");
+  const { setLoading } = useContext(userData);
+  const {setProducts} = useContext(ProductsData);
+  const [formValue, setFormValue ] = useState({
+    name: "",
+    type: "",
+    price: "",
+    qty: "",
+    rating: "",
+    reviews: "",
+    brand: "",
+    description: "",
+  });
   const [image, setImage] = useState("");
-  const [description, setDescription] = useState("");
-  const [brand, setBrand] = useState("");
-  const [price, setPrice] = useState("");
-  const [rating, setRating] = useState("");
-  const [reviews, setReviews] = useState("");
   const navigate = useNavigate();
 
-  const { PostProducts } = useContext(ProductsData);
+  const AddProducts = async () => {
+    try {
+      setLoading(true);
+      const formData = new FormData();
+      formData.append("name", formValue.name);
+      formData.append("type", formValue.type);
+      formData.append("price", formValue.price);
+      formData.append("qty", formValue.qty);
+      formData.append("rating", formValue.rating);
+      formData.append("reviews", formValue.reviews);
+      formData.append("brand", formValue.brand);
+      formData.append("description", formValue.description);
+      formData.append("image", image);
+      const res = await axiosInstance.post("/admin/product", formData);
+      setLoading(false);
+      if (res.status === 201) {
+        toast.success(res.data.message);
+        setProducts((prev) => [...prev, res.data.data]);
+        navigate("/admin");
+        resetFunc();
+      }
+    } catch (err) {
+      toast.error(axiosErrorManager(err));
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  const resetFunc = () =>{
+    setFormValue({
+      name: "",
+      type: "",
+      price: "",
+      qty: "",
+      rating: "",
+      reviews: "",
+      brand: "",
+      description: "",
+    })
+    setImage("");
+  }
+
   const DefaultFun = (e) => {
     e.preventDefault();
-    PostProducts(name, type, image, price, rating, reviews, brand, description);
-    toast.success("Product Added");
   };
 
   const handlerForMain = () => {
@@ -44,14 +91,12 @@ function ProductAddPage() {
           type="text"
           placeholder="Name"
           className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BF3131]"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setFormValue({ ...formValue, name: e.target.value })}
         />
 
         <select
           className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BF3131]"
-          value={type}
-          onChange={(e) => setType(e.target.value)}
+          onChange={(e) => setFormValue({ ...formValue, type: e.target.value })}
         >
           <option value="select type">Select Type</option>
           <option value="men">Men</option>
@@ -59,55 +104,66 @@ function ProductAddPage() {
         </select>
 
         <input
-          type="text"
+          type="file"
           placeholder="Image"
-          value={image}
           className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BF3131]"
-          onChange={(e) => setImage(e.target.value)}
+          onChange={(e) => setImage(e.target.files[0])}
         />
 
         <input
-          type="text"
+          type="number"
           placeholder="Price"
-          value={price}
           className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BF3131]"
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={(e) =>
+            setFormValue({ ...formValue, price: e.target.value })
+          }
+        />
+        <input
+          type="number"
+          placeholder="Quantity"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BF3131]"
+          onChange={(e) => setFormValue({ ...formValue, qty: e.target.value })}
         />
 
         <input
-          type="text"
+          type="number"
           placeholder="Rating"
-          value={rating}
           className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BF3131]"
-          onChange={(e) => setRating(e.target.value)}
+          onChange={(e) =>
+            setFormValue({ ...formValue, rating: e.target.value })
+          }
         />
 
         <input
-          type="text"
+          type="number"
           placeholder="Reviews"
-          value={reviews}
           className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BF3131]"
-          onChange={(e) => setReviews(e.target.value)}
+          onChange={(e) =>
+            setFormValue({ ...formValue, reviews: e.target.value })
+          }
         />
 
         <input
           type="text"
           placeholder="Brand"
-          value={brand}
           className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BF3131]"
-          onChange={(e) => setBrand(e.target.value)}
+          onChange={(e) =>
+            setFormValue({ ...formValue, brand: e.target.value })
+          }
         />
 
         <input
           type="text"
           placeholder="Description"
-          value={description}
           className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#BF3131]"
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) =>
+            setFormValue({ ...formValue, description: e.target.value })
+          }
         />
 
         <button
           type="submit"
+          onClick={AddProducts}
           className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition duration-200"
         >
           Submit
