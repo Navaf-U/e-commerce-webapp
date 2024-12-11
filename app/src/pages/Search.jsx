@@ -22,10 +22,10 @@ function Search() {
     <div className="pt-20">
       {data != null ? (
         <ul className="flex flex-wrap justify-center items-center gap-8">
-          {data.map((item) => (
+          {data.map((item,i) => (
             <li
               className="border-[1px] border-[#BF3131] text-center w-full md:w-[40%] text-[20px] p-5"
-              key={item._id}
+              key={i}
             >
               <NavLink
                 to={`/products/${item._id}`}

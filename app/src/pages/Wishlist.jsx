@@ -13,7 +13,7 @@ function Wishlist() {
         addToCart(id,1),
         removeFromWishlist(id)
       ])
-      console.log(cartRes)
+      
       if (cartRes && wishRes) {
         toast.success(cartRes.data.message )
       }else{

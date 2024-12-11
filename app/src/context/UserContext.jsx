@@ -103,7 +103,7 @@ function UserContext({ children }) {
       const data = await axiosInstance.get(`user/wishlist`);
       setWishlist(data.data?.products);
     } catch (error) {
-      console.log(error);
+      toast.error(axiosErrorManager(error));
     }
   };
 
@@ -142,7 +142,7 @@ function UserContext({ children }) {
       const data = await axiosInstance.get(`/user/cart`);
       setCart(data.data?.products);
     } catch (error) {
-      console.log(error);
+      toast.error(axiosErrorManager(error));
     }
   };
 

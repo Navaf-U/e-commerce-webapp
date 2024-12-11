@@ -50,7 +50,6 @@ function AdminUserActionPage() {
     };
     fetchOrders();
   }, [ID]);
-  console.log(orders);
 
   const handlerForMain = () => {
     navigate("/admin");
