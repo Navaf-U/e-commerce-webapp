@@ -76,7 +76,7 @@ function AdminProducts() {
             Women
           </label>
         </div>
-        <NavLink to="/addproducts">
+        <NavLink to="/admin/product/add">
           <button
             type="button"
             className="px-6 py-2 bg-green-500 text-white text-lg rounded-md hover:bg-green-600 transition"

@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { userData } from "../../context/UserContext.jsx";
+import axiosErrorManager from "../../util/axiosErrorManage.jsx";
+import { toast } from "react-toastify";
 
 function LoginCombo() {
   const {loginUser} = useContext(userData) 
@@ -14,7 +16,7 @@ function LoginCombo() {
     try{
       await loginUser(email, password);
     }catch(err){
-      console.log(err)
+      toast.error(axiosErrorManager(err))
     }
   };
   return (

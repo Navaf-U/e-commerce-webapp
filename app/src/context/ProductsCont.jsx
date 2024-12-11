@@ -1,6 +1,8 @@
-import axios from "axios";
 import { useContext, useEffect, useState, createContext } from "react";
 import { userData } from "./UserContext";
+import axiosInstance from "../util/axiosInstance";
+import axiosErrorManager from "../util/axiosErrorManage";
+import { toast } from "react-toastify";
 
 export const ProductsData = createContext();
 
@@ -9,39 +11,16 @@ function ProductsCont({ children }) {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
 
-  const { currUser, cart, setLoading } = useContext(userData) || {};
-
-  const getTotalCartAmount = () => {
-    let total = 0;
-    products.forEach((item) => {
-      const quantity = cart[item.id];
-      if (quantity) {
-        total += item.price * quantity;
-      }
-    });
-    return total;
-  };
-
-  // const cartItemNotify = () => {
-  //   let totalNotify = 0;
-  //   for (let i in cart) {
-  //     const productExist = products.find((item) => item.id == i);
-
-  //     if (cart[i] > 0 && productExist) {
-  //       totalNotify += cart[i];
-  //     }
-  //   }
-  //   return totalNotify;
-  // };
+  const { currUser, setLoading } = useContext(userData) || {};
 
   useEffect(() => {
     const fetchProductsData = async () => {
       setLoading(true);
       try {
-        const { data } = await axios.get("http://localhost:3000/user/products");
+        const { data } = await axiosInstance.get("/user/products");
         setProducts(data.data);
       } catch (err) {
-        console.log(err);
+        toast.error(axiosErrorManager(err));
       } finally {
         setLoading(false);
       }
@@ -49,49 +28,15 @@ function ProductsCont({ children }) {
     fetchProductsData();
   }, [currUser, setLoading]);
 
-  const PostProducts = (
-    name,
-    type,
-    image,
-    price,
-    rating,
-    reviews,
-    brand,
-    description
-  ) => {
-    const datas = {
-      name: name,
-      type: type,
-      image: image,
-      price: price,
-      rating: rating,
-      reviews: reviews,
-      brand: brand,
-      description: description,
-    };
-
-    const AddProducts = async () => {
-      setLoading(true);
-      try {
-        await axios.post("http://localhost:3000/admin/product", datas);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    AddProducts();
-  };
-
+   
   const currency = "₹";
 
   const value = {
     currency,
     products,
+    setProducts,
     search,
     setSearch,
-    getTotalCartAmount,
-    PostProducts,
   };
 
   return (
