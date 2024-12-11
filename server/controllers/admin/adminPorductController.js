@@ -34,8 +34,7 @@ const createProducts = async (req, res, next) => {
   }
   await newProduct.save();
   res.status(201).json({
-    message: "Product created successfully",
-  });
+    message: "Product created successfully",data : newProduct});
 };
 
 const updateProducts = async (req, res, next) => {
