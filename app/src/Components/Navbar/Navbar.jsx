@@ -41,6 +41,8 @@ function Navbar() {
       }
     });
   };
+
+
   return (
     <div className="pb-20">
       <div>
@@ -71,7 +73,6 @@ function Navbar() {
           </div>
         )}
       </div>
-
       <div className="border-b-2 h-20 flex justify-center w-full fixed bg-white z-50">
         <div className="nav-logo flex justify-between items-center w-full px-4">
           <Link to="/">
@@ -105,7 +106,6 @@ function Navbar() {
               </NavLink>
             )}
           </div>
-
           <div className="flex items-center ps-3">
             <input
               type="text"

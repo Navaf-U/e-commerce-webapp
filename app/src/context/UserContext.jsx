@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Cookies from "js-cookie";
 import axiosErrorManager from "../util/axiosErrorManage";
 import axiosInstance from "../util/axiosInstance";
@@ -26,8 +27,11 @@ function UserContext({ children }) {
       } catch (error) {
         console.error("Failed to parse currentUser cookie:", error);
       }
+    } else {
+      setCurrUser(null); // Automatically update UI when cookie is removed
     }
-  }, []);
+  }, [Cookies.get("currentUser") ]); // Depend on the currentUser cookie
+  
 
   const registerUser = async (name, email, password) => {
     const data = {

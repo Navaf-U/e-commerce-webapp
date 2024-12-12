@@ -56,18 +56,6 @@ function LoginCombo() {
                 </button>
               </NavLink>
             </p>
-            <div className="loginsignup-agree flex items-center mt-6 gap-5 text-[#5c5c5c] text-base md:text-lg font-medium">
-              <input type="checkbox" required />
-              <p>
-                By proceeding, you acknowledge acceptance of our
-                <span className="text-[#ff4141] font-semibold">
-                  &nbsp;terms of use
-                </span>
-                <span className="text-[#ff4141] font-semibold">
-                  privacy policy
-                </span>
-              </p>
-            </div>
           </div>
         </form>
       </div>
