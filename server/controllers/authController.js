@@ -45,13 +45,17 @@ const loginUser = async (req, res, next) => {
     return next(new CustomError("User doesn't exist", 401));
   }
 
+  
   if (user.isBlocked) {
     return next(new CustomError("User is Blocked", 403));
   }
-
+  
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
     return next(new CustomError("Invalid credentials", 401));
+  }
+  if (user.role === "admin") {
+    return next(new CustomError("Access denied.Nice try, though! :)", 403));
   }
   // creating token for logged user
   const token = createToken(user._id, user.role, "1h");
