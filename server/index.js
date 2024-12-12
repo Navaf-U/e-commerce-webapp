@@ -7,7 +7,7 @@ import authRoutes from "./routes/authRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import manageError from "./middlewares/manageError.js";
 import connectCloudinary from "./config/cloudinary.js";
-
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 //mongoDb connect AND cloudinaryConnects
@@ -15,14 +15,15 @@ connectDB();
 connectCloudinary();
 const app = express();
 const PORT = process.env.PORT || 3000;
+// middleware
 app.use(cors({
   origin:process.env.CLIENT_URL,
   credentials: true
 }));
-
-
-// middleware
 app.use(express.json());
+app.use(cookieParser());
+
+
 app.get("/", (req, res) => {
   res.send("BACKEND Running");
 });

@@ -8,7 +8,7 @@ const router = express.Router()
 router
 .post("/register",tryCatch(userRegister))
 .post("/login",tryCatch(loginUser))
-.post("/refreshtoken",tryCatch(refreshingToken)) //handling token refresh
+.post("/refreshToken",tryCatch(refreshingToken)) //handling token refresh
 .post("/logout",tryCatch(logout)) // handling logout
 
 export default router;

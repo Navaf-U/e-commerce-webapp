@@ -9,8 +9,8 @@ const productSchema = new mongoose.Schema(
         qty:{type:Number,required:true},
         description:{type:String},
         brand:{type:String,required:true},
-        rating:{type:Number,required:true,min:0,max:5},
-        reviews:{type:Number},
+        rating:{type:Number,min:1,max:5,default:1},
+        reviews:{type:Number,default:0},
         isDeleted:{type:Boolean, default:false }
     },
     {timestamps:true}

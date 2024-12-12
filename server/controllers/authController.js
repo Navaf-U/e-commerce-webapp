@@ -62,8 +62,8 @@ const loginUser = async (req, res, next) => {
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    secure: true,
-    sameSite: "none",
+    secure: true, 
+    sameSite: "None",
   });
 
   const currentUser = {
@@ -71,19 +71,19 @@ const loginUser = async (req, res, next) => {
     name: user.name,
     email: user.email,
     role: user.role,
-  }
+  };
   //sending user details to client (for curr user)
-  res.cookie("currentUser", JSON.stringify(currentUser))
+  res.cookie("currentUser", JSON.stringify(currentUser));
 
   //sending token to cookie
   res.cookie("token", token, {
     httpOnly: false,
     secure: true,
-    sameSite: "none",
+    sameSite: "None",
   });
+  console.log(user)
 
-  res.json({ message: "user successfully logged in",token});
-
+  res.json({ message: "user successfully logged in", token });
 };
 
 const adminLogin = async (req, res, next) => {
@@ -109,7 +109,7 @@ const adminLogin = async (req, res, next) => {
   //sending refreshToken to cookie
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    secure: false,
+    secure: true,
     sameSite: "none", //can change to strict
   });
 
@@ -118,9 +118,9 @@ const adminLogin = async (req, res, next) => {
     name: user.name,
     email: user.email,
     role: user.role,
-  }
+  };
   //sending user details to client (for curr user)
-  res.cookie("currentUser", JSON.stringify(currentUser))
+  res.cookie("currentUser", JSON.stringify(currentUser));
 
   //sending token to cookie
   res.cookie("token", token, {
@@ -130,30 +130,40 @@ const adminLogin = async (req, res, next) => {
   });
 
   res.json({ message: "Admin successfully logged in", token });
-
 };
 
 // controller to handle refresh
 const refreshingToken = async (req, res, next) => {
+  if (!req.cookies) {
+    return next(new CustomError("No cookies found", 401));
+  }
   const refreshToken = req.cookies.refreshToken;
   if (!refreshToken) {
-    return next(new CustomError("no refresh token found", 401));
+    return next(new CustomError("No refresh token found", 401));
   }
-  // verifying the refresh token
+
+  // Verifying the refresh token
   const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN);
+
   const user = await User.findById(decoded.id);
-  if (!user) {
-    return next(new CustomError("User not found", 401));
+  if (!user || user.refreshToken !== refreshToken) {
+    return next(new CustomError("Invalid refresh token", 401));
   }
-  const token = createToken(user._id, user.role, "1h");
-  res.status(200).json({ message: "token refreshed", token });
+  let accessToken = createToken(user._id, user.role, "1h");
+  
+  res.status(200).json({ message: "Token refreshed", token: accessToken });
 };
 
 // controller to handle logout
-const logout = async (req, res) => {
-  //clearing refresh token from cookie
+const logout = async (req, res, next) => {
+  // Clearing the refresh token cookie
   res.clearCookie("refreshToken", {
     httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
+  res.clearCookie("token", {
+    httpOnly: false,
     secure: true,
     sameSite: "none",
   });
@@ -162,12 +172,10 @@ const logout = async (req, res) => {
     secure: true,
     sameSite: "none",
   });
-  res.clearCookie("token", {
-    httpOnly: false,
-    secure: true,
-    sameSite: "none",
-  })
-  res.json({ message: "You've successfully logged out" });
+
+  res
+    .status(200)
+    .json({ status: "success", message: "Logged out successfully" });
 };
 
-export { userRegister, loginUser, adminLogin , refreshingToken , logout };
+export { userRegister, loginUser, adminLogin, refreshingToken, logout };
