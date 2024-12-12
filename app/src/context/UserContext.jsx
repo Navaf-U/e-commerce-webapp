@@ -15,6 +15,8 @@ function UserContext({ children }) {
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
+  const [cartLengthCheck, setCartLengthCheck] = useState(0);
+  const [wishlistLengthCheck, setWishlistLengthCheck] = useState(0);
   const navigate = useNavigate();
 
   const isAdmin = currUser !== null && currUser.role === "admin" ? true : false;
@@ -30,8 +32,8 @@ function UserContext({ children }) {
     } else {
       setCurrUser(null); // Automatically update UI when cookie is removed
     }
-  }, [Cookies.get("currentUser") ]); // Depend on the currentUser cookie
-  
+  }, [Cookies.get("currentUser")]); // Depend on the currentUser cookie
+
 
   const registerUser = async (name, email, password) => {
     const data = {
@@ -46,7 +48,7 @@ function UserContext({ children }) {
         "http://localhost:3000/auth/register",
         data
       );
-      navigate("/login")
+      navigate("/login");
       toast.success(response.data.message);
     } catch (error) {
       toast.error(axiosErrorManager(error));
@@ -55,16 +57,16 @@ function UserContext({ children }) {
     }
   };
 
-
   const loginUser = async (email, password) => {
     try {
-      await axios.post("http://localhost:3000/auth/login",
+      await axios.post(
+        "http://localhost:3000/auth/login",
         { email, password },
         { withCredentials: true }
       );
       const cookieUser = Cookies.get("currentUser");
       setCurrUser(JSON.parse(cookieUser));
-      navigate("/")
+      navigate("/");
       toast.success("Logged in successfully");
     } catch (err) {
       toast.error(axiosErrorManager(err));
@@ -73,11 +75,7 @@ function UserContext({ children }) {
   const logoutUser = async () => {
     try {
       // Call the logout API on the server
-      await axiosInstance.post(
-        "auth/logout",
-        {},
-        { withCredentials: true }
-      );
+      await axiosInstance.post("auth/logout", {}, { withCredentials: true });
       navigate("/"); // Navigate to the homepage or login page
       toast.success("Logged out successfully");
       setCurrUser(null);
@@ -88,32 +86,37 @@ function UserContext({ children }) {
 
   const adminLogin = async (email, password) => {
     try {
-      await axios.post("http://localhost:3000/admin/login",
+      await axios.post(
+        "http://localhost:3000/admin/login",
         { email, password },
         { withCredentials: true }
       );
       const cookieAdmin = Cookies.get("currentUser");
       setCurrUser(JSON.parse(cookieAdmin));
-      navigate("/")
+      navigate("/");
       toast.success("Admin logged in successfully");
     } catch (err) {
       toast.error(axiosErrorManager(err));
     }
   };
 
-
   const getUserWishList = async () => {
-    try {
-      const data = await axiosInstance.get(`user/wishlist`);
-      setWishlist(data.data?.products);
-    } catch (error) {
-      toast.error(axiosErrorManager(error));
+    if (currUser) {
+      try {
+        const data = await axiosInstance.get(`user/wishlist`);
+        const fetchedWishlist = data.data?.products || [];
+        setWishlist(fetchedWishlist);
+        setWishlistLengthCheck(fetchedWishlist.length); // Update length here
+      } catch (error) {
+        toast.error(axiosErrorManager(error));
+      }
     }
   };
+  
 
   useEffect(() => {
     getUserWishList();
-  }, []);
+  }, [currUser]);
 
   const addToWishlist = async (id) => {
     try {
@@ -142,27 +145,27 @@ function UserContext({ children }) {
   //cart section
 
   const getUserCart = async () => {
-    try {
-      const data = await axiosInstance.get(`/user/cart`);
-      setCart(data.data?.products);
-    } catch (error) {
-      toast.error(axiosErrorManager(error));
+    if (currUser) {
+      try {
+        const data = await axiosInstance.get(`/user/cart`);
+        setCart(data.data?.products);
+        setCartLengthCheck(data.data?.products.length);
+      } catch (error) {
+        toast.error(axiosErrorManager(error));
+      }
     }
   };
 
   useEffect(() => {
     getUserCart();
-  }, []);
+  }, [currUser]);
 
   const addToCart = async (id, q) => {
     try {
-      const res = await axiosInstance.post(
-        `user/cart`,
-        {
-          productID: id,
-          quantity: q,
-        }
-      );
+      const res = await axiosInstance.post(`user/cart`, {
+        productID: id,
+        quantity: q,
+      });
       await getUserCart();
       toast.success(res.data.message);
     } catch (error) {
@@ -182,10 +185,6 @@ function UserContext({ children }) {
     }
   };
 
-  //updating cart quantity
-
-
-
   const value = {
     currUser,
     setCurrUser,
@@ -197,11 +196,13 @@ function UserContext({ children }) {
     setLoading,
     cart,
     setCart,
+    cartLengthCheck,
     addToCart,
     removeFromCart,
     wishlist,
     addToWishlist,
     removeFromWishlist,
+    wishlistLengthCheck,
     isAdmin,
   };
 

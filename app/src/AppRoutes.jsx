@@ -28,8 +28,7 @@ import StripeSuccessPage from "./pages/StripeSuccessPage.jsx";
 import AdminLogin from "./Admin/AdminLoginPage.jsx";
 
 function AppRoutes() {
-  const { isAdmin ,cart,currUser} = useContext(userData);
-  const cartLength = cart ? cart.length : 0;
+  const { isAdmin ,cartLengthCheck,currUser} = useContext(userData);
   return (
     <>
       <ToastContainer draggable />
@@ -47,21 +46,21 @@ function AppRoutes() {
           <Route path="/women" element={<Women />} />
           <Route path="/search" element={<Search />} />
           <Route path="/products/:id" element={<Product />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/wishlist" element={<Wishlist/>} />
-          <Route path="/payment" element={ cartLength && currUser ? <Payment />  : <NotFound/> }/>
-          <Route path="/orders" element={<Orders />} />
+          <Route path="/cart" element={ currUser !== null ? <Cart /> : <NotFound/>} />
+          <Route path="/wishlist" element={ currUser !== null ? <Wishlist/> : <NotFound/> } />
+          <Route path="/payment" element={ cartLengthCheck && currUser ? <Payment />  : <NotFound/> }/>
+          <Route path="/orders" element={currUser !== null ? <Orders /> : <NotFound/>} />
           <Route path="/login" element={ currUser === null ? <LoginPage /> :<NotFound/>} />
           <Route path="/signup" element={currUser === null ? <SignupPage /> : <NotFound/>} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/profile" element={<UserProfile />} />
-          <Route path="/success/:sessionID" element={<StripeSuccessPage/>} />
+          <Route path="/contact" element={ <Contact />} />
+          <Route path="/profile" element={ currUser !== null ? <UserProfile /> : <NotFound/>} />
+          <Route path="/success/:sessionID" element={currUser !== null ? <StripeSuccessPage/> : <NotFound/>} />
           <Route path="*" element={<NotFound />} />
         </Route>
         
         <Route
               path="/admin/login"
-              element={ <AdminLogin />}
+              element={currUser === null ? <AdminLogin /> : "Please log out first"}
             />
       <Route
             path="/admin"

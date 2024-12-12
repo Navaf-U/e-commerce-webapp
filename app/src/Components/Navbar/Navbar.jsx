@@ -15,10 +15,11 @@ function Navbar() {
   const [menu, setMenu] = useState(false);
   const [currUserDataShows, setCurrUserDataShows] = useState(false);
   const { search, setSearch } = useContext(ProductsData);
-  const { currUser, logoutUser, cart, wishlist, isAdmin } =
-    useContext(userData);
-  const cartLength = cart ? cart.length : 0;
-  const wishlistLength = wishlist ? wishlist.length : 0;
+  const { currUser, logoutUser, cartLengthCheck, wishlistLengthCheck, isAdmin } =
+  useContext(userData);
+  
+
+  
   const toggleDropdown = () => {
     setCurrUserDataShows((prev) => !prev);
   };
@@ -143,7 +144,7 @@ function Navbar() {
                 <NavLink to="/wishlist" className="relative">
                   <div className="absolute top-[-18px] right-[-3px] bg-red-700 rounded-full h-4 w-4 text-center mt-2">
                     <p className="m-[-2px] text-white text-[12px]">
-                      {wishlistLength}
+                      {wishlistLengthCheck}
                     </p>
                   </div>
                   <CiHeart className="hover:text-[#BF3131]" size={25} />
@@ -152,7 +153,7 @@ function Navbar() {
                 <NavLink to="/cart" className="relative">
                   <div className="absolute top-[-19px] right-[14px] sm:right-[-10px] bg-red-700 rounded-full h-4 w-4 text-center mt-2">
                     <p className="m-[-3px] text-white text-[13px]">
-                      {cartLength}
+                      {cartLengthCheck}
                     </p>
                   </div>
                   <IoCartOutline
