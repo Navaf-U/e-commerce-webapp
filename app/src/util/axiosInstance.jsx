@@ -1,50 +1,67 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import axiosErrorManager from "./axiosErrorManage";
+import { toast } from "react-toastify";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3000",
-  withCredentials: true,
+  withCredentials: true, // Ensures cookies are sent
 });
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    //get the token from cookies
     const accessToken = Cookies.get("token");
     if (accessToken) {
-      // include the token in the header
-      config.headers["token"] = `Bearer ${accessToken}`;
+      config.headers["Authorization"] = `Bearer ${accessToken}`;
     }
     return config;
   },
-  (error) => {
-    //part of interceptors and will catch errors
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+
+    if (
+      error.response &&
+      error.response.status === 401 &&
+      !originalRequest._retry
+    ) {
+      originalRequest._retry = true; // mark request to avoid infinite loops
       try {
-        // request to refresh token
-        const response = await axios.post("/auth/refreshtoken");
+        const response = await axios.post(
+          "http://localhost:3000/auth/refreshToken",
+          {},
+          {
+            withCredentials: true,
+          }
+        );
         const newAccessToken = response.data.token;
 
-        //update the instance's header
+        Cookies.set("token", newAccessToken, {
+          secure: true,
+          sameSite: "None",
+        });
         axiosInstance.defaults.headers.common[
-          "token"
+          "Authorization"
         ] = `Bearer ${newAccessToken}`;
-        //retry the original request with new token
+
+        originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
         return axiosInstance(originalRequest);
-      } catch (error) {
-        console.error("Token refresh error:", error);
-        // Optional: Redirect to login or handle logout
-        return Promise.reject(error);
+      } catch (err) {
+        console.error("Error refreshing token:", err);
+        toast.error("Session expired. Please log in again.");
+        Cookies.remove("token");
+        Cookies.remove("refreshToken");
+        Cookies.remove("user");
+
+        return Promise.reject(err);
       }
     }
+
+    console.error("Request failed:", axiosErrorManager(error));
     return Promise.reject(error);
   }
 );
