@@ -18,12 +18,12 @@ const createProducts = async (req, res, next) => {
   if(product){
     return next(new CustomError("Product already exists",400))
   }
-  if (error) {
-    return next(new CustomError(error.details[0].message, 400));
-  }
   //req.file will have the meta data's
   if (!req.file || !req.file.path) {
     return next(new CustomError("Image is required", 400));
+  }
+  if (error) {
+    return next(new CustomError(error.details[0].message , 400));
   }
   const newProduct = new Product({
     ...value,
