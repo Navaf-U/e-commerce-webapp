@@ -80,9 +80,6 @@ function AdminProductActionPage() {
     formData.append("qty", values.qty);
     formData.append("description", values.description);
     formData.append("brand", values.brand);
-    formData.append("rating", values.rating);
-    formData.append("reviews", values.reviews);
-  
     if (values.image) {
       formData.append("image", values.image);
     }
@@ -253,23 +250,7 @@ function AdminProductActionPage() {
                     value={values.brand}
                     onChange={handleInputChange}
                     className="p-3 border border-red-200 rounded-lg shadow-sm focus-within:ring-[1px] focus-within:ring-[#BF3131] outline-none"
-                  />
-                  <input
-                    type="text"
-                    name="rating"
-                    placeholder="Rating"
-                    value={values.rating}
-                    onChange={handleInputChange}
-                    className="p-3 border border-red-200 rounded-lg shadow-sm focus-within:ring-[1px] focus-within:ring-[#BF3131] outline-none"
-                  />
-                  <input
-                    type="text"
-                    name="reviews"
-                    placeholder="Reviews"
-                    value={values.reviews}
-                    onChange={handleInputChange}
-                    className="p-3 border border-red-200 rounded-lg shadow-sm focus-within:ring-[1px] focus-within:ring-[#BF3131] outline-none"
-                  />
+                  />          
                   <button
                     type="submit"
                     className="bg-[#BF3131] text-white py-3 rounded-full hover:bg-[#a82626] transition-all duration-300 shadow-lg"

@@ -60,7 +60,7 @@ function AppRoutes() {
         
         <Route
               path="/admin/login"
-              element={currUser === null ? <AdminLogin /> : "Please log out first"}
+              element={currUser === null ? <AdminLogin /> : <NotFound/>}
             />
       <Route
             path="/admin"

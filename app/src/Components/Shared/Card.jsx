@@ -7,7 +7,7 @@ import { useInView } from "react-intersection-observer"; // Import the hook
 import { FaHeart } from "react-icons/fa";
 // eslint-disable-next-line react/prop-types
 function Card({ id, price, image, type, name, rating }) {
-  const { wishlist,addToCart,addToWishlist,removeFromWishlist } = useContext(userData);
+  const { currUser,wishlist,addToCart,addToWishlist,removeFromWishlist } = useContext(userData);
   const isInWishlist = wishlist.some((product) => product._id === id);
   // Use the useInView hook
   const { ref, inView } = useInView({
@@ -15,7 +15,9 @@ function Card({ id, price, image, type, name, rating }) {
   });
 
   const handleAddToCart = () => {
-    addToCart(id, 1);
+    if(currUser){
+      addToCart(id, 1);
+    }
   };
 
   const handleAddToWishlist = () => {
