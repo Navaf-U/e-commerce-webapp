@@ -29,10 +29,14 @@ function AdminOrderStatus() {
       const { data } = await axiosInstance.patch(
         `/admin/orders/shipping/${orderID}`,
         {
-          shippingStatus,
+         status : shippingStatus,
         }
       );
       toast.success(data.message);
+      setOrder((prevOrder) => ({
+        ...prevOrder,
+        shippingStatus,
+      }));
     } catch (err) {
       toast.error(axiosErrorManager(err));
     }
@@ -43,9 +47,13 @@ function AdminOrderStatus() {
       const { data } = await axiosInstance.patch(
         `/admin/orders/payment/${orderID}`,
         {
-          paymentStatus,
+         status : paymentStatus,
         }
       );
+      setOrder((prevOrder) => ({
+        ...prevOrder,
+        paymentStatus,
+      }));
       toast.success(data.message);
     } catch (err) {
       toast.error(axiosErrorManager(err));
@@ -93,10 +101,10 @@ function AdminOrderStatus() {
               <p className="text-gray-600"></p>
               <h3 className="text-lg font-semibold mt-4">Update Shipping:</h3>
               <select onChange={(e) => setShippingStatus(e.target.value)} className="w-[150px] bg-yellow-500 text-white hover:bg-yellow-600 mt-2 mb-3 py-2 px-3 rounded">
-                <option value="">Select Status</option>
-                <option value="Delivered">Delivered</option>
-                <option value="Processing">Processing</option>
-                <option value="Cancelled">Cancelled</option>
+                <option value={order.shippingStatus}>{order.shippingStatus}</option>
+                <option className={`${order.shippingStatus !== "Delivered" ? "flex" : "hidden" }`} value="Delivered">Delivered</option>
+                <option className={`${order.shippingStatus !== "Processing" ? "flex" : "hidden" }`} value="Processing">Processing</option>
+                <option className={`${order.shippingStatus !== "Cancelled" ? "flex" : "hidden" }`} value="Cancelled">Cancelled</option>
               </select>
               <button onClick={updateShippingStatus} className="bg-blue-500 text-white hover:bg-blue-600 mt-2 w-full py-2 rounded">
                 Update
@@ -104,10 +112,10 @@ function AdminOrderStatus() {
 
               <h3 className="text-lg font-semibold mt-4">Update Payment:</h3>
               <select onChange={(e) => setPaymentStatus(e.target.value)} className="w-[150px] bg-red-500 text-white hover:bg-red-600 mt-2 mb-3 py-2 px-3 rounded">
-                <option value="">Select Status</option>
-                <option value="Paid">Paid</option>
-                <option value="Unpaid">Unpaid</option>
-                <option value="Cancelled">Cancelled</option>
+                <option value={order.paymentStatus}>{order.paymentStatus}</option>
+                <option className={`${order.paymentStatus !== "Paid" ? "flex" : "hidden" }`} value="Paid">Paid</option>
+                <option className={`${order.paymentStatus !== "Pending" ? "flex" : "hidden" }`} value="Pending">Pending</option>
+                <option className={`${order.paymentStatus !== "Cancelled" ? "flex" : "hidden" }`} value="Cancelled">Cancelled</option>
               </select>
               <button onClick={updatePaymentStatus} className="bg-blue-500 text-white hover:bg-blue-600 mt-2 w-full py-2 rounded">
                 Update

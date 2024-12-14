@@ -20,6 +20,8 @@ function StripeSuccess() {
       try {
         const { data } = await axiosInstance.patch(`/user/orders/stripe/success/${sessionID}`);
         setCart([]);
+        window.location.reload();
+        navigate("/orders");
         toast.success(data.message);
       } catch (err) {
         toast.error(axiosErrorManager(err));
