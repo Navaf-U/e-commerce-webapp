@@ -26,6 +26,8 @@ import  { userData } from "./context/UserContext";
 import { useContext } from "react";
 import StripeSuccessPage from "./pages/StripeSuccessPage.jsx";
 import AdminLogin from "./Admin/AdminLoginPage.jsx";
+import StripeCancelPage from "./pages/stripeCancelPage.jsx";
+import AdminOrderStatus from "./Admin/AdminOrderStatus.jsx";
 
 function AppRoutes() {
   const { isAdmin ,cartLengthCheck,currUser} = useContext(userData);
@@ -55,6 +57,7 @@ function AppRoutes() {
           <Route path="/contact" element={ <Contact />} />
           <Route path="/profile" element={ currUser !== null ? <UserProfile /> : <NotFound/>} />
           <Route path="/success/:sessionID" element={currUser !== null ? <StripeSuccessPage/> : <NotFound/>} />
+          <Route path="/cancel" element={currUser !== null ? <StripeCancelPage/> : <NotFound/>} />
           <Route path="*" element={<NotFound />} />
         </Route>
         
@@ -77,6 +80,10 @@ function AppRoutes() {
           <Route
             path="/admin/product/add"
             element={ isAdmin ? <ProductAddPage /> : <NotFound />}
+          />
+          <Route
+            path="/admin/order/:userID/:orderID"
+            element={ isAdmin ? <AdminOrderStatus /> : <NotFound />}
           />
       </Routes>
     </>

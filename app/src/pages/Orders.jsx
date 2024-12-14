@@ -69,7 +69,7 @@ function Orders() {
                 <p className="text-green-600 font-semibold">Order is paid</p>
                 <SiTicktick size={15} className="text-green-600 mt-[4px]" />
               </div>
-            ) : item.paymentStatus === "COD" &&
+            ) : item.paymentStatus === "Pending" &&
               item.shippingStatus !== "Cancelled" ? (
               <div className="flex gap-1">
                 <p className="text-red-600 font-semibold">Order is unpaid</p>

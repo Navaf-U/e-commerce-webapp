@@ -52,11 +52,12 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        const { data } = await axiosInstance.get("/admin/orders");
-        const paidOrders = data.data.filter((item) => item.paymentStatus === "Paid");
-        setOrders(paidOrders.length);
-        const total = paidOrders.reduce((sum, order) => sum + order.totalAmount, 0);
-        setTotalAmount(total);
+        const { data } = await axiosInstance.get("/admin/orders/total");
+        setOrders(data.data);
+        const res = await axiosInstance.get("/admin/orders/stats");
+        setTotalAmount(res.data.data.totalRevenue);
+        console.log(res.data.data.totalRevenue)
+        
       } catch (err) {
         toast.error(axiosErrorManager(err));
       }
@@ -101,7 +102,7 @@ const AdminDashboard = () => {
         backgroundColor: 'rgba(255, 206, 86, 0.5)',
         borderColor: 'rgb(255, 206, 86)',
         borderWidth: 1,
-        data: [0, 0, 0, totalAmount],
+        data: [0, 0, 0, totalAmount || 0],
         yAxisID: 'y2', 
       },
     ],
