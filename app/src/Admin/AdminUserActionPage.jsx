@@ -57,7 +57,7 @@ function AdminUserActionPage() {
 
   return (
     user && (
-      <div className="flex flex-col sm:flex-row justify-center items-center">
+      <div className="flex flex-col sm:flex-row justify-center h-screen overflow-hidden">
         <IoCloseOutline
           onClick={handlerForMain}
           className="cursor-pointer bg-[#80808069] rounded-full hover:text-[#BA3131] position fixed left-4 top-2"
@@ -66,7 +66,7 @@ function AdminUserActionPage() {
         {loading ? (
           <Loading />
         ) : (
-          <div className="sm:ps-20 px-4 sm:px-0">
+          <div className="sm:ps-20 px-4 mt-24 sm:px-0">
             <div className="flex flex-col sm:flex-row sm:gap-28 items-center sm:items-start">
               {user.image ? (
                 <img
@@ -125,7 +125,7 @@ function AdminUserActionPage() {
             </div>
           </div>
         )}
-        <div className="sm:order-1 order-2 mt-10 sm:mt-0 sm:w-[50%]">
+        <div className="mt-10 sm:mt-0 sm:w-[50%] h-screen overflow-scroll">
           <div className="container mx-auto px-4 py-8">
             <h1 className="text-2xl font-bold text-center mb-6">Your Orders</h1>
             {orders.length > 0 ? (
@@ -137,7 +137,7 @@ function AdminUserActionPage() {
                   <h2 className="text-xl font-[700]">Order ID: {order._id}</h2>
                   <p className="text-gray-600">
                     Purchased Date:
-                    {/* convert the date into human readable :) */}
+                    {/* will convert the date into human readable :) */}
                     {new Date(order.purchasedDate).toLocaleString()}
                   </p>
                   <p className="text-gray-600">
@@ -159,6 +159,7 @@ function AdminUserActionPage() {
                   <p className="font-semibold text-lg mt-4">
                     Total Amount: ₹{order.totalAmount}
                   </p>
+                    <button onClick={() => navigate(`/admin/order/${user._id}/${order._id}`)} className="bg-red-500 text-white px-6 py-2 mt-4 rounded-md hover:bg-red-600 transition duration-300">Update</button>
                 </div>
               ))
             ) : (
