@@ -179,6 +179,7 @@ const cancelOneOrder = async (req, res, next) => {
     }
     // will update order shipping status to "Cancelled"
     order.shippingStatus = "Cancelled";
+    order.paymentStatus = "Cancelled";
     await order.save();
     await order.populate("products.productID", "name price image")
 
