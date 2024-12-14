@@ -85,7 +85,6 @@ const loginUser = async (req, res, next) => {
     secure: true,
     sameSite: "None",
   });
-  console.log(user)
 
   res.json({ message: "user successfully logged in", token });
 };
