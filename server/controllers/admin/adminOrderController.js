@@ -103,8 +103,7 @@ const updatePaymentStatus = async (req, res, next) => {
 // getting the total revenue
 const getTotalStats = async (req, res) => {
   const totalStats = await Orders.aggregate([
-    { $match: { shippingStatus: { $ne: "Cancelled" }, paymentStatus: "Paid" } },
-    { $unwind: "$products" }, // deconstruct the 'products' array
+    { $match: { shippingStatus: { $ne: "Cancelled" }, paymentStatus: "Paid" } }, // deconstruct the 'products' array
     {
       $group: {
         _id: null,

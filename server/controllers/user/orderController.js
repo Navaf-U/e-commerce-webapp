@@ -111,7 +111,7 @@ const StripeSuccess = async (req, res, next) => {
   if (!order) return next(new CustomError("Order not found", 404));
   // updating the order status
   order.paymentStatus = "Paid";
-  order.shippingStatus = "Pending";
+  order.shippingStatus = "Processing";
   await order.save();
 
   // will make cart empty after purchase
