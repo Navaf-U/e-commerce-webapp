@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../util/axiosInstance";
 import axiosErrorManager from "../util/axiosErrorManage";
 import { toast } from "react-toastify";
+import { IoCloseOutline } from "react-icons/io5";
 
 function AdminOrderStatus() {
   const { orderID, userID } = useParams();
   const [order, setOrder] = useState(null);
   const [shippingStatus, setShippingStatus] = useState("");
   const [paymentStatus, setPaymentStatus] = useState("");
+  const navigate = useNavigate();
+
+
 
   useEffect(() => {
     const fetchSingleOrder = async () => {
@@ -60,8 +64,17 @@ function AdminOrderStatus() {
     }
   };
 
+  const handlerForMain = () => {
+    navigate(`/admin/user/${userID}`);
+  };
+
   return (
     <div className="container mx-auto px-4  h-screen sm:overflow-hidden">
+       <IoCloseOutline
+          onClick={handlerForMain}
+          className="cursor-pointer bg-[#80808069] rounded-full hover:text-[#BA3131] position fixed left-4 top-2"
+          size={40}
+        />
       <h1 className="text-2xl font-bold text-center mb-6">Order Details</h1>
       {order ? ( 
         <div className="bg-white shadow-md rounded-lg p-6">

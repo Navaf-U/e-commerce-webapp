@@ -9,9 +9,8 @@ import { FaHeart } from "react-icons/fa";
 function Card({ id, price, image, type, name, rating }) {
   const { currUser,wishlist,addToCart,addToWishlist,removeFromWishlist } = useContext(userData);
   const isInWishlist = wishlist.some((product) => product._id === id);
-  // Use the useInView hook
   const { ref, inView } = useInView({
-    threshold: 0.1, // Trigger when 10% of the card is visible
+    threshold: 0.1, 
   });
 
   const handleAddToCart = () => {
@@ -29,7 +28,7 @@ function Card({ id, price, image, type, name, rating }) {
   }
   return (
     <div
-      ref={ref} // Set the ref to the card container
+      ref={ref} 
       className={`group animate-slideY ${
         inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
@@ -58,20 +57,20 @@ function Card({ id, price, image, type, name, rating }) {
           )}
           </span>
         <NavLink to="" className="relative mx-3 mt-3 flex justify-center overflow-hidden rounded-xl">
-          <p className="text-1xl font-bold pt-4 text-slate-900">{name}</p>
+          <h1 className="text-1xl font-bold pt-4 text-slate-900">{name}</h1>
         </NavLink>
 
         <div className="mt-4 px-5 pb-5">
           <div className="mt-2 mb-5 flex justify-around">
-            <p>
+            <h1>
               <span className="text-[130%] font-bold text-slate-900">₹{price}</span>
-            </p>
-            <p className="flex">
+            </h1>
+            <h1 className="flex">
               <span className="text-1xl flex text-center font-bold text-slate-900">
                 {rating}
                 <FaStar className="mt-1" />
               </span>
-            </p>
+            </h1>
           </div>
           <NavLink
             onClick={handleAddToCart}

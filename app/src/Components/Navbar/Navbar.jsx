@@ -78,8 +78,8 @@ function Navbar() {
         <div className="nav-logo flex justify-between items-center w-full px-4">
           <Link to="/">
             <div className="md:flex items-center hidden ">
-              <img src={logo} className="h-12 hidden lg:flex" alt="" />
-              <img src={sLogo} className="h-12 lg:hidden" alt="" />
+              <img src={logo} className="h-12 w-44 hidden lg:flex" alt="" />
+              <img src={sLogo} className="h-12  lg:hidden" alt="" />
             </div>
             <div className="md:hidden w-12 me-2">
               <img src={smallerLogo} alt="" className="me-5" />
