@@ -2,16 +2,22 @@ import Loading from "../Loading/Loading";
 import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { userData } from "../../context/UserContext";
+import { toast } from "react-toastify";
 
 function SignupCombo() {
   const { registerUser,loading} = useContext(userData);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [cPassword,setCPassword] = useState("");
 
   const handlerEvent = async(e) => {
     e.preventDefault();
+    if (password === cPassword){
       registerUser(name, email, password);
+    }else{
+      toast.er("Password does not match");
+    }
   };
 
   return (
@@ -46,6 +52,14 @@ function SignupCombo() {
                 required
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
+                className="bg-gray-200 h-14 md:h-16 w-full ps-5 border-gray-500 outline-none text-[#5c5c5c] text-base md:text-lg"
+              />
+              <input
+                type="password"
+                id="signup-cpassword"
+                required
+                placeholder="Confirm Password"
+                onChange={(e) => setCPassword(e.target.value)}
                 className="bg-gray-200 h-14 md:h-16 w-full ps-5 border-gray-500 outline-none text-[#5c5c5c] text-base md:text-lg"
               />
             </div>
