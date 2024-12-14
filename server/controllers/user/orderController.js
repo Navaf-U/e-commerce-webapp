@@ -16,7 +16,7 @@ const orderCashOnDelivery = async (req, res, next) => {
   if (!newOrder) return next(new CustomError("order not created", 400));
 
   // getting the status for payment and delivery
-  newOrder.paymentStatus = "COD";
+  newOrder.paymentStatus = "Pending";
   newOrder.shippingStatus = "Processing";
 
   // will make cart empty after purchase
@@ -180,7 +180,7 @@ const cancelOneOrder = async (req, res, next) => {
     // will update order shipping status to "Cancelled"
     order.shippingStatus = "Cancelled";
     await order.save();
-    await order.populate("products.productID", "name price image");
+    await order.populate("products.productID", "name price image")
 
     res.status(200).json({
       success: true,

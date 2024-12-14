@@ -27,6 +27,28 @@ const getOrderByUser = async (req, res) => {
   }
   res.status(200).json({ data: orders });
 };
+
+const getSingleOrderByUser = async (req, res, next) => {
+  const { orderID, userID } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(orderID) || !mongoose.Types.ObjectId.isValid(userID)) {
+    return next(new CustomError("Invalid ID format", 400));
+  }
+
+  try {
+    const order = await Orders.findOne({ _id: orderID, userID })
+      .populate("products.productID", "name price image");
+
+    if (!order) {
+      return next(new CustomError("Order not found", 404));
+    }
+
+    res.status(200).json({ data: order });
+  } catch (err) {
+    return next(new CustomError("Order not found", 404));
+  }
+};
+
 // get the total number of orders
 const totalPurchaseOfOrders = async (req, res) => {
   const confirmedOrders = await Orders.aggregate([
@@ -110,5 +132,6 @@ export {
   updateShippingStatus,
   updatePaymentStatus,
   getOrderByUser,
+  getSingleOrderByUser,
   getTotalStats,
 };
