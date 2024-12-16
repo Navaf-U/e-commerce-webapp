@@ -6,11 +6,8 @@ import { toast } from "react-toastify";
 
 function LoginCombo() {
   const {loginUser} = useContext(userData) 
-  // const { isLogged } = useContext(userData);
   const [email, setEmail] = useState("");
-  // const navigates = useNavigate();
   const [password, setPassword] = useState("");
-  // const [, setIsLogged] = useState(false);
   const handleFunc = async (e) => {
     e.preventDefault();
     try{

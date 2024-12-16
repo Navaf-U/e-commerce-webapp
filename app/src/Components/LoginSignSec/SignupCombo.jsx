@@ -6,13 +6,21 @@ import { toast } from "react-toastify";
 
 function SignupCombo() {
   const { registerUser,loading} = useContext(userData);
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [cPassword,setCPassword] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    cPassword: "",
+  })
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
   const handlerEvent = async(e) => {
     e.preventDefault();
+    const { name, email, password, cPassword } = formData;
+    console.log(formData.name)
     if (password === cPassword){
       registerUser(name, email, password);
     }else{
@@ -33,33 +41,37 @@ function SignupCombo() {
               <input
                 type="text"
                 id="signup-name"
+                name="name"
                 required
                 placeholder="Your Name"
-                onChange={(e) => setName(e.target.value)}
+                onChange={handleChange}
                 className="bg-gray-200 h-14 md:h-16 w-full ps-5 border-gray-500 outline-none text-[#5c5c5c] text-base md:text-lg"
               />
               <input
                 type="email"
                 id="signup-email"
+                name="email"
                 required
                 placeholder="Email Address"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleChange}
                 className="bg-gray-200 h-14 md:h-16 w-full ps-5 border-gray-500 outline-none text-[#5c5c5c] text-base md:text-lg"
               />
               <input
                 type="password"
                 id="signup-password"
+                name="password"
                 required
                 placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handleChange}
                 className="bg-gray-200 h-14 md:h-16 w-full ps-5 border-gray-500 outline-none text-[#5c5c5c] text-base md:text-lg"
               />
               <input
                 type="password"
                 id="signup-cpassword"
+                name="cPassword"
                 required
                 placeholder="Confirm Password"
-                onChange={(e) => setCPassword(e.target.value)}
+                onChange={handleChange}
                 className="bg-gray-200 h-14 md:h-16 w-full ps-5 border-gray-500 outline-none text-[#5c5c5c] text-base md:text-lg"
               />
             </div>

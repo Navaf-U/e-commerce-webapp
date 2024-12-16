@@ -50,11 +50,11 @@ function Card({ id, price, image, type, name, rating }) {
           <span onClick={()=>{handleAddToWishlist(id)}} className="absolute cursor-pointer text-[#BF3131]  hover:text-[#7D0A0A] top-5 right-2 m-2 rounded-full px- text-center text-sm font-medium">
           {isInWishlist ? (
             <FaHeart size={28} className="mt-1 me-1"/>
-          ) : (
-            (
+          ) : currUser ? (
+            ( 
             <CiHeart size={35} />
           )
-          )}
+          ):null}
           </span>
         <NavLink to="" className="relative mx-3 mt-3 flex justify-center overflow-hidden rounded-xl">
           <h1 className="text-1xl font-bold pt-4 text-slate-900">{name}</h1>
