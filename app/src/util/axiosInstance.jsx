@@ -5,7 +5,8 @@ import { toast } from "react-toastify";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:3000",
-  withCredentials: true, // Ensures cookies are sent
+  // will ensures cookies are sent
+  withCredentials: true, 
 });
 
 axiosInstance.interceptors.request.use(
@@ -29,7 +30,8 @@ axiosInstance.interceptors.response.use(
       error.response.status === 401 &&
       !originalRequest._retry
     ) {
-      originalRequest._retry = true; // mark request to avoid infinite loops
+      //will mark request to avoid infinite loops
+      originalRequest._retry = true; 
       try {
         const response = await axios.post(
           "http://localhost:3000/auth/refreshToken",

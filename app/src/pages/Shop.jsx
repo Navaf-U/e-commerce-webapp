@@ -4,14 +4,37 @@ import womenAd from "../Components/assets/womenAd.jpg";
 import NewsLetter from "../Components/NewsLetter/NewsLetter";
 import Button from '@mui/material/Button';
 import Card from "../Components/Shared/Card";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { ProductsData } from "../context/ProductsCont";
 import { FaPersonWalkingArrowRight } from "react-icons/fa6";
+import { userData } from "../context/UserContext";
+import axiosInstance from "../util/axiosInstance";
+import axiosErrorManager from "../util/axiosErrorManage";
+import { toast } from "react-toastify";
+import Loading from "../Components/Loading/Loading";
 
 function Shop() {
-  const { products } = useContext(ProductsData);
+  const [products, setProducts] = useState([]);
+  const { currUser, loading,setLoading } = useContext(userData);
+  useEffect(() => {
+    const fetchProductsData = async () => {
+      setLoading(true);
+      try {
+        const { data } = await axiosInstance.get("/user/products");
+        setProducts(data.data);
+      } catch (err) {
+        toast.error(axiosErrorManager(err));
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProductsData();
+  }, [currUser, setLoading]);
 
+  if(loading){
+    return <Loading/>
+  }
+   
   return (
     <div>
       <Hero />
