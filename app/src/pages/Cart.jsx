@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import axiosInstance from "../util/axiosInstance";
 import axiosErrorManager from "../util/axiosErrorManage";
 import { useContext } from "react";
@@ -24,16 +23,12 @@ const Cart = () => {
   const updateServer = async (productID, quantity) => {
     setLoading(true);
     try {
-      const token = Cookies.get("token");
       await axiosInstance.post(
         `user/cart`,
         {
           productID,
           quantity,
         },
-        {
-          headers: { token: `Bearer ${token}` },
-        }
       );
     } catch (error) {
       console.error(axiosErrorManager(error));
