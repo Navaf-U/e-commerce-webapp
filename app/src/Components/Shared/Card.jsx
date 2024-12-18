@@ -10,7 +10,7 @@ function Card({ id, price, image, type, name, rating }) {
   const { currUser,wishlist,addToCart,addToWishlist,removeFromWishlist } = useContext(userData);
   const isInWishlist = wishlist.some((product) => product._id === id);
   const { ref, inView } = useInView({
-    threshold: 0.1, 
+    threshold: 0.1,
   });
 
   const handleAddToCart = () => {
@@ -48,10 +48,10 @@ function Card({ id, price, image, type, name, rating }) {
             {type}
           </span>
           <span onClick={()=>{handleAddToWishlist(id)}} className="absolute cursor-pointer text-[#BF3131]  hover:text-[#7D0A0A] top-5 right-2 m-2 rounded-full px- text-center text-sm font-medium">
-          {isInWishlist ? (
+          {isInWishlist && currUser ? (
             <FaHeart size={28} className="mt-1 me-1"/>
           ) : currUser ? (
-            ( 
+            (
             <CiHeart size={35} />
           )
           ):null}
