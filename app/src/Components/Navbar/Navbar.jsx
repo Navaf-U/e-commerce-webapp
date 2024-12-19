@@ -95,9 +95,11 @@ function Navbar() {
             <NavLink to="/women">
               <h1 className="hover-line hover:font-semibold">Women</h1>
             </NavLink>
-            <NavLink to="/orders">
+            { currUser &&
+              <NavLink to="/orders">
               <h1 className="hover-line hover:font-semibold">Orders</h1>
             </NavLink>
+            }
             <NavLink to="/contact">
               <h1 className="hover-line hover:font-semibold">Contact</h1>
             </NavLink>

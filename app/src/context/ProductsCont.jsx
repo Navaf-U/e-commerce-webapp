@@ -43,7 +43,7 @@ function ProductsCont({ children }) {
     <div>
       <ProductsData.Provider value={value}>{children}</ProductsData.Provider>
     </div>
-  );
+  )
 }
 
 export default ProductsCont;
