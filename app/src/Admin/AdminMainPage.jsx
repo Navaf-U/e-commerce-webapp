@@ -14,6 +14,7 @@ import { NavLink } from "react-router-dom";
 import { TiArrowBackOutline } from "react-icons/ti";
 import { MdAutoDelete } from "react-icons/md";
 function AdminMainPage() {
+  window.scrollTo(0, 0);
   const { logoutUser, isAdmin } = useContext(userData);
   const [adminOption, setAdminOption] = useState("dashboard");
   const handleSwitch = () => {

@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { IoCloseOutline } from "react-icons/io5";
 
 function AdminOrderStatus() {
+  window.scrollTo(0, 0)
   const { orderID, userID } = useParams();
   const [order, setOrder] = useState(null);
   const [shippingStatus, setShippingStatus] = useState("");

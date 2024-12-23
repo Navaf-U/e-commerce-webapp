@@ -6,6 +6,7 @@ import axiosInstance from "../util/axiosInstance";
 import axiosErrorManager from "../util/axiosErrorManage";
 
 function AdminUsersPage() {
+  window.scrollTo(0, 0)
   const [users, setUsers] = useState([]);
   const { currUser } = useContext(userData);
   const navigate = useNavigate();

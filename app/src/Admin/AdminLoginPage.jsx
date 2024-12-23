@@ -4,6 +4,7 @@ import axiosErrorManager from "../util/axiosErrorManage";
 import { toast } from "react-toastify";
 
 function AdminLogin() {
+  window.scrollTo(0, 0)
   const { adminLogin } = useContext(userData);
   // const { isLogged } = useContext(userData);
   const [email, setEmail] = useState("");

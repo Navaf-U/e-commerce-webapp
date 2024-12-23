@@ -8,6 +8,7 @@ import axiosInstance from "../util/axiosInstance";
 import axiosErrorManager from "../util/axiosErrorManage";
 
 function AdminProductActionPage() {
+  window.scrollTo(0, 0)
   const { id } = useParams();
   const { setLoading, loading } = useContext(userData);
   const [products,setProducts] = useState([])

@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axiosErrorManager from "../util/axiosErrorManage";
 import { toast } from "react-toastify";
 function AdminUserActionPage() {
+  window.scrollTo(0, 0)
   const [user, setUser] = useState(null);
   const [orders, setOrders] = useState([]);
   const { loading, setLoading } = useContext(userData);

@@ -6,6 +6,7 @@ import { userData } from "../context/UserContext";
 import Loading from "../Components/Loading/Loading";
 
 function AdminDeletedItems() {
+  window.scrollTo(0, 0)
   const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([]);
   const { loading, setLoading } = useContext(userData);

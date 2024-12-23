@@ -4,6 +4,7 @@ import axiosErrorManager from "../util/axiosErrorManage";
 import axiosInstance from "../util/axiosInstance";
 
 function AdminProducts() {
+  window.scrollTo(0, 0)
   const [products, setProducts] = useState([]);
   const [men, setMen] = useState(false);
   const [women, setWomen] = useState(false);

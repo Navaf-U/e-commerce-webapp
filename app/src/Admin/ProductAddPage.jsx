@@ -7,6 +7,7 @@ import axiosErrorManager from "../util/axiosErrorManage";
 import { userData } from "../context/UserContext";
 import { ProductsData } from "../context/ProductsCont";
 function ProductAddPage() {
+  window.scrollTo(0, 0)
   const { setLoading } = useContext(userData);
   const {setProducts} = useContext(ProductsData);
   const [formValue, setFormValue ] = useState({
