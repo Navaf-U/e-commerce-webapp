@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { userData } from "../context/UserContext";
 import Loading from "../Components/Loading/Loading";
 function Contact() {
+  window.scrollTo(0, 0)
   const {loading} = useContext(userData) 
   return (
     <>  

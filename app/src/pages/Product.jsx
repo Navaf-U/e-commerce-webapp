@@ -9,6 +9,7 @@ import axiosErrorManager from "../util/axiosErrorManage";
 import axiosInstance from "../util/axiosInstance";
 
 function Product() {
+  window.scrollTo(0, 0)
   const { id } = useParams();
   const { currency } = useContext(ProductsData);
   const { currUser, addToCart, cart } = useContext(userData);

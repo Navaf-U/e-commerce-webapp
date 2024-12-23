@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import Loading from "../Components/Loading/Loading";
 
 function Shop() {
+  window.scrollTo(0, 0)
   const [products, setProducts] = useState([]);
   const { currUser, loading,setLoading } = useContext(userData);
   useEffect(() => {

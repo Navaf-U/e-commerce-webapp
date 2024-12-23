@@ -8,6 +8,7 @@ import axiosErrorManager from "../util/axiosErrorManage";
 import axiosInstance from "../util/axiosInstance";
 
 function Payment() {
+  window.scrollTo(0, 0)
   const { cart, setCart, loading, setLoading } = useContext(userData);
   const [paymentOption, setPaymentOption] = useState(null);
   const navigator = useNavigate();

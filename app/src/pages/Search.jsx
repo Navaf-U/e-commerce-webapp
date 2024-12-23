@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { ProductsData } from "../context/ProductsCont";
 import { NavLink } from "react-router-dom";
 function Search() {
+  window.scrollTo(0, 0)
   const { products, search } = useContext(ProductsData);
   const [data, setData] = useState([]);
 

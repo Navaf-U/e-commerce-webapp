@@ -1,4 +1,5 @@
 function NotFound() {
+  window.scrollTo(0, 0)
   return (
     <div>
       <h1 className="text-[70px] mt-52 text-red-600 text-center">

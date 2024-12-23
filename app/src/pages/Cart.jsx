@@ -6,6 +6,7 @@ import { ProductsData } from "../context/ProductsCont";
 import { NavLink } from "react-router-dom";
 import { userData } from "../context/UserContext";
 const Cart = () => {
+  window.scrollTo(0, 0)
   const { currency } = useContext(ProductsData);
   const { cart, removeFromCart, setLoading, setCart } = useContext(userData);
 

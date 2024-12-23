@@ -10,6 +10,7 @@ import axiosErrorManager from "../util/axiosErrorManage";
 import { toast } from "react-toastify";
 
 function Orders() {
+  window.scrollTo(0, 0)
   const { currUser, loading } = useContext(userData);
   const { currency } = useContext(ProductsData);
   const [orders, setOrders] = useState(null);

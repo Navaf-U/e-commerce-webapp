@@ -6,6 +6,7 @@ import axiosErrorManager from "../util/axiosErrorManage";
 import axiosInstance from "../util/axiosInstance";
 
 function Men() {
+  
   const [men, setMen] = useState([]);
   const { loading } = useContext(userData);
   useEffect(() => {
