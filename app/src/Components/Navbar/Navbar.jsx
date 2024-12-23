@@ -224,7 +224,7 @@ function Navbar() {
                 <h1 className="font-[500] text-[20px] p-5">Contact</h1>
               </NavLink>
             </button>
-            <button className="w-full hover:bg-[#7D0A0A] bg-white">
+            <button className="w-full bg-white">
               <FaBackspace
                 size={30}
                 onClick={toggleDropdownMenu}

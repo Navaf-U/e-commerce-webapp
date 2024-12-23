@@ -32,10 +32,33 @@ function StripeSuccess() {
   }, [sessionID]);
 
   return (
-    <div>
-      <h1>Success, your payment was processed!</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-center">
+      <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full animate-fadeIn">
+        <h1 className="text-2xl font-bold text-green-600 mb-4">
+          Payment Successful!
+        </h1>
+        <p className="text-gray-700">
+          Your payment was processed successfully. You will be redirected to your orders shortly.
+        </p>
+        <div className="mt-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-16 w-16 text-green-500 mx-auto"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 12l2 2 4-4M7 12l-2-2 6-6m8 10l-6 6-2-2-4 4"
+            />
+          </svg>
+        </div>
+      </div>
     </div>
-  );
+  );  
 }
 
 export default StripeSuccess;
