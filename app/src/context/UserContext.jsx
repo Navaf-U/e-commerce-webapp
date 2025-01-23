@@ -45,7 +45,7 @@ function UserContext({ children }) {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:3000/auth/register",
+        `${import.meta.env.VITE_API_URL}/auth/register`,
         data
       );
       navigate("/login");
@@ -60,7 +60,7 @@ function UserContext({ children }) {
   const loginUser = async (email, password) => {
     try {
       await axios.post(
-        "http://localhost:3000/auth/login",
+        `${import.meta.env.VITE_API_URL}/auth/login`,
         { email, password },
         { withCredentials: true }
       );
@@ -87,7 +87,7 @@ function UserContext({ children }) {
   const adminLogin = async (email, password) => {
     try {
       await axios.post(
-        "http://localhost:3000/admin/login",
+        `${import.meta.env.VITE_API_URL}/admin/login`,
         { email, password },
         { withCredentials: true }
       );
