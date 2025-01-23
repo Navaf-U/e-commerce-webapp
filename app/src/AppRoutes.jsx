@@ -26,7 +26,7 @@ import  { userData } from "./context/UserContext";
 import { useContext } from "react";
 import StripeSuccessPage from "./pages/StripeSuccessPage.jsx";
 import AdminLogin from "./Admin/AdminLoginPage.jsx";
-import StripeCancelPage from "./pages/stripeCancelPage.jsx";
+import StripeCancelPage from "./pages/StripeCancelPage.jsx";
 import AdminOrderStatus from "./Admin/AdminOrderStatus.jsx";
 
 function AppRoutes() {
