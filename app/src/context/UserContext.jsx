@@ -88,11 +88,13 @@ function UserContext({ children }) {
 
   const adminLogin = async (email, password) => {
     try {
-      await axios.post(
+      const {data} = await axios.post(
         `${import.meta.env.VITE_API_URL}/admin/login`,
         { email, password },
         { withCredentials: true }
       );
+      Cookies.set("currentUser", JSON.stringify(data.currentUser))
+      Cookies.set("token", data.token)
       const cookieAdmin = Cookies.get("currentUser");
       setCurrUser(JSON.parse(cookieAdmin));
       navigate("/");
