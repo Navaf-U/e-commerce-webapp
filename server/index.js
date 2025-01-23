@@ -10,12 +10,10 @@ import connectCloudinary from "./config/cloudinary.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
-//mongoDb connect AND cloudinaryConnects
 connectDB();
 connectCloudinary();
 const app = express();
 const PORT = process.env.PORT || 3000;
-// middleware
 app.use(cors({
   origin:process.env.CLIENT_URL,
   credentials: true
@@ -29,13 +27,11 @@ app.get("/", (req, res) => {
 });
 
 
-//base path, api endpoints
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/admin",adminRoutes);
 
 
-// undefined endpoint will handle
 app.all("*",(req,res)=>{
   res.status(400).json({message:'cannot access the endpoint'})
 })

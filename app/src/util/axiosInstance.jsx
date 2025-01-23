@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  // will ensures cookies are sent
   withCredentials: true, 
 });
 
@@ -30,7 +29,6 @@ axiosInstance.interceptors.response.use(
       error.response.status === 401 &&
       !originalRequest._retry
     ) {
-      //will mark request to avoid infinite loops
       originalRequest._retry = true; 
       try {
         const response = await axios.post(

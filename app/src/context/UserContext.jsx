@@ -76,9 +76,8 @@ function UserContext({ children }) {
   };
   const logoutUser = async () => {
     try {
-      // Call the logout API on the server
       await axiosInstance.post("auth/logout", {}, { withCredentials: true });
-      navigate("/"); // Navigate to the homepage or login page
+      navigate("/");
       toast.success("Logged out successfully");
       setCurrUser(null);
     } catch (err) {
@@ -145,8 +144,6 @@ function UserContext({ children }) {
       console.error(axiosErrorManager(error));
     }
   };
-
-  //cart section
 
   const getUserCart = async () => {
     if (currUser) {

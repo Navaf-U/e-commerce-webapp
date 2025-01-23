@@ -46,8 +46,6 @@ function AdminMainPage() {
       }
     });
   };
-  // addedLogoSmallerVersion
-
   return (
     <div className="w-full h-screen overflow-x-auto">
       {!isAdmin ? (

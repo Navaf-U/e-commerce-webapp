@@ -19,7 +19,6 @@ function AdminProducts() {
     }
   };
 
-  // did for the products resetting if deleted
   const fetchProducts = async () => {
     try {
       const { data } = await axiosInstance.get("user/products");
@@ -40,7 +39,6 @@ function AdminProducts() {
     return false;
   });
 
-  // pagination checkings
 
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const indexOfLastProduct = currentPage * productsPerPage;

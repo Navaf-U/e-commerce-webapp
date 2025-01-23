@@ -3,7 +3,6 @@ import { useContext, useState } from "react";
 import { userData } from "../context/UserContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-// import { ProductsData } from "../context/ProductsCont";
 import axiosErrorManager from "../util/axiosErrorManage";
 import axiosInstance from "../util/axiosInstance";
 
@@ -30,7 +29,6 @@ function Payment() {
     }
     await postingOrder();
   };
-  //posting order
   const postingOrder = async () => {
     if (cart.length === 0) {
       return toast.error("Cart is empty");

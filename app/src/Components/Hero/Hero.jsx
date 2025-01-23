@@ -8,7 +8,7 @@ const Hero = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1, // Controls delay between each letter
+        staggerChildren: 0.1,
       },
     },
   };
@@ -22,7 +22,6 @@ const Hero = () => {
     },
   };
 
-  // Text broken into lines
   const lines = [
     { text: "New", color: "text-[#BF3131]" },
     { text: "Collections", color: "text-white" },

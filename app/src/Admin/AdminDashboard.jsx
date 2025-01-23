@@ -5,7 +5,6 @@ import axiosErrorManager from '../util/axiosErrorManage';
 import { toast } from 'react-toastify';
 import axiosInstance from '../util/axiosInstance';
 
-// Register necessary Chart.js components
 ChartJS.register(
   BarElement,
   LineElement,

@@ -70,7 +70,6 @@ const Cart = () => {
       { Array.isArray(cart) && cart.map((item,index) => {
         return (
           <div
-          //must use index as key
             key={index}
             className="flex flex-col sm:flex-row items-center py-4 px-4 bg-gray-50 rounded-lg shadow-md mb-4"
           >
