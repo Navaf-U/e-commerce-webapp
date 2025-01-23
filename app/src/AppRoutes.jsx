@@ -26,7 +26,6 @@ import  { userData } from "./context/UserContext";
 import { useContext } from "react";
 import StripeSuccessPage from "./pages/StripeSuccessPage.jsx";
 import AdminLogin from "./Admin/AdminLoginPage.jsx";
-import StripeCancelPage from "./pages/StripeCancelPage.jsx";
 import AdminOrderStatus from "./Admin/AdminOrderStatus.jsx";
 
 function AppRoutes() {
@@ -57,7 +56,6 @@ function AppRoutes() {
           <Route path="/contact" element={ <Contact />} />
           <Route path="/profile" element={ currUser !== null ? <UserProfile /> : <NotFound/>} />
           <Route path="/success/:sessionID" element={currUser !== null ? <StripeSuccessPage/> : <NotFound/>} />
-          <Route path="/cancel" element={currUser !== null ? <StripeCancelPage/> : <NotFound/>} />
           <Route path="*" element={<NotFound />} />
         </Route>
         
