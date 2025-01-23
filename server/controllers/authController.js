@@ -76,17 +76,8 @@ const loginUser = async (req, res, next) => {
     email: user.email,
     role: user.role,
   };
-  //sending user details to client (for curr user)
-  res.cookie("currentUser", JSON.stringify(currentUser));
 
-  //sending token to cookie
-  res.cookie("token", token, {
-    httpOnly: false,
-    secure: true,
-    sameSite: "None",
-  });
-
-  res.json({ message: "user successfully logged in", token });
+  res.json({ message: "user successfully logged in", token ,currentUser});
 };
 
 const adminLogin = async (req, res, next) => {
@@ -122,17 +113,8 @@ const adminLogin = async (req, res, next) => {
     email: user.email,
     role: user.role,
   };
-  //sending user details to client (for curr user)
-  res.cookie("currentUser", JSON.stringify(currentUser));
 
-  //sending token to cookie
-  res.cookie("token", token, {
-    httpOnly: false,
-    secure: true,
-    sameSite: "none",
-  });
-
-  res.json({ message: "Admin successfully logged in", token });
+  res.json({ message: "Admin successfully logged in", token ,currentUser});
 };
 
 // controller to handle refresh

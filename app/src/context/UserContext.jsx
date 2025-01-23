@@ -30,9 +30,9 @@ function UserContext({ children }) {
         console.error("Failed to parse currentUser cookie:", error);
       }
     } else {
-      setCurrUser(null); // Automatically update UI when cookie is removed
+      setCurrUser(null);
     }
-  }, [Cookies.get("currentUser")]); // Depend on the currentUser cookie
+  }, [Cookies.get("currentUser")]); 
 
 
   const registerUser = async (name, email, password) => {
@@ -59,11 +59,13 @@ function UserContext({ children }) {
 
   const loginUser = async (email, password) => {
     try {
-      await axios.post(
+     const {data} = await axios.post(
         `${import.meta.env.VITE_API_URL}/auth/login`,
         { email, password },
         { withCredentials: true }
       );
+      Cookies.set("currentUser", JSON.stringify(data.currentUser))
+      Cookies.set("token", data.token)
       const cookieUser = Cookies.get("currentUser");
       setCurrUser(JSON.parse(cookieUser));
       navigate("/");
