@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../util/axiosInstance";
@@ -28,7 +29,7 @@ function StripeSuccess() {
       }
     };
     success();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [sessionID]);
 
   return (

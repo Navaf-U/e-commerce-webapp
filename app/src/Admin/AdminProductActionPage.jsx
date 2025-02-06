@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Loading from "../Components/Loading/Loading";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -13,7 +14,6 @@ function AdminProductActionPage() {
   const { setLoading, loading } = useContext(userData);
   const [products,setProducts] = useState([])
   const navigate = useNavigate();
-
   const [values, setValues] = useState({
     id: "",
     name: "",

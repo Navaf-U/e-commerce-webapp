@@ -74,7 +74,6 @@ function AdminDeletedItems() {
       ) : (
         <>
           <div className="flex-grow overflow-y-auto p-6 space-y-8">
-            {/* this is blocked users section :> */}
             <section className="bg-[#14141ed9] rounded-md shadow-sm p-6">
               <h2 className="text-xl font-bold text-white border-b pb-2 mb-4">
                 Blocked Users
@@ -108,7 +107,6 @@ function AdminDeletedItems() {
               </div>
             </section>
 
-            {/* this is deleted products section :> */}
             <section className="bg-[#14141ed9] rounded-md shadow-sm p-6">
               <h2 className="text-xl font-bold text-white border-b pb-2 mb-4">
                 Deleted Products

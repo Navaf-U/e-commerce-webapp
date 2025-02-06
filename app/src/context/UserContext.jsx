@@ -31,9 +31,9 @@ function UserContext({ children }) {
       }
     } else {
       setCurrUser(null);
+      logoutUser();
     }
-  }, [Cookies.get("currentUser")]); 
-
+  }, [Cookies.get("currentUser")]);
 
   const registerUser = async (name, email, password) => {
     const data = {
@@ -44,12 +44,8 @@ function UserContext({ children }) {
 
     setLoading(true);
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/auth/register`,
-        data
-      );
+      await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, data);
       navigate("/login");
-      toast.success(response.data.message);
     } catch (error) {
       toast.error(axiosErrorManager(error));
     } finally {
@@ -59,17 +55,16 @@ function UserContext({ children }) {
 
   const loginUser = async (email, password) => {
     try {
-     const {data} = await axios.post(
+      const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/auth/login`,
         { email, password },
         { withCredentials: true }
       );
-      Cookies.set("currentUser", JSON.stringify(data.currentUser))
-      Cookies.set("token", data.token)
+      Cookies.set("currentUser", JSON.stringify(data.currentUser));
+      Cookies.set("token", data.token);
       const cookieUser = Cookies.get("currentUser");
       setCurrUser(JSON.parse(cookieUser));
       navigate("/");
-      toast.success("Logged in successfully");
     } catch (err) {
       toast.error(axiosErrorManager(err));
     }
@@ -77,8 +72,9 @@ function UserContext({ children }) {
   const logoutUser = async () => {
     try {
       await axiosInstance.post("auth/logout", {}, { withCredentials: true });
+      Cookies?.remove("currentUser");
+      Cookies?.remove("token");
       navigate("/");
-      toast.success("Logged out successfully");
       setCurrUser(null);
     } catch (err) {
       toast.error(axiosErrorManager(err));
@@ -87,17 +83,16 @@ function UserContext({ children }) {
 
   const adminLogin = async (email, password) => {
     try {
-      const {data} = await axios.post(
+      const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/admin/login`,
         { email, password },
         { withCredentials: true }
       );
-      Cookies.set("currentUser", JSON.stringify(data.currentUser))
-      Cookies.set("token", data.token)
+      Cookies.set("currentUser", JSON.stringify(data.currentUser));
+      Cookies.set("token", data.token);
       const cookieAdmin = Cookies.get("currentUser");
       setCurrUser(JSON.parse(cookieAdmin));
       navigate("/");
-      toast.success("Admin logged in successfully");
     } catch (err) {
       toast.error(axiosErrorManager(err));
     }
@@ -109,13 +104,12 @@ function UserContext({ children }) {
         const data = await axiosInstance.get(`user/wishlist`);
         const fetchedWishlist = data.data?.products || [];
         setWishlist(fetchedWishlist);
-        setWishlistLengthCheck(fetchedWishlist.length); // Update length here
+        setWishlistLengthCheck(fetchedWishlist.length);
       } catch (error) {
         toast.error(axiosErrorManager(error));
       }
     }
   };
-  
 
   useEffect(() => {
     getUserWishList();
@@ -127,7 +121,6 @@ function UserContext({ children }) {
         productID: id,
       });
       await getUserWishList();
-      toast.success("Product added to wishlist");
     } catch (error) {
       toast.error(axiosErrorManager(error));
     }
@@ -135,11 +128,10 @@ function UserContext({ children }) {
 
   const removeFromWishlist = async (id) => {
     try {
-      const res = await axiosInstance.delete(`user/wishlist`, {
+      await axiosInstance.delete(`user/wishlist`, {
         data: { productID: id },
       });
       await getUserWishList();
-      toast.success(res.data.message);
     } catch (error) {
       console.error(axiosErrorManager(error));
     }
@@ -163,12 +155,11 @@ function UserContext({ children }) {
 
   const addToCart = async (id, q) => {
     try {
-      const res = await axiosInstance.post(`user/cart`, {
+      await axiosInstance.post(`user/cart`, {
         productID: id,
         quantity: q,
       });
       await getUserCart();
-      toast.success(res.data.message);
     } catch (error) {
       toast.error(axiosErrorManager(error));
     }
@@ -176,11 +167,10 @@ function UserContext({ children }) {
 
   const removeFromCart = async (id) => {
     try {
-      const res = await axiosInstance.delete(`user/cart`, {
+      await axiosInstance.delete(`user/cart`, {
         data: { productID: id },
       });
       await getUserCart();
-      toast.success(res.data.message);
     } catch (error) {
       console.error(axiosErrorManager(error));
     }

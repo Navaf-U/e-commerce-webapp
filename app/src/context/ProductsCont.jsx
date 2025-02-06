@@ -10,7 +10,6 @@ export const ProductsData = createContext();
 function ProductsCont({ children }) {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
-
   const { currUser, setLoading } = useContext(userData) || {};
 
   useEffect(() => {
