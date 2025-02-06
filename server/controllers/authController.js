@@ -45,28 +45,32 @@ const loginUser = async (req, res, next) => {
     return next(new CustomError("User doesn't exist", 401));
   }
 
-  
   if (user.isBlocked) {
     return next(new CustomError("User is Blocked", 403));
   }
-  
+
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
     return next(new CustomError("Invalid credentials", 401));
   }
   if (user.role === "admin") {
-    return next(new CustomError("Access denied. Nice try though, but this is the user zone :)", 403));
+    return next(
+      new CustomError(
+        "Access denied. Nice try though, but this is the user zone :)",
+        403
+      )
+    );
   }
   // creating token for logged user
   const token = createToken(user._id, user.role, "1h");
-  const refreshToken = createRefreshToken(user._id, user.role, "1d");
+  const refreshToken = createRefreshToken(user._id, user.role, "1h");
 
   user.refreshToken = refreshToken;
   await user.save();
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    secure: true, 
+    secure: true,
     sameSite: "None",
   });
 
@@ -76,8 +80,7 @@ const loginUser = async (req, res, next) => {
     email: user.email,
     role: user.role,
   };
-
-  res.json({ message: "user successfully logged in", token ,currentUser});
+  res.json({ message: "user successfully logged in", token, currentUser });
 };
 
 const adminLogin = async (req, res, next) => {
@@ -104,7 +107,7 @@ const adminLogin = async (req, res, next) => {
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
     secure: true,
-    sameSite: "none", //can change to strict
+    sameSite: "none",
   });
 
   const currentUser = {
@@ -114,7 +117,7 @@ const adminLogin = async (req, res, next) => {
     role: user.role,
   };
 
-  res.json({ message: "Admin successfully logged in", token ,currentUser});
+  res.json({ message: "Admin successfully logged in", token, currentUser });
 };
 
 // controller to handle refresh
@@ -126,8 +129,6 @@ const refreshingToken = async (req, res, next) => {
   if (!refreshToken) {
     return next(new CustomError("No refresh token found", 401));
   }
-
-  // Verifying the refresh token
   const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN);
 
   const user = await User.findById(decoded.id);
@@ -135,29 +136,17 @@ const refreshingToken = async (req, res, next) => {
     return next(new CustomError("Invalid refresh token", 401));
   }
   let accessToken = createToken(user._id, user.role, "1h");
-  
+
   res.status(200).json({ message: "Token refreshed", token: accessToken });
 };
 
 // controller to handle logout
 const logout = async (req, res, next) => {
-  // Clearing the refresh token cookie
   res.clearCookie("refreshToken", {
     httpOnly: true,
     secure: true,
     sameSite: "none",
   });
-  res.clearCookie("token", {
-    httpOnly: false,
-    secure: true,
-    sameSite: "none",
-  });
-  res.clearCookie("currentUser", {
-    httpOnly: false,
-    secure: true,
-    sameSite: "none",
-  });
-
   res
     .status(200)
     .json({ status: "success", message: "Logged out successfully" });
