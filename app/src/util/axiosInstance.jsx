@@ -55,7 +55,7 @@ axiosInstance.interceptors.response.use(
         toast.error("Session expired. Please log in again.");
         Cookies.remove("token");
         Cookies.remove("refreshToken");
-        Cookies.remove("user");
+        Cookies.remove("currentUser");
 
         return Promise.reject(err);
       }
