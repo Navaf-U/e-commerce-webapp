@@ -1,4 +1,4 @@
-import { Chart as ChartJS, BarElement, LineElement, CategoryScale, LinearScale, PointElement, Title, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, BarElement, LineElement, CategoryScale, LinearScale, PointElement, Title, Tooltip, Legend, BarController } from 'chart.js';
 import { useEffect, useState } from 'react';
 import { Chart } from 'react-chartjs-2';
 import axiosErrorManager from '../util/axiosErrorManage';
@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import axiosInstance from '../util/axiosInstance';
 
 ChartJS.register(
+  BarController,
   BarElement,
   LineElement,
   CategoryScale,
