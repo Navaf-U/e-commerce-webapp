@@ -31,7 +31,7 @@ function UserContext({ children }) {
       }
     } else {
       setCurrUser(null);
-      logoutUser();
+      
     }
   }, [Cookies.get("currentUser")]);
 
