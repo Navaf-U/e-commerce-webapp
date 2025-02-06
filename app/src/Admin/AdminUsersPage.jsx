@@ -6,7 +6,7 @@ import axiosInstance from "../util/axiosInstance";
 import axiosErrorManager from "../util/axiosErrorManage";
 
 function AdminUsersPage() {
-  window.scrollTo(0, 0)
+  window.scrollTo(0, 0);
   const [users, setUsers] = useState([]);
   const { currUser } = useContext(userData);
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ function AdminUsersPage() {
           <h1>Please log in as admin to view users</h1>
         </div>
       ) : (
-        <div className="h-[100vh] overflow-scroll mt-1">
+        <div className="md:h-[100vh] mb-14 md:mb-0 overflow-scroll mt-1">
           <table className="min-w-full text-center table-auto">
             <thead>
               <tr className="bg-[#BF3131] text-white">
@@ -43,7 +43,7 @@ function AdminUsersPage() {
             <tbody>
               {users?.map((item) => (
                 <tr key={item._id} className="border-b">
-                  <td className="py-2 font-semibold text-xs md:text-sm">
+                  <td className="py-2 font-semibold text-xs md:text-sm truncate max-w-[100px] md:max-w-full">
                     {item._id}
                   </td>
                   <td className="py-2 text-xs md:text-sm">{item.name}</td>

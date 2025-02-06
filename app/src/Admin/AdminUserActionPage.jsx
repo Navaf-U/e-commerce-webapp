@@ -102,6 +102,7 @@ function AdminUserActionPage() {
                 <p className="mb-5 ps-2 font-medium">Username:</p>
                 <p className="mb-5 ps-2 font-medium">Email:</p>
                 <p className="mb-5 ps-2 font-medium">Role:</p>
+                <p className="mb-5 ps-2 font-medium">UserID:</p>
               </div>
               <div className="w-full">
                 <input
@@ -120,6 +121,12 @@ function AdminUserActionPage() {
                   type="text"
                   className="ps-2 mb-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#BF3131] h-8 w-[90%]"
                   value={user.role === "admin" ? "admin" : "user"}
+                  readOnly
+                />
+                <input
+                  type="text"
+                  className="ps-1 text-sm mb-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#BF3131] h-8 w-[90%]"
+                  value={user._id}
                   readOnly
                 />
               </div>

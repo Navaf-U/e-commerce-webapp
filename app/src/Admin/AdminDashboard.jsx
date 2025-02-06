@@ -55,9 +55,7 @@ const AdminDashboard = () => {
         const { data } = await axiosInstance.get("/admin/orders/total");
         setOrders(data.data);
         const res = await axiosInstance.get("/admin/orders/stats");
-        setTotalAmount(res.data.data.totalRevenue);
-        console.log(res.data.data.totalRevenue)
-        
+        setTotalAmount(res.data.data.totalRevenue);        
       } catch (err) {
         toast.error(axiosErrorManager(err));
       }
@@ -140,7 +138,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex flex-col md:flex-row justify-around items-center">
-      <div className="w-full h-screen">
+      <div className="w-full md:h-screen">
         <Chart type="bar" data={data} options={options} />
       </div>
     </div>

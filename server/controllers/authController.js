@@ -55,7 +55,7 @@ const loginUser = async (req, res, next) => {
     return next(new CustomError("Invalid credentials", 401));
   }
   if (user.role === "admin") {
-    return next(new CustomError("Access denied.Nice try, though! :)", 403));
+    return next(new CustomError("Access denied. Nice try though, but this is the user zone :)", 403));
   }
   // creating token for logged user
   const token = createToken(user._id, user.role, "1h");

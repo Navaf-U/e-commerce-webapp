@@ -51,7 +51,7 @@ function AdminProducts() {
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="h-screen w-full overflow-y-auto p-4 bg-gray-100">
+    <div className="md:h-screen w-full overflow-y-auto p-4 bg-gray-100">
       <div className="flex flex-col md:flex-row justify-between items-center mb-4">
         <div className="flex gap-4 mb-4 md:mb-0">
           <label className="flex items-center">
@@ -89,11 +89,10 @@ function AdminProducts() {
         <table className="min-w-full text-center table-auto bg-white shadow-md rounded-lg overflow-hidden">
           <thead>
             <tr className="bg-gray-200">
-              <th className="p-2 text-xs md:text-sm">ID</th>
               <th className="p-2 text-xs md:text-sm hidden sm:table-cell">
                 IMAGE
               </th>
-              <th className="p-2 text-xs md:text-sm">NAME</th>
+              <th className="p-2 text-xs  md:text-sm">NAME</th>
               <th className="p-2 text-xs md:text-sm hidden sm:table-cell">
                 TYPE
               </th>
@@ -117,9 +116,6 @@ function AdminProducts() {
                   key={item._id}
                   className="border-b hover:bg-gray-100 transition"
                 >
-                  <td className="py-2 font-semibold text-xs md:text-sm">
-                    {item.id}
-                  </td>
                   <td className="py-2 hidden sm:table-cell">
                     <img
                       src={item.image}
@@ -161,9 +157,7 @@ function AdminProducts() {
         </table>
       </div>
 
-      {/* this is  pagination Controls */}
-
-      <div className="flex justify-center mt-6 space-x-2">
+      <div className="flex justify-center mt-6 space-x-2 space-y-2 flex-wrap ">
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
