@@ -18,7 +18,7 @@ scopeoConfig()
 connectDB();
 connectCloudinary();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3005;
 app.use(cors({
   origin:process.env.CLIENT_URL,
   credentials: true
