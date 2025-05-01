@@ -12,7 +12,6 @@ const getAllUsers = async (req,res)=>{
 }
 
 const getOneUser = async (req,res,next)=>{
-    //checking id format valid or not
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
         return next(new CustomError("Invalid ID format", 400)); 
     }
@@ -24,7 +23,6 @@ const getOneUser = async (req,res,next)=>{
 }
 
 const blockUser = async (req,res) => {
-    //checking id format valid or not
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
         return next(new CustomError("Invalid ID format", 400)); 
     }
@@ -32,13 +30,11 @@ const blockUser = async (req,res) => {
     if(!user){
         return next(new CustomError("User not found",404))
     }
-    // will toggle the user block property true/false
     user.isBlocked = true
     await user.save()
     res.status(200).json({message:"User blocked successfully",user})
 }
 const unblockUser = async (req,res) => {
-    //checking id format valid or not
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
         return next(new CustomError("Invalid ID format", 400)); 
     }
@@ -46,7 +42,6 @@ const unblockUser = async (req,res) => {
     if(!user){
         return next(new CustomError("User not found",404))
     }
-    // will toggle the user block property true/false
     user.isBlocked = false
     await user.save()
     res.status(200).json({message:"User unblocked successfully",user})
