@@ -1,4 +1,4 @@
-import {configManager} from "scopeo";
+import { configManager } from "scopeo";
 export const scopeoConfig = () => {
   try {
     configManager.setConfig({
@@ -7,6 +7,6 @@ export const scopeoConfig = () => {
       environment: process.env.ENVIRONMENT,
     });
   } catch (error) {
-    console.log(error,"from scopeo package");
+    console.log(error, "from scopeo package");
   }
 };
