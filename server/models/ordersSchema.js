@@ -13,7 +13,6 @@ const orderSchema = new mongoose.Schema(
             quantity:{type:Number,required:true,default:1}
         }
     ],
-    //without stripe session id and things
     sessionID:{type:String},
     purchasedDate:{type:Date,default:Date.now},
     firstName:{type:String,required:true},
