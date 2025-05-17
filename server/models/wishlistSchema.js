@@ -15,8 +15,9 @@ const wishlistSchema = new mongoose.Schema(
     ],
   },
   { timestamps: true }
+  
 );
 
-const wishListModel = mongoose.models.WishList || mongoose.model("WishList",wishlistSchema)
+const wishListModel = mongoose.models.WishList || mongoose.model("WishList", wishlistSchema)
 
 export default wishListModel;

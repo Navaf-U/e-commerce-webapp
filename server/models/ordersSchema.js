@@ -25,6 +25,7 @@ const orderSchema = new mongoose.Schema(
     shippingStatus:{type:String,default:"pending"},
     },
     {timestamps:true}
+    
 )
 
 const orderModel = mongoose.models.Order || mongoose.model("Order",orderSchema)

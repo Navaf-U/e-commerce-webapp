@@ -14,6 +14,7 @@ const productSchema = new mongoose.Schema(
         isDeleted:{type:Boolean, default:false }
     },
     {timestamps:true}
+    
 )
 
 const productModel = mongoose.models.Product || mongoose.model("Product",productSchema)
