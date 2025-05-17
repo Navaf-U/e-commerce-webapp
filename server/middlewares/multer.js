@@ -2,16 +2,15 @@ import {CloudinaryStorage} from 'multer-storage-cloudinary'
 import multer from 'multer'
 import { v2 as cloudinary } from 'cloudinary';
 
-// cloudinary storage for multer    
+
 const storage = new CloudinaryStorage({
     cloudinary:cloudinary,
     params:{
-        folder:'stepprime', //folder in cloudinary
-        allowed_formats:['jpeg','png','jpg']  //allowed file formats
+        folder:'stepprime',
+        allowed_formats:['jpeg','png','jpg'] 
     }
 })
 
-//multer middleware 
 const upload  = multer({storage})
 
 

@@ -4,6 +4,7 @@ import CustomError from "../utils/customError.js";
 export const tokenVerify = (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
+  
     if (authHeader) {
       const token = authHeader.split(" ")[1];
       jwt.verify(token, process.env.JWT_TOKEN, (err, user) => {
@@ -33,4 +34,5 @@ export const verifyTokenAdmin = (req,res,next)=>{
     }
    await next()
   })
+
 }
